@@ -4,14 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>Unity-IntermediateScript | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="[TOC] 1.属性 Properties在外部访问类内部变量的需求，除了设其为public，还可以用properties。其在内部封装变量，称其为域，可以用get{}set{}对其内部进行访问。 123456789101112131415161718192021public class Properties : MonoBehaviour&amp;#123;    private int experie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity-IntermediateScript">
+<meta property="og:url" content="http://example.com/2021/11/02/Unity-IntermediateScript/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] 1.属性 Properties在外部访问类内部变量的需求，除了设其为public，还可以用properties。其在内部封装变量，称其为域，可以用get{}set{}对其内部进行访问。 123456789101112131415161718192021public class Properties : MonoBehaviour&amp;#123;    private int experie">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-02T01:20:00.000Z">
+<meta property="article:modified_time" content="2021-11-03T02:27:16.358Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -69,9 +74,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Unity-IntermediateScript" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Unity-IntermediateScript" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/11/02/Unity-IntermediateScript/" class="article-date">
   <time class="dt-published" datetime="2021-11-02T01:20:00.000Z" itemprop="datePublished">2021-11-02</time>
@@ -84,8 +87,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/11/02/Unity-IntermediateScript/">Unity-IntermediateScript</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Unity-IntermediateScript
     </h1>
   
 
@@ -204,347 +207,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Unity-BasicScript2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/31/Unity-BasicScript2/" class="article-date">
-  <time class="dt-published" datetime="2021-10-31T10:47:11.000Z" itemprop="datePublished">2021-10-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/31/Unity-BasicScript2/">Unity-BasicScript2</a>
-    </h1>
+    <a href="/2021/10/31/Unity-BasicScript2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Unity-BasicScript2</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h3 id="1-DataTypes"><a href="#1-DataTypes" class="headerlink" title="1.DataTypes"></a>1.DataTypes</h3><p>初级分为Value和Reference</p>
-<p>Value：int float double bool char Structs{Vector3,Quatenion}</p>
-<p>Reference: Classes{Transform,GameObject}</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        Transform tran=transform;	//这里的transform就是组件 故是地址 共同改变了属于是</span><br><span class="line">        tran.position = new Vector3(0,0,2);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="2-类的使用"><a href="#2-类的使用" class="headerlink" title="2.类的使用"></a>2.类的使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Fuc1&#123;</span><br><span class="line">       int a1;</span><br><span class="line">    	public Fun1(int aa1)&#123;	//Constructor //no return value</span><br><span class="line">           a1=aa1;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">public Fuc1 fuc1=new Fuc1();</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="3-Instantiate"><a href="#3-Instantiate" class="headerlink" title="3.Instantiate()"></a>3.Instantiate()</h3><p>Instantiate函数实例化是将original对象的所有子物体和子组件完全复制，成为一个新的对象。这个新的对象拥有与源对象完全一样的东西，包括坐标值等。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public Rigidbody rocketPrefab;	//需要绑定一个带Rigidbody的物体</span><br><span class="line">	public Transform barrelEnd;	//需要绑定一个(空)物体,坐标就是生成位置</span><br><span class="line">   void Update()</span><br><span class="line">   &#123;</span><br><span class="line">       if(Input.GetKeyDown(KeyCode.K))</span><br><span class="line">       &#123;	//在Inspector中绑定物品即可 //可以用来生成子弹</span><br><span class="line">           Instantiate(rocketPrefab);</span><br><span class="line">           //第二种 第二三个参数是新克隆体的位置和旋转值</span><br><span class="line">           Instantiate(rocketPrefab,barrelEnd.position,barrelEnd.rotation);   </span><br><span class="line">           //第三种，当作刚体可以进行力的施加</span><br><span class="line">           Rigidbody rocketRigid;</span><br><span class="line">           rocketRigid=Instantiate(rocketPrefab,barrelEnd.position,barrelEnd.rotation) as Rigidbody;</span><br><span class="line">           rocketRigid.AddForce(Vector3.up * 500);</span><br><span class="line">           //因为克隆出来的物体会一直存在，所以如果是子弹什么的可以加一个定时销毁的脚本</span><br><span class="line">       &#125;	</span><br><span class="line">   &#125;	</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="4-数组Array"><a href="#4-数组Array" class="headerlink" title="4.数组Array"></a>4.数组Array</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int[] array1=new int[4];</span><br><span class="line">   int[] array2=&#123;1,3,54,53&#125;;</span><br><span class="line">   public GameObject[] players;  //public即可界面编辑</span><br><span class="line">   void Start()</span><br><span class="line">   &#123;</span><br><span class="line">       array1[0]=2;</span><br><span class="line">       players=GameObject.FindGameObjectsWithTag(&quot;player&quot;);//用指定的标签去寻找</span><br><span class="line">       for (int i = 0; i &lt; players.Length; i++)</span><br><span class="line">           Debug.Log(&quot;Goodbye&quot;+i+players[i].name);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="5-Invoke"><a href="#5-Invoke" class="headerlink" title="5.Invoke()"></a>5.Invoke()</h3><p>允许安排一个延时调用的函数。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public Object target;</span><br><span class="line">    void SpawnObject()</span><br><span class="line">    &#123;</span><br><span class="line">        float x=Random.Range(-3.0f, 3.0f);</span><br><span class="line">        float z=Random.Range(-3.0f, 3.0f);</span><br><span class="line">        Instantiate(target,new Vector3(x,1,z),Quaternion.identity);</span><br><span class="line">    &#125;</span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        Invoke(&quot;SpawnObject&quot;,2);</span><br><span class="line">        //延时俩秒调用 </span><br><span class="line">        //只有不需要传入参数，且返回类型为void的函数才能用Invoke调用</span><br><span class="line">        InvokeRepeating(&quot;SpawnObject&quot;,2,1);</span><br><span class="line">        //延时俩秒调用，并且之后每隔一秒调用一次</span><br><span class="line">        CancelInvoke();</span><br><span class="line">        CancelInvoke(&quot;SpawnObject&quot;);</span><br><span class="line">        //停止延时调用</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="6-Enumeration-Enum"><a href="#6-Enumeration-Enum" class="headerlink" title="6.Enumeration/Enum"></a>6.Enumeration/Enum</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">enum Enum1&#123; North, East, South, West&#125;;	</span><br><span class="line">//enum 可以写在class外/注意大写 因为这是类不是变量/注意最后的；</span><br><span class="line">   void Start()</span><br><span class="line">   &#123;</span><br><span class="line">       Enum1 myEnum;</span><br><span class="line">       myEnum = Enum1.North;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>Thanks：</p>
-<p>Unity官方脚本P3： <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17s411o7Mf?p=3">https://www.bilibili.com/video/BV17s411o7Mf?p=3</a></p>
-<p>Unity入门路线： <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/314175363/answer/650214605">https://www.zhihu.com/question/314175363/answer/650214605</a></p>
-<hr>
-<p>突然想到或许我可以做一个roft学长的3d卡牌对战游戏，但是在同时加入摄像机旋转切换游戏玩家，实现双人同时玩的卡牌游戏…挺有意思的。roft学长的游戏很多用low-poly，好喜欢这个风格。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/31/Unity-BasicScript2/" data-id="ckviwkcf700054scfbyteejy9" data-title="Unity-BasicScript2" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-Unity-BasicScript" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/31/Unity-BasicScript/" class="article-date">
-  <time class="dt-published" datetime="2021-10-31T05:55:53.000Z" itemprop="datePublished">2021-10-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/31/Unity-BasicScript/">Unity-BasicScript1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h3 id="1-在Unity中似乎把组件（inspecter中的属性）当成类使用，在C-中需创建类的实例，并用GetComponent获取才可以对其操作。"><a href="#1-在Unity中似乎把组件（inspecter中的属性）当成类使用，在C-中需创建类的实例，并用GetComponent获取才可以对其操作。" class="headerlink" title="1.在Unity中似乎把组件（inspecter中的属性）当成类使用，在C#中需创建类的实例，并用GetComponent获取才可以对其操作。"></a>1.在Unity中似乎把组件（inspecter中的属性）当成类使用，在C#中需创建类的实例，并用GetComponent获取才可以对其操作。</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">private Light light1;</span><br><span class="line">private CharacterController cc; // 获得该组件</span><br><span class="line">	private Vector3 dir;    //储存移动的方向</span><br><span class="line">   private void Start()</span><br><span class="line">   &#123;</span><br><span class="line">       cc = GetComponent&lt;CharacterController&gt;();</span><br><span class="line">       light1=GetComponent&lt;Light&gt;();</span><br><span class="line">   &#125;</span><br><span class="line">private void Update()</span><br><span class="line">   &#123;</span><br><span class="line">       if (Input.GetKeyDown())</span><br><span class="line">       &#123;</span><br><span class="line">           light1.enabled = !light1.enabled;</span><br><span class="line">       &#125;</span><br><span class="line">       cc.Move(dir * Time.deltaTime);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-似乎发现上方有GetKey-和GetButton-，有何不同呢"><a href="#2-似乎发现上方有GetKey-和GetButton-，有何不同呢" class="headerlink" title="2.似乎发现上方有GetKey()和GetButton()，有何不同呢"></a>2.似乎发现上方有GetKey()和GetButton()，有何不同呢</h3><p>区别在于：</p>
-<p>GetKey需传入KeyCode.XX，如Input.GetKeyDown(KeyCode.Space)。</p>
-<p>而GetButton则传入提前预设好的键位：如Input.GetButtonDown(“Jump”)。</p>
-<p>路径：Edit-Project Setting-Input Manager 。好处在于你可以详细地设计键位，使得键盘手柄可以共用。</p>
-<p><img src="/Unity-BasicScript/image-20211031143205933.png" alt="image-20211031143205933"></p>
-<h3 id="3-在以下代码中，定义了一个GameObject的实例，但是这需要在脚本组件中自行选择Object拖入，毕竟在代码中也不能选择更高维度的咯（或许可以）。"><a href="#3-在以下代码中，定义了一个GameObject的实例，但是这需要在脚本组件中自行选择Object拖入，毕竟在代码中也不能选择更高维度的咯（或许可以）。" class="headerlink" title="3.在以下代码中，定义了一个GameObject的实例，但是这需要在脚本组件中自行选择Object拖入，毕竟在代码中也不能选择更高维度的咯（或许可以）。"></a>3.在以下代码中，定义了一个GameObject的实例，但是这需要在脚本组件中自行选择Object拖入，毕竟在代码中也不能选择更高维度的咯（或许可以）。</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class DetectIsActive : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    public GameObject myObject;</span><br><span class="line">    // Start is called before the first frame update</span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(&quot;DetectIsActive&quot; +myObject.activeSelf);</span><br><span class="line">        Debug.Log(&quot;DetectIsActive2&quot; +myObject.activeInHierarchy);</span><br><span class="line">        gameObject.SetActive(false);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/Unity-BasicScript/image-20211031144323263.png" alt="image-20211031144323263"></p>
-<p>另外，这里用active来判定其物体是否激活，当然也要看父组件的激活情况。</p>
-<h3 id="4-Translate-Rotate"><a href="#4-Translate-Rotate" class="headerlink" title="4.Translate() Rotate()"></a>4.Translate() Rotate()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public float moveSpeed=3f;</span><br><span class="line">  public float turnSpeed=1f;</span><br><span class="line">  void Update()</span><br><span class="line">  &#123;	//注意transform大小写 /(ㄒoㄒ)/~~</span><br><span class="line">      transform.Translate(new Vector3(0,0,3)*moveSpeed*Time.deltaTime);</span><br><span class="line">      transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime); </span><br><span class="line">      //forward = 物体自己的z 等同于上行  </span><br><span class="line">      transform.Translate(transform.forward * moveSpeed *Time.deltaTime);</span><br><span class="line">      //而Transform.forward则是当前物体的正方向</span><br><span class="line">      transform.Rotate(Vector3.up,-turnSpeed*Time.deltaTime); </span><br><span class="line">      //up代表其旋转绕的向量轴（也就是y）</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-LookAt"><a href="#5-LookAt" class="headerlink" title="5.LookAt()"></a>5.LookAt()</h3><p>指定给摄像机，并绑定target即可。<del>（但是试不出来…</del> (原来是错放在start函数里了，并且需要关掉其他脚本才可运行。))</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public Transform target;</span><br><span class="line">   // Start is called before the first frame update</span><br><span class="line">   void Update()//Start()</span><br><span class="line">   &#123;</span><br><span class="line">       transform.LookAt(target);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-Destory"><a href="#5-Destory" class="headerlink" title="5.Destory()"></a>5.Destory()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        if(Input.GetKeyDown(KeyCode.J))</span><br><span class="line">        &#123;</span><br><span class="line">            Destroy(gameObject);    //删除自己</span><br><span class="line">            Destroy(other);     //删除绑定的物体</span><br><span class="line">            Destroy(GetComponent&lt;Light&gt;());     //删除其组件 </span><br><span class="line">            Destroy(GetComponent&lt;Light&gt;(),3f);     //延迟3秒 删除其组件 </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="6-GetAxis"><a href="#6-GetAxis" class="headerlink" title="6.GetAxis()"></a>6.GetAxis()</h3><p>返回-1~1的bool ，需指定Horizontal或者Vertical，实例可以看上次的FPS Blog。</p>
-<p><img src="/Unity-BasicScript/image-20211031153023092.png" alt="image-20211031153023092"></p>
-<p>同上在Input Manager可管理gravity：从1-0的回复速度</p>
-<p>Sensitivity：从0-1的变化速度</p>
-<p>Dead： 响应盲区，去避免摇杆微弱的误触</p>
-<p>Snap：允许俩边同时响应时返回0</p>
-<p>也可以用Input.GetAxisRaw()只返回整数，可以精确操控</p>
-<h3 id="7-OnMouseDown"><a href="#7-OnMouseDown" class="headerlink" title="7.OnMouseDown()"></a>7.OnMouseDown()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void OnMouseDown() </span><br><span class="line">   &#123;</span><br><span class="line">       GetComponent&lt;Rigidbody&gt;().AddForce(transform.forward*300);  //给一个物体z方向的力</span><br><span class="line">       GetComponent&lt;Rigidbody&gt;().useGravity=true;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="8"><a href="#8" class="headerlink" title="8."></a>8.<img src="/Unity-BasicScript/image-20211031161545879.png" alt="image-20211031161545879"></h3><hr>
-<h3 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks:"></a>Thanks:</h3><p>Unity-Transform类：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42446849/article/details/81669864">https://blog.csdn.net/weixin_42446849/article/details/81669864</a></p>
-<p>Unity官方脚本开发初级教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cs411o7GD?p=5">https://www.bilibili.com/video/BV1cs411o7GD?p=5</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/31/Unity-BasicScript/" data-id="ckviwkcf400024scf1phl7rj1" data-title="Unity-BasicScript1" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Unity-FPS控制" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/29/Unity-FPS%E6%8E%A7%E5%88%B6/" class="article-date">
-  <time class="dt-published" datetime="2021-10-29T12:39:42.000Z" itemprop="datePublished">2021-10-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/29/Unity-FPS%E6%8E%A7%E5%88%B6/">Unity1-FPS控制</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!--好好学Unity从今天开始(lll￢ω￢)-->
-
-<h2 id="一-FPS控制"><a href="#一-FPS控制" class="headerlink" title="一.FPS控制"></a>一.FPS控制</h2><p>1.导入assets建立场景， 创建一个player并将main camera绑定至player下即可。</p>
-<p>2.为camera编写视角控制脚本：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections;</span><br><span class="line">using System.Collections.Generic;		</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">public class Player : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    public Transform player;//用于获取transform组件</span><br><span class="line">    </span><br><span class="line">    private float mouseX, mouseY;   //获取鼠标移动的值</span><br><span class="line">    public float mouseSensitivity;	//鼠标灵敏度</span><br><span class="line">    public float xRotation; </span><br><span class="line"></span><br><span class="line">    private void Update ()</span><br><span class="line">    &#123;</span><br><span class="line">        mouseX = Input.GetAxis(&quot;Mouse X&quot;) * mouseSensitivity * Time.deltaTime;</span><br><span class="line">        mouseY = Input.GetAxis(&quot;Mouse Y&quot;) * mouseSensitivity * Time.deltaTime;  		//GetAxis() 返回 -1_~1 向左,下是-1，向右,上是1</span><br><span class="line">        //Time.deltaTime 是变量 指完成上一帧所用的时间 防止FPS波动导致的time波动</span><br><span class="line"></span><br><span class="line">        xRotation -= mouseY; //累加 </span><br><span class="line">        xRotation = Mathf.Clamp(xRotation, -70f, 70f);//限制视角</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        player.Rotate(Vector3.up * mouseX);</span><br><span class="line">        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);//四元数（TODO</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>3.为player编写移动脚本：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">public class RealPlayer : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    private CharacterController cc; // 用于获得CharacterController组件</span><br><span class="line">    public float moveSpeed;</span><br><span class="line">    public float jumpSpeed;</span><br><span class="line"></span><br><span class="line">    private float horizontalMove, verticalMove;</span><br><span class="line">    private Vector3 dir;    //储存移动的方向</span><br><span class="line"></span><br><span class="line">    public float gravity;</span><br><span class="line">    private Vector3 velocity;// 重力加速度</span><br><span class="line"></span><br><span class="line">    public Transform groundCheck; //为了检测与地面的碰撞</span><br><span class="line">    public float checkRadius;  </span><br><span class="line">    public LayerMask groundLayer;</span><br><span class="line">    public bool isGround;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        cc = GetComponent&lt;CharacterController&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        isGround = Physics.CheckSphere(groundCheck.position,checkRadius,groundLayer);</span><br><span class="line">        if(isGround &amp;&amp; velocity.y&lt;0)</span><br><span class="line">        &#123;</span><br><span class="line">            velocity.y = -2f;//防止落地后 加速度不停下降     值会影响自由落体的手感     </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        horizontalMove = Input.GetAxis(&quot;Horizontal&quot;)*moveSpeed;</span><br><span class="line">        verticalMove = Input.GetAxis(&quot;Vertical&quot;)*moveSpeed;</span><br><span class="line"></span><br><span class="line">        dir = transform.forward * verticalMove + transform.right * horizontalMove;</span><br><span class="line">        cc.Move(dir * Time.deltaTime);</span><br><span class="line"></span><br><span class="line">        if(Input.GetButtonDown(&quot;Jump&quot;) /*&amp;&amp; isGround*/)</span><br><span class="line">        &#123;</span><br><span class="line">            velocity.y = jumpSpeed;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        velocity.y -= gravity * Time.deltaTime;//每秒减去重力的值</span><br><span class="line">        cc.Move(velocity * Time.deltaTime); //自由落体的公式 要乘以时间的二次方 故多乘</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>4.别忘记在Inspector中删去player的碰撞，加入Character Controller。</p>
-<p>新建空物体附在player下面，命名Ground Check，并赋给脚本中的groundCheck。再调整其高度在player的脚底板，以检测碰撞。在Inspector的layer中，新建ground层并将场景的全部environment设置为ground层。再将脚本中的那个层设为该ground层就大功告成了。<img src="/Unity-FPS%E6%8E%A7%E5%88%B6/20211029210158.png" alt="20211029210158"><img src="/Unity-FPS%E6%8E%A7%E5%88%B6/202110292119.gif" alt="202110292119"></p>
-<p><del>5.借用室友调侃的话说：做出原神指日可待 (￣▽￣)”  遥遥无期</del></p>
-<p>感谢：</p>
-<p>Time.deltaTime 理解: <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37608784/article/details/84859597">https://blog.csdn.net/weixin_37608784/article/details/84859597</a></p>
-<p>Unity Documentation: <a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/2021.1/ScriptReference/index.html">https://docs.unity3d.com/cn/2021.1/ScriptReference/index.html</a></p>
-<p>​    <a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/2019.3/ScriptReference/Quaternion.Euler.html">https://docs.unity3d.com/cn/2019.3/ScriptReference/Quaternion.Euler.html</a></p>
-<p>Unity asset store：<a target="_blank" rel="noopener" href="https://assetstore.unity.com/?q=low-poly%20simple%20nature&amp;orderBy=1">https://assetstore.unity.com/?q=low-poly%20simple%20nature&amp;orderBy=1</a></p>
-<p>Blend Swap: <a target="_blank" rel="noopener" href="https://blendswap.com/blend/26019#">https://blendswap.com/blend/26019#</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/29/Unity-FPS%E6%8E%A7%E5%88%B6/" data-id="ckviwkcf600044scfbpqthkzj" data-title="Unity1-FPS控制" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Proustian-Effect" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/27/Proustian-Effect/" class="article-date">
-  <time class="dt-published" datetime="2021-10-27T02:09:39.000Z" itemprop="datePublished">2021-10-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/27/Proustian-Effect/">Proustian Effect 「普鲁斯特效应」</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>“20世纪法国最伟大的小说家之一，马塞尔·普鲁斯特(1871-1922，Marcel Proust)，在其作品中写到这样一段轶事：</p>
-<blockquote>
-<p><em>And soon, mechanically, weary after a dull day with the prospect of a depressing morrow, I raised to my lips a spoonful of the tea in which I had soaked a morsel of the cake. No sooner had the warm liquid, and the crumbs with it, touched my palate than a shudder ran through my whole body, and I stopped, intent upon the extraordinary changes that were taking place. . . . I was conscious that it was connected with the taste of tea and cake, but that it infinitely transcended those savours, could not, indeed, be of the same nature as theirs.   <strong>Marcel Proust, “In Search of Lost Time”</strong></em></p>
-</blockquote>
-<p>被茶浸泡的糕点的气味使作者想起了童年的经历。这段被糕点气味唤醒的记忆，既生动，又包含情感。”</p>
-<p>普特鲁斯效应 指当你闻到一种特定气味时，就会忽然想起已经遗忘了的回忆，这种效应发生时回忆起的场景往往极其生动形象，而且饱含情感。</p>
-<p>不只是气味，气温、光照、天气、声音、味道、特殊的滤镜都能唤起记忆中的往事以及当时伴随着的情绪。但似乎气味是最容易被记住，也是最容易让我们唤起过往的记忆的。</p>
-<p>“秋季充满了普鲁斯特效应~”  （奇特的是我并没有感受到秋天</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/27/Proustian-Effect/" data-id="ckviwkcf200014scffr5o6yqa" data-title="Proustian Effect 「普鲁斯特效应」" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E8%AE%B0/" rel="tag">随记</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-MY-FIRST-BLOG" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/26/MY-FIRST-BLOG/" class="article-date">
-  <time class="dt-published" datetime="2021-10-26T11:53:15.000Z" itemprop="datePublished">2021-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/26/MY-FIRST-BLOG/">MY FIRST BLOG!</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>行吧 辛苦了一阵子 可能总算是把这个破博客弄好了~<br>有缘更新！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/26/MY-FIRST-BLOG/" data-id="ckviwkcey00004scf553gg3hu" data-title="MY FIRST BLOG!" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/26/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-10-26T11:20:15.446Z" itemprop="datePublished">2021-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/26/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/26/hello-world/" data-id="ckviwkcfb000e4scf6oug43fi" data-title="Hello World" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
