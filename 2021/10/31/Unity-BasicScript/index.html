@@ -13,16 +13,16 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="[TOC] 1.在Unity中似乎把组件（inspecter中的属性）当成类使用，在C#中需创建类的实例，并用GetComponent获取才可以对其操作。12345678910111213141516private Light light1;private CharacterController cc; &#x2F;&#x2F; 获得该组件	private Vector3 dir;    &#x2F;&#x2F;储存移动的方向   pr">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/Unity-BasicScript/image-20211031143205933.png">
-<meta property="og:image" content="http://example.com/Unity-BasicScript/image-20211031144323263.png">
-<meta property="og:image" content="http://example.com/Unity-BasicScript/image-20211031153023092.png">
-<meta property="og:image" content="http://example.com/Unity-BasicScript/image-20211031161545879.png">
+<meta property="og:image" content="http://example.com/2021/10/31/Unity-BasicScript/image-20211031143205933.png">
+<meta property="og:image" content="http://example.com/2021/10/31/Unity-BasicScript/image-20211031144323263.png">
+<meta property="og:image" content="http://example.com/2021/10/31/Unity-BasicScript/image-20211031153023092.png">
+<meta property="og:image" content="http://example.com/2021/10/31/Unity-BasicScript/image-20211031161545879.png">
 <meta property="article:published_time" content="2021-10-31T05:55:53.000Z">
-<meta property="article:modified_time" content="2021-11-03T02:28:33.612Z">
+<meta property="article:modified_time" content="2021-11-12T02:13:25.772Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/Unity-BasicScript/image-20211031143205933.png">
+<meta name="twitter:image" content="http://example.com/2021/10/31/Unity-BasicScript/image-20211031143205933.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -108,10 +108,10 @@
 <p>GetKey需传入KeyCode.XX，如Input.GetKeyDown(KeyCode.Space)。</p>
 <p>而GetButton则传入提前预设好的键位：如Input.GetButtonDown(“Jump”)。</p>
 <p>路径：Edit-Project Setting-Input Manager 。好处在于你可以详细地设计键位，使得键盘手柄可以共用。</p>
-<p><img src="/Unity-BasicScript/image-20211031143205933.png" alt="image-20211031143205933"></p>
+<p><img src="/2021/10/31/Unity-BasicScript/image-20211031143205933.png" alt="image-20211031143205933"></p>
 <h3 id="3-在以下代码中，定义了一个GameObject的实例，但是这需要在脚本组件中自行选择Object拖入，毕竟在代码中也不能选择更高维度的咯（或许可以）。"><a href="#3-在以下代码中，定义了一个GameObject的实例，但是这需要在脚本组件中自行选择Object拖入，毕竟在代码中也不能选择更高维度的咯（或许可以）。" class="headerlink" title="3.在以下代码中，定义了一个GameObject的实例，但是这需要在脚本组件中自行选择Object拖入，毕竟在代码中也不能选择更高维度的咯（或许可以）。"></a>3.在以下代码中，定义了一个GameObject的实例，但是这需要在脚本组件中自行选择Object拖入，毕竟在代码中也不能选择更高维度的咯（或许可以）。</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class DetectIsActive : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    public GameObject myObject;</span><br><span class="line">    // Start is called before the first frame update</span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(&quot;DetectIsActive&quot; +myObject.activeSelf);</span><br><span class="line">        Debug.Log(&quot;DetectIsActive2&quot; +myObject.activeInHierarchy);</span><br><span class="line">        gameObject.SetActive(false);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Unity-BasicScript/image-20211031144323263.png" alt="image-20211031144323263"></p>
+<p><img src="/2021/10/31/Unity-BasicScript/image-20211031144323263.png" alt="image-20211031144323263"></p>
 <p>另外，这里用active来判定其物体是否激活，当然也要看父组件的激活情况。</p>
 <h3 id="4-Translate-Rotate"><a href="#4-Translate-Rotate" class="headerlink" title="4.Translate() Rotate()"></a>4.Translate() Rotate()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public float moveSpeed=3f;</span><br><span class="line">  public float turnSpeed=1f;</span><br><span class="line">  void Update()</span><br><span class="line">  &#123;	//注意transform大小写 /(ㄒoㄒ)/~~</span><br><span class="line">      transform.Translate(new Vector3(0,0,3)*moveSpeed*Time.deltaTime);</span><br><span class="line">      transform.Translate(Vector3.forward*moveSpeed*Time.deltaTime); </span><br><span class="line">      //forward = 物体自己的z 等同于上行  </span><br><span class="line">      transform.Translate(transform.forward * moveSpeed *Time.deltaTime);</span><br><span class="line">      //而Transform.forward则是当前物体的正方向</span><br><span class="line">      transform.Rotate(Vector3.up,-turnSpeed*Time.deltaTime); </span><br><span class="line">      //up代表其旋转绕的向量轴（也就是y）</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
@@ -121,7 +121,7 @@
 <h3 id="5-Destory"><a href="#5-Destory" class="headerlink" title="5.Destory()"></a>5.Destory()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        if(Input.GetKeyDown(KeyCode.J))</span><br><span class="line">        &#123;</span><br><span class="line">            Destroy(gameObject);    //删除自己</span><br><span class="line">            Destroy(other);     //删除绑定的物体</span><br><span class="line">            Destroy(GetComponent&lt;Light&gt;());     //删除其组件 </span><br><span class="line">            Destroy(GetComponent&lt;Light&gt;(),3f);     //延迟3秒 删除其组件 </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="6-GetAxis"><a href="#6-GetAxis" class="headerlink" title="6.GetAxis()"></a>6.GetAxis()</h3><p>返回-1~1的bool ，需指定Horizontal或者Vertical，实例可以看上次的FPS Blog。</p>
-<p><img src="/Unity-BasicScript/image-20211031153023092.png" alt="image-20211031153023092"></p>
+<p><img src="/2021/10/31/Unity-BasicScript/image-20211031153023092.png" alt="image-20211031153023092"></p>
 <p>同上在Input Manager可管理gravity：从1-0的回复速度</p>
 <p>Sensitivity：从0-1的变化速度</p>
 <p>Dead： 响应盲区，去避免摇杆微弱的误触</p>
@@ -129,14 +129,14 @@
 <p>也可以用Input.GetAxisRaw()只返回整数，可以精确操控</p>
 <h3 id="7-OnMouseDown"><a href="#7-OnMouseDown" class="headerlink" title="7.OnMouseDown()"></a>7.OnMouseDown()</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void OnMouseDown() </span><br><span class="line">   &#123;</span><br><span class="line">       GetComponent&lt;Rigidbody&gt;().AddForce(transform.forward*300);  //给一个物体z方向的力</span><br><span class="line">       GetComponent&lt;Rigidbody&gt;().useGravity=true;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="8"><a href="#8" class="headerlink" title="8."></a>8.<img src="/Unity-BasicScript/image-20211031161545879.png" alt="image-20211031161545879"></h3><hr>
+<h3 id="8"><a href="#8" class="headerlink" title="8."></a>8.<img src="/2021/10/31/Unity-BasicScript/image-20211031161545879.png" alt="image-20211031161545879"></h3><hr>
 <h3 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks:"></a>Thanks:</h3><p>Unity-Transform类：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42446849/article/details/81669864">https://blog.csdn.net/weixin_42446849/article/details/81669864</a></p>
 <p>Unity官方脚本开发初级教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cs411o7GD?p=5">https://www.bilibili.com/video/BV1cs411o7GD?p=5</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/31/Unity-BasicScript/" data-id="ckviwkcf400024scf1phl7rj1" data-title="Unity-BasicScript1" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/10/31/Unity-BasicScript/" data-id="ckvvqyf0x00020gcf8n3dfm29" data-title="Unity-BasicScript1" class="article-share-link">Share</a>
       
       
       
@@ -212,6 +212,14 @@
       <ul>
         
           <li>
+            <a href="/2021/11/07/%E5%B8%83%E6%96%99%E6%A8%A1%E6%8B%9F/">布料模拟</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/03/Unity%E6%9D%82%E8%AE%B0/">Unity杂记</a>
+          </li>
+        
+          <li>
             <a href="/2021/11/02/Unity-IntermediateScript/">Unity-IntermediateScript</a>
           </li>
         
@@ -221,14 +229,6 @@
         
           <li>
             <a href="/2021/10/31/Unity-BasicScript/">Unity-BasicScript1</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/29/Unity-FPS%E6%8E%A7%E5%88%B6/">Unity1-FPS控制</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/27/Proustian-Effect/">Proustian Effect 「普鲁斯特效应」</a>
           </li>
         
       </ul>
