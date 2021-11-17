@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Unity," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介空间投影变换在学习shader之前，先学习空间变化把 模型空间ModelSpace指物体自身的坐标？以模型pivot为中心，而pivot在世界坐标中就是物体的位置 世界坐标World指相对的坐标。通过模型变换得到 摄像机空间摄像机朝向为z轴，上y右x（为什么与opengl的完全不同？）通过上者视变换而得到 裁切空间clip通过投影变换而得到 屏幕空间通过屏幕投影而得到 现代gpu渲染流水线 S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity_shader">
+<meta property="og:url" content="http://example.com/2021/11/16/Unity-shader/index.html">
+<meta property="og:site_name" content="旋转公寓的阁楼">
+<meta property="og:description" content="简介空间投影变换在学习shader之前，先学习空间变化把 模型空间ModelSpace指物体自身的坐标？以模型pivot为中心，而pivot在世界坐标中就是物体的位置 世界坐标World指相对的坐标。通过模型变换得到 摄像机空间摄像机朝向为z轴，上y右x（为什么与opengl的完全不同？）通过上者视变换而得到 裁切空间clip通过投影变换而得到 屏幕空间通过屏幕投影而得到 现代gpu渲染流水线 S">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211117135949050.png">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211117142854328.png">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211117142915137.png">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211117143648273.png">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211117152005645.png">
+<meta property="article:published_time" content="2021-11-16T02:58:37.000Z">
+<meta property="article:modified_time" content="2021-11-17T09:04:26.294Z">
+<meta property="article:author" content="Zhairest">
+<meta property="article:tag" content="Unity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Unity-shader/image-20211117135949050.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/11/16/Unity-shader/"/>
+
+
+
+
+
+  <title>Unity_shader | 旋转公寓的阁楼</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋转公寓的阁楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">储物间</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/16/Unity-shader/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋转公寓的阁楼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Unity_shader</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-16T10:58:37+08:00">
+                2021-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="空间投影变换"><a href="#空间投影变换" class="headerlink" title="空间投影变换"></a>空间投影变换</h2><p>在学习shader之前，先学习空间变化把</p>
+<h3 id="模型空间ModelSpace"><a href="#模型空间ModelSpace" class="headerlink" title="模型空间ModelSpace"></a>模型空间ModelSpace</h3><p>指物体自身的坐标？以模型pivot为中心，而pivot在世界坐标中就是物体的位置</p>
+<h3 id="世界坐标World"><a href="#世界坐标World" class="headerlink" title="世界坐标World"></a>世界坐标World</h3><p>指相对的坐标。通过模型变换得到</p>
+<h3 id="摄像机空间"><a href="#摄像机空间" class="headerlink" title="摄像机空间"></a>摄像机空间</h3><p>摄像机朝向为z轴，上y右x（为什么与opengl的完全不同？）通过上者视变换而得到</p>
+<h3 id="裁切空间clip"><a href="#裁切空间clip" class="headerlink" title="裁切空间clip"></a>裁切空间clip</h3><p>通过投影变换而得到</p>
+<h3 id="屏幕空间"><a href="#屏幕空间" class="headerlink" title="屏幕空间"></a>屏幕空间</h3><p>通过屏幕投影而得到</p>
+<h2 id="现代gpu渲染流水线"><a href="#现代gpu渲染流水线" class="headerlink" title="现代gpu渲染流水线"></a>现代gpu渲染流水线</h2><p><img src="/Unity-shader/image-20211117135949050.png" alt="image-20211117135949050"></p>
+<h2 id="Shader概念"><a href="#Shader概念" class="headerlink" title="Shader概念"></a>Shader概念</h2><p>shader是渲染流水线的一部分，由顶点着色器和片段着色器构成（着色器(Shader)是运行在GPU上的小程序。这些小程序为图形渲染管线的某个特定部分而运行。从基本意义上来说，着色器只是一种把输入转化为输出的程序。着色器也是一种非常独立的程序，因为它们之间不能相互通信；它们之间唯一的沟通只有通过输入和输出。）</p>
+<p>unity用cg编写，OpenGL用glsl，direct3d用hlsl。unity基于hlsl产生的cg。</p>
+<h2 id="shaderlab语法基础"><a href="#shaderlab语法基础" class="headerlink" title="shaderlab语法基础"></a>shaderlab语法基础</h2><p>shader结构为：properties subshader fallback</p>
+<p>如果是顶点片段着色器，里面还会包含pass{}</p>
+<h3 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h3><p>开放出来的变量，可以在控制面板中调节</p>
+<p>properties主要分为三大类：数值 颜色与向量 纹理贴图</p>
+<p>每条属性的语法如下：</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_Name(&quot;Display Name&quot;,type) = defaultValue[&#123;options&#125;]</span><br><span class="line"><span class="comment">//属性名字（“显示的名字”，属性的类型）=将shader指定给材质时初始化的默认值</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="数值类properties"><a href="#数值类properties" class="headerlink" title="数值类properties"></a>数值类properties</h4><p>基本都是float，有以下俩种</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name(&quot;display name&quot;,Float)=number</span><br><span class="line">name(&quot;display name&quot;, Range(min,max))=number</span><br></pre></td></tr></table></figure>
+
+<h4 id="颜色和向量类properties"><a href="#颜色和向量类properties" class="headerlink" title="颜色和向量类properties"></a>颜色和向量类properties</h4><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name(&quot;display name&quot;, Color)=(number,number,number,number)<span class="comment">//RGBA</span></span><br><span class="line">name(&quot;display name&quot;, Vector)=(number1,number2,number3,number4)</span><br></pre></td></tr></table></figure>
+
+<h4 id="纹理贴图类"><a href="#纹理贴图类" class="headerlink" title="纹理贴图类"></a>纹理贴图类</h4><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name(&quot;display name&quot;, <span class="number">2</span>D)=&quot;defaulttexture&quot;&#123;&#125;</span><br><span class="line">name(&quot;display name&quot;, Cube)=&quot;defaulttexture&quot;&#123;&#125;</span><br><span class="line">name(&quot;display name&quot;, <span class="number">3</span>D)=&quot;defaulttexture&quot;&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2D最常使用，例如漫反射贴图，法线贴图。其defaulttexture可以用各种颜色 black red</p>
+<p>Cube全称CubeMapTexture立方体纹理，由六张有联系的2D贴图拼成的立方体，主要用于反射，例如Skybox和ReflectionProb</p>
+<p><img src="/Unity-shader/image-20211117142854328.png" alt="image-20211117142854328"></p>
+<p><img src="/Unity-shader/image-20211117142915137.png" alt="image-20211117142915137"></p>
+<h3 id="SubShader"><a href="#SubShader" class="headerlink" title="SubShader"></a>SubShader</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">SubShader</span><br><span class="line">    &#123;</span><br><span class="line">    	Tags &#123; &quot;RenderType&quot;=&quot;Opaque&quot; &#125;</span><br><span class="line">        <span class="comment">//渲染状况</span></span><br><span class="line">        cull back</span><br><span class="line">    	LOD <span class="number">200</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//1:LOD Level of Detail, 根据LOD来设置使用不同版本的Shader;</span></span><br><span class="line"><span class="comment">//2:着色器中给SubShader一个LOD值，程序来设置这个shader的LOD值，只有第一个小于等于LOD值subShader才会被执行;</span></span><br><span class="line"><span class="comment">//3: 每个shader最多只会有一个SubShader被使用;</span></span><br><span class="line">    	</span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            ...</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">FallBack &quot;Diffuse&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="tags"><a href="#tags" class="headerlink" title="tags"></a>tags</h4><h5 id="渲染队列"><a href="#渲染队列" class="headerlink" title="渲染队列"></a>渲染队列</h5><p>可以用Tags{“Quene”=”Geometry+1”}来指定队列，unity有五种指定的队列。当然也可以在材质面板中选择<img src="/Unity-shader/image-20211117143648273.png" alt="image-20211117143648273"></p>
+<h5 id="渲染类型"><a href="#渲染类型" class="headerlink" title="渲染类型"></a>渲染类型</h5><p>RenderType可以进行划分，便于替换深度纹理</p>
+<p>比如 Tags { “RenderType”=”Opaque” } 普通shader。再比如Transparent为半透明等等等等</p>
+<h5 id="禁用批处理"><a href="#禁用批处理" class="headerlink" title="禁用批处理"></a>禁用批处理</h5><p>DisableBatching，使用批处理时，几何体可能被变换到世界空间，模型空间被丢弃，这会导致用模型空间顶点坐标的shader出问题。</p>
+<h5 id="等等等等"><a href="#等等等等" class="headerlink" title="等等等等"></a>等等等等</h5><p>请看<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/SL-SubShaderTags.html">https://docs.unity3d.com/cn/current/Manual/SL-SubShaderTags.html</a> 但我觉得很难看懂</p>
+<h4 id="Pass的渲染状况"><a href="#Pass的渲染状况" class="headerlink" title="Pass的渲染状况"></a>Pass的渲染状况</h4><p>例如Cull Back 设置多边形背面剔除等等</p>
+<h4 id="Fallback"><a href="#Fallback" class="headerlink" title="Fallback"></a>Fallback</h4><p>在所有subShader之后定义，如果所有subshader都无法运行，就运行fallback定义的shader，常见unity内置的diffuse</p>
+<h1 id="顶点-片段着色器基础"><a href="#顶点-片段着色器基础" class="headerlink" title="顶点-片段着色器基础"></a>顶点-片段着色器基础</h1><p>unity里shader有俩种用途：1.给材质用于渲染 2.给脚本用于图像处理</p>
+<h2 id="CG语法"><a href="#CG语法" class="headerlink" title="CG语法"></a>CG语法</h2><p>unity的shader中，shaderlab只是组织代码结构，真正渲染部分是cg语言编写的。cg程序片段通过指令嵌入在pass中，夹在 CGPROGRAM和 ENDCG之中。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Pass</span><br><span class="line">       &#123;</span><br><span class="line">           CGPROGRAM</span><br><span class="line">           <span class="meta">#pragma vertex vert		//编译指令</span></span><br><span class="line">           <span class="meta">#pragma fragment frag</span></span><br><span class="line">           <span class="comment">//CG_code</span></span><br><span class="line">           ENDCG</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="编译指令"><a href="#编译指令" class="headerlink" title="编译指令"></a>编译指令</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#pragma vertex vert	//定义顶点着色器名字</span></span><br><span class="line"><span class="meta">#pragma fragment frag//定义片段着色器名字</span></span><br><span class="line"><span class="meta">#pragma target name //定义shader编译的目标级别，默认2.5</span></span><br></pre></td></tr></table></figure>
+
+<p>当然其他还有很多，上网看看吧，用到就知道了</p>
+<h3 id="着色器函数"><a href="#着色器函数" class="headerlink" title="着色器函数"></a>着色器函数</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">struct appdata</span><br><span class="line">        &#123;</span><br><span class="line">            float4 vertex : POSITION; <span class="comment">// vertex position</span></span><br><span class="line">            float2 uv : TEXCOORD0; <span class="comment">// texture coordinate</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// vertex shader outputs (&quot;vertex to fragment&quot;)</span></span><br><span class="line">        struct v2f</span><br><span class="line">        &#123;</span><br><span class="line">            float2 uv : TEXCOORD0; <span class="comment">// texture coordinate</span></span><br><span class="line">            float4 vertex : SV_POSITION; <span class="comment">// clip space position</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// vertex shader</span></span><br><span class="line">        v2f vert (appdata v)</span><br><span class="line">        &#123;</span><br><span class="line">            v2f o;</span><br><span class="line">            o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">            <span class="comment">//******看解释</span></span><br><span class="line">            o.uv = v.uv;</span><br><span class="line">            <span class="keyword">return</span> o;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">sampler2D</span> _MainTex;</span><br><span class="line"></span><br><span class="line">        fixed4 frag (v2f i) : SV_Target</span><br><span class="line">        &#123;</span><br><span class="line">            fixed4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">            <span class="keyword">return</span> col;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在vert()中，有UnityObjectToClipPos()，这是unity内置空间变换函数，把模型空间坐标转换成裁剪空间坐标，然后输出。</p>
+<h3 id="语义"><a href="#语义" class="headerlink" title="语义"></a>语义</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">### 为什么参数后面有这样一个冒号呢，后面跟着全大写的关键词</span></span><br><span class="line"></span><br><span class="line">fixed4 frag (v2f i) : SV_Target&#123;&#125;</span><br><span class="line"></span><br><span class="line">v2f vert (float4 vertex : POSITION, float3 normal : NORMAL)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用cg编写时，需要参数填充语义来表达要传递的数据信息。</p>
+<h4 id="顶点着色器的输入语义"><a href="#顶点着色器的输入语义" class="headerlink" title="顶点着色器的输入语义"></a>顶点着色器的输入语义</h4><p>POSITION, 顶点的坐标信息</p>
+<p>NORMAL,    顶点的法线信息</p>
+<p>TEXCOORD0,TEXCOORD1,TEXCOORD2,TEXCOORD3,    模型的第几套uv坐标</p>
+<p>TANGENT,    顶点的切向量</p>
+<p>COLOR    顶点的颜色坐标</p>
+<h4 id="顶点着色器的输出-和-片段着色器的输入语义"><a href="#顶点着色器的输出-和-片段着色器的输入语义" class="headerlink" title="顶点着色器的输出 和 片段着色器的输入语义"></a>顶点着色器的输出 和 片段着色器的输入语义</h4><p>顶点着色器的主要任务就是输出顶点坐标在裁切空间的坐标，这样gpu才知道顶点在屏幕上的栅格化位置和深度值。</p>
+<p>SV_POSITION,    顶点在裁切空间的坐标 f4</p>
+<p>COLOR0,COLOR1,    低精度数据，例如顶点颜色</p>
+<p>TEXCOORD0-7    </p>
+<h4 id="片段着色器输出语义"><a href="#片段着色器输出语义" class="headerlink" title="片段着色器输出语义"></a>片段着色器输出语义</h4><p>只会输出一个fixed4类型的颜色信息，输出的值会存到渲染目标中，因此只有一个SV_TARGET语义</p>
+<h3 id="在CG中调用属性变量"><a href="#在CG中调用属性变量" class="headerlink" title="在CG中调用属性变量"></a>在CG中调用属性变量</h3><p>如果在properties中定义开放的属性，想要在shader中访问，需要在CG块中再次声明。</p>
+<p><img src="/Unity-shader/image-20211117152005645.png" alt="image-20211117152005645"></p>
+<p>可以看到，纹理贴图类的前面要加入sampler2D/Cube/3D</p>
+<p>Color或者vector要用half4，或者float4，fixed4，其中颜色最好使用fixed4(节约性能)</p>
+<p>其他就普通咯</p>
+<h4 id="在shader中使用贴图"><a href="#在shader中使用贴图" class="headerlink" title="在shader中使用贴图"></a>在shader中使用贴图</h4><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Properties</span><br><span class="line">   &#123;</span><br><span class="line">       _MainTex (&quot;Albedo (RGB)&quot;, <span class="number">2</span>D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">   &#125;</span><br><span class="line">    SubShader</span><br><span class="line">   &#123;</span><br><span class="line">  		...</span><br><span class="line">  		<span class="type">sampler2D</span> _MainTex;</span><br><span class="line">  		float4 _MainTex_ST;<span class="comment">//在cg中定义的平铺偏移变量</span></span><br><span class="line">  		..</span><br><span class="line">  	&#125;	<span class="comment">//好像写的很复杂，现在好像不需要了</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment">//Scale &amp; Transform 首字母，表示UV的缩放和平移 xy代表Tilling的xy值，zw代表Offset的xy值</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对不起我错了，在shader中有一个叫做Unlit Shader，就是按这个语法来写的</span></span><br><span class="line">Shader &quot;Unlit/<span class="number">333</span>&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainTex (&quot;Texture&quot;, <span class="number">2</span>D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Tags &#123; &quot;RenderType&quot;=&quot;Opaque&quot; &#125;</span><br><span class="line">        LOD <span class="number">100</span></span><br><span class="line"></span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#pragma vertex vert</span></span><br><span class="line">            <span class="meta">#pragma fragment frag</span></span><br><span class="line">            <span class="comment">// make fog work</span></span><br><span class="line">            <span class="meta">#pragma multi_compile_fog</span></span><br><span class="line"></span><br><span class="line">            <span class="meta">#include &quot;UnityCG.cginc&quot;</span></span><br><span class="line"></span><br><span class="line">            struct appdata</span><br><span class="line">            &#123;</span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                UNITY_FOG_COORDS(<span class="number">1</span>)</span><br><span class="line">                float4 vertex : SV_POSITION;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="type">sampler2D</span> _MainTex;</span><br><span class="line">            float4 _MainTex_ST;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">                o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">                UNITY_TRANSFER_FOG(o,o.vertex);</span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// sample the texture</span></span><br><span class="line">                fixed4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">                <span class="comment">// apply fog</span></span><br><span class="line">                UNITY_APPLY_FOG(i.fogCoord, col);</span><br><span class="line">                <span class="keyword">return</span> col;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="在Unity中使用立方体贴图"><a href="#在Unity中使用立方体贴图" class="headerlink" title="在Unity中使用立方体贴图"></a>在Unity中使用立方体贴图</h4><p>没必要写</p>
+<h1 id="Unity包含文件"><a href="#Unity包含文件" class="headerlink" title="Unity包含文件"></a>Unity包含文件</h1><p>在cg代码块中#include即可</p>
+<h2 id="UnityCG-cginc"><a href="#UnityCG-cginc" class="headerlink" title="UnityCG.cginc"></a>UnityCG.cginc</h2><h3 id="顶点着色器输入结构体"><a href="#顶点着色器输入结构体" class="headerlink" title="顶点着色器输入结构体"></a>顶点着色器输入结构体</h3><p>appdata_base     顶点坐标，顶点法线，第一组纹理坐标<br>appdata_tan        顶点坐标，顶点切线，顶点法线，第一组纹理坐标<br>appdata_full        顶点坐标，顶点切线，顶点法线，四组（或更多）纹理坐标<br>appdata_img       顶点坐标，第一组纹理坐标<br>v2f_img：             裁剪空间中的位置，纹理坐标</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">struct appdata_base &#123;</span><br><span class="line">    float4 vertex : POSITION;</span><br><span class="line">    float3 normal : NORMAL;</span><br><span class="line">    float4 texcoord : TEXCOORD0;</span><br><span class="line">    UNITY_VERTEX_INPUT_INSTANCE_ID</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct appdata_tan &#123;</span><br><span class="line">    float4 vertex : POSITION;</span><br><span class="line">    float4 tangent : TANGENT;</span><br><span class="line">    float3 normal : NORMAL;</span><br><span class="line">    float4 texcoord : TEXCOORD0;</span><br><span class="line">    UNITY_VERTEX_INPUT_INSTANCE_ID</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct appdata_full &#123;</span><br><span class="line">    float4 vertex : POSITION;</span><br><span class="line">    float4 tangent : TANGENT;</span><br><span class="line">    float3 normal : NORMAL;</span><br><span class="line">    float4 texcoord : TEXCOORD0;</span><br><span class="line">    float4 texcoord1 : TEXCOORD1;</span><br><span class="line">    float4 texcoord2 : TEXCOORD2;</span><br><span class="line">    float4 texcoord3 : TEXCOORD3;</span><br><span class="line">    fixed4 color : COLOR;</span><br><span class="line">    UNITY_VERTEX_INPUT_INSTANCE_ID</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct appdata_img</span><br><span class="line">&#123;</span><br><span class="line">    float4 vertex : POSITION;</span><br><span class="line">    half2 texcoord : TEXCOORD0;</span><br><span class="line">    UNITY_VERTEX_INPUT_INSTANCE_ID</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct v2f_img</span><br><span class="line">&#123;</span><br><span class="line">    float4 pos : SV_POSITION;</span><br><span class="line">    half2 uv : TEXCOORD0;</span><br><span class="line">    UNITY_VERTEX_INPUT_INSTANCE_ID</span><br><span class="line">    UNITY_VERTEX_OUTPUT_STEREO</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="各种帮助函数"><a href="#各种帮助函数" class="headerlink" title="各种帮助函数"></a>各种帮助函数</h3><h4 id="顶点变换函数"><a href="#顶点变换函数" class="headerlink" title="顶点变换函数"></a>顶点变换函数</h4><p>float4 WorldSpaceViewDir(float4 v)            输入一个模型空间中的顶点位置，返回世界空间中从该点到摄像机的观察方向<br>float4 UnityWorldSpaceViewDir(float4 v)            输入一个世界空间中的顶点位置，返回世界空间中从该点到摄像机的观察方向<br>float4 ObjSpaceViewDir(float4 v)            输入一个模型空间中的顶点位置，返回模型空间中从该店到摄像机的观察方向</p>
+<h4 id="灯光辅助函数"><a href="#灯光辅助函数" class="headerlink" title="灯光辅助函数"></a>灯光辅助函数</h4><p>float4 WorldSpace LightDir(flaot4 v)            仅用于向前渲染。 输入一个模型空间中的顶点位置，返回世界空间中从该点到光源的光照方向。没有被归一化<br>float4 ObjectSpaceLightDir(float4 v)            仅用于向前渲染中，输入一个模型空间中的顶点位置， 返回模型空间中从该点到光源的光照方向。没有被归一化<br>float4 UnityWorldSpaceLightDir(float4 v)            仅用于向前渲染中，输入一个世界空间中的顶点位置， 返回世界空间中从该点到光源的光照方向。没有被归一化</p>
+<h4 id="向量变换函数"><a href="#向量变换函数" class="headerlink" title="向量变换函数"></a>向量变换函数</h4><p>float3 UnityObjectToWorldNormal(float3 norm)            把法线方向从模型空间中转换到世界空间中<br>float3 UnityObjectToWorldDir(float3 dir)            把方向矢量从模型空间中变换到世界空间中<br>float3 Unity WorldToObjectDir(float3 dir)            把方向矢量从世界空间变换到模型空间中</p>
+<h2 id="UnityShaderVariable-cginc"><a href="#UnityShaderVariable-cginc" class="headerlink" title="UnityShaderVariable.cginc"></a>UnityShaderVariable.cginc</h2><p>…….随便都可以</p>
+<p>[TOC]</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/12/OpenGL-%E4%B8%B4%E6%97%B6%E7%AC%94-%E9%94%AE%E7%9B%98-%E8%AE%B0/" rel="next" title="OpenGL-临时笔(键盘)记">
+                <i class="fa fa-chevron-left"></i> OpenGL-临时笔(键盘)记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/11/17/Unity-shader2/" rel="prev" title="Unity_shader2_各类光照模型">
+                Unity_shader2_各类光照模型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Zhairest" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/#/user/home?id=70879973" target="_blank" title="CloudMusic">
+                      
+                        <i class="fa fa-fw fa-cloud"></i>CloudMusic</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E6%8A%95%E5%BD%B1%E5%8F%98%E6%8D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">空间投影变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%A9%BA%E9%97%B4ModelSpace"><span class="nav-number">1.1.1.</span> <span class="nav-text">模型空间ModelSpace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%96%E7%95%8C%E5%9D%90%E6%A0%87World"><span class="nav-number">1.1.2.</span> <span class="nav-text">世界坐标World</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%84%E5%83%8F%E6%9C%BA%E7%A9%BA%E9%97%B4"><span class="nav-number">1.1.3.</span> <span class="nav-text">摄像机空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A3%81%E5%88%87%E7%A9%BA%E9%97%B4clip"><span class="nav-number">1.1.4.</span> <span class="nav-text">裁切空间clip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%8F%E5%B9%95%E7%A9%BA%E9%97%B4"><span class="nav-number">1.1.5.</span> <span class="nav-text">屏幕空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3gpu%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">1.2.</span> <span class="nav-text">现代gpu渲染流水线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shader%E6%A6%82%E5%BF%B5"><span class="nav-number">1.3.</span> <span class="nav-text">Shader概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shaderlab%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80"><span class="nav-number">1.4.</span> <span class="nav-text">shaderlab语法基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#properties"><span class="nav-number">1.4.1.</span> <span class="nav-text">properties</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E7%B1%BBproperties"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">数值类properties</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E5%92%8C%E5%90%91%E9%87%8F%E7%B1%BBproperties"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">颜色和向量类properties</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E8%B4%B4%E5%9B%BE%E7%B1%BB"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">纹理贴图类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SubShader"><span class="nav-number">1.4.2.</span> <span class="nav-text">SubShader</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tags"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">tags</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E9%98%9F%E5%88%97"><span class="nav-number">1.4.2.1.1.</span> <span class="nav-text">渲染队列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.2.1.2.</span> <span class="nav-text">渲染类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A6%81%E7%94%A8%E6%89%B9%E5%A4%84%E7%90%86"><span class="nav-number">1.4.2.1.3.</span> <span class="nav-text">禁用批处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AD%89%E7%AD%89%E7%AD%89%E7%AD%89"><span class="nav-number">1.4.2.1.4.</span> <span class="nav-text">等等等等</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pass%E7%9A%84%E6%B8%B2%E6%9F%93%E7%8A%B6%E5%86%B5"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">Pass的渲染状况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fallback"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">Fallback</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B6%E7%82%B9-%E7%89%87%E6%AE%B5%E7%9D%80%E8%89%B2%E5%99%A8%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">顶点-片段着色器基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CG%E8%AF%AD%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">CG语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4"><span class="nav-number">2.1.1.</span> <span class="nav-text">编译指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9D%80%E8%89%B2%E5%99%A8%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">着色器函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E4%B9%89"><span class="nav-number">2.1.3.</span> <span class="nav-text">语义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8%E7%9A%84%E8%BE%93%E5%85%A5%E8%AF%AD%E4%B9%89"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">顶点着色器的输入语义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8%E7%9A%84%E8%BE%93%E5%87%BA-%E5%92%8C-%E7%89%87%E6%AE%B5%E7%9D%80%E8%89%B2%E5%99%A8%E7%9A%84%E8%BE%93%E5%85%A5%E8%AF%AD%E4%B9%89"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">顶点着色器的输出 和 片段着色器的输入语义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%87%E6%AE%B5%E7%9D%80%E8%89%B2%E5%99%A8%E8%BE%93%E5%87%BA%E8%AF%AD%E4%B9%89"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">片段着色器输出语义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8CG%E4%B8%AD%E8%B0%83%E7%94%A8%E5%B1%9E%E6%80%A7%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.4.</span> <span class="nav-text">在CG中调用属性变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8shader%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%B4%B4%E5%9B%BE"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">在shader中使用贴图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8Unity%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%AB%8B%E6%96%B9%E4%BD%93%E8%B4%B4%E5%9B%BE"><span class="nav-number">2.1.4.2.</span> <span class="nav-text">在Unity中使用立方体贴图</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unity%E5%8C%85%E5%90%AB%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">Unity包含文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UnityCG-cginc"><span class="nav-number">3.1.</span> <span class="nav-text">UnityCG.cginc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8%E8%BE%93%E5%85%A5%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">3.1.1.</span> <span class="nav-text">顶点着色器输入结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E7%A7%8D%E5%B8%AE%E5%8A%A9%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.2.</span> <span class="nav-text">各种帮助函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B6%E7%82%B9%E5%8F%98%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">顶点变换函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%81%AF%E5%85%89%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">灯光辅助函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%8F%98%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">向量变换函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UnityShaderVariable-cginc"><span class="nav-number">3.2.</span> <span class="nav-text">UnityShaderVariable.cginc</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhairest</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

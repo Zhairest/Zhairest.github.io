@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Unity," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="shader中的光照模型学到这一章，又为之前图形学的浑水摸鱼而感到羞耻我(＠_＠;) Lambert光照模型光射到粗糙的物体，产生漫反射（diffuse），满足Lambert定理：反射光线的强度与表面法线和光影方向之间的夹角成正比。即光线垂直物体表面时，漫反射强度最大。 其计算公式为：$$C_diffuse &#x3D;(C_lightM_diffuse)saturate(n·l)$$​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity_shader2_各类光照模型">
+<meta property="og:url" content="http://example.com/2021/11/17/Unity-shader2/index.html">
+<meta property="og:site_name" content="旋转公寓的阁楼">
+<meta property="og:description" content="shader中的光照模型学到这一章，又为之前图形学的浑水摸鱼而感到羞耻我(＠_＠;) Lambert光照模型光射到粗糙的物体，产生漫反射（diffuse），满足Lambert定理：反射光线的强度与表面法线和光影方向之间的夹角成正比。即光线垂直物体表面时，漫反射强度最大。 其计算公式为：$$C_diffuse &#x3D;(C_lightM_diffuse)saturate(n·l)$$​">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/Unity-shader2/image-20211117201334581.png!%5Bim20211117201538527%5D(Unity-shader2/image-20211117201538527.png">
+<meta property="og:image" content="http://example.com/Unity-shader2/image-20211117201523639.png">
+<meta property="og:image" content="http://example.com/Unity-shader2/image-20211117204323435.png">
+<meta property="article:published_time" content="2021-11-17T09:03:29.000Z">
+<meta property="article:modified_time" content="2021-11-17T12:58:22.398Z">
+<meta property="article:author" content="Zhairest">
+<meta property="article:tag" content="Unity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Unity-shader2/image-20211117201334581.png!%5Bim20211117201538527%5D(Unity-shader2/image-20211117201538527.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2021/11/17/Unity-shader2/"/>
+
+
+
+
+
+  <title>Unity_shader2_各类光照模型 | 旋转公寓的阁楼</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋转公寓的阁楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">储物间</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/17/Unity-shader2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋转公寓的阁楼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Unity_shader2_各类光照模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-17T17:03:29+08:00">
+                2021-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="shader中的光照模型"><a href="#shader中的光照模型" class="headerlink" title="shader中的光照模型"></a>shader中的光照模型</h1><p>学到这一章，又为之前图形学的浑水摸鱼而感到羞耻我(＠_＠;)</p>
+<h2 id="Lambert光照模型"><a href="#Lambert光照模型" class="headerlink" title="Lambert光照模型"></a>Lambert光照模型</h2><p>光射到粗糙的物体，产生漫反射（diffuse），满足Lambert定理：反射光线的强度与表面法线和光影方向之间的夹角成正比。即光线垂直物体表面时，漫反射强度最大。</p>
+<p>其计算公式为：<br>$$<br>C_diffuse =(C_light<em>M_diffuse)saturate(n·l)<br>$$<br>​                        C物体的漫反射颜色=（C入射光线的颜色</em>M物体材质的漫反射颜色）将点积取[0，1]之间（物体的表面法线 -点积- 物体指向灯光的方向）</p>
+<h3 id="那如何在shader里获得灯光呢"><a href="#那如何在shader里获得灯光呢" class="headerlink" title="那如何在shader里获得灯光呢"></a>那如何在shader里获得灯光呢</h3><p>Edit&gt;Project Setting&gt;Graphics 中发现已经被设置是前向渲染了</p>
+<p>这下子可以使用的灯光属性变量有：_LightColor0     fixed4     灯光的颜色乘上亮度</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Hidden/<span class="number">1</span>_Lambert&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainColor(&quot;Main Color&quot;,Color)=(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#pragma vertex vert</span></span><br><span class="line">            <span class="meta">#pragma fragment frag</span></span><br><span class="line">            <span class="meta">#include &quot;UnityCG.cginc&quot;</span></span><br><span class="line">            <span class="meta">#include &quot;UnityLightingCommon.cginc&quot;</span></span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : SV_POSITION;</span><br><span class="line">                fixed4 dif : COLOR0;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            fixed4 _MainColor;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata_base v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos =UnityObjectToClipPos(v.vertex);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//法线向量</span></span><br><span class="line">                float3 n=UnityObjectToWorldNormal(v.normal);</span><br><span class="line">                n=<span class="built_in">normalize</span>(n);</span><br><span class="line">                <span class="comment">//灯光方向向量</span></span><br><span class="line">                fixed3 l=<span class="built_in">normalize</span>(_WorldSpaceLightPos0.xyz);</span><br><span class="line">                <span class="comment">//按照公式计算漫反射s</span></span><br><span class="line">                fixed ndotl =<span class="built_in">dot</span>(n,l);<span class="comment">//点积</span></span><br><span class="line">                o.dif =_LightColor0*_MainColor*saturate(ndotl);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> i.dif;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  //法线向量<br>                float3 n=UnityObjectToWorldNormal(v.normal);<br>                n=normalize(n);</p>
+<p>计算光照时要确保在同一空间，而法线向量在模型空间，灯光方向向量在世界空间，因此要转化，并且进行标准化。<img src="/Unity-shader2/image-20211117201334581.png!%5Bim20211117201538527%5D(Unity-shader2/image-20211117201538527.png" alt="image-20211117201334581"></p>
+<hr>
+<h2 id="Half-Lambert光照模型"><a href="#Half-Lambert光照模型" class="headerlink" title="Half-Lambert光照模型"></a>Half-Lambert光照模型</h2><p>前者Lambert光照能看到，物体的背面明显过黑，只能再加灯，但不利于性能的优化。故有half出现。</p>
+<p>其计算公式为：<br>$$<br>C_diffuse =(C_light<em>M_diffuse)[0.5</em>(n·l)+0.5]<br>$$<br>如此可以看到是先乘0.5将区间缩小至[-0.5,0.5]，然后再加上去，使得物体光照强度从最亮逐渐过渡到最暗。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//仅改动vertex_shader部分</span></span><br><span class="line">            v2f vert (appdata_base v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos =UnityObjectToClipPos(v.vertex);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//法线向量</span></span><br><span class="line">                float3 n=UnityObjectToWorldNormal(v.normal);</span><br><span class="line">                n=<span class="built_in">normalize</span>(n);</span><br><span class="line">                <span class="comment">//灯光方向向量</span></span><br><span class="line">                fixed3 l=<span class="built_in">normalize</span>(_WorldSpaceLightPos0.xyz);</span><br><span class="line">                <span class="comment">//按照公式计算漫反射s</span></span><br><span class="line">                fixed ndotl =<span class="built_in">dot</span>(n,l);</span><br><span class="line">                o.dif =_LightColor0*_MainColor*(<span class="number">0.5</span>*ndotl+<span class="number">0.5</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Unity-shader2/image-20211117201523639.png" alt="image-20211117201523639"></p>
+<hr>
+<h2 id="Phong光照模型"><a href="#Phong光照模型" class="headerlink" title="Phong光照模型"></a>Phong光照模型</h2><p>Lambert能模拟粗糙表面的光照，但是还有很多光滑物体，因此引入镜面反射的光照模型-Phong（印象中好像片元分的够细，俩者效果其实相差无几）</p>
+<p>（Phong，越南出生的美国科学家）</p>
+<p>其计算公式为：<br>$$<br>SurfaceColor=C_Ambient+C_Diffuse+C_Specular<br>$$<br>即                                环境光+漫反射+镜面反射</p>
+<p>其中镜面反射的公式为：<br>$$<br>C_Specular=(C_light·M_specular)saturate(v·r)^Mshininess<br>$$<br>即                                镜面反射光=（灯光亮度·物体材质镜面反射亮度）将范围截到[0,1] (视角方向·光线的发射方向)^物体材质的光泽度</p>
+<h3 id="那如何在shader里获得环境光呢"><a href="#那如何在shader里获得环境光呢" class="headerlink" title="那如何在shader里获得环境光呢"></a>那如何在shader里获得环境光呢</h3><p>Window-Rendering-LightingSetting中environmentLight选择Gradient</p>
+<p>即可使用：unity_AmbientSky 环境类型的sky color</p>
+<p>unity_AmbientEquator</p>
+<p>unity_AmbientGround</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Hidden/<span class="number">3</span>_Phong&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainColor(&quot;Main Color&quot;,Color)=(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">        _SpecularColor(&quot;Specular Color&quot;,Color)=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)    <span class="comment">//控制高光颜色</span></span><br><span class="line">        _Shininess(&quot;Shininess&quot;,Range(<span class="number">1</span>,<span class="number">100</span>))=<span class="number">1</span>      <span class="comment">//控制光泽度</span></span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#pragma vertex vert</span></span><br><span class="line">            <span class="meta">#pragma fragment frag</span></span><br><span class="line">            <span class="meta">#include &quot;UnityCG.cginc&quot;</span></span><br><span class="line">            <span class="meta">#include &quot;Lighting.cginc&quot;</span></span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : SV_POSITION;</span><br><span class="line">                fixed4 color : COLOR0;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            fixed4 _MainColor;</span><br><span class="line">            fixed4 _SpecularColor;</span><br><span class="line">            half _Shininess;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata_base v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos =UnityObjectToClipPos(v.vertex);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//计算公式中各个变量</span></span><br><span class="line">                <span class="comment">//法线向量</span></span><br><span class="line">                float3 n=UnityObjectToWorldNormal(v.normal);</span><br><span class="line">                n=<span class="built_in">normalize</span>(n);</span><br><span class="line">                <span class="comment">//灯光方向向量</span></span><br><span class="line">                fixed3 l=<span class="built_in">normalize</span>(_WorldSpaceLightPos0.xyz);</span><br><span class="line">                fixed3 view=<span class="built_in">normalize</span>(WorldSpaceViewDir(v.vertex));</span><br><span class="line"></span><br><span class="line">                <span class="comment">//按照公式计算漫反射s</span></span><br><span class="line">                fixed ndotl =<span class="built_in">dot</span>(n,l);</span><br><span class="line">                fixed4 dif =_LightColor0*_MainColor*saturate(ndotl);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//镜面反射部分</span></span><br><span class="line">                float3 ref=<span class="built_in">reflect</span>(-l,n);</span><br><span class="line">                ref=<span class="built_in">normalize</span>(ref);</span><br><span class="line">                fixed rdotv=saturate(<span class="built_in">dot</span>(ref,view));</span><br><span class="line">                fixed4 spec=_LightColor0*_SpecularColor*<span class="built_in">pow</span>(rdotv,_Shininess);</span><br><span class="line"></span><br><span class="line">                o.color=unity_AmbientSky+dif+spec;</span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> i.color;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/Unity-shader2/image-20211117204323435.png" alt="image-20211117204323435"></p>
+<h2 id="逐像素光照-per-pixel"><a href="#逐像素光照-per-pixel" class="headerlink" title="逐像素光照 per-pixel"></a>逐像素光照 per-pixel</h2><p>据说phong被应用之后，高光部分会边缘不够圆滑。这是因为光照模型的计算一直是逐顶点光照。</p>
+<p>逐顶点光照，就是在顶点着色器中计算光照颜色。GPU在对顶点进行光照计算后，得到颜色，然后通过顶点在多边形上所占的范围对像素颜色进行线性插值。</p>
+<p>细分较低（多边形数量少）的模型，就会棱角分明，高光也不理想。</p>
+<p>那么逐像素光照per-pixel就是在像素着色器（也就是片段着色器）进行着色的。计算不再基于顶点，而是像素，计算量增大。</p>
+<p>[TOC]</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/16/Unity-shader/" rel="next" title="Unity_shader">
+                <i class="fa fa-chevron-left"></i> Unity_shader
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Zhairest" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/#/user/home?id=70879973" target="_blank" title="CloudMusic">
+                      
+                        <i class="fa fa-fw fa-cloud"></i>CloudMusic</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shader%E4%B8%AD%E7%9A%84%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">shader中的光照模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambert%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">Lambert光照模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E5%A6%82%E4%BD%95%E5%9C%A8shader%E9%87%8C%E8%8E%B7%E5%BE%97%E7%81%AF%E5%85%89%E5%91%A2"><span class="nav-number">1.1.1.</span> <span class="nav-text">那如何在shader里获得灯光呢</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Half-Lambert%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">Half-Lambert光照模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Phong%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">Phong光照模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E5%A6%82%E4%BD%95%E5%9C%A8shader%E9%87%8C%E8%8E%B7%E5%BE%97%E7%8E%AF%E5%A2%83%E5%85%89%E5%91%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">那如何在shader里获得环境光呢</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%90%E5%83%8F%E7%B4%A0%E5%85%89%E7%85%A7-per-pixel"><span class="nav-number">1.4.</span> <span class="nav-text">逐像素光照 per-pixel</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhairest</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -229,6 +229,358 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/17/Unity-shader2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋转公寓的阁楼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/11/17/Unity-shader2/" itemprop="url">Unity_shader2_各类光照模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-17T17:03:29+08:00">
+                2021-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="shader中的光照模型"><a href="#shader中的光照模型" class="headerlink" title="shader中的光照模型"></a>shader中的光照模型</h1><p>学到这一章，又为之前图形学的浑水摸鱼而感到羞耻我(＠_＠;)</p>
+<h2 id="Lambert光照模型"><a href="#Lambert光照模型" class="headerlink" title="Lambert光照模型"></a>Lambert光照模型</h2><p>光射到粗糙的物体，产生漫反射（diffuse），满足Lambert定理：反射光线的强度与表面法线和光影方向之间的夹角成正比。即光线垂直物体表面时，漫反射强度最大。</p>
+<p>其计算公式为：<br>$$<br>C_diffuse =(C_light<em>M_diffuse)saturate(n·l)<br>$$<br>​                        C物体的漫反射颜色=（C入射光线的颜色</em>M物体材质的漫反射颜色）将点积取[0，1]之间（物体的表面法线 -点积- 物体指向灯光的方向）</p>
+<h3 id="那如何在shader里获得灯光呢"><a href="#那如何在shader里获得灯光呢" class="headerlink" title="那如何在shader里获得灯光呢"></a>那如何在shader里获得灯光呢</h3><p>Edit&gt;Project Setting&gt;Graphics 中发现已经被设置是前向渲染了</p>
+<p>这下子可以使用的灯光属性变量有：_LightColor0     fixed4     灯光的颜色乘上亮度</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Hidden/<span class="number">1</span>_Lambert&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainColor(&quot;Main Color&quot;,Color)=(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#pragma vertex vert</span></span><br><span class="line">            <span class="meta">#pragma fragment frag</span></span><br><span class="line">            <span class="meta">#include &quot;UnityCG.cginc&quot;</span></span><br><span class="line">            <span class="meta">#include &quot;UnityLightingCommon.cginc&quot;</span></span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : SV_POSITION;</span><br><span class="line">                fixed4 dif : COLOR0;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            fixed4 _MainColor;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata_base v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos =UnityObjectToClipPos(v.vertex);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//法线向量</span></span><br><span class="line">                float3 n=UnityObjectToWorldNormal(v.normal);</span><br><span class="line">                n=<span class="built_in">normalize</span>(n);</span><br><span class="line">                <span class="comment">//灯光方向向量</span></span><br><span class="line">                fixed3 l=<span class="built_in">normalize</span>(_WorldSpaceLightPos0.xyz);</span><br><span class="line">                <span class="comment">//按照公式计算漫反射s</span></span><br><span class="line">                fixed ndotl =<span class="built_in">dot</span>(n,l);<span class="comment">//点积</span></span><br><span class="line">                o.dif =_LightColor0*_MainColor*saturate(ndotl);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> i.dif;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  //法线向量<br>                float3 n=UnityObjectToWorldNormal(v.normal);<br>                n=normalize(n);</p>
+<p>计算光照时要确保在同一空间，而法线向量在模型空间，灯光方向向量在世界空间，因此要转化，并且进行标准化。<img src="/Unity-shader2/image-20211117201334581.png!%5Bim20211117201538527%5D(Unity-shader2/image-20211117201538527.png" alt="image-20211117201334581"></p>
+<hr>
+<h2 id="Half-Lambert光照模型"><a href="#Half-Lambert光照模型" class="headerlink" title="Half-Lambert光照模型"></a>Half-Lambert光照模型</h2><p>前者Lambert光照能看到，物体的背面明显过黑，只能再加灯，但不利于性能的优化。故有half出现。</p>
+<p>其计算公式为：<br>$$<br>C_diffuse =(C_light<em>M_diffuse)[0.5</em>(n·l)+0.5]<br>$$<br>如此可以看到是先乘0.5将区间缩小至[-0.5,0.5]，然后再加上去，使得物体光照强度从最亮逐渐过渡到最暗。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//仅改动vertex_shader部分</span></span><br><span class="line">            v2f vert (appdata_base v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos =UnityObjectToClipPos(v.vertex);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//法线向量</span></span><br><span class="line">                float3 n=UnityObjectToWorldNormal(v.normal);</span><br><span class="line">                n=<span class="built_in">normalize</span>(n);</span><br><span class="line">                <span class="comment">//灯光方向向量</span></span><br><span class="line">                fixed3 l=<span class="built_in">normalize</span>(_WorldSpaceLightPos0.xyz);</span><br><span class="line">                <span class="comment">//按照公式计算漫反射s</span></span><br><span class="line">                fixed ndotl =<span class="built_in">dot</span>(n,l);</span><br><span class="line">                o.dif =_LightColor0*_MainColor*(<span class="number">0.5</span>*ndotl+<span class="number">0.5</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Unity-shader2/image-20211117201523639.png" alt="image-20211117201523639"></p>
+<hr>
+<h2 id="Phong光照模型"><a href="#Phong光照模型" class="headerlink" title="Phong光照模型"></a>Phong光照模型</h2><p>Lambert能模拟粗糙表面的光照，但是还有很多光滑物体，因此引入镜面反射的光照模型-Phong（印象中好像片元分的够细，俩者效果其实相差无几）</p>
+<p>（Phong，越南出生的美国科学家）</p>
+<p>其计算公式为：<br>$$<br>SurfaceColor=C_Ambient+C_Diffuse+C_Specular<br>$$<br>即                                环境光+漫反射+镜面反射</p>
+<p>其中镜面反射的公式为：<br>$$<br>C_Specular=(C_light·M_specular)saturate(v·r)^Mshininess<br>$$<br>即                                镜面反射光=（灯光亮度·物体材质镜面反射亮度）将范围截到[0,1] (视角方向·光线的发射方向)^物体材质的光泽度</p>
+<h3 id="那如何在shader里获得环境光呢"><a href="#那如何在shader里获得环境光呢" class="headerlink" title="那如何在shader里获得环境光呢"></a>那如何在shader里获得环境光呢</h3><p>Window-Rendering-LightingSetting中environmentLight选择Gradient</p>
+<p>即可使用：unity_AmbientSky 环境类型的sky color</p>
+<p>unity_AmbientEquator</p>
+<p>unity_AmbientGround</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Hidden/<span class="number">3</span>_Phong&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainColor(&quot;Main Color&quot;,Color)=(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">        _SpecularColor(&quot;Specular Color&quot;,Color)=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)    <span class="comment">//控制高光颜色</span></span><br><span class="line">        _Shininess(&quot;Shininess&quot;,Range(<span class="number">1</span>,<span class="number">100</span>))=<span class="number">1</span>      <span class="comment">//控制光泽度</span></span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#pragma vertex vert</span></span><br><span class="line">            <span class="meta">#pragma fragment frag</span></span><br><span class="line">            <span class="meta">#include &quot;UnityCG.cginc&quot;</span></span><br><span class="line">            <span class="meta">#include &quot;Lighting.cginc&quot;</span></span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : SV_POSITION;</span><br><span class="line">                fixed4 color : COLOR0;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            fixed4 _MainColor;</span><br><span class="line">            fixed4 _SpecularColor;</span><br><span class="line">            half _Shininess;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata_base v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos =UnityObjectToClipPos(v.vertex);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//计算公式中各个变量</span></span><br><span class="line">                <span class="comment">//法线向量</span></span><br><span class="line">                float3 n=UnityObjectToWorldNormal(v.normal);</span><br><span class="line">                n=<span class="built_in">normalize</span>(n);</span><br><span class="line">                <span class="comment">//灯光方向向量</span></span><br><span class="line">                fixed3 l=<span class="built_in">normalize</span>(_WorldSpaceLightPos0.xyz);</span><br><span class="line">                fixed3 view=<span class="built_in">normalize</span>(WorldSpaceViewDir(v.vertex));</span><br><span class="line"></span><br><span class="line">                <span class="comment">//按照公式计算漫反射s</span></span><br><span class="line">                fixed ndotl =<span class="built_in">dot</span>(n,l);</span><br><span class="line">                fixed4 dif =_LightColor0*_MainColor*saturate(ndotl);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//镜面反射部分</span></span><br><span class="line">                float3 ref=<span class="built_in">reflect</span>(-l,n);</span><br><span class="line">                ref=<span class="built_in">normalize</span>(ref);</span><br><span class="line">                fixed rdotv=saturate(<span class="built_in">dot</span>(ref,view));</span><br><span class="line">                fixed4 spec=_LightColor0*_SpecularColor*<span class="built_in">pow</span>(rdotv,_Shininess);</span><br><span class="line"></span><br><span class="line">                o.color=unity_AmbientSky+dif+spec;</span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> i.color;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/Unity-shader2/image-20211117204323435.png" alt="image-20211117204323435"></p>
+<h2 id="逐像素光照-per-pixel"><a href="#逐像素光照-per-pixel" class="headerlink" title="逐像素光照 per-pixel"></a>逐像素光照 per-pixel</h2><p>据说phong被应用之后，高光部分会边缘不够圆滑。这是因为光照模型的计算一直是逐顶点光照。</p>
+<p>逐顶点光照，就是在顶点着色器中计算光照颜色。GPU在对顶点进行光照计算后，得到颜色，然后通过顶点在多边形上所占的范围对像素颜色进行线性插值。</p>
+<p>细分较低（多边形数量少）的模型，就会棱角分明，高光也不理想。</p>
+<p>那么逐像素光照per-pixel就是在像素着色器（也就是片段着色器）进行着色的。计算不再基于顶点，而是像素，计算量增大。</p>
+<p>[TOC]</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/16/Unity-shader/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋转公寓的阁楼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/11/16/Unity-shader/" itemprop="url">Unity_shader</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-16T10:58:37+08:00">
+                2021-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="空间投影变换"><a href="#空间投影变换" class="headerlink" title="空间投影变换"></a>空间投影变换</h2><p>在学习shader之前，先学习空间变化把</p>
+<h3 id="模型空间ModelSpace"><a href="#模型空间ModelSpace" class="headerlink" title="模型空间ModelSpace"></a>模型空间ModelSpace</h3><p>指物体自身的坐标？以模型pivot为中心，而pivot在世界坐标中就是物体的位置</p>
+<h3 id="世界坐标World"><a href="#世界坐标World" class="headerlink" title="世界坐标World"></a>世界坐标World</h3><p>指相对的坐标。通过模型变换得到</p>
+<h3 id="摄像机空间"><a href="#摄像机空间" class="headerlink" title="摄像机空间"></a>摄像机空间</h3><p>摄像机朝向为z轴，上y右x（为什么与opengl的完全不同？）通过上者视变换而得到</p>
+<h3 id="裁切空间clip"><a href="#裁切空间clip" class="headerlink" title="裁切空间clip"></a>裁切空间clip</h3><p>通过投影变换而得到</p>
+<h3 id="屏幕空间"><a href="#屏幕空间" class="headerlink" title="屏幕空间"></a>屏幕空间</h3><p>通过屏幕投影而得到</p>
+<h2 id="现代gpu渲染流水线"><a href="#现代gpu渲染流水线" class="headerlink" title="现代gpu渲染流水线"></a>现代gpu渲染流水线</h2><p><img src="/Unity-shader/image-20211117135949050.png" alt="image-20211117135949050"></p>
+<h2 id="Shader概念"><a href="#Shader概念" class="headerlink" title="Shader概念"></a>Shader概念</h2><p>shader是渲染流水线的一部分，由顶点着色器和片段着色器构成（着色器(Shader)是运行在GPU上的小程序。这些小程序为图形渲染管线的某个特定部分而运行。从基本意义上来说，着色器只是一种把输入转化为输出的程序。着色器也是一种非常独立的程序，因为它们之间不能相互通信；它们之间唯一的沟通只有通过输入和输出。）</p>
+<p>unity用cg编写，OpenGL用glsl，direct3d用hlsl。unity基于hlsl产生的cg。</p>
+<h2 id="shaderlab语法基础"><a href="#shaderlab语法基础" class="headerlink" title="shaderlab语法基础"></a>shaderlab语法基础</h2><p>shader结构为：properties subshader fallback</p>
+<p>如果是顶点片段着色器，里面还会包含pass{}</p>
+<h3 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h3><p>开放出来的变量，可以在控制面板中调节</p>
+<p>properties主要分为三大类：数值 颜色与向量 纹理贴图</p>
+<p>每条属性的语法如下：</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_Name(&quot;Display Name&quot;,type) = defaultValue[&#123;options&#125;]</span><br><span class="line"><span class="comment">//属性名字（“显示的名字”，属性的类型）=将shader指定给材质时初始化的默认值</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="数值类properties"><a href="#数值类properties" class="headerlink" title="数值类properties"></a>数值类properties</h4><p>基本都是float，有以下俩种</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name(&quot;display name&quot;,Float)=number</span><br><span class="line">name(&quot;display name&quot;, Range(min,max))=number</span><br></pre></td></tr></table></figure>
+
+<h4 id="颜色和向量类properties"><a href="#颜色和向量类properties" class="headerlink" title="颜色和向量类properties"></a>颜色和向量类properties</h4><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name(&quot;display name&quot;, Color)=(number,number,number,number)<span class="comment">//RGBA</span></span><br><span class="line">name(&quot;display name&quot;, Vector)=(number1,number2,number3,number4)</span><br></pre></td></tr></table></figure>
+
+<h4 id="纹理贴图类"><a href="#纹理贴图类" class="headerlink" title="纹理贴图类"></a>纹理贴图类</h4><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name(&quot;display name&quot;, <span class="number">2</span>D)=&quot;defaulttexture&quot;&#123;&#125;</span><br><span class="line">name(&quot;display name&quot;, Cube)=&quot;defaulttexture&quot;&#123;&#125;</span><br><span class="line">name(&quot;display name&quot;, <span class="number">3</span>D)=&quot;defaulttexture&quot;&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2D最常使用，例如漫反射贴图，法线贴图。其defaulttexture可以用各种颜色 black red</p>
+<p>Cube全称CubeMapTexture立方体纹理，由六张有联系的2D贴图拼成的立方体，主要用于反射，例如Skybox和ReflectionProb</p>
+<p><img src="/Unity-shader/image-20211117142854328.png" alt="image-20211117142854328"></p>
+<p><img src="/Unity-shader/image-20211117142915137.png" alt="image-20211117142915137"></p>
+<h3 id="SubShader"><a href="#SubShader" class="headerlink" title="SubShader"></a>SubShader</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">SubShader</span><br><span class="line">    &#123;</span><br><span class="line">    	Tags &#123; &quot;RenderType&quot;=&quot;Opaque&quot; &#125;</span><br><span class="line">        <span class="comment">//渲染状况</span></span><br><span class="line">        cull back</span><br><span class="line">    	LOD <span class="number">200</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//1:LOD Level of Detail, 根据LOD来设置使用不同版本的Shader;</span></span><br><span class="line"><span class="comment">//2:着色器中给SubShader一个LOD值，程序来设置这个shader的LOD值，只有第一个小于等于LOD值subShader才会被执行;</span></span><br><span class="line"><span class="comment">//3: 每个shader最多只会有一个SubShader被使用;</span></span><br><span class="line">    	</span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            ...</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">FallBack &quot;Diffuse&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="tags"><a href="#tags" class="headerlink" title="tags"></a>tags</h4><h5 id="渲染队列"><a href="#渲染队列" class="headerlink" title="渲染队列"></a>渲染队列</h5><p>可以用Tags{“Quene”=”Geometry+1”}来指定队列，unity有五种指定的队列。当然也可以在材质面板中选择<img src="/Unity-shader/image-20211117143648273.png" alt="image-20211117143648273"></p>
+<h5 id="渲染类型"><a href="#渲染类型" class="headerlink" title="渲染类型"></a>渲染类型</h5><p>RenderType可以进行划分，便于替换深度纹理</p>
+<p>比如 Tags { “RenderType”=”Opaque” } 普通shader。再比如Transparent为半透明等等等等</p>
+<h5 id="禁用批处理"><a href="#禁用批处理" class="headerlink" title="禁用批处理"></a>禁用批处理</h5><p>DisableBatching，使用批处理时，几何体可能被变换到世界空间，模型空间被丢弃，这会导致用模型空间顶点坐标的shader出问题。</p>
+<h5 id="等等等等"><a href="#等等等等" class="headerlink" title="等等等等"></a>等等等等</h5><p>请看<a target="_blank" rel="noopener" href="https://docs.unity3d.com/cn/current/Manual/SL-SubShaderTags.html">https://docs.unity3d.com/cn/current/Manual/SL-SubShaderTags.html</a> 但我觉得很难看懂</p>
+<h4 id="Pass的渲染状况"><a href="#Pass的渲染状况" class="headerlink" title="Pass的渲染状况"></a>Pass的渲染状况</h4><p>例如Cull Back 设置多边形背面剔除等等</p>
+<h4 id="Fallback"><a href="#Fallback" class="headerlink" title="Fallback"></a>Fallback</h4><p>在所有subShader之后定义，如果所有subshader都无法运行，就运行fallback定义的shader，常见unity内置的diffuse</p>
+<h1 id="顶点-片段着色器基础"><a href="#顶点-片段着色器基础" class="headerlink" title="顶点-片段着色器基础"></a>顶点-片段着色器基础</h1><p>unity里shader有俩种用途：1.给材质用于渲染 2.给脚本用于图像处理</p>
+<h2 id="CG语法"><a href="#CG语法" class="headerlink" title="CG语法"></a>CG语法</h2><p>unity的shader中，shaderlab只是组织代码结构，真正渲染部分是cg语言编写的。cg程序片段通过指令嵌入在pass中，夹在 CGPROGRAM和 ENDCG之中。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Pass</span><br><span class="line">       &#123;</span><br><span class="line">           CGPROGRAM</span><br><span class="line">           <span class="meta">#pragma vertex vert		//编译指令</span></span><br><span class="line">           <span class="meta">#pragma fragment frag</span></span><br><span class="line">           <span class="comment">//CG_code</span></span><br><span class="line">           ENDCG</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="编译指令"><a href="#编译指令" class="headerlink" title="编译指令"></a>编译指令</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#pragma vertex vert	//定义顶点着色器名字</span></span><br><span class="line"><span class="meta">#pragma fragment frag//定义片段着色器名字</span></span><br><span class="line"><span class="meta">#pragma target name //定义shader编译的目标级别，默认2.5</span></span><br></pre></td></tr></table></figure>
+
+<p>当然其他还有很多，上网看看吧，用到就知道了</p>
+<h3 id="着色器函数"><a href="#着色器函数" class="headerlink" title="着色器函数"></a>着色器函数</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">struct appdata</span><br><span class="line">        &#123;</span><br><span class="line">            float4 vertex : POSITION; <span class="comment">// vertex position</span></span><br><span class="line">            float2 uv : TEXCOORD0; <span class="comment">// texture coordinate</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// vertex shader outputs (&quot;vertex to fragment&quot;)</span></span><br><span class="line">        struct v2f</span><br><span class="line">        &#123;</span><br><span class="line">            float2 uv : TEXCOORD0; <span class="comment">// texture coordinate</span></span><br><span class="line">            float4 vertex : SV_POSITION; <span class="comment">// clip space position</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// vertex shader</span></span><br><span class="line">        v2f vert (appdata v)</span><br><span class="line">        &#123;</span><br><span class="line">            v2f o;</span><br><span class="line">            o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">            <span class="comment">//******看解释</span></span><br><span class="line">            o.uv = v.uv;</span><br><span class="line">            <span class="keyword">return</span> o;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">sampler2D</span> _MainTex;</span><br><span class="line"></span><br><span class="line">        fixed4 frag (v2f i) : SV_Target</span><br><span class="line">        &#123;</span><br><span class="line">            fixed4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">            <span class="keyword">return</span> col;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在vert()中，有UnityObjectToClipPos()，这是unity内置空间变换函数，把模型空间坐标转换成裁剪空间坐标，然后输出。</p>
+<h3 id="语义"><a href="#语义" class="headerlink" title="语义"></a>语义</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">### 为什么参数后面有这样一个冒号呢，后面跟着全大写的关键词</span></span><br><span class="line"></span><br><span class="line">fixed4 frag (v2f i) : SV_Target&#123;&#125;</span><br><span class="line"></span><br><span class="line">v2f vert (float4 vertex : POSITION, float3 normal : NORMAL)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用cg编写时，需要参数填充语义来表达要传递的数据信息。</p>
+<h4 id="顶点着色器的输入语义"><a href="#顶点着色器的输入语义" class="headerlink" title="顶点着色器的输入语义"></a>顶点着色器的输入语义</h4><p>POSITION, 顶点的坐标信息</p>
+<p>NORMAL,    顶点的法线信息</p>
+<p>TEXCOORD0,TEXCOORD1,TEXCOORD2,TEXCOORD3,    模型的第几套uv坐标</p>
+<p>TANGENT,    顶点的切向量</p>
+<p>COLOR    顶点的颜色坐标</p>
+<h4 id="顶点着色器的输出-和-片段着色器的输入语义"><a href="#顶点着色器的输出-和-片段着色器的输入语义" class="headerlink" title="顶点着色器的输出 和 片段着色器的输入语义"></a>顶点着色器的输出 和 片段着色器的输入语义</h4><p>顶点着色器的主要任务就是输出顶点坐标在裁切空间的坐标，这样gpu才知道顶点在屏幕上的栅格化位置和深度值。</p>
+<p>SV_POSITION,    顶点在裁切空间的坐标 f4</p>
+<p>COLOR0,COLOR1,    低精度数据，例如顶点颜色</p>
+<p>TEXCOORD0-7    </p>
+<h4 id="片段着色器输出语义"><a href="#片段着色器输出语义" class="headerlink" title="片段着色器输出语义"></a>片段着色器输出语义</h4><p>只会输出一个fixed4类型的颜色信息，输出的值会存到渲染目标中，因此只有一个SV_TARGET语义</p>
+<h3 id="在CG中调用属性变量"><a href="#在CG中调用属性变量" class="headerlink" title="在CG中调用属性变量"></a>在CG中调用属性变量</h3><p>如果在properties中定义开放的属性，想要在shader中访问，需要在CG块中再次声明。</p>
+<p><img src="/Unity-shader/image-20211117152005645.png" alt="image-20211117152005645"></p>
+<p>可以看到，纹理贴图类的前面要加入sampler2D/Cube/3D</p>
+<p>Color或者vector要用half4，或者float4，fixed4，其中颜色最好使用fixed4(节约性能)</p>
+<p>其他就普通咯</p>
+<h4 id="在shader中使用贴图"><a href="#在shader中使用贴图" class="headerlink" title="在shader中使用贴图"></a>在shader中使用贴图</h4><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Properties</span><br><span class="line">   &#123;</span><br><span class="line">       _MainTex (&quot;Albedo (RGB)&quot;, <span class="number">2</span>D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">   &#125;</span><br><span class="line">    SubShader</span><br><span class="line">   &#123;</span><br><span class="line">  		...</span><br><span class="line">  		<span class="type">sampler2D</span> _MainTex;</span><br><span class="line">  		float4 _MainTex_ST;<span class="comment">//在cg中定义的平铺偏移变量</span></span><br><span class="line">  		..</span><br><span class="line">  	&#125;	<span class="comment">//好像写的很复杂，现在好像不需要了</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       <span class="comment">//Scale &amp; Transform 首字母，表示UV的缩放和平移 xy代表Tilling的xy值，zw代表Offset的xy值</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对不起我错了，在shader中有一个叫做Unlit Shader，就是按这个语法来写的</span></span><br><span class="line">Shader &quot;Unlit/<span class="number">333</span>&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainTex (&quot;Texture&quot;, <span class="number">2</span>D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Tags &#123; &quot;RenderType&quot;=&quot;Opaque&quot; &#125;</span><br><span class="line">        LOD <span class="number">100</span></span><br><span class="line"></span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#pragma vertex vert</span></span><br><span class="line">            <span class="meta">#pragma fragment frag</span></span><br><span class="line">            <span class="comment">// make fog work</span></span><br><span class="line">            <span class="meta">#pragma multi_compile_fog</span></span><br><span class="line"></span><br><span class="line">            <span class="meta">#include &quot;UnityCG.cginc&quot;</span></span><br><span class="line"></span><br><span class="line">            struct appdata</span><br><span class="line">            &#123;</span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float2 uv : TEXCOORD0;</span><br><span class="line">                UNITY_FOG_COORDS(<span class="number">1</span>)</span><br><span class="line">                float4 vertex : SV_POSITION;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="type">sampler2D</span> _MainTex;</span><br><span class="line">            float4 _MainTex_ST;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.vertex = UnityObjectToClipPos(v.vertex);</span><br><span class="line">                o.uv = TRANSFORM_TEX(v.uv, _MainTex);</span><br><span class="line">                UNITY_TRANSFER_FOG(o,o.vertex);</span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// sample the texture</span></span><br><span class="line">                fixed4 col = tex2D(_MainTex, i.uv);</span><br><span class="line">                <span class="comment">// apply fog</span></span><br><span class="line">                UNITY_APPLY_FOG(i.fogCoord, col);</span><br><span class="line">                <span class="keyword">return</span> col;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="在Unity中使用立方体贴图"><a href="#在Unity中使用立方体贴图" class="headerlink" title="在Unity中使用立方体贴图"></a>在Unity中使用立方体贴图</h4><p>没必要写</p>
+<h1 id="Unity包含文件"><a href="#Unity包含文件" class="headerlink" title="Unity包含文件"></a>Unity包含文件</h1><p>在cg代码块中#include即可</p>
+<h2 id="UnityCG-cginc"><a href="#UnityCG-cginc" class="headerlink" title="UnityCG.cginc"></a>UnityCG.cginc</h2><h3 id="顶点着色器输入结构体"><a href="#顶点着色器输入结构体" class="headerlink" title="顶点着色器输入结构体"></a>顶点着色器输入结构体</h3><p>appdata_base     顶点坐标，顶点法线，第一组纹理坐标<br>appdata_tan        顶点坐标，顶点切线，顶点法线，第一组纹理坐标<br>appdata_full        顶点坐标，顶点切线，顶点法线，四组（或更多）纹理坐标<br>appdata_img       顶点坐标，第一组纹理坐标<br>v2f_img：             裁剪空间中的位置，纹理坐标</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">struct appdata_base &#123;</span><br><span class="line">    float4 vertex : POSITION;</span><br><span class="line">    float3 normal : NORMAL;</span><br><span class="line">    float4 texcoord : TEXCOORD0;</span><br><span class="line">    UNITY_VERTEX_INPUT_INSTANCE_ID</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct appdata_tan &#123;</span><br><span class="line">    float4 vertex : POSITION;</span><br><span class="line">    float4 tangent : TANGENT;</span><br><span class="line">    float3 normal : NORMAL;</span><br><span class="line">    float4 texcoord : TEXCOORD0;</span><br><span class="line">    UNITY_VERTEX_INPUT_INSTANCE_ID</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct appdata_full &#123;</span><br><span class="line">    float4 vertex : POSITION;</span><br><span class="line">    float4 tangent : TANGENT;</span><br><span class="line">    float3 normal : NORMAL;</span><br><span class="line">    float4 texcoord : TEXCOORD0;</span><br><span class="line">    float4 texcoord1 : TEXCOORD1;</span><br><span class="line">    float4 texcoord2 : TEXCOORD2;</span><br><span class="line">    float4 texcoord3 : TEXCOORD3;</span><br><span class="line">    fixed4 color : COLOR;</span><br><span class="line">    UNITY_VERTEX_INPUT_INSTANCE_ID</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct appdata_img</span><br><span class="line">&#123;</span><br><span class="line">    float4 vertex : POSITION;</span><br><span class="line">    half2 texcoord : TEXCOORD0;</span><br><span class="line">    UNITY_VERTEX_INPUT_INSTANCE_ID</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct v2f_img</span><br><span class="line">&#123;</span><br><span class="line">    float4 pos : SV_POSITION;</span><br><span class="line">    half2 uv : TEXCOORD0;</span><br><span class="line">    UNITY_VERTEX_INPUT_INSTANCE_ID</span><br><span class="line">    UNITY_VERTEX_OUTPUT_STEREO</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="各种帮助函数"><a href="#各种帮助函数" class="headerlink" title="各种帮助函数"></a>各种帮助函数</h3><h4 id="顶点变换函数"><a href="#顶点变换函数" class="headerlink" title="顶点变换函数"></a>顶点变换函数</h4><p>float4 WorldSpaceViewDir(float4 v)            输入一个模型空间中的顶点位置，返回世界空间中从该点到摄像机的观察方向<br>float4 UnityWorldSpaceViewDir(float4 v)            输入一个世界空间中的顶点位置，返回世界空间中从该点到摄像机的观察方向<br>float4 ObjSpaceViewDir(float4 v)            输入一个模型空间中的顶点位置，返回模型空间中从该店到摄像机的观察方向</p>
+<h4 id="灯光辅助函数"><a href="#灯光辅助函数" class="headerlink" title="灯光辅助函数"></a>灯光辅助函数</h4><p>float4 WorldSpace LightDir(flaot4 v)            仅用于向前渲染。 输入一个模型空间中的顶点位置，返回世界空间中从该点到光源的光照方向。没有被归一化<br>float4 ObjectSpaceLightDir(float4 v)            仅用于向前渲染中，输入一个模型空间中的顶点位置， 返回模型空间中从该点到光源的光照方向。没有被归一化<br>float4 UnityWorldSpaceLightDir(float4 v)            仅用于向前渲染中，输入一个世界空间中的顶点位置， 返回世界空间中从该点到光源的光照方向。没有被归一化</p>
+<h4 id="向量变换函数"><a href="#向量变换函数" class="headerlink" title="向量变换函数"></a>向量变换函数</h4><p>float3 UnityObjectToWorldNormal(float3 norm)            把法线方向从模型空间中转换到世界空间中<br>float3 UnityObjectToWorldDir(float3 dir)            把方向矢量从模型空间中变换到世界空间中<br>float3 Unity WorldToObjectDir(float3 dir)            把方向矢量从世界空间变换到模型空间中</p>
+<h2 id="UnityShaderVariable-cginc"><a href="#UnityShaderVariable-cginc" class="headerlink" title="UnityShaderVariable.cginc"></a>UnityShaderVariable.cginc</h2><p>…….随便都可以</p>
+<p>[TOC]</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/12/OpenGL-%E4%B8%B4%E6%97%B6%E7%AC%94-%E9%94%AE%E7%9B%98-%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1405,253 +1757,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/27/Proustian-Effect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旋转公寓的阁楼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/10/27/Proustian-Effect/" itemprop="url">Proustian Effect 「普鲁斯特效应」</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-27T10:09:39+08:00">
-                2021-10-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>“20世纪法国最伟大的小说家之一，马塞尔·普鲁斯特(1871-1922，Marcel Proust)，在其作品中写到这样一段轶事：</p>
-<blockquote>
-<p><em>And soon, mechanically, weary after a dull day with the prospect of a depressing morrow, I raised to my lips a spoonful of the tea in which I had soaked a morsel of the cake. No sooner had the warm liquid, and the crumbs with it, touched my palate than a shudder ran through my whole body, and I stopped, intent upon the extraordinary changes that were taking place. . . . I was conscious that it was connected with the taste of tea and cake, but that it infinitely transcended those savours, could not, indeed, be of the same nature as theirs.   <strong>Marcel Proust, “In Search of Lost Time”</strong></em></p>
-</blockquote>
-<p>被茶浸泡的糕点的气味使作者想起了童年的经历。这段被糕点气味唤醒的记忆，既生动，又包含情感。”</p>
-<p>普特鲁斯效应 指当你闻到一种特定气味时，就会忽然想起已经遗忘了的回忆，这种效应发生时回忆起的场景往往极其生动形象，而且饱含情感。</p>
-<p>不只是气味，气温、光照、天气、声音、味道、特殊的滤镜都能唤起记忆中的往事以及当时伴随着的情绪。但似乎气味是最容易被记住，也是最容易让我们唤起过往的记忆的。</p>
-<p>“秋季充满了普鲁斯特效应~”  （奇特的是我并没有感受到秋天</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/26/MY-FIRST-BLOG/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旋转公寓的阁楼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/10/26/MY-FIRST-BLOG/" itemprop="url">MY FIRST BLOG!</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-26T19:53:15+08:00">
-                2021-10-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>行吧 辛苦了一阵子 可能总算是把这个破博客弄好了~<br>有缘更新！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1701,7 +1806,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
