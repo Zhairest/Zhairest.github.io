@@ -56,10 +56,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -89,8 +89,13 @@
 <meta property="og:image" content="http://example.com/Unity-shader2/image-20211117201334581.png!%5Bim20211117201538527%5D(Unity-shader2/image-20211117201538527.png">
 <meta property="og:image" content="http://example.com/Unity-shader2/image-20211117201523639.png">
 <meta property="og:image" content="http://example.com/Unity-shader2/image-20211117204323435.png">
+<meta property="og:image" content="http://example.com/Unity-shader2/image-20211118181116607.png">
+<meta property="og:image" content="http://example.com/Unity-shader2/image-20211118181228268.png">
+<meta property="og:image" content="http://example.com/Unity-shader2/92f4f5f9b284a56a0ee6e7f7235fb985.png">
+<meta property="og:image" content="http://example.com/Unity-shader2/6a29e48cee2d8eee77eeddb6b49f22aa-16372315719662.png">
+<meta property="og:image" content="http://example.com/Unity-shader2/image-20211118193048793.png">
 <meta property="article:published_time" content="2021-11-17T09:03:29.000Z">
-<meta property="article:modified_time" content="2021-11-17T12:58:22.398Z">
+<meta property="article:modified_time" content="2021-11-18T11:51:39.133Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
@@ -195,6 +200,36 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -242,7 +277,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/head.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -272,7 +307,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-11-18T19:51:39+08:00">
+                2021-11-18
+              </time>
             
           </span>
 
@@ -287,6 +334,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.5k
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -337,7 +403,37 @@
 <p>逐顶点光照，就是在顶点着色器中计算光照颜色。GPU在对顶点进行光照计算后，得到颜色，然后通过顶点在多边形上所占的范围对像素颜色进行线性插值。</p>
 <p>细分较低（多边形数量少）的模型，就会棱角分明，高光也不理想。</p>
 <p>那么逐像素光照per-pixel就是在像素着色器（也就是片段着色器）进行着色的。计算不再基于顶点，而是像素，计算量增大。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            ......</span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : SV_POSITION;</span><br><span class="line">                float3 normal:TEXCOORD0;</span><br><span class="line">                float4 vertex:TEXCOORD1;</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            fixed4 _MainColor;</span><br><span class="line">            fixed4 _SpecularColor;</span><br><span class="line">            half _Shininess;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata_base v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos =UnityObjectToClipPos(v.vertex);  </span><br><span class="line">                o.normal =v.normal;</span><br><span class="line">                o.vertex =v.vertex;</span><br><span class="line">                <span class="keyword">return</span> o;   </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                float3 n=UnityObjectToWorldNormal(i.normal);</span><br><span class="line">                n=<span class="built_in">normalize</span>(n);</span><br><span class="line">                fixed3 l=<span class="built_in">normalize</span>(_WorldSpaceLightPos0.xyz);</span><br><span class="line">                fixed3 view=<span class="built_in">normalize</span>(WorldSpaceViewDir(v.vertex));</span><br><span class="line"></span><br><span class="line">                <span class="comment">//按照公式计算漫反射s</span></span><br><span class="line">                fixed ndotl =<span class="built_in">dot</span>(n,l);</span><br><span class="line">                fixed4 dif =_LightColor0*_MainColor*saturate(ndotl);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//镜面反射部分</span></span><br><span class="line">                float3 ref=<span class="built_in">reflect</span>(-l,n);</span><br><span class="line">                ref=<span class="built_in">normalize</span>(ref);</span><br><span class="line">                fixed rdotv=saturate(<span class="built_in">dot</span>(ref,view));</span><br><span class="line">                fixed4 spec=_LightColor0*_SpecularColor*<span class="built_in">pow</span>(rdotv,_Shininess);</span><br><span class="line">                <span class="comment">//return    </span></span><br><span class="line">                <span class="keyword">return</span> unity_AmbientSky+dif+spec;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//其实就是移过去了</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/Unity-shader2/image-20211118181116607.png" alt="per-vertex"></p>
+<p><img src="/Unity-shader2/image-20211118181228268.png" alt="per-pixel"></p>
+<p>你能看出区别吗？（我不能）</p>
+<hr>
+<h2 id="Blinn-Phong光照模型"><a href="#Blinn-Phong光照模型" class="headerlink" title="Blinn-Phong光照模型"></a>Blinn-Phong光照模型</h2><p>与phong相比，将计算镜面反射光线的r（即入射光线的反射光线）替换成了入射光线和摄像机视角v的角平分线方向h。<br>$$<br>h=normalize(l,v)<br>$$</p>
+<p>$$<br>C_Specular=(C_light·M_specular)saturate(v·h)^Mshininess<br>$$</p>
+<p>其优点在于，在摄像机和光源都离物体无限远的时候，h只取决于俩者方向，可被视为常量，减少计算量。而phong则要根据表面曲率逐个计算反射向量r，效率低。</p>
+<p>但在查阅资料后发现，phong还有一个很大的问题:<img src="/Unity-shader2/92f4f5f9b284a56a0ee6e7f7235fb985.png" alt="两种模型的效果图2，此处可以发现Phong模型的一个问题"></p>
+<p>“第二张效果图中，我们可以发现Phong模型在一些情况下会导致显示效果不平滑。当反射光与视线的夹角大于90度时，由于在实际渲染时余弦值总是被限制在[0,1]，在这些地方上高光项没有任何贡献。当物体的反光度非常小时，高光半径就会非常大，在反射角与视线夹角为90度的区域附近就会出现很明显的断层现象。而由于半角向量与法线夹角总不大于90度，使用Blinn-Phong模型时断层现象不会发生。”<img src="/Unity-shader2/6a29e48cee2d8eee77eeddb6b49f22aa-16372315719662.png" alt="效果图2的断层问题的产生原因示意图"></p>
+<hr>
+<h2 id="灯光阴影"><a href="#灯光阴影" class="headerlink" title="灯光阴影"></a>灯光阴影</h2><h3 id="渲染路径"><a href="#渲染路径" class="headerlink" title="渲染路径"></a>渲染路径</h3><h4 id="延迟着色渲染"><a href="#延迟着色渲染" class="headerlink" title="延迟着色渲染"></a>延迟着色渲染</h4><p>较强，需要设备支持，所有灯光可以逐像素渲染</p>
+<h4 id="前向渲染"><a href="#前向渲染" class="headerlink" title="前向渲染"></a>前向渲染</h4><p>传统的渲染方式，支持所有unity图形，兼容性好。</p>
+<p>默认4个逐像素灯光（渲染模式为Important，如果不够4个，比较亮的灯光会逐像素渲染），4个逐顶点灯光，其他的都是SH渲染（Spherical Harmonics 球谐 球面调和）。SH渲染很快，只消耗较少cpu，几乎无gpu。</p>
+<h3 id="Pass里面的标签"><a href="#Pass里面的标签" class="headerlink" title="Pass里面的标签"></a>Pass里面的标签</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Pass&#123;</span><br><span class="line">	Tags&#123;</span><br><span class="line">	&quot;LightMode&quot; = &quot;ForwardBase&quot; </span><br><span class="line">        &quot;PassFlags&quot; = &quot;xxxx&quot;</span><br><span class="line">	<span class="comment">//定义该Pass在Unity的流水线中的角色 (只有定义它才能获取到一些Unity内置的光照变量如_LightColor0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="内置的-multi-compile-多重编译指令"><a href="#内置的-multi-compile-多重编译指令" class="headerlink" title="内置的 multi_compile 多重编译指令"></a>内置的 multi_compile 多重编译指令</h3><p>#pragma multi_compile_fwdbase是unity内置的用于前向渲染的关键字快捷方式，它包含了前向渲染光照计算需要的大多数关键字，因此会被shader带来很多的变体。</p>
+<h3 id="实现阴影-投影-效果"><a href="#实现阴影-投影-效果" class="headerlink" title="实现阴影(投影)效果"></a>实现阴影(投影)效果</h3><p>案例使用Lambert光照模型，不计算镜面反射。按照前向渲染的光照标准进行，分为俩个pass。</p>
+<p>基础pass用于渲染平行光和逐顶点或者SH灯光，并为平行光产生阴影投影。</p>
+<p>额外pass用于逐像素，也为逐像素灯光产生阴影投影。</p>
+<p><img src="/Unity-shader2/image-20211118193048793.png" alt="image-20211118193048793"></p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Hidden/<span class="number">5</span>_LambertWithShadow&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainColor (&quot;Main Color&quot;, Color) = (<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// -------- 基础Pass 为主要平行光产生投影 --------</span></span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 添加Pass标签</span></span><br><span class="line">            Tags&#123;&quot;LightMode&quot; = &quot;ForwardBase&quot;&#125;</span><br><span class="line"></span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#pragma vertex vert</span></span><br><span class="line">            <span class="meta">#pragma fragment frag</span></span><br><span class="line">            <span class="meta">#pragma multi_compile_fwdbase</span></span><br><span class="line">            <span class="meta">#include &quot;UnityCG.cginc&quot;</span></span><br><span class="line">            <span class="meta">#include &quot;Lighting.cginc&quot;</span></span><br><span class="line">            <span class="meta">#include &quot;AutoLight.cginc&quot;</span></span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : SV_POSITION;</span><br><span class="line">                float3 normal : TEXCOORD0;</span><br><span class="line">                float4 vertex : TEXCOORD1;</span><br><span class="line">                SHADOW_COORDS(<span class="number">2</span>) <span class="comment">// 使用预定义宏保存阴影坐标</span></span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            fixed4 _MainColor;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata_base v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos = UnityObjectToClipPos(v.vertex);</span><br><span class="line">                o.normal = v.normal;</span><br><span class="line">                o.vertex = v.vertex;</span><br><span class="line">                TRANSFER_SHADOW(o) <span class="comment">// 使用预定义宏变换阴影坐标</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 准备变量</span></span><br><span class="line">                float3 n = UnityObjectToWorldNormal(i.normal);</span><br><span class="line">                n = <span class="built_in">normalize</span>(n);</span><br><span class="line">                float3 l = WorldSpaceLightDir(i.vertex);</span><br><span class="line">                l = <span class="built_in">normalize</span>(l);</span><br><span class="line">                float4 worldPos = mul(unity_ObjectToWorld, i.vertex);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Lambert光照</span></span><br><span class="line">                fixed ndotl = saturate(<span class="built_in">dot</span>(n, l));</span><br><span class="line">                fixed4 color = _LightColor0 * _MainColor * ndotl;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 加上4个点光源的光照</span></span><br><span class="line">                color.rgb += Shade4PointLights(</span><br><span class="line">                unity_4LightPosX0, unity_4LightPosY0, unity_4LightPosZ0,</span><br><span class="line">                unity_LightColor[<span class="number">0</span>].rgb, unity_LightColor[<span class="number">1</span>].rgb,</span><br><span class="line">                unity_LightColor[<span class="number">2</span>].rgb, unity_LightColor[<span class="number">3</span>].rgb,</span><br><span class="line">                unity_4LightAtten0, worldPos.rgb, n) * _MainColor;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 加上环境光照</span></span><br><span class="line">                color += unity_AmbientSky;		<span class="comment">//区别仅仅在这？</span></span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 使用预定义宏计算阴影系数</span></span><br><span class="line">                UNITY_LIGHT_ATTENUATION(shadowmask, i, worldPos.rgb)</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 阴影合成</span></span><br><span class="line">                color.rgb *= shadowmask;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> color;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// -------- 额外的Pass 为其他逐像素的灯光产生投影 --------</span></span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            Tags&#123;&quot;LightMode&quot; = &quot;ForwardAdd&quot;&#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 使用相加混合，使绘制的图像与上一个Pass完全混合</span></span><br><span class="line">            Blend One One</span><br><span class="line"></span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#pragma vertex vert</span></span><br><span class="line">            <span class="meta">#pragma fragment frag</span></span><br><span class="line">            <span class="meta">#pragma multi_compile_fwdadd_fullshadows</span></span><br><span class="line">            <span class="meta">#include &quot;UnityCG.cginc&quot;</span></span><br><span class="line">            <span class="meta">#include &quot;Lighting.cginc&quot;</span></span><br><span class="line">            <span class="meta">#include &quot;AutoLight.cginc&quot;</span></span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : SV_POSITION;</span><br><span class="line">                float3 normal : TEXCOORD0;</span><br><span class="line">                float4 vertex : TEXCOORD1;</span><br><span class="line">                SHADOW_COORDS(<span class="number">2</span>) <span class="comment">// 使用预定义宏保存阴影坐标</span></span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            fixed4 _MainColor;</span><br><span class="line"></span><br><span class="line">            v2f vert (appdata_base v)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.pos = UnityObjectToClipPos(v.vertex);</span><br><span class="line">                o.normal = v.normal;</span><br><span class="line">                o.vertex = v.vertex;</span><br><span class="line">                TRANSFER_SHADOW(o) <span class="comment">// 使用预定义宏变换阴影坐标</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fixed4 frag (v2f i) : SV_Target</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 准备变量</span></span><br><span class="line">                float3 n = UnityObjectToWorldNormal(i.normal);</span><br><span class="line">                n = <span class="built_in">normalize</span>(n);</span><br><span class="line">                float3 l = WorldSpaceLightDir(i.vertex);</span><br><span class="line">                l = <span class="built_in">normalize</span>(l);</span><br><span class="line">                float4 worldPos = mul(unity_ObjectToWorld, i.vertex);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Lambert光照</span></span><br><span class="line">                fixed ndotl = saturate(<span class="built_in">dot</span>(n, l));</span><br><span class="line">                fixed4 color = _LightColor0 * _MainColor * ndotl;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 加上4个点光源的光照</span></span><br><span class="line">                color.rgb += Shade4PointLights(</span><br><span class="line">                unity_4LightPosX0, unity_4LightPosY0, unity_4LightPosZ0,</span><br><span class="line">                unity_LightColor[<span class="number">0</span>].rgb, unity_LightColor[<span class="number">1</span>].rgb,</span><br><span class="line">                unity_LightColor[<span class="number">2</span>].rgb, unity_LightColor[<span class="number">3</span>].rgb,</span><br><span class="line">                unity_4LightAtten0, worldPos.rgb, n) * _MainColor;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 使用预定义宏计算阴影系数</span></span><br><span class="line">                UNITY_LIGHT_ATTENUATION(shadowmask, i, worldPos.rgb)</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 阴影合成</span></span><br><span class="line">                color.rgb *= shadowmask;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> color;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    FallBack &quot;Diffuse&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有一说一，没有很看懂…………</p>
 <p>[TOC]</p>
+<p>Thanks：</p>
+<p><a target="_blank" rel="noopener" href="https://www.pianshen.com/article/18651304807/">https://www.pianshen.com/article/18651304807/</a></p>
+<p>【GDC2008】Stupid Spherical Harmonics (SH) Tricks:<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a379b4c6d346">https://www.jianshu.com/p/a379b4c6d346</a></p>
+<p>聊一下球谐函数（Spherical Harmonics）计算光照:<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34059900">https://zhuanlan.zhihu.com/p/34059900</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sifenkesi/p/9942272.html">https://www.cnblogs.com/sifenkesi/p/9942272.html</a></p>
 
       
     </div>
@@ -377,6 +473,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/11/18/Unity-shader3/" rel="prev" title="Unity_shader3">
+                Unity_shader3 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -442,6 +542,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpg"
+                alt="" />
+            
               <p class="site-author-name" itemprop="name"></p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -453,7 +557,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -529,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shader%E4%B8%AD%E7%9A%84%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">shader中的光照模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambert%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">Lambert光照模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E5%A6%82%E4%BD%95%E5%9C%A8shader%E9%87%8C%E8%8E%B7%E5%BE%97%E7%81%AF%E5%85%89%E5%91%A2"><span class="nav-number">1.1.1.</span> <span class="nav-text">那如何在shader里获得灯光呢</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Half-Lambert%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">Half-Lambert光照模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Phong%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">Phong光照模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E5%A6%82%E4%BD%95%E5%9C%A8shader%E9%87%8C%E8%8E%B7%E5%BE%97%E7%8E%AF%E5%A2%83%E5%85%89%E5%91%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">那如何在shader里获得环境光呢</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%90%E5%83%8F%E7%B4%A0%E5%85%89%E7%85%A7-per-pixel"><span class="nav-number">1.4.</span> <span class="nav-text">逐像素光照 per-pixel</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shader%E4%B8%AD%E7%9A%84%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">shader中的光照模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambert%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">Lambert光照模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E5%A6%82%E4%BD%95%E5%9C%A8shader%E9%87%8C%E8%8E%B7%E5%BE%97%E7%81%AF%E5%85%89%E5%91%A2"><span class="nav-number">1.1.1.</span> <span class="nav-text">那如何在shader里获得灯光呢</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Half-Lambert%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">Half-Lambert光照模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Phong%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">Phong光照模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E5%A6%82%E4%BD%95%E5%9C%A8shader%E9%87%8C%E8%8E%B7%E5%BE%97%E7%8E%AF%E5%A2%83%E5%85%89%E5%91%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">那如何在shader里获得环境光呢</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%90%E5%83%8F%E7%B4%A0%E5%85%89%E7%85%A7-per-pixel"><span class="nav-number">1.4.</span> <span class="nav-text">逐像素光照 per-pixel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blinn-Phong%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.5.</span> <span class="nav-text">Blinn-Phong光照模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%81%AF%E5%85%89%E9%98%B4%E5%BD%B1"><span class="nav-number">1.6.</span> <span class="nav-text">灯光阴影</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84"><span class="nav-number">1.6.1.</span> <span class="nav-text">渲染路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%E7%9D%80%E8%89%B2%E6%B8%B2%E6%9F%93"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">延迟着色渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E6%B8%B2%E6%9F%93"><span class="nav-number">1.6.1.2.</span> <span class="nav-text">前向渲染</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass%E9%87%8C%E9%9D%A2%E7%9A%84%E6%A0%87%E7%AD%BE"><span class="nav-number">1.6.2.</span> <span class="nav-text">Pass里面的标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E7%9A%84-multi-compile-%E5%A4%9A%E9%87%8D%E7%BC%96%E8%AF%91%E6%8C%87%E4%BB%A4"><span class="nav-number">1.6.3.</span> <span class="nav-text">内置的 multi_compile 多重编译指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E9%98%B4%E5%BD%B1-%E6%8A%95%E5%BD%B1-%E6%95%88%E6%9E%9C"><span class="nav-number">1.6.4.</span> <span class="nav-text">实现阴影(投影)效果</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
