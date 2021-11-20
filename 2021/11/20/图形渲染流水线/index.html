@@ -89,9 +89,9 @@
 <meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-2be9951a258f1b4cf3ada3cc01ef5d3e_720w.jpg">
 <meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-909069f69f8d8a55bd694836dc293376_r.jpg">
 <meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-95d4db3dc46db03b7c740a611cf623e8_720w.jpg">
-<meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/image-20211120213011620.png">
+<meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/image-20211120214614674.png">
 <meta property="article:published_time" content="2021-11-20T11:46:50.000Z">
-<meta property="article:modified_time" content="2021-11-20T13:39:30.835Z">
+<meta property="article:modified_time" content="2021-11-20T13:48:02.381Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="OpenGL">
 <meta property="article:tag" content="Unity">
@@ -314,7 +314,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-11-20T21:39:30+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-11-20T21:48:02+08:00">
                 2021-11-20
               </time>
             
@@ -342,7 +342,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  1.2k
                 </span>
               
 
@@ -371,7 +371,9 @@
 <span id="more"></span>
 
 <p>今天看shader的时候，搜了一个问题，被答主建议重新巩固渲染流水线的知识，想来也是…</p>
-<h2 id="渲染流水线"><a href="#渲染流水线" class="headerlink" title="渲染流水线"></a>渲染流水线</h2><p>模型从3D的数据（顶点坐标，法线坐标，UV纹理坐标），到最后在屏幕上的2D图像，中间需要很多过程。</p>
+<hr>
+<h2 id="渲染流水线"><a href="#渲染流水线" class="headerlink" title="渲染流水线"></a>渲染流水线</h2><p>模型从3D的数据（顶点坐标，法线坐标，UV纹理坐标），到最后在屏幕上的2D图像，中间需要很多过程。这大段过程在GPU上，就像流水线一样，疯狂不断地进行，故称渲染流水线。</p>
+<hr>
 <h2 id="3D图形渲染完整流水线"><a href="#3D图形渲染完整流水线" class="headerlink" title="3D图形渲染完整流水线"></a>3D图形渲染完整流水线</h2><p>下面列举一个通用的流水线，当然具体引擎会有不同，但大体如此。</p>
 <p><strong>1.建立场景</strong>：对场景进行预先设置，如摄像机视角，灯光雾化设置</p>
 <p><strong>2.可见性检测</strong>：基于摄像机对所有物体检测可见性，可以减少资源损耗。</p>
@@ -383,6 +385,7 @@
 <p><strong>8.光栅化</strong>：屏幕空间中的几何体通过光栅化转变为2D的像素信息。</p>
 <p><strong>9.像素着色</strong>：计算颜色并输出。</p>
 <p><img src="/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-2be9951a258f1b4cf3ada3cc01ef5d3e_720w.jpg" alt="img"></p>
+<hr>
 <h2 id="空间变换"><a href="#空间变换" class="headerlink" title="空间变换"></a>空间变换</h2><h3 id="1-模型空间Model-Space-物体空间-本地空间"><a href="#1-模型空间Model-Space-物体空间-本地空间" class="headerlink" title="1. 模型空间Model Space/ 物体空间 / 本地空间"></a>1. 模型空间Model Space/ 物体空间 / 本地空间</h3><p>顶点数据一开始就是按照这个空间进行描述的。坐标轴以模型的Pivot枢轴确定</p>
 <h3 id="2-世界空间-World-Space"><a href="#2-世界空间-World-Space" class="headerlink" title="2. 世界空间 World Space"></a>2. 世界空间 World Space</h3><p>描述物体之间的相对位置。</p>
 <p>从模型空间转变到世界空间需要使用<strong>模型变换矩阵</strong>，称为<strong>模型变换</strong>。</p>
@@ -403,7 +406,8 @@
 </ol>
 <p>z分量依旧需要保留，以便进行深度测试。</p>
 <p><img src="/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-95d4db3dc46db03b7c740a611cf623e8_720w.jpg" alt="img"></p>
-<h2 id="现代GPU渲染流水线"><a href="#现代GPU渲染流水线" class="headerlink" title="现代GPU渲染流水线"></a>现代GPU渲染流水线</h2><p><img src="/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/image-20211120213011620.png" alt="image-20211120213011620"></p>
+<hr>
+<h2 id="现代GPU渲染流水线"><a href="#现代GPU渲染流水线" class="headerlink" title="现代GPU渲染流水线"></a>现代GPU渲染流水线</h2><p><img src="/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/image-20211120214614674.png" alt="image-20211120214614674"></p>
 <ol>
 <li>第一个站点是顶点着色器。在此，<strong>顶点坐标从模型空间变换到裁切空间</strong>。此外还可以进行其他操作（毕竟Shader里面可操作的就是顶点着色器和片源着色器嘛）</li>
 <li>装配图元阶段把顶点着色器输出的顶点数据装配成指定的几何图元（点线面等等）</li>
@@ -416,6 +420,7 @@
 <li>最后进入<strong>测试和混合阶段</strong>。在此<strong>检测像素的深度值</strong>，从而判断像素前面是否被阻挡。（也就是说深度检测居然是最后进行的？）</li>
 <li><strong>帧缓存</strong>是最后一个站点，等待输出到屏幕。</li>
 </ol>
+<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks:"></a>Thanks:</h2><p>感谢</p>
 
       
     </div>
@@ -613,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">1.</span> <span class="nav-text">渲染流水线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E5%AE%8C%E6%95%B4%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">2.</span> <span class="nav-text">3D图形渲染完整流水线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2"><span class="nav-number">3.</span> <span class="nav-text">空间变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A8%A1%E5%9E%8B%E7%A9%BA%E9%97%B4Model-Space-%E7%89%A9%E4%BD%93%E7%A9%BA%E9%97%B4-%E6%9C%AC%E5%9C%B0%E7%A9%BA%E9%97%B4"><span class="nav-number">3.1.</span> <span class="nav-text">1. 模型空间Model Space&#x2F; 物体空间 &#x2F; 本地空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%96%E7%95%8C%E7%A9%BA%E9%97%B4-World-Space"><span class="nav-number">3.2.</span> <span class="nav-text">2. 世界空间 World Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%91%84%E5%83%8F%E6%9C%BA%E7%A9%BA%E9%97%B4-Camera-Space-%E8%A7%82%E5%AF%9F%E7%A9%BA%E9%97%B4View-Space"><span class="nav-number">3.3.</span> <span class="nav-text">3. 摄像机空间 Camera Space &#x2F; 观察空间View Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%A3%81%E5%88%87%E7%A9%BA%E9%97%B4-Clip-Space"><span class="nav-number">3.4.</span> <span class="nav-text">4. 裁切空间 Clip Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%B1%8F%E5%B9%95%E7%A9%BA%E9%97%B4"><span class="nav-number">3.5.</span> <span class="nav-text">5. 屏幕空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3GPU%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">4.</span> <span class="nav-text">现代GPU渲染流水线</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">1.</span> <span class="nav-text">渲染流水线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E5%AE%8C%E6%95%B4%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">2.</span> <span class="nav-text">3D图形渲染完整流水线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2"><span class="nav-number">3.</span> <span class="nav-text">空间变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A8%A1%E5%9E%8B%E7%A9%BA%E9%97%B4Model-Space-%E7%89%A9%E4%BD%93%E7%A9%BA%E9%97%B4-%E6%9C%AC%E5%9C%B0%E7%A9%BA%E9%97%B4"><span class="nav-number">3.1.</span> <span class="nav-text">1. 模型空间Model Space&#x2F; 物体空间 &#x2F; 本地空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%96%E7%95%8C%E7%A9%BA%E9%97%B4-World-Space"><span class="nav-number">3.2.</span> <span class="nav-text">2. 世界空间 World Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%91%84%E5%83%8F%E6%9C%BA%E7%A9%BA%E9%97%B4-Camera-Space-%E8%A7%82%E5%AF%9F%E7%A9%BA%E9%97%B4View-Space"><span class="nav-number">3.3.</span> <span class="nav-text">3. 摄像机空间 Camera Space &#x2F; 观察空间View Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%A3%81%E5%88%87%E7%A9%BA%E9%97%B4-Clip-Space"><span class="nav-number">3.4.</span> <span class="nav-text">4. 裁切空间 Clip Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%B1%8F%E5%B9%95%E7%A9%BA%E9%97%B4"><span class="nav-number">3.5.</span> <span class="nav-text">5. 屏幕空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3GPU%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">4.</span> <span class="nav-text">现代GPU渲染流水线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thanks"><span class="nav-number">5.</span> <span class="nav-text">Thanks:</span></a></li></ol></div>
             
 
           </div>
