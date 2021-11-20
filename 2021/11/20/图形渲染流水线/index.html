@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="随记," />
+  <meta name="keywords" content="OpenGL,Unity," />
 
 
 
@@ -79,18 +79,24 @@
 
 
 
-<meta name="description" content="“20世纪法国最伟大的小说家之一，马塞尔·普鲁斯特(1871-1922，Marcel Proust)，在其作品中写到这样一段轶事：  And soon, mechanically, weary after a dull day with the prospect of a depressing morrow, I raised to my lips a spoonful of the tea in">
+<meta name="description" content="图形渲染流水线，顶点在不同空间的变换，GPU渲染流水线，Shader概念">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Proustian Effect 「普鲁斯特效应」">
-<meta property="og:url" content="http://example.com/2021/10/27/Proustian-Effect/index.html">
+<meta property="og:title" content="图形渲染流水线">
+<meta property="og:url" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
-<meta property="og:description" content="“20世纪法国最伟大的小说家之一，马塞尔·普鲁斯特(1871-1922，Marcel Proust)，在其作品中写到这样一段轶事：  And soon, mechanically, weary after a dull day with the prospect of a depressing morrow, I raised to my lips a spoonful of the tea in">
+<meta property="og:description" content="图形渲染流水线，顶点在不同空间的变换，GPU渲染流水线，Shader概念">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-10-27T02:09:39.000Z">
-<meta property="article:modified_time" content="2021-10-29T02:56:42.419Z">
+<meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-2be9951a258f1b4cf3ada3cc01ef5d3e_720w.jpg">
+<meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-909069f69f8d8a55bd694836dc293376_r.jpg">
+<meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-95d4db3dc46db03b7c740a611cf623e8_720w.jpg">
+<meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/image-20211120213011620.png">
+<meta property="article:published_time" content="2021-11-20T11:46:50.000Z">
+<meta property="article:modified_time" content="2021-11-20T13:39:30.835Z">
 <meta property="article:author" content="Zhairest">
-<meta property="article:tag" content="随记">
+<meta property="article:tag" content="OpenGL">
+<meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-2be9951a258f1b4cf3ada3cc01ef5d3e_720w.jpg">
 
 
 
@@ -120,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2021/10/27/Proustian-Effect/"/>
+  <link rel="canonical" href="http://example.com/2021/11/20/图形渲染流水线/"/>
 
 
 
 
 
-  <title>Proustian Effect 「普鲁斯特效应」 | 旋转公寓的阁楼</title>
+  <title>图形渲染流水线 | 旋转公寓的阁楼</title>
   
 
 
@@ -263,7 +269,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/27/Proustian-Effect/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -280,7 +286,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Proustian Effect 「普鲁斯特效应」</h1>
+          <h1 class="post-title" itemprop="name headline">图形渲染流水线</h1>
         
 
         <div class="post-meta">
@@ -292,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-27T10:09:39+08:00">
-                2021-10-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-20T19:46:50+08:00">
+                2021-11-20
               </time>
             
 
@@ -308,8 +314,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-10-29T10:56:42+08:00">
-                2021-10-29
+              <time title="更新于" itemprop="dateModified" datetime="2021-11-20T21:39:30+08:00">
+                2021-11-20
               </time>
             
           </span>
@@ -336,7 +342,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  337
+                  1.1k
                 </span>
               
 
@@ -361,14 +367,55 @@
       
 
       
-        <p>“20世纪法国最伟大的小说家之一，马塞尔·普鲁斯特(1871-1922，Marcel Proust)，在其作品中写到这样一段轶事：</p>
-<blockquote>
-<p><em>And soon, mechanically, weary after a dull day with the prospect of a depressing morrow, I raised to my lips a spoonful of the tea in which I had soaked a morsel of the cake. No sooner had the warm liquid, and the crumbs with it, touched my palate than a shudder ran through my whole body, and I stopped, intent upon the extraordinary changes that were taking place. . . . I was conscious that it was connected with the taste of tea and cake, but that it infinitely transcended those savours, could not, indeed, be of the same nature as theirs.   <strong>Marcel Proust, “In Search of Lost Time”</strong></em></p>
-</blockquote>
-<p>被茶浸泡的糕点的气味使作者想起了童年的经历。这段被糕点气味唤醒的记忆，既生动，又包含情感。”</p>
-<p>普特鲁斯效应 指当你闻到一种特定气味时，就会忽然想起已经遗忘了的回忆，这种效应发生时回忆起的场景往往极其生动形象，而且饱含情感。</p>
-<p>不只是气味，气温、光照、天气、声音、味道、特殊的滤镜都能唤起记忆中的往事以及当时伴随着的情绪。但似乎气味是最容易被记住，也是最容易让我们唤起过往的记忆的。</p>
-<p>“秋季充满了普鲁斯特效应~”  （奇特的是我并没有感受到秋天</p>
+        <p>图形渲染流水线，顶点在不同空间的变换，GPU渲染流水线，Shader概念</p>
+<span id="more"></span>
+
+<p>今天看shader的时候，搜了一个问题，被答主建议重新巩固渲染流水线的知识，想来也是…</p>
+<h2 id="渲染流水线"><a href="#渲染流水线" class="headerlink" title="渲染流水线"></a>渲染流水线</h2><p>模型从3D的数据（顶点坐标，法线坐标，UV纹理坐标），到最后在屏幕上的2D图像，中间需要很多过程。</p>
+<h2 id="3D图形渲染完整流水线"><a href="#3D图形渲染完整流水线" class="headerlink" title="3D图形渲染完整流水线"></a>3D图形渲染完整流水线</h2><p>下面列举一个通用的流水线，当然具体引擎会有不同，但大体如此。</p>
+<p><strong>1.建立场景</strong>：对场景进行预先设置，如摄像机视角，灯光雾化设置</p>
+<p><strong>2.可见性检测</strong>：基于摄像机对所有物体检测可见性，可以减少资源损耗。</p>
+<p><strong>3.设置渲染状态</strong>：对具体物体有不同的渲染设置。</p>
+<p><strong>4.几何体生成与提交</strong>：向渲染api提交几何体数据，一般内容为三角形的顶点数据。如顶点坐标，法线坐标，UV纹理坐标。</p>
+<p><strong>5.变换与光照</strong>：将顶点坐标从模型空间变换到摄像机空间，并进行顶点光照计算（是否不一定）</p>
+<p><strong>6.背面剔除与裁剪</strong>：变换到摄像机空间后，背对着摄像机的三角形被剔除。再转换到裁切空间，将视锥体外面的部分裁切掉。</p>
+<p><strong>7.投影到屏幕空间</strong>：裁切后的三角形通过投影从三维变到平面，输出到屏幕空间中。</p>
+<p><strong>8.光栅化</strong>：屏幕空间中的几何体通过光栅化转变为2D的像素信息。</p>
+<p><strong>9.像素着色</strong>：计算颜色并输出。</p>
+<p><img src="/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-2be9951a258f1b4cf3ada3cc01ef5d3e_720w.jpg" alt="img"></p>
+<h2 id="空间变换"><a href="#空间变换" class="headerlink" title="空间变换"></a>空间变换</h2><h3 id="1-模型空间Model-Space-物体空间-本地空间"><a href="#1-模型空间Model-Space-物体空间-本地空间" class="headerlink" title="1. 模型空间Model Space/ 物体空间 / 本地空间"></a>1. 模型空间Model Space/ 物体空间 / 本地空间</h3><p>顶点数据一开始就是按照这个空间进行描述的。坐标轴以模型的Pivot枢轴确定</p>
+<h3 id="2-世界空间-World-Space"><a href="#2-世界空间-World-Space" class="headerlink" title="2. 世界空间 World Space"></a>2. 世界空间 World Space</h3><p>描述物体之间的相对位置。</p>
+<p>从模型空间转变到世界空间需要使用<strong>模型变换矩阵</strong>，称为<strong>模型变换</strong>。</p>
+<p>当计算光照时，一般要将顶点转变到这个空间，与灯光一起进行计算。</p>
+<h3 id="3-摄像机空间-Camera-Space-观察空间View-Space"><a href="#3-摄像机空间-Camera-Space-观察空间View-Space" class="headerlink" title="3. 摄像机空间 Camera Space / 观察空间View Space"></a>3. 摄像机空间 Camera Space / 观察空间View Space</h3><p>引擎进行渲染的时候就是以摄像机作为视角，也就是这个空间。</p>
+<p>从世界空间物体转换到摄像机空间称为<strong>视变换</strong>，需要视变换矩阵。</p>
+<h3 id="4-裁切空间-Clip-Space"><a href="#4-裁切空间-Clip-Space" class="headerlink" title="4. 裁切空间 Clip Space"></a>4. 裁切空间 Clip Space</h3><p>顶点转换到摄像机空间后，需要进行视锥体的裁切，就是转换到这个空间进行。</p>
+<p>不管是透视投影（Perspective Projection）还是正交投影（Orthographic Projection），视锥体都是六个面组成。</p>
+<p>从摄像机空间转换到这个空间的过程叫做<strong>投影变换</strong>，需要使用<strong>裁切矩阵/投影矩阵</strong>。</p>
+<p>在裁切空间做了以下事情：</p>
+<p>1.<strong>计算顶点坐标的w分量</strong>，用于接下来的透视除法。</p>
+<p>2.对视锥体进行不均等缩放，使其变成正方体。</p>
+<p><img src="/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-909069f69f8d8a55bd694836dc293376_r.jpg" alt="preview"></p>
+<h3 id="5-屏幕空间"><a href="#5-屏幕空间" class="headerlink" title="5. 屏幕空间"></a>5. 屏幕空间</h3><p>此刻顶点坐标还是3D数据，需要在这个空间进行投影将其转化为2D数据。</p>
+<ol>
+<li>首先将顶点的xyz除以w分量，得到标准化的设备坐标（Normalized Device Coordinate，NDC）</li>
+<li>然后将NDC在屏幕像素上进行映射，得到屏幕空间下的像素坐标了。</li>
+</ol>
+<p>z分量依旧需要保留，以便进行深度测试。</p>
+<p><img src="/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-95d4db3dc46db03b7c740a611cf623e8_720w.jpg" alt="img"></p>
+<h2 id="现代GPU渲染流水线"><a href="#现代GPU渲染流水线" class="headerlink" title="现代GPU渲染流水线"></a>现代GPU渲染流水线</h2><p><img src="/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/image-20211120213011620.png" alt="image-20211120213011620"></p>
+<ol>
+<li>第一个站点是顶点着色器。在此，<strong>顶点坐标从模型空间变换到裁切空间</strong>。此外还可以进行其他操作（毕竟Shader里面可操作的就是顶点着色器和片源着色器嘛）</li>
+<li>装配图元阶段把顶点着色器输出的顶点数据装配成指定的几何图元（点线面等等）</li>
+<li><strong>光栅化是将几何图元转化成片段的过程</strong><ol>
+<li>确定屏幕坐标在哪些整形栅格区域被基本图元占用</li>
+<li>分配颜色值和深度值到各个区域</li>
+</ol>
+</li>
+<li>得到的片段，经过视锥体裁切后就被传递到<strong>片段着色器</strong>。在此<strong>计算每一个像素的颜色</strong>（逐像素？）。</li>
+<li>最后进入<strong>测试和混合阶段</strong>。在此<strong>检测像素的深度值</strong>，从而判断像素前面是否被阻挡。（也就是说深度检测居然是最后进行的？）</li>
+<li><strong>帧缓存</strong>是最后一个站点，等待输出到屏幕。</li>
+</ol>
 
       
     </div>
@@ -386,7 +433,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E9%9A%8F%E8%AE%B0/" rel="tag"># 随记</a>
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
           
         </div>
       
@@ -399,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/10/26/MY-FIRST-BLOG/" rel="next" title="MY FIRST BLOG!">
-                <i class="fa fa-chevron-left"></i> MY FIRST BLOG!
+              <a href="/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/" rel="next" title="OpenGL 第五章 光照">
+                <i class="fa fa-chevron-left"></i> OpenGL 第五章 光照
               </a>
             
           </div>
@@ -408,10 +457,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/10/29/Unity-FPS%E6%8E%A7%E5%88%B6/" rel="prev" title="Unity1-FPS控制">
-                Unity1-FPS控制 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -463,8 +508,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -549,6 +603,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">1.</span> <span class="nav-text">渲染流水线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E5%AE%8C%E6%95%B4%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">2.</span> <span class="nav-text">3D图形渲染完整流水线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E5%8F%98%E6%8D%A2"><span class="nav-number">3.</span> <span class="nav-text">空间变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A8%A1%E5%9E%8B%E7%A9%BA%E9%97%B4Model-Space-%E7%89%A9%E4%BD%93%E7%A9%BA%E9%97%B4-%E6%9C%AC%E5%9C%B0%E7%A9%BA%E9%97%B4"><span class="nav-number">3.1.</span> <span class="nav-text">1. 模型空间Model Space&#x2F; 物体空间 &#x2F; 本地空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%96%E7%95%8C%E7%A9%BA%E9%97%B4-World-Space"><span class="nav-number">3.2.</span> <span class="nav-text">2. 世界空间 World Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%91%84%E5%83%8F%E6%9C%BA%E7%A9%BA%E9%97%B4-Camera-Space-%E8%A7%82%E5%AF%9F%E7%A9%BA%E9%97%B4View-Space"><span class="nav-number">3.3.</span> <span class="nav-text">3. 摄像机空间 Camera Space &#x2F; 观察空间View Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%A3%81%E5%88%87%E7%A9%BA%E9%97%B4-Clip-Space"><span class="nav-number">3.4.</span> <span class="nav-text">4. 裁切空间 Clip Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%B1%8F%E5%B9%95%E7%A9%BA%E9%97%B4"><span class="nav-number">3.5.</span> <span class="nav-text">5. 屏幕空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3GPU%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">4.</span> <span class="nav-text">现代GPU渲染流水线</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
