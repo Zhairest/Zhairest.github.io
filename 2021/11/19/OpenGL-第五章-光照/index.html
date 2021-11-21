@@ -79,18 +79,24 @@
 
 
 
-<meta name="description" content="消隐隐藏表面消除，最简单方法就是使用z-buffer深度缓存区。 OpenGL的光分成环境光，散射光，镜面光和发射光。">
+<meta name="description" content="概述1. 消隐隐藏表面消除，最简单方法就是使用z-buffer深度缓存区。 2. OpenGL的光分成环境光，散射光，镜面光和发射光。 环境光 Ambient Light​    在环境中充分散射，几乎来自于所有方向。 散射光 Diffuse Light镜面光 Specular Light发射光 Emissive Light3. 材料颜色OpenGL根据材料反射的光来模拟它的颜色。 简单的例子在场">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenGL 第五章 光照">
 <meta property="og:url" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
-<meta property="og:description" content="消隐隐藏表面消除，最简单方法就是使用z-buffer深度缓存区。 OpenGL的光分成环境光，散射光，镜面光和发射光。">
+<meta property="og:description" content="概述1. 消隐隐藏表面消除，最简单方法就是使用z-buffer深度缓存区。 2. OpenGL的光分成环境光，散射光，镜面光和发射光。 环境光 Ambient Light​    在环境中充分散射，几乎来自于所有方向。 散射光 Diffuse Light镜面光 Specular Light发射光 Emissive Light3. 材料颜色OpenGL根据材料反射的光来模拟它的颜色。 简单的例子在场">
 <meta property="og:locale">
+<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145345676.png">
+<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145453185.png">
+<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145650263.png">
+<meta property="og:image" content="http://example.com/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150610126.png">
+<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121150804323.png">
 <meta property="article:published_time" content="2021-11-19T11:08:34.000Z">
-<meta property="article:modified_time" content="2021-11-19T11:53:17.133Z">
+<meta property="article:modified_time" content="2021-11-21T07:52:11.451Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145345676.png">
 
 
 
@@ -308,8 +314,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-11-19T19:53:17+08:00">
-                2021-11-19
+              <time title="更新于" itemprop="dateModified" datetime="2021-11-21T15:52:11+08:00">
+                2021-11-21
               </time>
             
           </span>
@@ -336,7 +342,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  42
+                  2.3k
                 </span>
               
 
@@ -361,8 +367,237 @@
       
 
       
-        <h2 id="消隐"><a href="#消隐" class="headerlink" title="消隐"></a>消隐</h2><p>隐藏表面消除，最简单方法就是使用z-buffer深度缓存区。</p>
-<h2 id="OpenGL的光"><a href="#OpenGL的光" class="headerlink" title="OpenGL的光"></a>OpenGL的光</h2><p>分成环境光，散射光，镜面光和发射光。</p>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="1-消隐"><a href="#1-消隐" class="headerlink" title="1. 消隐"></a>1. 消隐</h2><p>隐藏表面消除，最简单方法就是使用z-buffer深度缓存区。</p>
+<h2 id="2-OpenGL的光"><a href="#2-OpenGL的光" class="headerlink" title="2. OpenGL的光"></a>2. OpenGL的光</h2><p>分成环境光，散射光，镜面光和发射光。</p>
+<h3 id="环境光-Ambient-Light"><a href="#环境光-Ambient-Light" class="headerlink" title="环境光 Ambient Light"></a>环境光 Ambient Light</h3><p>​    在环境中充分散射，几乎来自于所有方向。</p>
+<h3 id="散射光-Diffuse-Light"><a href="#散射光-Diffuse-Light" class="headerlink" title="散射光 Diffuse Light"></a>散射光 Diffuse Light</h3><h3 id="镜面光-Specular-Light"><a href="#镜面光-Specular-Light" class="headerlink" title="镜面光 Specular Light"></a>镜面光 Specular Light</h3><h3 id="发射光-Emissive-Light"><a href="#发射光-Emissive-Light" class="headerlink" title="发射光 Emissive Light"></a>发射光 Emissive Light</h3><h2 id="3-材料颜色"><a href="#3-材料颜色" class="headerlink" title="3. 材料颜色"></a>3. 材料颜色</h2><p>OpenGL根据材料反射的光来模拟它的颜色。</p>
+<h2 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h2><p>在场景中增加光照，一般有以下步骤：</p>
+<ol>
+<li>定义每个物体顶点的法线向量</li>
+<li>创建和选择一个或多个光源</li>
+<li>创建和选择光照模型</li>
+<li>定义场景中物体的材料属性</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GL/glut.h&gt;</span>	<span class="comment">//使用RGBA颜色模型</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   GLfloat mat_specular[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line">   GLfloat mat_shininess[] = &#123; <span class="number">50.0</span> &#125;;</span><br><span class="line">   GLfloat light_position[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span> &#125;;</span><br><span class="line">       GLfloat lmodel_ambient[] = &#123; <span class="number">0.1</span>,<span class="number">0.1</span>,<span class="number">0.1</span>,<span class="number">1.0</span> &#125;;</span><br><span class="line"></span><br><span class="line">   glClearColor (<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">   glShadeModel (GL_SMOOTH);</span><br><span class="line"></span><br><span class="line">   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);</span><br><span class="line">   glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);</span><br><span class="line">   glLightfv(GL_LIGHT0, GL_POSITION, light_position);	<span class="comment">//指定光源位置</span></span><br><span class="line">    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);</span><br><span class="line"></span><br><span class="line">   glEnable(GL_LIGHTING);</span><br><span class="line">   glEnable(GL_LIGHT0);	<span class="comment">//启用光源0</span></span><br><span class="line">   glEnable(GL_DEPTH_TEST);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br><span class="line">   glutSolidSphere (<span class="number">1.0</span>, <span class="number">8000</span>, <span class="number">500</span>);	<span class="comment">//定义法线向量</span></span><br><span class="line">   glFlush ();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reshape</span> <span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glViewport (<span class="number">0</span>, <span class="number">0</span>, (GLsizei) w, (GLsizei) h);</span><br><span class="line">   glMatrixMode (GL_PROJECTION);</span><br><span class="line">   glLoadIdentity();</span><br><span class="line">   <span class="keyword">if</span> (w &lt;= h)</span><br><span class="line">      glOrtho (<span class="number">-1.5</span>, <span class="number">1.5</span>, <span class="number">-1.5</span>*(GLfloat)h/(GLfloat)w,</span><br><span class="line">         <span class="number">1.5</span>*(GLfloat)h/(GLfloat)w, <span class="number">-10.0</span>, <span class="number">10.0</span>);</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      glOrtho (<span class="number">-1.5</span>*(GLfloat)w/(GLfloat)h,</span><br><span class="line">         <span class="number">1.5</span>*(GLfloat)w/(GLfloat)h, <span class="number">-1.5</span>, <span class="number">1.5</span>, <span class="number">-10.0</span>, <span class="number">10.0</span>);</span><br><span class="line">   glMatrixMode(GL_MODELVIEW);</span><br><span class="line">   glLoadIdentity();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">keyboard</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> key, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">switch</span> (key) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">27</span>:</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glutInit(&amp;argc, argv);</span><br><span class="line">   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);</span><br><span class="line">   glutInitWindowSize (<span class="number">500</span>, <span class="number">500</span>); </span><br><span class="line">   glutInitWindowPosition (<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">   glutCreateWindow (argv[<span class="number">0</span>]);</span><br><span class="line">   init ();</span><br><span class="line">   glutDisplayFunc(display); </span><br><span class="line">   glutReshapeFunc(reshape);</span><br><span class="line">   glutKeyboardFunc(keyboard);</span><br><span class="line">   glutMainLoop();</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="为顶点定义法线向量"><a href="#为顶点定义法线向量" class="headerlink" title="为顶点定义法线向量"></a>为顶点定义法线向量</h3><p>​    在此例子中，用 glutSolidSphere (1.0, 8000, 500); 来定义球体的法线。（好像不止于此）</p>
+<h3 id="创建、定位和启用光源"><a href="#创建、定位和启用光源" class="headerlink" title="创建、定位和启用光源"></a>创建、定位和启用光源</h3><p>​    glLightfv(GL_LIGHT0, GL_POSITION, light_position);    //指定光源位置</p>
+<h3 id="选择光照模型"><a href="#选择光照模型" class="headerlink" title="选择光照模型"></a>选择光照模型</h3><p>​    用glLightModel（）描述，但是并没有找到欸，似乎加不加都可以。   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);</p>
+<h3 id="为场景中的物体定义材料属性"><a href="#为场景中的物体定义材料属性" class="headerlink" title="为场景中的物体定义材料属性"></a>为场景中的物体定义材料属性</h3><p>​    可以指定材料的环境、散射、镜面颜色和光泽度。本例子中用</p>
+<p>​     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);<br>      glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);定义了镜面颜色和光泽度。</p>
+<h1 id="详细解释："><a href="#详细解释：" class="headerlink" title="详细解释："></a>详细解释：</h1><h2 id="创建光源"><a href="#创建光源" class="headerlink" title="创建光源"></a>创建光源</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> glLight&#123;<span class="keyword">if</span>&#125;(GLenum light, GLenum pname, TYPE param);</span><br><span class="line"><span class="keyword">void</span> glLight&#123;<span class="keyword">if</span>&#125;v(GLenum light, GLenum pname, <span class="keyword">const</span> TYPE *param);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Default Values</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GL_AMBIENT</td>
+<td>(0.0, 0.0, 0.0, 1.0)</td>
+<td>光的环境强度</td>
+</tr>
+<tr>
+<td>GL_DIFFUSE</td>
+<td>(1.0, 1.0, 1.0, 1.0) or (0.0, 0.0, 0.0, 1.0)</td>
+<td>光的散射强度</td>
+</tr>
+<tr>
+<td>GL_SPECULAR</td>
+<td>(1.0, 1.0, 1.0, 1.0) or (0.0, 0.0, 0.0, 1.0)</td>
+<td>镜面强度</td>
+</tr>
+<tr>
+<td>GL_POSITION</td>
+<td>(0.0, 0.0, 1.0, 0.0)</td>
+<td>光源位置的坐标</td>
+</tr>
+<tr>
+<td>GL_SPOT_DIRECTION</td>
+<td>(0.0, 0.0, -1.0)</td>
+<td></td>
+</tr>
+<tr>
+<td>GL_SPOT_EXPONENT</td>
+<td>0.0</td>
+<td></td>
+</tr>
+<tr>
+<td>GL_SPOT_CUTOFF</td>
+<td>180.0</td>
+<td></td>
+</tr>
+<tr>
+<td>GL_CONSTANT_ATTENUATION</td>
+<td>1.0</td>
+<td></td>
+</tr>
+<tr>
+<td>GL_LINEAR_ATTENUATION</td>
+<td>0.0</td>
+<td></td>
+</tr>
+<tr>
+<td>GL_QUADRATIC_ATTENUATION</td>
+<td>0.0</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>定义光源的颜色和位置</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GLfloat light_ambient[] = &#123; <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line">GLfloat light_diffuse[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line">GLfloat light_specular[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line">GLfloat light_position[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span> &#125;;</span><br><span class="line">glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);</span><br><span class="line">glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);</span><br><span class="line">glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);</span><br><span class="line">glLightfv(GL_LIGHT0, GL_POSITION, light_position);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-颜色"><a href="#1-颜色" class="headerlink" title="1.  颜色"></a>1.  颜色</h3><p>​    OpenGL的颜色与<strong>GL_AMBIENT、GL_DIFFUSE、GL_SPECULAR</strong>有关。</p>
+<p>​    <strong>默认的环境光是白色</strong>，但是我们可以把它改成red！<img src="OpenGL-第五章-光照/image-20211121145345676.png" alt="image-20211121145345676" style="zoom: 67%;" /></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GLfloat myRed[] = &#123; <span class="number">1.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">1.0</span> &#125;;</span><br><span class="line">glLightfv(GL_LIGHT0, GL_AMBIENT, myRed);</span><br><span class="line"></span><br><span class="line">glLightfv(GL_LIGHT0, GL_DIFFUSE, myRed);</span><br><span class="line">glLightfv(GL_LIGHT0, GL_SPECULAR, myRed);</span><br></pre></td></tr></table></figure>
+
+<p>​    GL_DIFFUSE则最接近我们理解的颜色，它默认白色，我们也可以改！<img src="OpenGL-第五章-光照/image-20211121145453185.png" alt="image-20211121145453185" style="zoom: 67%;" /></p>
+<p>GL_SPECULAR则影响物体上镜面亮点的颜色，一般想创建逼真效果，其与GL_DIFFUSE相同即可。<img src="OpenGL-第五章-光照/image-20211121145650263.png" alt="image-20211121145650263" style="zoom:67%;" /></p>
+<h3 id="2-位置与衰减"><a href="#2-位置与衰减" class="headerlink" title="2. 位置与衰减"></a>2. 位置与衰减</h3><p>​    <strong>方向性光源</strong>：当光源位置无限远，默认光线平行，例如太阳。</p>
+<p>​    <strong>位置性光源</strong>：它的位置决定了光线的效果，例如台灯。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GLfloat light_position[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span> &#125;;	</span><br><span class="line">glLightfv(GL_LIGHT0, GL_POSITION, light_position);</span><br></pre></td></tr></table></figure>
+
+<p>​    如果给定的向量第四个<strong>值为0，则表示其为方向性光源，即平行光</strong>。<strong>若非0，则默认是位置性光源，即太阳</strong>（也可以限制为聚光灯）。</p>
+<p>​    当然，对于位置性光源，还可以进行一个<strong>光强度随位置增加的衰减：对其乘以衰减因子</strong>。</p>
+<p><img src="/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150610126.png" alt="image-20211121150610126"></p>
+<h3 id="3-聚光灯"><a href="#3-聚光灯" class="headerlink" title="3.聚光灯"></a>3.聚光灯</h3><p>若将位置性光源限制为聚光灯，需要GL_SPOT_CUTOFF参数，光锥的最大角度是这个值的俩倍。<img src="OpenGL-第五章-光照/image-20211121150804323.png" alt="image-20211121150804323" style="zoom:50%;" /></p>
+<p>可以用如下代码限制光锥切角： 还需要指定聚光灯方向和光锥的轴：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, <span class="number">45.0</span>);</span><br><span class="line"></span><br><span class="line">GLfloat spot_direction[] = &#123; <span class="number">-1.0</span>, <span class="number">-1.0</span>, <span class="number">0.0</span> &#125;;</span><br><span class="line">glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_direction);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-多光源"><a href="#4-多光源" class="headerlink" title="4.多光源"></a>4.多光源</h3><p>最多可以中场景指定8个光源（一般）。之前只有一个光源，默认表示它的常量就是GL_LIGHT0，当然后面都顺延，加上去就可以用了。</p>
+<h3 id="5-控制光源的位置和方向"><a href="#5-控制光源的位置和方向" class="headerlink" title="5.控制光源的位置和方向"></a>5.控制光源的位置和方向</h3><h4 id="1-光源保持静止"><a href="#1-光源保持静止" class="headerlink" title="1.光源保持静止"></a>1.光源保持静止</h4><p>​        为实现这个效果，需要在使用视图和模型变换之后，设置光源的位置。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">glViewport(<span class="number">0</span>, <span class="number">0</span>, (GLsizei) w, (GLsizei) h);</span><br><span class="line">glMatrixMode(GL_PROJECTION);</span><br><span class="line">glLoadIdentity();</span><br><span class="line"><span class="keyword">if</span> (w &lt;= h) </span><br><span class="line"> glOrtho(<span class="number">-1.5</span>, <span class="number">1.5</span>, <span class="number">-1.5</span>*h/w, <span class="number">1.5</span>*h/w, <span class="number">-10.0</span>, <span class="number">10.0</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"> glOrtho(<span class="number">-1.5</span>*w/h, <span class="number">1.5</span>*w/h, <span class="number">-1.5</span>, <span class="number">1.5</span>, <span class="number">-10.0</span>, <span class="number">10.0</span>);</span><br><span class="line"></span><br><span class="line">glMatrixMode(GL_MODELVIEW);</span><br><span class="line">glLoadIdentity();</span><br><span class="line"><span class="comment">/* later in init() */</span></span><br><span class="line">GLfloat light_position[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line">glLightfv(GL_LIGHT0, GL_POSITION, position);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-独立移动光源"><a href="#2-独立移动光源" class="headerlink" title="2.独立移动光源"></a>2.独立移动光源</h4><p>这里是一个例子，用到spin这个全局变量，由输入设备控制。关键点在display函数中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GL/glut.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> spin = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glClearColor (<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">   glShadeModel (GL_SMOOTH);</span><br><span class="line">   glEnable(GL_LIGHTING);</span><br><span class="line">   glEnable(GL_LIGHT0);</span><br><span class="line">   glEnable(GL_DEPTH_TEST);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   GLfloat position[] = &#123; <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.5</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line"></span><br><span class="line">   glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br><span class="line">   glPushMatrix ();</span><br><span class="line">   gluLookAt (<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">5.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>);</span><br><span class="line"></span><br><span class="line">   glPushMatrix ();</span><br><span class="line">       glRotated ((GLdouble) spin, <span class="number">1.0</span>, (GLdouble)spin, <span class="number">0.0</span>);</span><br><span class="line">       glLightfv (GL_LIGHT0, GL_POSITION, position);</span><br><span class="line"></span><br><span class="line">       glTranslated (<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.5</span>);</span><br><span class="line">       glDisable (GL_LIGHTING);</span><br><span class="line">       glColor3f (<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>);</span><br><span class="line">       glutWireCube (<span class="number">0.1</span>);<span class="comment">//lifangti</span></span><br><span class="line">       glEnable (GL_LIGHTING);</span><br><span class="line">       glPopMatrix ();</span><br><span class="line"></span><br><span class="line">       glutSolidTorus (<span class="number">0.275</span>, <span class="number">0.85</span>, <span class="number">20</span>, <span class="number">50</span>);<span class="comment">//L轮胎？？？？？？？？</span></span><br><span class="line">   glPopMatrix ();</span><br><span class="line">   glFlush ();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reshape</span> <span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glViewport (<span class="number">0</span>, <span class="number">0</span>, (GLsizei) w, (GLsizei) h);</span><br><span class="line">   glMatrixMode (GL_PROJECTION);</span><br><span class="line">   glLoadIdentity();</span><br><span class="line">   gluPerspective(<span class="number">40.0</span>, (GLfloat) w/(GLfloat) h, <span class="number">1.0</span>, <span class="number">20.0</span>);</span><br><span class="line">   glMatrixMode(GL_MODELVIEW);</span><br><span class="line">   glLoadIdentity();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mouse</span><span class="params">(<span class="keyword">int</span> button, <span class="keyword">int</span> state, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">switch</span> (button) &#123;</span><br><span class="line">      <span class="keyword">case</span> GLUT_LEFT_BUTTON:</span><br><span class="line">         <span class="keyword">if</span> (state == GLUT_DOWN) &#123;</span><br><span class="line">            spin = (spin + <span class="number">30</span>) % <span class="number">360</span>;</span><br><span class="line">            glutPostRedisplay();</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">keyboard</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> key, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">switch</span> (key) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">27</span>:</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glutInit(&amp;argc, argv);</span><br><span class="line">   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);</span><br><span class="line">   glutInitWindowSize (<span class="number">500</span>, <span class="number">500</span>); </span><br><span class="line">   glutInitWindowPosition (<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">   glutCreateWindow (argv[<span class="number">0</span>]);</span><br><span class="line">   init ();</span><br><span class="line">   glutDisplayFunc(display); </span><br><span class="line">   glutReshapeFunc(reshape);</span><br><span class="line">   glutMouseFunc(mouse);</span><br><span class="line">   glutKeyboardFunc(keyboard);</span><br><span class="line">   glutMainLoop();</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-随观察者移动（miner’s-hat）"><a href="#3-随观察者移动（miner’s-hat）" class="headerlink" title="3.随观察者移动（miner’s hat）"></a>3.随观察者移动（miner’s hat）</h4><h2 id="选择光照模型-1"><a href="#选择光照模型-1" class="headerlink" title="选择光照模型"></a>选择光照模型</h2><p>OpenGL的光照模型分为以下概念：</p>
+<ol>
+<li>全局环境光强度</li>
+<li>观察点的位置位于场景还是无限远</li>
+<li>物体的正面背面是否执行不同的光照计算</li>
+<li>镜面颜色是否应该从环境和散射模型中分离，再纹理之后再应用。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> glLightModel&#123;<span class="keyword">if</span>&#125;(GLenum pname, TYPE param);</span><br><span class="line"><span class="keyword">void</span> glLightModel&#123;<span class="keyword">if</span>&#125;v(GLenum pname, <span class="keyword">const</span> TYPE *param);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Default Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GL_LIGHT_MODEL_AMBIENT</td>
+<td>(0.2, 0.2, 0.2, 1.0)</td>
+<td>整个场景环境光的RGBA强度</td>
+</tr>
+<tr>
+<td>GL_LIGHT_MODEL_LOCAL_VIEWER</td>
+<td>0.0 or GL_FALSE</td>
+<td>镜面反射角度的计算</td>
+</tr>
+<tr>
+<td>GL_LIGHT_MODEL_TWO_SIDE</td>
+<td>0.0 or GL_FALSE</td>
+<td>指定单面还是双面光照</td>
+</tr>
+<tr>
+<td>GL_LIGHT_MODEL_COLOR_CONTROL</td>
+<td>GL_SINGLE_COLOR</td>
+<td>镜面颜色的计算是否分离</td>
+</tr>
+</tbody></table>
+<h3 id="1-全局环境光"><a href="#1-全局环境光" class="headerlink" title="1. 全局环境光"></a>1. 全局环境光</h3><p>默认值是少量白光的环境光，以便于看清物体。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GLfloat lmodel_ambient[] = &#123; <span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line">glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-观察点的位置位于场景还是无限远"><a href="#2-观察点的位置位于场景还是无限远" class="headerlink" title="2.观察点的位置位于场景还是无限远"></a>2.观察点的位置位于场景还是无限远</h3><p>观测点的位置影响镜面反射产生的亮点。观测点位于无穷远，则场景这所有顶点的方向固定。局部观测点可以更逼真但是开销大。</p>
+<p>可以用下列代码开启，true为局部，false为无穷远。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-双面光照"><a href="#3-双面光照" class="headerlink" title="3.双面光照"></a>3.双面光照</h3><p>默认单面，双面指的是加上了背面，例如圆的内部。开启会反转表面法线的方向，加剧开销。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-镜面辅助颜色"><a href="#4-镜面辅助颜色" class="headerlink" title="4.镜面辅助颜色"></a>4.镜面辅助颜色</h3><p>把镜面计算推迟到纹理贴图之后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR);</span><br></pre></td></tr></table></figure>
+
+<p>恢复默认为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SINGLE_COLOR);</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-启用光照"><a href="#5-启用光照" class="headerlink" title="5.启用光照"></a>5.启用光照</h3><p>当然可以自行开关光照，以及具体光源的开关：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">glEnable(GL_LIGHTING);</span><br><span class="line">glEnable(GL_LIGHT0);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="定义材料属性"><a href="#定义材料属性" class="headerlink" title="定义材料属性"></a>定义材料属性</h2><p>如何设置场景中物体的材料属性：环境，散射和镜面颜色，光泽度，所发射光的颜色：用这个函数就可以拉：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> glMaterial&#123;<span class="keyword">if</span>&#125;(GLenum face, GLenum pname, TYPE param);</span><br><span class="line"><span class="keyword">void</span> glMaterial&#123;<span class="keyword">if</span>&#125;v(GLenum face, GLenum pname, <span class="keyword">const</span> TYPE *param);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Parameter Name Default Value Meaning</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GL_AMBIENT</td>
+<td>(0.2, 0.2, 0.2, 1.0)</td>
+<td>ambient color of material 环境颜色</td>
+</tr>
+<tr>
+<td>GL_DIFFUSE</td>
+<td>(0.8, 0.8, 0.8, 1.0)</td>
+<td>diffuse color of material 散射颜色</td>
+</tr>
+<tr>
+<td>GL_AMBIENT_AND_DIFFUSE</td>
+<td></td>
+<td>ambient and diffuse color of material</td>
+</tr>
+<tr>
+<td>GL_SPECULAR</td>
+<td>(0.0, 0.0, 0.0, 1.0)</td>
+<td>specular color of material 镜面颜色</td>
+</tr>
+<tr>
+<td>GL_SHININESS</td>
+<td>0.0</td>
+<td>specular exponent 镜面指数</td>
+</tr>
+<tr>
+<td>GL_EMISSION</td>
+<td>(0.0, 0.0, 0.0, 1.0)</td>
+<td>emissive color of material</td>
+</tr>
+<tr>
+<td>GL_COLOR_INDEXES</td>
+<td>(0, 1, 1)</td>
+<td>ambient, diffuse, and  specular color indices 索引</td>
+</tr>
+</tbody></table>
+<h3 id="1-散射和环境反射"><a href="#1-散射和环境反射" class="headerlink" title="1.散射和环境反射"></a>1.散射和环境反射</h3><p>一般物体的散射和环境反射相同，故可以起定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GLfloat mat_amb_diff[] = &#123; <span class="number">0.1</span>, <span class="number">0.5</span>, <span class="number">0.8</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line">glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, mat_amb_diff);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-镜面反射"><a href="#2-镜面反射" class="headerlink" title="2.镜面反射"></a>2.镜面反射</h3><p>可以用GL_SPECULAR设定材料的效果，用GL_SHININESS控制亮点的大小和亮度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GLfloat mat_specular[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line">GLfloat low_shininess[] = &#123; <span class="number">5.0</span> &#125;;</span><br><span class="line">glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);</span><br><span class="line">glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-发射光颜色"><a href="#3-发射光颜色" class="headerlink" title="3.发射光颜色"></a>3.发射光颜色</h3><p>一般用在自发光物体</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GLfloat mat_emission[] = &#123;<span class="number">0.3</span>, <span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">0.0</span>&#125;;</span><br><span class="line">glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="后言"><a href="#后言" class="headerlink" title="后言"></a>后言</h1><p>边看边想边copy，又看掉了一节，继续加油……</p>
+<p>[TOC]</p>
 
       
     </div>
@@ -562,7 +797,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E9%9A%90"><span class="nav-number">1.</span> <span class="nav-text">消隐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenGL%E7%9A%84%E5%85%89"><span class="nav-number">2.</span> <span class="nav-text">OpenGL的光</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B6%88%E9%9A%90"><span class="nav-number">1.1.</span> <span class="nav-text">1. 消隐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-OpenGL%E7%9A%84%E5%85%89"><span class="nav-number">1.2.</span> <span class="nav-text">2. OpenGL的光</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%85%89-Ambient-Light"><span class="nav-number">1.2.1.</span> <span class="nav-text">环境光 Ambient Light</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E5%B0%84%E5%85%89-Diffuse-Light"><span class="nav-number">1.2.2.</span> <span class="nav-text">散射光 Diffuse Light</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E9%9D%A2%E5%85%89-Specular-Light"><span class="nav-number">1.2.3.</span> <span class="nav-text">镜面光 Specular Light</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B0%84%E5%85%89-Emissive-Light"><span class="nav-number">1.2.4.</span> <span class="nav-text">发射光 Emissive Light</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9D%90%E6%96%99%E9%A2%9C%E8%89%B2"><span class="nav-number">1.3.</span> <span class="nav-text">3. 材料颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">1.4.</span> <span class="nav-text">简单的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E9%A1%B6%E7%82%B9%E5%AE%9A%E4%B9%89%E6%B3%95%E7%BA%BF%E5%90%91%E9%87%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">为顶点定义法线向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E3%80%81%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%90%AF%E7%94%A8%E5%85%89%E6%BA%90"><span class="nav-number">1.4.2.</span> <span class="nav-text">创建、定位和启用光源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.3.</span> <span class="nav-text">选择光照模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E5%9C%BA%E6%99%AF%E4%B8%AD%E7%9A%84%E7%89%A9%E4%BD%93%E5%AE%9A%E4%B9%89%E6%9D%90%E6%96%99%E5%B1%9E%E6%80%A7"><span class="nav-number">1.4.4.</span> <span class="nav-text">为场景中的物体定义材料属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E8%A7%A3%E9%87%8A%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">详细解释：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%85%89%E6%BA%90"><span class="nav-number">2.1.</span> <span class="nav-text">创建光源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%A2%9C%E8%89%B2"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.  颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BD%8D%E7%BD%AE%E4%B8%8E%E8%A1%B0%E5%87%8F"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. 位置与衰减</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%81%9A%E5%85%89%E7%81%AF"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.聚光灯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%A4%9A%E5%85%89%E6%BA%90"><span class="nav-number">2.1.4.</span> <span class="nav-text">4.多光源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%8E%A7%E5%88%B6%E5%85%89%E6%BA%90%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%92%8C%E6%96%B9%E5%90%91"><span class="nav-number">2.1.5.</span> <span class="nav-text">5.控制光源的位置和方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%85%89%E6%BA%90%E4%BF%9D%E6%8C%81%E9%9D%99%E6%AD%A2"><span class="nav-number">2.1.5.1.</span> <span class="nav-text">1.光源保持静止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%8B%AC%E7%AB%8B%E7%A7%BB%E5%8A%A8%E5%85%89%E6%BA%90"><span class="nav-number">2.1.5.2.</span> <span class="nav-text">2.独立移动光源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E9%9A%8F%E8%A7%82%E5%AF%9F%E8%80%85%E7%A7%BB%E5%8A%A8%EF%BC%88miner%E2%80%99s-hat%EF%BC%89"><span class="nav-number">2.1.5.3.</span> <span class="nav-text">3.随观察者移动（miner’s hat）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B-1"><span class="nav-number">2.2.</span> <span class="nav-text">选择光照模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%85%A8%E5%B1%80%E7%8E%AF%E5%A2%83%E5%85%89"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 全局环境光</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%A7%82%E5%AF%9F%E7%82%B9%E7%9A%84%E4%BD%8D%E7%BD%AE%E4%BD%8D%E4%BA%8E%E5%9C%BA%E6%99%AF%E8%BF%98%E6%98%AF%E6%97%A0%E9%99%90%E8%BF%9C"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.观察点的位置位于场景还是无限远</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8F%8C%E9%9D%A2%E5%85%89%E7%85%A7"><span class="nav-number">2.2.3.</span> <span class="nav-text">3.双面光照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%95%9C%E9%9D%A2%E8%BE%85%E5%8A%A9%E9%A2%9C%E8%89%B2"><span class="nav-number">2.2.4.</span> <span class="nav-text">4.镜面辅助颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%90%AF%E7%94%A8%E5%85%89%E7%85%A7"><span class="nav-number">2.2.5.</span> <span class="nav-text">5.启用光照</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%9D%90%E6%96%99%E5%B1%9E%E6%80%A7"><span class="nav-number">2.3.</span> <span class="nav-text">定义材料属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%A3%E5%B0%84%E5%92%8C%E7%8E%AF%E5%A2%83%E5%8F%8D%E5%B0%84"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.散射和环境反射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%95%9C%E9%9D%A2%E5%8F%8D%E5%B0%84"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.镜面反射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8F%91%E5%B0%84%E5%85%89%E9%A2%9C%E8%89%B2"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.发射光颜色</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E8%A8%80"><span class="nav-number">3.</span> <span class="nav-text">后言</span></a></li></ol></div>
             
 
           </div>
