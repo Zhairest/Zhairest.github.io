@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-95d4db3dc46db03b7c740a611cf623e8_720w.jpg">
 <meta property="og:image" content="http://example.com/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/image-20211120214614674.png">
 <meta property="article:published_time" content="2021-11-20T11:46:50.000Z">
-<meta property="article:modified_time" content="2021-11-21T04:44:59.021Z">
+<meta property="article:modified_time" content="2021-11-21T05:14:11.302Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="OpenGL">
 <meta property="article:tag" content="Unity">
@@ -314,7 +314,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-11-21T12:44:59+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-11-21T13:14:11+08:00">
                 2021-11-21
               </time>
             
@@ -372,7 +372,7 @@
 
 <p>今天看shader的时候，搜了一个问题，被答主建议重新巩固渲染流水线的知识，想来也是…</p>
 <hr>
-<h2 id="渲染流水线"><a href="#渲染流水线" class="headerlink" title="渲染流水线"></a>渲染流水线</h2><p>模型从3D的数据（顶点坐标，法线坐标，UV纹理坐标），到最后在屏幕上的2D图像，中间需要很多过程。这大段过程在GPU上，就像流水线一样，疯狂不断地进行，故称渲染流水线。</p>
+<h2 id="渲染流水线"><a href="#渲染流水线" class="headerlink" title="渲染流水线"></a>渲染流水线</h2><p>​    模型从3D的数据（顶点坐标，法线坐标，UV纹理坐标），到最后在屏幕上的2D图像，中间需要很多过程。这大段过程在GPU上，就像流水线一样，疯狂不断地进行，故称渲染流水线。</p>
 <hr>
 <h2 id="3D图形渲染完整流水线"><a href="#3D图形渲染完整流水线" class="headerlink" title="3D图形渲染完整流水线"></a>3D图形渲染完整流水线</h2><p>下面列举一个通用的流水线，当然具体引擎会有不同，但大体如此。</p>
 <p><strong>1.建立场景</strong>：对场景进行预先设置，如摄像机视角，灯光雾化设置</p>
@@ -386,18 +386,18 @@
 <p><strong>9.像素着色</strong>：计算颜色并输出。</p>
 <p><img src="/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-2be9951a258f1b4cf3ada3cc01ef5d3e_720w.jpg" alt="img"></p>
 <hr>
-<h2 id="空间变换"><a href="#空间变换" class="headerlink" title="空间变换"></a>空间变换</h2><h3 id="1-模型空间Model-Space-物体空间-本地空间"><a href="#1-模型空间Model-Space-物体空间-本地空间" class="headerlink" title="1. 模型空间Model Space/ 物体空间 / 本地空间"></a>1. 模型空间Model Space/ 物体空间 / 本地空间</h3><p>顶点数据一开始就是按照这个空间进行描述的。坐标轴以模型的Pivot枢轴确定</p>
-<h3 id="2-世界空间-World-Space"><a href="#2-世界空间-World-Space" class="headerlink" title="2. 世界空间 World Space"></a>2. 世界空间 World Space</h3><p>描述物体之间的相对位置。</p>
-<p>从模型空间转变到世界空间需要使用<strong>模型变换矩阵</strong>，称为<strong>模型变换</strong>。</p>
-<p>当计算光照时，一般要将顶点转变到这个空间，与灯光一起进行计算。</p>
-<h3 id="3-摄像机空间-Camera-Space-观察空间View-Space"><a href="#3-摄像机空间-Camera-Space-观察空间View-Space" class="headerlink" title="3. 摄像机空间 Camera Space / 观察空间View Space"></a>3. 摄像机空间 Camera Space / 观察空间View Space</h3><p>引擎进行渲染的时候就是以摄像机作为视角，也就是这个空间。</p>
-<p>从世界空间物体转换到摄像机空间称为<strong>视变换</strong>，需要视变换矩阵。</p>
-<h3 id="4-裁切空间-Clip-Space"><a href="#4-裁切空间-Clip-Space" class="headerlink" title="4. 裁切空间 Clip Space"></a>4. 裁切空间 Clip Space</h3><p>顶点转换到摄像机空间后，需要进行视锥体的裁切，就是转换到这个空间进行。</p>
-<p>不管是透视投影（Perspective Projection）还是正交投影（Orthographic Projection），视锥体都是六个面组成。</p>
-<p>从摄像机空间转换到这个空间的过程叫做<strong>投影变换</strong>，需要使用<strong>裁切矩阵/投影矩阵</strong>。</p>
-<p>在裁切空间做了以下事情：</p>
-<p>1.<strong>计算顶点坐标的w分量</strong>，用于接下来的透视除法。</p>
-<p>2.对视锥体进行不均等缩放，使其变成正方体。</p>
+<h2 id="空间变换"><a href="#空间变换" class="headerlink" title="空间变换"></a>空间变换</h2><h3 id="1-模型空间Model-Space-物体空间-本地空间"><a href="#1-模型空间Model-Space-物体空间-本地空间" class="headerlink" title="1. 模型空间Model Space/ 物体空间 / 本地空间"></a>1. 模型空间Model Space/ 物体空间 / 本地空间</h3><p>​    顶点数据一开始就是按照这个空间进行描述的。坐标轴以模型的Pivot枢轴确定</p>
+<h3 id="2-世界空间-World-Space"><a href="#2-世界空间-World-Space" class="headerlink" title="2. 世界空间 World Space"></a>2. 世界空间 World Space</h3><p>​    描述物体之间的相对位置。</p>
+<p>​    从模型空间转变到世界空间需要使用<strong>模型变换矩阵</strong>，称为<strong>模型变换</strong>。</p>
+<p>​    当计算光照时，一般要将顶点转变到这个空间，与灯光一起进行计算。</p>
+<h3 id="3-摄像机空间-Camera-Space-观察空间View-Space"><a href="#3-摄像机空间-Camera-Space-观察空间View-Space" class="headerlink" title="3. 摄像机空间 Camera Space / 观察空间View Space"></a>3. 摄像机空间 Camera Space / 观察空间View Space</h3><p>​    引擎进行渲染的时候就是以摄像机作为视角，也就是这个空间。</p>
+<p>​    从世界空间物体转换到摄像机空间称为<strong>视变换</strong>，需要视变换矩阵。</p>
+<h3 id="4-裁切空间-Clip-Space"><a href="#4-裁切空间-Clip-Space" class="headerlink" title="4. 裁切空间 Clip Space"></a>4. 裁切空间 Clip Space</h3><p>​    顶点转换到摄像机空间后，需要进行视锥体的裁切，就是转换到这个空间进行。</p>
+<p>​    不管是透视投影（Perspective Projection）还是正交投影（Orthographic Projection），视锥体都是六个面组成。</p>
+<p>​    从摄像机空间转换到这个空间的过程叫做<strong>投影变换</strong>，需要使用<strong>裁切矩阵/投影矩阵</strong>。</p>
+<p>​    在裁切空间做了以下事情：</p>
+<p>​        1.<strong>计算顶点坐标的w分量</strong>，用于接下来的透视除法。</p>
+<p>​        2.对视锥体进行不均等缩放，使其变成正方体。</p>
 <p><img src="/2021/11/20/%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF/v2-909069f69f8d8a55bd694836dc293376_r.jpg" alt="preview"></p>
 <h3 id="5-屏幕空间"><a href="#5-屏幕空间" class="headerlink" title="5. 屏幕空间"></a>5. 屏幕空间</h3><p>此刻顶点坐标还是3D数据，需要在这个空间进行投影将其转化为2D数据。</p>
 <ol>
@@ -420,7 +420,7 @@
 <li>最后进入<strong>测试和混合阶段</strong>。在此<strong>检测像素的深度值</strong>，从而判断像素前面是否被阻挡。（也就是说深度检测居然是最后进行的？）</li>
 <li><strong>帧缓存</strong>是最后一个站点，等待输出到屏幕。</li>
 </ol>
-<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks:"></a>Thanks:</h2><p>感谢《ShaderLab 新手宝典》及其编者。</p>
+<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks:"></a>Thanks:</h2><p>感谢《ShaderLab 新手宝典》及其编者<em>Faith</em>-<em>Tong</em>。</p>
 
       
     </div>
