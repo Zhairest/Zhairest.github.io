@@ -87,7 +87,7 @@
 <meta property="og:description" content="概述为使用纹理贴图，步骤如下：  创建纹理对象，指定纹理 确定纹理如何应用到每个像素上 简单使用纹理颜色作为最后的颜色 用纹理来调整片段的颜色 根据纹理值，用常量颜色与片段颜色进行组合   启用纹理贴图功能 GL_TEXTURE_1D, GL_TEXTURE_2D, GL_TEXTURE_3D, or  GL_TEXTURE_CUBE_MAP 同时应该只启用一种纹理        绘制场景，提供几">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-11-21T08:26:40.000Z">
-<meta property="article:modified_time" content="2021-11-21T11:10:33.704Z">
+<meta property="article:modified_time" content="2021-11-27T04:56:42.220Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-11-21T19:10:33+08:00">
-                2021-11-21
+              <time title="更新于" itemprop="dateModified" datetime="2021-11-27T12:56:42+08:00">
+                2021-11-27
               </time>
             
           </span>
@@ -336,7 +336,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  2k
                 </span>
               
 
@@ -429,7 +429,8 @@
 
 
 <hr>
-<h2 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h2><hr>
+<h2 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h2><p>…跳过</p>
+<hr>
 <h2 id="纹理对象"><a href="#纹理对象" class="headerlink" title="纹理对象"></a>纹理对象</h2><p>有些OpenGL支持一种容量有限的高性能纹理工作集（<em>a limited working set of high performance textures</em>），可以把常用纹理加载到这个区域里。</p>
 <ol>
 <li>生成纹理名称</li>
@@ -455,6 +456,10 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> glTexEnv&#123;<span class="keyword">if</span>&#125;(GLenum target, GLenum pname, TYPE param);</span><br><span class="line"><span class="keyword">void</span> glTexEnv&#123;<span class="keyword">if</span>&#125;v(GLenum target, GLenum pname, <span class="keyword">const</span> TYPE *param);</span><br></pre></td></tr></table></figure>
 
 <p>//待写2021年11月21日</p>
+<h2 id="纹理坐标自动生成"><a href="#纹理坐标自动生成" class="headerlink" title="纹理坐标自动生成"></a>纹理坐标自动生成</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> glTexGen&#123;ifd&#125;(GLenum coord, GLenum pname, TYPE param);</span><br><span class="line"><span class="keyword">void</span> glTexGen&#123;ifd&#125;v(GLenum coord, GLenum pname, <span class="keyword">const</span> TYPE *param);</span><br></pre></td></tr></table></figure>
+
+<p>是的，看不懂，有缘再看。</p>
+<h3 id="球体纹理"><a href="#球体纹理" class="headerlink" title="球体纹理"></a>球体纹理</h3><p>环境纹理的目的是渲染具有完美反射能力的物体。如擦的亮亮的银器，终结者2中的液态机器人。</p>
 
       
     </div>
@@ -494,6 +499,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/11/27/%E5%B1%80%E5%A4%96%E4%BA%BA-%E5%BD%A2%E8%80%8C%E4%B8%8A/" rel="prev" title="局外人-形而上">
+                局外人-形而上 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -574,7 +583,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -650,7 +659,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%B9%E7%90%86%E5%AF%B9%E8%B1%A1%EF%BC%8C%E6%8C%87%E5%AE%9A%E7%BA%B9%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">创建纹理对象，指定纹理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E7%BA%B9%E7%90%86%E5%A6%82%E4%BD%95%E5%BA%94%E7%94%A8%E5%88%B0%E6%AF%8F%E4%B8%AA%E5%83%8F%E7%B4%A0%E4%B8%8A"><span class="nav-number">1.2.</span> <span class="nav-text">确定纹理如何应用到每个像素上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E7%94%A8%E7%BA%B9%E7%90%86%E8%B4%B4%E5%9B%BE%E5%8A%9F%E8%83%BD"><span class="nav-number">1.3.</span> <span class="nav-text">启用纹理贴图功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%9C%BA%E6%99%AF%EF%BC%8C%E6%8F%90%E4%BE%9B%E5%87%A0%E4%BD%95%E5%9D%90%E6%A0%87%E5%92%8C%E7%BA%B9%E7%90%86%E8%B4%B4%E5%9B%BE%E5%9D%90%E6%A0%87"><span class="nav-number">1.4.</span> <span class="nav-text">绘制场景，提供几何坐标和纹理贴图坐标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E7%BA%B9%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">指定纹理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#glTexImage2D-%E5%87%BD%E6%95%B0%E7%94%A8%E4%BA%8E%E6%8C%87%E5%AE%9A%E4%BA%8C%E7%BB%B4%E7%BA%B9%E7%90%86%EF%BC%9A"><span class="nav-number">2.1.1.</span> <span class="nav-text">glTexImage2D() 函数用于指定二维纹理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gluScaleImage-%E6%9B%B4%E6%94%B9%E7%BA%B9%E7%90%86%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">2.1.2.</span> <span class="nav-text">gluScaleImage() 更改纹理的大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#glCopyTexImage2D-%E4%BB%8E%E5%B8%A7%E7%BC%93%E5%86%B2%E5%8C%BA%E5%8F%96%E5%87%BA%E7%9F%A9%E5%BD%A2%EF%BC%8C%E4%BD%9C%E4%B8%BA%E7%BA%B9%E7%90%86"><span class="nav-number">2.1.3.</span> <span class="nav-text">glCopyTexImage2D() 从帧缓冲区取出矩形，作为纹理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BA%B9%E7%90%86%E4%BB%A3%E7%90%86-Texture-Proxy-%EF%BC%88%E6%B2%A1%E6%87%82%EF%BC%89"><span class="nav-number">2.1.4.</span> <span class="nav-text">1. 纹理代理 Texture Proxy （没懂）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9B%BF%E6%8D%A2%E7%BA%B9%E7%90%86%E7%9A%84%E9%83%A8%E5%88%86"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.替换纹理的部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%B8%80%E7%BB%B4%E7%BA%B9%E7%90%86"><span class="nav-number">2.1.6.</span> <span class="nav-text">3.一维纹理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%B8%89%E7%BB%B4%E7%BA%B9%E7%90%86"><span class="nav-number">2.1.7.</span> <span class="nav-text">4.三维纹理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-mipmap%EF%BC%9A%E5%A4%9A%E9%87%8D%E7%BB%86%E8%8A%82%E5%B1%82"><span class="nav-number">2.1.8.</span> <span class="nav-text">5.mipmap：多重细节层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E4%B8%AD%E6%9E%84%E9%80%A0mipmap"><span class="nav-number">2.1.8.1.</span> <span class="nav-text">实际应用中构造mipmap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.</span> <span class="nav-text">纹理对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%91%BD%E5%90%8D%E7%BA%B9%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.命名纹理对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8%E7%BA%B9%E7%90%86"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.创建和使用纹理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%B8%85%E9%99%A4%E7%BA%B9%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.清除纹理对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B8%B8%E9%A9%BB%E7%BA%B9%E7%90%86%E5%B7%A5%E4%BD%9C%E9%9B%86"><span class="nav-number">2.3.4.</span> <span class="nav-text">4.常驻纹理工作集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">纹理函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%B9%E7%90%86%E5%AF%B9%E8%B1%A1%EF%BC%8C%E6%8C%87%E5%AE%9A%E7%BA%B9%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">创建纹理对象，指定纹理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E7%BA%B9%E7%90%86%E5%A6%82%E4%BD%95%E5%BA%94%E7%94%A8%E5%88%B0%E6%AF%8F%E4%B8%AA%E5%83%8F%E7%B4%A0%E4%B8%8A"><span class="nav-number">1.2.</span> <span class="nav-text">确定纹理如何应用到每个像素上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E7%94%A8%E7%BA%B9%E7%90%86%E8%B4%B4%E5%9B%BE%E5%8A%9F%E8%83%BD"><span class="nav-number">1.3.</span> <span class="nav-text">启用纹理贴图功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%9C%BA%E6%99%AF%EF%BC%8C%E6%8F%90%E4%BE%9B%E5%87%A0%E4%BD%95%E5%9D%90%E6%A0%87%E5%92%8C%E7%BA%B9%E7%90%86%E8%B4%B4%E5%9B%BE%E5%9D%90%E6%A0%87"><span class="nav-number">1.4.</span> <span class="nav-text">绘制场景，提供几何坐标和纹理贴图坐标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-number">1.5.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E7%BA%B9%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">指定纹理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#glTexImage2D-%E5%87%BD%E6%95%B0%E7%94%A8%E4%BA%8E%E6%8C%87%E5%AE%9A%E4%BA%8C%E7%BB%B4%E7%BA%B9%E7%90%86%EF%BC%9A"><span class="nav-number">2.1.1.</span> <span class="nav-text">glTexImage2D() 函数用于指定二维纹理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gluScaleImage-%E6%9B%B4%E6%94%B9%E7%BA%B9%E7%90%86%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">2.1.2.</span> <span class="nav-text">gluScaleImage() 更改纹理的大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#glCopyTexImage2D-%E4%BB%8E%E5%B8%A7%E7%BC%93%E5%86%B2%E5%8C%BA%E5%8F%96%E5%87%BA%E7%9F%A9%E5%BD%A2%EF%BC%8C%E4%BD%9C%E4%B8%BA%E7%BA%B9%E7%90%86"><span class="nav-number">2.1.3.</span> <span class="nav-text">glCopyTexImage2D() 从帧缓冲区取出矩形，作为纹理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BA%B9%E7%90%86%E4%BB%A3%E7%90%86-Texture-Proxy-%EF%BC%88%E6%B2%A1%E6%87%82%EF%BC%89"><span class="nav-number">2.1.4.</span> <span class="nav-text">1. 纹理代理 Texture Proxy （没懂）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9B%BF%E6%8D%A2%E7%BA%B9%E7%90%86%E7%9A%84%E9%83%A8%E5%88%86"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.替换纹理的部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%B8%80%E7%BB%B4%E7%BA%B9%E7%90%86"><span class="nav-number">2.1.6.</span> <span class="nav-text">3.一维纹理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%B8%89%E7%BB%B4%E7%BA%B9%E7%90%86"><span class="nav-number">2.1.7.</span> <span class="nav-text">4.三维纹理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-mipmap%EF%BC%9A%E5%A4%9A%E9%87%8D%E7%BB%86%E8%8A%82%E5%B1%82"><span class="nav-number">2.1.8.</span> <span class="nav-text">5.mipmap：多重细节层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E4%B8%AD%E6%9E%84%E9%80%A0mipmap"><span class="nav-number">2.1.8.1.</span> <span class="nav-text">实际应用中构造mipmap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.</span> <span class="nav-text">纹理对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%91%BD%E5%90%8D%E7%BA%B9%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.命名纹理对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8%E7%BA%B9%E7%90%86"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.创建和使用纹理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%B8%85%E9%99%A4%E7%BA%B9%E7%90%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.清除纹理对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B8%B8%E9%A9%BB%E7%BA%B9%E7%90%86%E5%B7%A5%E4%BD%9C%E9%9B%86"><span class="nav-number">2.3.4.</span> <span class="nav-text">4.常驻纹理工作集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">纹理函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B9%E7%90%86%E5%9D%90%E6%A0%87%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90"><span class="nav-number">2.5.</span> <span class="nav-text">纹理坐标自动生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%83%E4%BD%93%E7%BA%B9%E7%90%86"><span class="nav-number">2.5.1.</span> <span class="nav-text">球体纹理</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
