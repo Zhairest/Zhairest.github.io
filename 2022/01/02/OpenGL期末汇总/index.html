@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OpenGL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="边学边复习~ 大家新年快乐 1、VBO保存顶点数据 顶点数组对象：Vertex Array Object，VAO 顶点缓冲对象：Vertex Buffer Object，VBO 索引缓冲对象：Element Buffer Object，EBO或Index Buffer Object，IBO  在程序中，我们会定义大量的顶点数据，如模型坐标等等。在OpenGL中，我们通过顶点缓冲对象(Vertex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL期末汇总-关于VBO和Shader">
+<meta property="og:url" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:site_name" content="旋转公寓的阁楼">
+<meta property="og:description" content="边学边复习~ 大家新年快乐 1、VBO保存顶点数据 顶点数组对象：Vertex Array Object，VAO 顶点缓冲对象：Vertex Buffer Object，VBO 索引缓冲对象：Element Buffer Object，EBO或Index Buffer Object，IBO  在程序中，我们会定义大量的顶点数据，如模型坐标等等。在OpenGL中，我们通过顶点缓冲对象(Vertex">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/OpenGL期末汇总/image-20220102201529377.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/vertex_array_objects_ebo.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/image-20220102205557943.png">
+<meta property="article:published_time" content="2022-01-02T11:05:04.000Z">
+<meta property="article:modified_time" content="2022-01-02T13:06:53.961Z">
+<meta property="article:author" content="Zhairest">
+<meta property="article:tag" content="OpenGL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/OpenGL期末汇总/image-20220102201529377.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/01/02/OpenGL期末汇总/"/>
+
+
+
+
+
+  <title>OpenGL期末汇总-关于VBO和Shader | 旋转公寓的阁楼</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋转公寓的阁楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">储物间</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋转公寓的阁楼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenGL期末汇总-关于VBO和Shader</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-02T19:05:04+08:00">
+                2022-01-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-01-02T21:06:53+08:00">
+                2022-01-02
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.9k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>边学边复习~ 大家新年快乐</p>
+<h2 id="1、VBO保存顶点数据"><a href="#1、VBO保存顶点数据" class="headerlink" title="1、VBO保存顶点数据"></a>1、VBO保存顶点数据</h2><ul>
+<li><strong>顶点数组对象：Vertex Array Object，VAO</strong></li>
+<li><strong>顶点缓冲对象：Vertex Buffer Object，VBO</strong></li>
+<li><strong>索引缓冲对象：Element Buffer Object，EBO或Index Buffer Object，IBO</strong></li>
+</ul>
+<p>在程序中，我们会定义大量的顶点数据，如模型坐标等等。在OpenGL中，我们通过<strong>顶点缓冲对象</strong>(Vertex Buffer Objects, <strong>VBO</strong>)管理这个内存，它会在GPU内存（通常被称为显存）中储存大量顶点。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以使用glGenBuffers函数和一个缓冲ID生成一个VBO对象：</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> VBO;</span><br><span class="line"><span class="built_in">glGenBuffers</span>(<span class="number">1</span>, &amp;VBO);</span><br><span class="line"><span class="comment">//顶点缓冲对象的缓冲类型是GL_ARRAY_BUFFER,我们可以对VBO进行绑定</span></span><br><span class="line"><span class="built_in">glBindBuffer</span>(GL_ARRAY_BUFFER, VBO);  </span><br><span class="line"><span class="comment">//之后，就可以通过GL_ARRAY_BUFFER进行传值了</span></span><br><span class="line"><span class="comment">//glBufferData是一个专门用来把用户定义的数据复制到当前绑定缓冲的函数。</span></span><br><span class="line"><span class="built_in">glBufferData</span>(GL_ARRAY_BUFFER, <span class="built_in"><span class="keyword">sizeof</span></span>(vertices), vertices, GL_STATIC_DRAW);</span><br><span class="line"><span class="comment">//第二个参数指定传输数据的大小。第三个参数是我们希望发送的实际数据。第四个参数指定了我们希望显卡如何管理给定的数据</span></span><br></pre></td></tr></table></figure>
+
+<p>现在我们已经把顶点数据储存在显卡的内存中，并用VBO这个顶点缓冲对象管理。接下来需要使用shader进行处理咯~</p>
+<h2 id="2、Shader解释如何使用顶点数据和渲染流水线"><a href="#2、Shader解释如何使用顶点数据和渲染流水线" class="headerlink" title="2、Shader解释如何使用顶点数据和渲染流水线"></a>2、Shader解释如何使用顶点数据和渲染流水线</h2><h3 id="朴实无华版本"><a href="#朴实无华版本" class="headerlink" title="朴实无华版本"></a>朴实无华版本</h3><p>​    读取-绑定-顶点和片源着色器连接-使用-删除</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先进行shader内容的定义</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *vertexShaderSource =<span class="string">&quot;#version 330 core\n&quot;</span></span><br><span class="line">    <span class="string">&quot;layout (location = 0) in vec3 aPos;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;layout (location = 1) in vec3 aColor;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;out vec3 ourColor;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;void main()\n&quot;</span></span><br><span class="line">    <span class="string">&quot;&#123;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;   gl_Position = vec4(aPos, 1.0);\n&quot;</span></span><br><span class="line">    <span class="string">&quot;   ourColor = aColor;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;&#125;\0&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *fragmentShaderSource = <span class="string">&quot;#version 330 core\n&quot;</span></span><br><span class="line">    <span class="string">&quot;out vec4 FragColor;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;in vec3 ourColor;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;uniform vec4 ourColor1; // 在OpenGL程序代码中设定这个变量&quot;</span></span><br><span class="line">    <span class="string">&quot;void main()\n&quot;</span></span><br><span class="line">    <span class="string">&quot;&#123;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;   FragColor = vec4(ourColor, 1.0f);\n&quot;</span></span><br><span class="line">    <span class="string">&quot;&#125;\n\0&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//进行shader的build 省略错误检测部分</span></span><br><span class="line"> <span class="comment">// vertex shader</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> vertexShader = glCreateShader(GL_VERTEX_SHADER);</span><br><span class="line">    glShaderSource(vertexShader, <span class="number">1</span>, &amp;vertexShaderSource, <span class="literal">NULL</span>);</span><br><span class="line">    glCompileShader(vertexShader);</span><br><span class="line"> <span class="comment">// fragment shader</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);</span><br><span class="line">    glShaderSource(fragmentShader, <span class="number">1</span>, &amp;fragmentShaderSource, <span class="literal">NULL</span>);</span><br><span class="line">    glCompileShader(fragmentShader);</span><br><span class="line"> <span class="comment">// link shaders</span></span><br><span class="line"><span class="comment">//着色器程序对象(Shader Program Object)是多个着色器合并之后并最终链接完成的版本。如果要使用刚才编译的着色器我们必须把它们链接(Link)为一个着色器程序对象，然后在渲染对象的时候激活这个着色器程序。已激活着色器程序的着色器将在我们发送渲染调用的时候被使用。</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> shaderProgram = glCreateProgram();</span><br><span class="line">    glAttachShader(shaderProgram, vertexShader);</span><br><span class="line">    glAttachShader(shaderProgram, fragmentShader);</span><br><span class="line">    glLinkProgram(shaderProgram);</span><br><span class="line">    glDeleteShader(vertexShader);</span><br><span class="line">    glDeleteShader(fragmentShader);</span><br><span class="line"><span class="comment">//绑定完成后即可使用</span></span><br><span class="line"> glUseProgram(shaderProgram);</span><br><span class="line"><span class="comment">//......</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//若要传入数据至shader,这里传给Uniform，是全局的</span></span><br><span class="line">    <span class="keyword">int</span> vertexColorLocation = glGetUniformLocation(shaderProgram, <span class="string">&quot;ourColor1&quot;</span>);</span><br><span class="line">    glUniform4f(vertexColorLocation, <span class="number">0.0f</span>, greenValue, <span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">    <span class="comment">//也可通过VAO VBO的一系列操作传入数据</span></span><br><span class="line">    <span class="comment">// 位置属性</span></span><br><span class="line">    glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">6</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line">    <span class="comment">//这里需要参考上下文进行，传入给layout (location = 0) in vec3 aPos;这个输入。</span></span><br><span class="line"></span><br><span class="line">glDeleteProgram(shaderProgram);</span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="3、glVertexAttribPointer-来链接顶点属性"><a href="#3、glVertexAttribPointer-来链接顶点属性" class="headerlink" title="3、glVertexAttribPointer 来链接顶点属性"></a>3、glVertexAttribPointer 来链接顶点属性</h2><p>​    在传顶点数据至VBO（也就相对于把输入顶点数据发送给了GPU）完成和成功绑定俩个Shader（即指示了GPU如何在顶点和片段着色器中处理它）之后，我们还需要让OpenGL知道该如何解释内存中的顶点数据，以及它该如何将顶点数据链接到顶点着色器的属性上。</p>
+<p>​    即链接顶点属性:可以使用glVertexAttribPointer函数告诉OpenGL该如何解析顶点数据（应用到逐个顶点属性上）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 设置顶点属性指针</span></span><br><span class="line">glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line">glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line"><span class="comment">//在传入之后，我们就可以开画了</span></span><br><span class="line">glUseProgram(shaderProgram);</span><br><span class="line"><span class="comment">// ... 绘制物体</span></span><br><span class="line">someOpenGLFunctionThatDrawsOurTriangle();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>glVertexAttribPointer函数的参数非常多，所以我会逐一介绍它们：</p>
+<ul>
+<li>第一个参数指定我们要配置的顶点属性。还记得我们在顶点着色器中使用<code>layout(location = 0)</code>定义了position顶点属性的位置值(Location)吗？它可以把顶点属性的位置值设置为<code>0</code>。因为我们希望把数据传递到这一个顶点属性中，所以这里我们传入<code>0</code>。</li>
+<li>第二个参数指定顶点属性的大小。顶点属性是一个<code>vec3</code>，它由3个值组成，所以大小是3。</li>
+<li>第三个参数指定数据的类型，这里是GL_FLOAT(GLSL中<code>vec*</code>都是由浮点数值组成的)。</li>
+<li>第四个参数定义我们是否希望数据被标准化(Normalize)。如果我们设置为GL_TRUE，所有数据都会被映射到0（对于有符号型signed数据是-1）到1之间。我们把它设置为GL_FALSE。</li>
+<li>第五个参数叫做步长(Stride)，它告诉我们在连续的顶点属性组之间的间隔。由于下个组位置数据在3个<code>float</code>之后，我们把步长设置为<code>3 * sizeof(float)</code>。</li>
+<li>最后一个参数的类型是<code>void*</code>，所以需要我们进行这个奇怪的强制类型转换。它表示位置数据在缓冲中起始位置的偏移量(Offset)。由于位置数据在数组的开头，所以这里是0。我们会在后面详细解释这个参数。</li>
+</ul>
+<p>每个顶点属性从一个VBO管理的内存中获得它的数据，而具体是从哪个VBO（程序中可以有多个VBO）获取则是通过在调用glVertexAttribPointer时绑定到GL_ARRAY_BUFFER的VBO决定的。由于在调用glVertexAttribPointer之前绑定的是先前定义的VBO对象，顶点属性<code>0</code>现在会链接到它的顶点数据。</p>
+</blockquote>
+<p>​    是的，这个函数会默认使用之前的绑定到GL_ARRAY_BUFFER的VBO对象，也就是之前刚刚传入顶点数据的那个VBO（所以一切是看谁绑定到GL_ARRAY_BUFFER为准的咯）。然后将其内容传递至layout（position=0）的顶点属性里去。（仿佛人为翻译了一遍）</p>
+<h2 id="4、VAO-相当于管理VBO-方便我们切换"><a href="#4、VAO-相当于管理VBO-方便我们切换" class="headerlink" title="4、VAO 相当于管理VBO 方便我们切换"></a>4、VAO 相当于管理VBO 方便我们切换</h2><p>​    顶点数组对象(Vertex Array Object, VAO)可以像顶点缓冲对象那样被绑定，任何随后的顶点属性调用都会储存在这个VAO中。</p>
+<p>​    这样的好处就是，当配置顶点属性指针时，你只需要将那些调用执行一次，之后再绘制物体的时候只需要绑定相应的VAO就行了。这使在不同顶点数据和属性配置之间切换变得非常简单，只需要绑定不同的VAO就行了。</p>
+<p>​    默认情况下，应该是一个VBO就对应一个VAO。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用VAO与使用VBO类似</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> VAO;</span><br><span class="line">glGenVertexArrays(<span class="number">1</span>, &amp;VAO);</span><br></pre></td></tr></table></figure>
+
+<p>​    然后对VAO进行一个VBO的绑，绑好之后要用的时候，重新绑定VAO即可调用。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 绑定VAO</span></span><br><span class="line">glBindVertexArray(VAO);</span><br><span class="line"><span class="comment">// 2. 把顶点数组复制到缓冲中供OpenGL使用</span></span><br><span class="line">glBindBuffer(GL_ARRAY_BUFFER, VBO);</span><br><span class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</span><br><span class="line"><span class="comment">// 3. 设置顶点属性指针</span></span><br><span class="line">glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line">glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">[...]</span><br><span class="line"></span><br><span class="line"><span class="comment">// ..:: 绘制代码（渲染循环中） :: ..</span></span><br><span class="line"><span class="comment">// 4. 绘制物体</span></span><br><span class="line">glUseProgram(shaderProgram);</span><br><span class="line">glBindVertexArray(VAO);</span><br><span class="line">someOpenGLFunctionThatDrawsOurTriangle();</span><br></pre></td></tr></table></figure>
+
+<p>完整的内容大概如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> VBO, VAO;</span><br><span class="line">glGenVertexArrays(<span class="number">1</span>, &amp;VAO);</span><br><span class="line">glGenBuffers(<span class="number">1</span>, &amp;VBO);</span><br><span class="line"><span class="comment">// 先绑定VAO，然后绑定设置VBO，再配置顶点属性。</span></span><br><span class="line">glBindVertexArray(VAO);</span><br><span class="line"></span><br><span class="line">glBindBuffer(GL_ARRAY_BUFFER, VBO);</span><br><span class="line">glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</span><br><span class="line"></span><br><span class="line">glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line">glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//可有可无：在绑定顶点数据完成之后，确实可以解绑了，因为现在都存在这个VAO里面了</span></span><br><span class="line">glBindBuffer(GL_ARRAY_BUFFER, <span class="number">0</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 之后您可以解除绑定 VAO，这样其他 VAO 调用就不会意外修改此 VAO，但这种情况很少发生。</span></span><br><span class="line"><span class="comment">//VAO 无论如何都需要调用 glBindVertexArray，因此我们通常不会在不直接需要时解除绑定 VAO（或 VBO）。</span></span><br><span class="line">glBindVertexArray(<span class="number">0</span>); </span><br></pre></td></tr></table></figure>
+
+<p>​    上述是绑定VAO VBO的内容，之后即可进行使用了~</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (!glfwWindowShouldClose(window))<span class="comment">//绘制LOOP</span></span><br><span class="line">  &#123;</span><br><span class="line">      <span class="comment">//...输入之类杂七杂八</span></span><br><span class="line">  <span class="comment">//开画！</span></span><br><span class="line">      glUseProgram(shaderProgram);</span><br><span class="line">    <span class="comment">//这里的绑定shader对之后所有的绘制都有效，除非你解绑！</span></span><br><span class="line">    </span><br><span class="line">      glBindVertexArray(VAO); <span class="comment">// seeing as we only have a single VAO there&#x27;s no need to bind it every time, but we&#x27;ll do so to keep things a bit more organized</span></span><br><span class="line">      glDrawArrays(GL_TRIANGLES, <span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">      <span class="comment">// glBindVertexArray(0); // no need to unbind it every time </span></span><br><span class="line"> </span><br><span class="line">      <span class="comment">// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)</span></span><br><span class="line">      <span class="comment">// -------------------------------------------------------------------------------</span></span><br><span class="line">      glfwSwapBuffers(window);</span><br><span class="line">      glfwPollEvents();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// optional: de-allocate all resources once they&#x27;ve outlived their purpose:</span></span><br><span class="line">  <span class="comment">// ------------------------------------------------------------------------</span></span><br><span class="line">  glDeleteVertexArrays(<span class="number">1</span>, &amp;VAO);</span><br><span class="line">  glDeleteBuffers(<span class="number">1</span>, &amp;VBO);</span><br><span class="line">  glDeleteProgram(shaderProgram);<span class="comment">//别忘了解绑 删除</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5、EBO索引缓冲对象"><a href="#5、EBO索引缓冲对象" class="headerlink" title="5、EBO索引缓冲对象"></a>5、EBO索引缓冲对象</h2><p>​    嘿嘿嘿是不是感觉完成的差不多了。但其实在开头写的三个对象中，还有一个EBO没用到呢。不过也别怕，就差这最后一点点内容了！</p>
+<p>​    首先我们得知道，在OpenGL中，绘制图形都是以三角形为基础的，比如绘制矩形会由俩个三角形合成。那在这个过程中，必然有大量的三角形顶点重合，如果我们都把重合这部分导入顶点坐标，会有大量的浪费。因此我们引入了EBO，使用索引大大减少顶点重复量。不多说看例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> vertices[] = &#123;</span><br><span class="line">    <span class="comment">// 第一个三角形</span></span><br><span class="line">    <span class="number">0.5f</span>, <span class="number">0.5f</span>, <span class="number">0.0f</span>,   <span class="comment">// 右上角</span></span><br><span class="line">    <span class="number">0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span>,  <span class="comment">// 右下角</span></span><br><span class="line">    <span class="number">-0.5f</span>, <span class="number">0.5f</span>, <span class="number">0.0f</span>,  <span class="comment">// 左上角</span></span><br><span class="line">    <span class="comment">// 第二个三角形</span></span><br><span class="line">    <span class="number">0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span>,  <span class="comment">// 右下角</span></span><br><span class="line">    <span class="number">-0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span>, <span class="comment">// 左下角</span></span><br><span class="line">    <span class="number">-0.5f</span>, <span class="number">0.5f</span>, <span class="number">0.0f</span>   <span class="comment">// 左上角</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这个矩形的左上角和右下角都重复了！</p>
+<img src="OpenGL期末汇总/image-20220102201529377.png" alt="image-20220102201529377" style="zoom:50%;" />
+
+<p>所以，我们进行改进：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> vertices[] = &#123;</span><br><span class="line">    <span class="number">0.5f</span>, <span class="number">0.5f</span>, <span class="number">0.0f</span>,   <span class="comment">// 右上角</span></span><br><span class="line">    <span class="number">0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span>,  <span class="comment">// 右下角</span></span><br><span class="line">    <span class="number">-0.5f</span>, <span class="number">-0.5f</span>, <span class="number">0.0f</span>, <span class="comment">// 左下角</span></span><br><span class="line">    <span class="number">-0.5f</span>, <span class="number">0.5f</span>, <span class="number">0.0f</span>   <span class="comment">// 左上角</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> indices[] = &#123; <span class="comment">// 注意索引从0开始! </span></span><br><span class="line">    <span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="comment">// 第一个三角形</span></span><br><span class="line">    <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>  <span class="comment">// 第二个三角形</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​    然后，我们就可以使用EBO进行操作了！</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建索引缓冲对象：</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> EBO;</span><br><span class="line">glGenBuffers(<span class="number">1</span>, &amp;EBO);</span><br><span class="line"><span class="comment">//如同VBO的传入顶点数据，EBO也是一样，只不过这次我们把缓冲的类型定义为GL_ELEMENT_ARRAY_BUFFER。</span></span><br><span class="line">glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</span><br><span class="line">glBufferData(GL_ELEMENT_ARRAY_BUFFER, <span class="keyword">sizeof</span>(indices), indices, GL_STATIC_DRAW);</span><br><span class="line"></span><br><span class="line"><span class="comment">//在使用（绘制）时，注意绑定EBO同时使用glDrawElements！其会使用当前绑定的索引缓冲对象中的索引进行绘制</span></span><br><span class="line">glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</span><br><span class="line">glDrawElements(GL_TRIANGLES, <span class="number">6</span>, GL_UNSIGNED_INT, <span class="number">0</span>);</span><br><span class="line"><span class="comment">//第一个参数指定了我们绘制的模式，这个和glDrawArrays的一样。</span></span><br><span class="line"><span class="comment">//第二个参数是我们打算绘制顶点的个数，这里填6，也就是说我们一共需要绘制6个顶点。</span></span><br><span class="line"><span class="comment">//第三个参数是索引的类型，这里是GL_UNSIGNED_INT。</span></span><br><span class="line"><span class="comment">//最后一个参数里我们可以指定EBO中的偏移量（或者传递一个索引数组，但是这是当你不在使用索引缓冲对象的时候），但是我们会在这里填写0。</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/vertex_array_objects_ebo.png" alt="img"></p>
+<p>​    glDrawElements函数从当前绑定到GL_ELEMENT_ARRAY_BUFFER目标的EBO中获取索引。</p>
+<p>​    这意味着我们必须在每次要用索引渲染一个物体时绑定相应的EBO，这还是有点麻烦。</p>
+<p>​    不过顶点数组对象同样可以保存索引缓冲对象的绑定状态。VAO绑定时正在绑定的索引缓冲对象会被保存为VAO的元素缓冲对象。绑定VAO的同时也会自动绑定EBO。所以绑定好之后，我们还是可以只使用一个VAO！</p>
+<p>​    三个VAO VBO EBO 合起来大概是这样子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">int</span> VBO, VAO, EBO;</span><br><span class="line">    glGenVertexArrays(<span class="number">1</span>, &amp;VAO);</span><br><span class="line">    glGenBuffers(<span class="number">1</span>, &amp;VBO);</span><br><span class="line">    glGenBuffers(<span class="number">1</span>, &amp;EBO);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//疯狂绑定就可以，记住先VAO哦。绑好VBO和EBO之后传值别忘了</span></span><br><span class="line">    glBindVertexArray(VAO);</span><br><span class="line">    glBindBuffer(GL_ARRAY_BUFFER, VBO);</span><br><span class="line">    glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</span><br><span class="line">    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);</span><br><span class="line">    glBufferData(GL_ELEMENT_ARRAY_BUFFER, <span class="keyword">sizeof</span>(indices), indices, GL_STATIC_DRAW);</span><br><span class="line">	<span class="comment">//看样子会直接一起传进入/或者处理好了传进去</span></span><br><span class="line">    glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">3</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    glBindBuffer(GL_ARRAY_BUFFER, <span class="number">0</span>); </span><br><span class="line">    <span class="comment">//请记住：不要在 VAO 处于活动状态时解除绑定 EBO，因为绑定元素缓冲区对象存储在 VAO 中；EBO保持绑定！</span></span><br><span class="line"><span class="comment">//其实我只有全都不解绑不就行了，哈哈，当然不行，万一之后多起来了怎么办</span></span><br><span class="line">    <span class="comment">//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);</span></span><br><span class="line">    glBindVertexArray(<span class="number">0</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">//在LOOP中使用时，依旧绑定VAO即可，因为VBO EBO都已经在内了</span></span><br><span class="line">glBindVertexArray(VAO);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6、一点关于Uniform的小补充"><a href="#6、一点关于Uniform的小补充" class="headerlink" title="6、一点关于Uniform的小补充"></a>6、一点关于Uniform的小补充</h2><p>​    在之前我们不是使用layout(position=x)那玩意传入值到shader里吗，在这里我们介绍另一个比较常用的Uniform。</p>
+<p>​    Uniform是一种从CPU中的应用向GPU中的着色器发送数据的方式，但uniform和顶点属性有些不同。</p>
+<p>​    首先，uniform是全局的(Global)。全局意味着uniform变量必须在<strong>每个着色器程序对象</strong>中都是独一无二的，而且它可以被着色器程序的任意着色器在任意阶段访问。</p>
+<p>​    第二，无论你把uniform值设置成什么，uniform会一直保存它们的数据，直到它们被重置或更新。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//比如在这个fragment着色器中，我们有uniform vec4的ourColor</span></span><br><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line"><span class="keyword">out</span> <span class="type">vec4</span> FragColor;</span><br><span class="line"><span class="keyword">uniform</span> <span class="type">vec4</span> ourColor; <span class="comment">// 在OpenGL程序代码中设定这个变量</span></span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    FragColor = ourColor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    那，如何传入值到这个ourColor中去呢？</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们首先需要找到着色器中uniform属性的索引/位置值。当我们得到uniform的索引/位置值后，我们就可以更新它的值了。</span></span><br><span class="line">	<span class="comment">//用glGetUniformLocation查询uniform ourColor的位置值</span></span><br><span class="line">	<span class="comment">//提供着色器程序和uniform的名字</span></span><br><span class="line"><span class="type">int</span> vertexColorLocation = glGetUniformLocation(shaderProgram, &quot;ourColor&quot;);</span><br><span class="line">	<span class="comment">//更新一个uniform之前你必须先使用程序（调用glUseProgram)，因为它是在当前激活的着色器程序中设置uniform的。</span></span><br><span class="line">glUseProgram(shaderProgram);</span><br><span class="line"><span class="comment">//这里因为greenValue是float，所以用glUniform4f，指需要4个f</span></span><br><span class="line">glUniform4f(vertexColorLocation, <span class="number">0.0</span>f, greenValue<span class="comment">/*要传入的值*/</span>, <span class="number">0.0</span>f, <span class="number">1.0</span>f);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/image-20220102205557943.png" alt="image-20220102205557943"></p>
+<p>​    可以看到，因为uniform可以在MainLoop中随时随地改变值，所以其对于设置一个在渲染迭代中会改变的属性是一个非常有用的工具，它也是一个在程序和着色器间数据交互的很好工具。</p>
+<h2 id="7、改为从文件读取Shader"><a href="#7、改为从文件读取Shader" class="headerlink" title="7、改为从文件读取Shader"></a>7、改为从文件读取Shader</h2><p>​    之前那个朴实无华的shader是直接写在程序中，是硬编码在代码文件顶部的C风格字符串中。现在我们让它变得美观，即从外部读取进来！</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">ReadShader(<span class="keyword">const</span> <span class="keyword">char</span>* vertexPath, <span class="keyword">const</span> <span class="keyword">char</span>* fragmentPath)</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="comment">// 1. retrieve the vertex/fragment source code from filePath</span></span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">string</span> vertexCode;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">string</span> fragmentCode;</span><br><span class="line">      <span class="built_in">std</span>::ifstream vShaderFile;</span><br><span class="line">      <span class="built_in">std</span>::ifstream fShaderFile;</span><br><span class="line">      <span class="comment">// ensure ifstream objects can throw exceptions:</span></span><br><span class="line">      vShaderFile.exceptions (<span class="built_in">std</span>::ifstream::failbit | <span class="built_in">std</span>::ifstream::badbit);</span><br><span class="line">      fShaderFile.exceptions (<span class="built_in">std</span>::ifstream::failbit | <span class="built_in">std</span>::ifstream::badbit);</span><br><span class="line">      <span class="keyword">try</span> </span><br><span class="line">      &#123;</span><br><span class="line">          <span class="comment">// open files</span></span><br><span class="line">          vShaderFile.open(vertexPath);</span><br><span class="line">          fShaderFile.open(fragmentPath);</span><br><span class="line">          <span class="built_in">std</span>::<span class="built_in">stringstream</span> vShaderStream, fShaderStream;</span><br><span class="line">          <span class="comment">// read file&#x27;s buffer contents into streams</span></span><br><span class="line">          vShaderStream &lt;&lt; vShaderFile.rdbuf();</span><br><span class="line">          fShaderStream &lt;&lt; fShaderFile.rdbuf();</span><br><span class="line">          <span class="comment">// close file handlers</span></span><br><span class="line">          vShaderFile.close();</span><br><span class="line">          fShaderFile.close();</span><br><span class="line">          <span class="comment">// convert stream into string</span></span><br><span class="line">          vertexCode   = vShaderStream.str();</span><br><span class="line">          fragmentCode = fShaderStream.str();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (<span class="built_in">std</span>::ifstream::failure&amp; e)</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">      &#125;</span><br><span class="line"><span class="comment">//上部分大部分都是C的读文件操作...</span></span><br><span class="line"><span class="comment">//下部分就是如同在内部shader一样，绑定shader了</span></span><br><span class="line">    </span><br><span class="line">      <span class="keyword">const</span> <span class="keyword">char</span>* vShaderCode = vertexCode.c_str();</span><br><span class="line">      <span class="keyword">const</span> <span class="keyword">char</span> * fShaderCode = fragmentCode.c_str();</span><br><span class="line">      <span class="comment">// 2. compile shaders</span></span><br><span class="line">      <span class="keyword">unsigned</span> <span class="keyword">int</span> vertex, fragment;</span><br><span class="line">      <span class="comment">// vertex shader</span></span><br><span class="line">      vertex = glCreateShader(GL_VERTEX_SHADER);</span><br><span class="line">      glShaderSource(vertex, <span class="number">1</span>, &amp;vShaderCode, <span class="literal">NULL</span>);</span><br><span class="line">      glCompileShader(vertex);</span><br><span class="line">      checkCompileErrors(vertex, <span class="string">&quot;VERTEX&quot;</span>);</span><br><span class="line">      <span class="comment">// fragment Shader</span></span><br><span class="line">      fragment = glCreateShader(GL_FRAGMENT_SHADER);</span><br><span class="line">      glShaderSource(fragment, <span class="number">1</span>, &amp;fShaderCode, <span class="literal">NULL</span>);</span><br><span class="line">      glCompileShader(fragment);</span><br><span class="line">      checkCompileErrors(fragment, <span class="string">&quot;FRAGMENT&quot;</span>);</span><br><span class="line">      <span class="comment">// shader Program</span></span><br><span class="line">      ID = glCreateProgram();</span><br><span class="line">    <span class="comment">//是的，这个ID就是之后使用这个Shader的必需品了</span></span><br><span class="line">      glAttachShader(ID, vertex);</span><br><span class="line">      glAttachShader(ID, fragment);</span><br><span class="line">      glLinkProgram(ID);</span><br><span class="line">      checkCompileErrors(ID, <span class="string">&quot;PROGRAM&quot;</span>);</span><br><span class="line">      <span class="comment">// delete the shaders as they&#x27;re linked into our program now and no longer necessary</span></span><br><span class="line">      glDeleteShader(vertex);</span><br><span class="line">      glDeleteShader(fragment);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    感谢大佬做好的shader_s.h库，把之前所有的操作直接封装的好好的，直接使用极其方便。</p>
+<blockquote>
+<p>​    <a target="_blank" rel="noopener" href="https://learnopengl.com/code_viewer_gh.php?code=includes/learnopengl/shader_s.h">https://learnopengl.com/code_viewer_gh.php?code=includes/learnopengl/shader_s.h</a></p>
+</blockquote>
+<h2 id="尾言："><a href="#尾言：" class="headerlink" title="尾言："></a>尾言：</h2><p>​    差不多了差不多了，这一章就学到这吧，新年快乐~</p>
+<p>​    感谢LearnOpenGL-CN和期末周带给我的压力和动力555</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/12/16/%E6%B5%85%E5%A2%A8%E7%9A%84%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="浅墨的游戏设计模式">
+                <i class="fa fa-chevron-left"></i> 浅墨的游戏设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/" rel="prev" title="OpenGL期末汇总2-纹理">
+                OpenGL期末汇总2-纹理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Zhairest" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/#/user/home?id=70879973" target="_blank" title="CloudMusic">
+                      
+                        <i class="fa fa-fw fa-cloud"></i>CloudMusic</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81VBO%E4%BF%9D%E5%AD%98%E9%A1%B6%E7%82%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">1、VBO保存顶点数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81Shader%E8%A7%A3%E9%87%8A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%A1%B6%E7%82%B9%E6%95%B0%E6%8D%AE%E5%92%8C%E6%B8%B2%E6%9F%93%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">2.</span> <span class="nav-text">2、Shader解释如何使用顶点数据和渲染流水线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%B4%E5%AE%9E%E6%97%A0%E5%8D%8E%E7%89%88%E6%9C%AC"><span class="nav-number">2.1.</span> <span class="nav-text">朴实无华版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81glVertexAttribPointer-%E6%9D%A5%E9%93%BE%E6%8E%A5%E9%A1%B6%E7%82%B9%E5%B1%9E%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">3、glVertexAttribPointer 来链接顶点属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81VAO-%E7%9B%B8%E5%BD%93%E4%BA%8E%E7%AE%A1%E7%90%86VBO-%E6%96%B9%E4%BE%BF%E6%88%91%E4%BB%AC%E5%88%87%E6%8D%A2"><span class="nav-number">5.</span> <span class="nav-text">4、VAO 相当于管理VBO 方便我们切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81EBO%E7%B4%A2%E5%BC%95%E7%BC%93%E5%86%B2%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.</span> <span class="nav-text">5、EBO索引缓冲对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E4%B8%80%E7%82%B9%E5%85%B3%E4%BA%8EUniform%E7%9A%84%E5%B0%8F%E8%A1%A5%E5%85%85"><span class="nav-number">7.</span> <span class="nav-text">6、一点关于Uniform的小补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E6%94%B9%E4%B8%BA%E4%BB%8E%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96Shader"><span class="nav-number">8.</span> <span class="nav-text">7、改为从文件读取Shader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BE%E8%A8%80%EF%BC%9A"><span class="nav-number">9.</span> <span class="nav-text">尾言：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhairest</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
