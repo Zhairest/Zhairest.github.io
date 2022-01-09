@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OpenGL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="第一、二章：1、OpenGL中能渲染的基本元素是什么？GLU 可以渲染哪些基本元素？​    OpenGL仅限生成简单的几何图元，如下所示： ​    GLU即OpenGL工具函数库，可以绘制三维物体、球体、圆环面、茶壶、NUBRS曲线曲面,二次曲面等。  NUBRS非均匀有理B样条曲线 NURBS非均匀有理B样条曲面 二次曲面  第三章2、用框图说明OpenGL的渲染流程，并简要说明每个坐标系。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL期末复习提纲">
+<meta property="og:url" content="http://example.com/2022/01/06/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/index.html">
+<meta property="og:site_name" content="旋转公寓的阁楼">
+<meta property="og:description" content="第一、二章：1、OpenGL中能渲染的基本元素是什么？GLU 可以渲染哪些基本元素？​    OpenGL仅限生成简单的几何图元，如下所示： ​    GLU即OpenGL工具函数库，可以绘制三维物体、球体、圆环面、茶壶、NUBRS曲线曲面,二次曲面等。  NUBRS非均匀有理B样条曲线 NURBS非均匀有理B样条曲面 二次曲面  第三章2、用框图说明OpenGL的渲染流程，并简要说明每个坐标系。">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106194239945.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106194855491.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106195142772.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106200544468.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106200813854.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106200921669.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106223111433.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106223128244.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220109001917728.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220109001941440.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220109005651316.png">
+<meta property="article:published_time" content="2022-01-06T11:37:53.000Z">
+<meta property="article:modified_time" content="2022-01-09T11:48:56.108Z">
+<meta property="article:author" content="Zhairest">
+<meta property="article:tag" content="OpenGL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106194239945.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/01/06/OpenGL期末复习提纲/"/>
+
+
+
+
+
+  <title>OpenGL期末复习提纲 | 旋转公寓的阁楼</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋转公寓的阁楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">储物间</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/06/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋转公寓的阁楼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenGL期末复习提纲</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-06T19:37:53+08:00">
+                2022-01-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-01-09T19:48:56+08:00">
+                2022-01-09
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第一、二章："><a href="#第一、二章：" class="headerlink" title="第一、二章："></a>第一、二章：</h1><h2 id="1、OpenGL中能渲染的基本元素是什么？GLU-可以渲染哪些基本元素？"><a href="#1、OpenGL中能渲染的基本元素是什么？GLU-可以渲染哪些基本元素？" class="headerlink" title="1、OpenGL中能渲染的基本元素是什么？GLU 可以渲染哪些基本元素？"></a>1、OpenGL中能渲染的基本元素是什么？GLU 可以渲染哪些基本元素？</h2><p>​    OpenGL仅限生成简单的几何图元，如下所示：<img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106194239945.png" alt="image-20220106194239945"></p>
+<p>​    GLU即OpenGL工具函数库，可以绘制三维物体、球体、圆环面、茶壶、NUBRS曲线曲面,二次曲面等。</p>
+<ul>
+<li>NUBRS非均匀有理B样条曲线</li>
+<li>NURBS非均匀有理B样条曲面</li>
+<li>二次曲面</li>
+</ul>
+<h1 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h1><h2 id="2、用框图说明OpenGL的渲染流程，并简要说明每个坐标系。"><a href="#2、用框图说明OpenGL的渲染流程，并简要说明每个坐标系。" class="headerlink" title="2、用框图说明OpenGL的渲染流程，并简要说明每个坐标系。"></a>2、用框图说明OpenGL的渲染流程，并简要说明每个坐标系。</h2><p>​    对我们来说比较重要的总共有5个不同的坐标系统：</p>
+<ul>
+<li>局部空间(Local Space，或者称为物体空间(Object Space))</li>
+<li>世界空间(World Space)</li>
+<li>观察空间(View Space，或者称为视觉空间(Eye Space))</li>
+<li>裁剪空间(Clip Space)</li>
+<li>屏幕空间(Screen Space)</li>
+</ul>
+<p>​       为了将坐标从一个坐标系变换到另一个坐标系，我们需要用到几个变换矩阵，最重要的几个分别是模型(Model)、观察(View)、投影(Projection)三个矩阵。我们的顶点坐标起始于局部空间(Local Space)，在这里它称为局部坐标(Local Coordinate)，它在之后会变为世界坐标(World Coordinate)，观察坐标(View Coordinate)，裁剪坐标(Clip Coordinate)，并最后以屏幕坐标(Screen Coordinate)的形式结束。下面的这张图展示了整个流程以及各个变换过程做了什么：</p>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106194855491.png" alt="image-20220106194855491"></p>
+<ol>
+<li>局部坐标是对象相对于局部原点的坐标，也是物体起始的坐标。</li>
+<li>下一步是将局部坐标变换为世界空间坐标，世界空间坐标是处于一个更大的空间范围的。这些坐标相对于世界的全局原点，它们会和其它物体一起相对于世界的原点进行摆放。</li>
+<li>接下来我们将世界坐标变换为观察空间坐标，使得每个坐标都是从摄像机或者说观察者的角度进行观察的。</li>
+<li>坐标到达观察空间之后，我们需要将其投影到裁剪坐标。裁剪坐标会被处理至-1.0到1.0的范围内，并判断哪些顶点将会出现在屏幕上。</li>
+<li>最后，我们将裁剪坐标变换为屏幕坐标，我们将使用一个叫做视口变换(Viewport Transform)的过程。视口变换将位于-1.0到1.0范围的坐标变换到由glViewport函数所定义的坐标范围内。最后变换出来的坐标将会送到光栅器，将其转化为片段。</li>
+</ol>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106195142772.png" alt="image-20220106195142772"></p>
+<p> 最后还有4测试3操作（？）</p>
+<p>片元的测试按下列的顺序进行，如果在前面的测试中片元被删除，则不在进行后续的测试或操作。</p>
+<ol>
+<li><pre><code>  剪取测试：利用glScissor()函数定义窗口中的一个矩形，并将图限制在其中。
+</code></pre>
+</li>
+<li><pre><code>  alpha测试：利用alpha值来确定或是拒绝一个片元。利用glEnable()使用参数GL_ALPHA_TEST激活。哟哦那个glAlphaFunc()来比较。用来实现透明算法和纹理图制作贴花。
+</code></pre>
+</li>
+<li><pre><code>  模板测试：对存储于模板缓存中的像素值与参考值进行比较，根据比较的结果来对模板缓存中的值进行修改。glStencilOp().
+</code></pre>
+</li>
+</ol>
+<p>4.深度测试：用于消除隐藏表面的操作。glDepthFunc()来设置比较函数。 </p>
+<h2 id="3、投影变换的设置，gluPerspective-glFrustum-glOrtho等的具体含义，gluLookAt函数的具体参数和使用方法。"><a href="#3、投影变换的设置，gluPerspective-glFrustum-glOrtho等的具体含义，gluLookAt函数的具体参数和使用方法。" class="headerlink" title="3、投影变换的设置，gluPerspective, glFrustum, glOrtho等的具体含义，gluLookAt函数的具体参数和使用方法。"></a>3、投影变换的设置，gluPerspective, glFrustum, glOrtho等的具体含义，gluLookAt函数的具体参数和使用方法。</h2><h3 id="1-glFrustum"><a href="#1-glFrustum" class="headerlink" title="1.glFrustum()"></a>1.glFrustum()</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">glFrustum</span><span class="params">(GLdouble left, GLdouble right,</span></span></span><br><span class="line"><span class="params"><span class="function">               GLdouble bottom, GLdouble top, </span></span></span><br><span class="line"><span class="params"><span class="function">               GLdouble near,GLdouble far)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>left、right、bottom、top：表示近平面四个边的坐标</li>
+<li>near：近平面距离</li>
+<li>far：远平面距离</li>
+</ul>
+<p>glFrustum老透视投影了呀，这个函数定义了一个平截头体，计算一个用于实现透视投影的矩阵，位于视景体之外的物体会被裁剪掉。<img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106200544468.png" alt="image-20220106200544468"></p>
+<h3 id="2-gluPerspective"><a href="#2-gluPerspective" class="headerlink" title="2.gluPerspective()"></a>2.gluPerspective()</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gluPerspective</span> <span class="params">(GLdouble fovy, GLdouble aspect,</span></span></span><br><span class="line"><span class="params"><span class="function">                     GLdouble zNear, GLdouble zFar)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>fovy：上下的（y轴方向）FOV视角</li>
+<li>aspect：投影面长宽比</li>
+<li>zNear：近平面距离</li>
+<li>zFar：远平面距离</li>
+</ul>
+<p>前者实际使用上并不方便，于是就有了gluPerspective()，同样创建视景体，但是是不同方式，这个是直接指定y方向上视野的角度和横纵比。<img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106200813854.png" alt="image-20220106200813854"></p>
+<h3 id="3-glOrtho"><a href="#3-glOrtho" class="headerlink" title="3. glOrtho()"></a>3. glOrtho()</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">glOrtho</span><span class="params">(GLdouble left, GLdouble right,</span></span></span><br><span class="line"><span class="params"><span class="function">             GLdouble bottom, GLdouble top, </span></span></span><br><span class="line"><span class="params"><span class="function">             GLdouble near, GLdouble far)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>left、right、bottom、top：表示近平面四个边的坐标</li>
+<li>near：近平面距离</li>
+<li>far：远平面距离</li>
+</ul>
+<p>glOrtho()老正交了啊，也就是说它的视景体是平行的（长方体）。</p>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106200921669.png" alt="image-20220106200921669"></p>
+<h3 id="4-gluLookAt（）"><a href="#4-gluLookAt（）" class="headerlink" title="4.gluLookAt（）"></a>4.gluLookAt（）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gluLookAt</span><span class="params">(GLdouble eyex, GLdouble eyey,GLdouble eyez,</span></span></span><br><span class="line"><span class="params"><span class="function">               GLdouble centerx,GLdouble centery,GLdouble centerz,</span></span></span><br><span class="line"><span class="params"><span class="function">               GLdouble upx,GLdouble upy,GLdouble upz)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>eyex, eyey,eyez：相机在世界坐标的位置</li>
+<li>centerx,centery,centerz：相机镜头对准的点在世界坐标的位置</li>
+<li>upx,upy,upz：相机向上的方向（世界坐标）</li>
+</ul>
+<p>它接受参数去定义了观测点的位置，照相机瞄准的参考点和朝上的方向。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reshape</span> <span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       glViewport (<span class="number">0</span>, <span class="number">0</span>, (GLsizei) w, (GLsizei) h);</span><br><span class="line">       glMatrixMode (GL_PROJECTION);<span class="comment">//投影变换矩阵</span></span><br><span class="line">       glLoadIdentity ();</span><br><span class="line">       gluPerspective(<span class="number">60.0</span>, (GLfloat) w/(GLfloat) h, <span class="number">4</span>, <span class="number">10.0</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//下面使用gluLookAt()函数</span></span><br><span class="line">       glMatrixMode(GL_MODELVIEW);<span class="comment">//模型和视点变换矩阵</span></span><br><span class="line">       glLoadIdentity();<span class="comment">//设置为单位矩阵（初始化)</span></span><br><span class="line">       gluLookAt (<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">5.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="第四、五章"><a href="#第四、五章" class="headerlink" title="第四、五章"></a>第四、五章</h1><h2 id="4、写出OpenGL中局部光照的方程，要包含的系数有光源参数、材料参数、聚光灯的参数、衰减参数等，方程要表示是多个光源的。"><a href="#4、写出OpenGL中局部光照的方程，要包含的系数有光源参数、材料参数、聚光灯的参数、衰减参数等，方程要表示是多个光源的。" class="headerlink" title="4、写出OpenGL中局部光照的方程，要包含的系数有光源参数、材料参数、聚光灯的参数、衰减参数等，方程要表示是多个光源的。"></a>4、写出OpenGL中局部光照的方程，要包含的系数有光源参数、材料参数、聚光灯的参数、衰减参数等，方程要表示是多个光源的。</h2><hr>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106223111433.png" alt="image-20220106223111433"></p>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220106223128244.png" alt="image-20220106223128244"></p>
+<h2 id="5、请看下面的一段程序，并计算三个顶点①、②和③处的光照的颜色值。"><a href="#5、请看下面的一段程序，并计算三个顶点①、②和③处的光照的颜色值。" class="headerlink" title="5、请看下面的一段程序，并计算三个顶点①、②和③处的光照的颜色值。"></a>5、请看下面的一段程序，并计算三个顶点①、②和③处的光照的颜色值。</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   GLfloat mat_specular[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line">   GLfloat mat_shininess[] = &#123; <span class="number">50.0</span> &#125;;</span><br><span class="line">   GLfloat light_position[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span> &#125;;</span><br><span class="line"></span><br><span class="line">   glClearColor (<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">   glShadeModel (GL_SMOOTH);</span><br><span class="line"></span><br><span class="line">   glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_FALSE);<span class="comment">//这个调用把视点放在视点坐标系的原点处</span></span><br><span class="line">   <span class="comment">//glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);//双面光照</span></span><br><span class="line">   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);<span class="comment">//这里设定了材料镜面高光反射指数</span></span><br><span class="line">   glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);<span class="comment">//这里设定了镜面高光指数</span></span><br><span class="line">   glLightfv(GL_LIGHT0, GL_POSITION, light_position);</span><br><span class="line"></span><br><span class="line">   glEnable(GL_LIGHTING);</span><br><span class="line">   glEnable(GL_LIGHT0);</span><br><span class="line">   glEnable(GL_DEPTH_TEST);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br><span class="line">   glBegin(GL_TRIANGLES);</span><br><span class="line">   glNormal3f(..);</span><br><span class="line">   glVertex3f(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);<span class="comment">//①第一个点</span></span><br><span class="line">   glVertex3f(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>);<span class="comment">//②第二个点</span></span><br><span class="line">   glVertex3f(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>);<span class="comment">//③第三个点</span></span><br><span class="line">   glEnd();</span><br><span class="line">   glFlush ();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reshape</span> <span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glViewport (<span class="number">0</span>, <span class="number">0</span>, (GLsizei) w, (GLsizei) h);</span><br><span class="line">   glMatrixMode (GL_PROJECTION);</span><br><span class="line">   glLoadIdentity();</span><br><span class="line">   <span class="keyword">if</span> (w &lt;= h)</span><br><span class="line">      glOrtho (<span class="number">-1.5</span>, <span class="number">1.5</span>, <span class="number">-1.5</span>*(GLfloat)h/(GLfloat)w,</span><br><span class="line">         <span class="number">1.5</span>*(GLfloat)h/(GLfloat)w, <span class="number">-10.0</span>, <span class="number">10.0</span>);</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      glOrtho (<span class="number">-1.5</span>*(GLfloat)w/(GLfloat)h,</span><br><span class="line">         <span class="number">1.5</span>*(GLfloat)w/(GLfloat)h, <span class="number">-1.5</span>, <span class="number">1.5</span>, <span class="number">-10.0</span>, <span class="number">10.0</span>);</span><br><span class="line">   glMatrixMode(GL_MODELVIEW);</span><br><span class="line">   glLoadIdentity();</span><br><span class="line">   <span class="comment">//ModelView变换矩阵为单位阵的时候，在世界坐标系下，视点位置在(0,0,0),观察方向指向位于(0,0,1)的点，视点上方指向(0,1,0)方向</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">keyboard</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> key, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">switch</span> (key) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">27</span>:</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glutInit(&amp;argc, argv);</span><br><span class="line">   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);</span><br><span class="line">   glutInitWindowSize (<span class="number">500</span>, <span class="number">500</span>);</span><br><span class="line">   glutInitWindowPosition (<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">   glutCreateWindow (argv[<span class="number">0</span>]);</span><br><span class="line">   init ();</span><br><span class="line">   glutDisplayFunc(display);</span><br><span class="line">   glutReshapeFunc(reshape);</span><br><span class="line">   glutKeyboardFunc(keyboard);</span><br><span class="line">   glutMainLoop();</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    写在Pad上了~</p>
+<h1 id="第9章"><a href="#第9章" class="headerlink" title="第9章"></a>第9章</h1><h2 id="6、在OpenGL中，使用纹理的步骤是什么？纹理坐标和纹理都可以通过程序计算出来，自动生成纹理的原理是什么？"><a href="#6、在OpenGL中，使用纹理的步骤是什么？纹理坐标和纹理都可以通过程序计算出来，自动生成纹理的原理是什么？" class="headerlink" title="6、在OpenGL中，使用纹理的步骤是什么？纹理坐标和纹理都可以通过程序计算出来，自动生成纹理的原理是什么？"></a>6、在OpenGL中，使用纹理的步骤是什么？纹理坐标和纹理都可以通过程序计算出来，自动生成纹理的原理是什么？</h2><p>​    </p>
+<h3 id="使用纹理的步骤（4步，如果导入纹理图像不算的话）-第七版中文版P248"><a href="#使用纹理的步骤（4步，如果导入纹理图像不算的话）-第七版中文版P248" class="headerlink" title="使用纹理的步骤（4步，如果导入纹理图像不算的话）(第七版中文版P248)"></a><strong>使用纹理的步骤</strong>（4步，如果导入纹理图像不算的话）(第七版中文版P248)</h3><ol>
+<li><strong>创建纹理对象并指定该对象的纹理</strong>，绑定bind。</li>
+<li>用纹理坐标指示，<strong>确定纹理如何应用于每个像素</strong>。</li>
+<li><strong>启用纹理贴图功能</strong>。<ol>
+<li>glEnable(GL_TEXTURE_2D);</li>
+</ol>
+</li>
+<li><strong>绘制场景</strong>，<strong>提供纹理和几何坐标</strong>。</li>
+</ol>
+<h3 id="自动生成纹理由glTexGen-函数来实现。要自动生成纹理坐标，首先要指定以什么样的模式来生成纹理坐标。纹理坐标生成模式有："><a href="#自动生成纹理由glTexGen-函数来实现。要自动生成纹理坐标，首先要指定以什么样的模式来生成纹理坐标。纹理坐标生成模式有：" class="headerlink" title="自动生成纹理由glTexGen()函数来实现。要自动生成纹理坐标，首先要指定以什么样的模式来生成纹理坐标。纹理坐标生成模式有："></a>自动生成纹理由glTexGen()函数来实现。要自动生成纹理坐标，首先要指定以什么样的模式来生成纹理坐标。纹理坐标生成模式有：</h3><ol>
+<li><p><strong>GL_TEXTURE_GEN_MODE</strong>和<strong>GL_OBJECT_LINEAR</strong><br>在这个模式下，其纹理生成函数是顶点坐标(x0,y0,z0,w0)的线性组合<br>生成的坐标为：p0<em>x0+p1</em>y0+p2<em>z0+p3</em>w0<br>其中的值是由glTexGen<em>v()函数的param参数提供的。</em></p>
+<p>可以看出：此模式下生成的坐标相当于顶点坐标到特定平面的距离。</p>
+</li>
+<li><p><strong>GL_EYE_LINEAR</strong><br>在这个模式下，其纹理生成函数是顶点的人眼坐标(xe,ye,ze,we)的线性组合<br>生成的坐标为：p0’*xe+p1’*ye+p2’*ze+p3’*we<br>其中:(p0’,p1’,p2’,p3’)=(p0,p1,p2,p3)*inverse(M)</p>
+<p>可以看出：GL_EYE_LINEAR和GL_OBJECT_LINEAR模式具有类似的纹理生成函数，唯一的差别在于GL_OBJECT_LINEAR是物体空间内，在视发生变化的情况下，纹理坐标不会随着视的改变而改变；而GL_EYE_LINEAR是在视空间内，在视发生变化的情况下，纹理坐标会随着视的改变而改变，用而改变贴图后的效果。</p>
+</li>
+<li><p><strong>GL_SPHERE_MAP</strong>和<strong>GL_REFLECTION_MAP</strong><br>主要用于生成球体纹理</p>
+</li>
+<li><p><strong>GL_NORMAL_MAP</strong><br>主要用于生成立方图纹理</p>
+</li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://its401.com/article/houdy/145444">https://its401.com/article/houdy/145444</a></p>
+</blockquote>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="7、如何实现纹理的反走样？说明其原理。Mipmap"><a href="#7、如何实现纹理的反走样？说明其原理。Mipmap" class="headerlink" title="7、如何实现纹理的反走样？说明其原理。Mipmap"></a>7、如何实现纹理的反走样？说明其原理。Mipmap</h2><p>​        <strong>走样的一种情况（很大的纹理强行贴到很小的物体上）</strong></p>
+<ul>
+<li><ul>
+<li>有些物体会很远，但其纹理会拥有与近处物体同样高的分辨率。由于远处的物体可能只有很少的像素需要显示，OpenGL从高分辨率纹理中为这些像素获取正确的纹理颜色值就很困难，因为它需要对一个纹理坐标跨度很大的像素只拾取一个纹理颜色。</li>
+<li>举例子：400x400的纹理像素映射在20x20的像素内，一个像素需要映射20x20的纹理像素，如果直接进行纹理映射，那么在使用线性过滤的情况下，只会使用纹理坐标映射点的周围4个纹理像素进行计算，那么其他的396个纹理像素就没了参考价值，浪费显存且取色不精确。</li>
+</ul>
+</li>
+<li><p><strong>多级渐远纹理(Mipmap)反走样</strong></p>
+</li>
+<li><ul>
+<li><p>Mipmap简单来说就是一系列的纹理图像，后一个纹理图像的长和宽是前一个图像的二分之一。多级渐远纹理背后的理念很简单：距观察者的距离超过一定的阈值，OpenGL会使用不同的多级渐远纹理，即最适合物体的距离的那个。</p>
+</li>
+<li><p>使用Mipmap的渲染过程：</p>
+</li>
+<li><ul>
+<li>400x400的纹理需要映射到20x20的物体时，我们会在mipmap纹理中里寻找最接近20x20大小的纹理，并使用此纹理进行采样。</li>
+<li>此时采样用的纹理也是从上一级的纹理采样而来，此多级渐远纹理在之前已经预先插值计算好了20x20大小的纹理颜色，取色的效果比一个像素直接对原图20x20范围直接进行采样要好得多，使用mipmap就避免了采样的纹理像素过少而失真的问题。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>OpenGL有一个glGenerateMipmaps函数，在创建完一个纹理后调用它OpenGL就会承担接下来的所有工作了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 	glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGB, width, height, <span class="number">0</span>, GL_RGB, GL_UNSIGNED_BYTE, data);</span><br><span class="line">glGenerateMipmap(GL_TEXTURE_2D);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="8、帧缓存有几种，什么叫片元，片元的测试和操作有哪些？明白stencilbuffer的使用。-第七版P310"><a href="#8、帧缓存有几种，什么叫片元，片元的测试和操作有哪些？明白stencilbuffer的使用。-第七版P310" class="headerlink" title="8、帧缓存有几种，什么叫片元，片元的测试和操作有哪些？明白stencilbuffer的使用。(第七版P310)"></a>8、帧缓存有几种，什么叫片元，片元的测试和操作有哪些？明白stencilbuffer的使用。(第七版P310)</h2><h3 id="一、帧缓存有几种（4种）"><a href="#一、帧缓存有几种（4种）" class="headerlink" title="一、帧缓存有几种（4种）"></a><strong>一、帧缓存有几种（4种）</strong></h3><ul>
+<li><p><strong>Color Buffer（颜色缓冲）</strong></p>
+</li>
+<li><ul>
+<li>存储视口中每个像素的颜色</li>
+</ul>
+</li>
+<li><p><strong>Depth Buffer（深度缓冲）</strong></p>
+</li>
+<li><ul>
+<li>存储视口中每个像素的深度</li>
+</ul>
+</li>
+<li><p><strong>Stencil Buffer（模版缓冲）</strong></p>
+<ul>
+<li><strong>用途之一就是把绘画限制在屏幕的某个区域中</strong></li>
+</ul>
+</li>
+<li><ul>
+<li>为视口上的每个像素保存一个无符号整数值</li>
+<li>在渲染过程中，可以用模版缓冲区保存的值与一个预先设定的值相比较，根据比较的结果来决定是否更新颜色缓冲的颜色值。这个比较的过程称为模板测试。</li>
+<li>通过模板测试的像素会允许储存到颜色缓冲中，从而显示出来，而未通过的则不会保存到颜色缓冲区中，从而达到了过滤的功能</li>
+</ul>
+</li>
+<li><p><strong>Accumulation Buffer（累积缓冲）</strong></p>
+<ul>
+<li><strong>通常用于把一系列的图像合成为一幅图像</strong></li>
+</ul>
+</li>
+<li><ul>
+<li>累积缓冲允许你把渲染到颜色缓冲区的值，拷贝到累积缓冲区。</li>
+<li>当我们多次向累积缓冲区内传入颜色数据时，我们可以选择使用不同的方式的把传入累积缓冲区的颜色内容和当前累积缓冲区已有的内容进行混合。</li>
+<li>当我们在累积缓冲区完成多幅图像的混合之后，可以把累积缓冲区的颜色数据复制到颜色缓冲区中。</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、什么叫片元"><a href="#二、什么叫片元" class="headerlink" title="二、什么叫片元"></a>二、<strong>什么叫片元</strong></h3><ul>
+<li>每个片元包含与像素位置对应的坐标位置，颜色和深度的数据</li>
+<li>片元在通过了一系列测试之后就可以在帧缓冲中修改像素的值</li>
+<li>片元本质不是像素，它是潜在的像素。光栅化流程将几何图元分解，覆盖到每个像素，成为像素大小的片元。只有通过光栅化测试后，片元才会成为帧缓冲区的像素。</li>
+</ul>
+<h3 id="三、片元的测试和操作有哪些（4个测试，3个操作）"><a href="#三、片元的测试和操作有哪些（4个测试，3个操作）" class="headerlink" title="三、片元的测试和操作有哪些（4个测试，3个操作）"></a>三、片元的测试和操作有哪些（4个测试，3个操作）</h3><ul>
+<li><p><strong>测试</strong>（有先后顺序，1-4）（写入帧缓冲前）</p>
+</li>
+<li><ul>
+<li><p>1、<strong>裁剪测试</strong> <strong>glScissor()</strong></p>
+</li>
+<li><ul>
+<li>抛弃不位于视景体范围内的片元。</li>
+</ul>
+</li>
+<li><p>2、<strong>alpha测试</strong> <strong>glAlphaFunc()</strong></p>
+</li>
+<li><ul>
+<li>打开alpha测试后，OpenGL会测试每一个片元的Alpha值是否满足某一个特定的条件，如果满足，则该片元保留，如果不满足则抛弃。</li>
+</ul>
+</li>
+<li><p>3、<strong>模版测试</strong> <strong>glStencilFunc()</strong></p>
+</li>
+<li><ul>
+<li>打开模版测试后，OpenGL会比较模版缓冲区保存的值与用户预先设定的值，根据比较的结果来决定片元是否被抛弃。</li>
+</ul>
+</li>
+<li><p>4、<strong>深度测试</strong> <strong>glDepthFunc()</strong></p>
+</li>
+<li><ul>
+<li>打开深度测试后，OpenGL会把该片元的深度值和已经存在于深度缓冲中的深度值进行比较，比较逻辑允许用户自行设置，如果不通过则抛弃该片元。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>操作</strong>（有先后顺序，1-3）（写入帧缓冲后）</p>
+</li>
+<li><ul>
+<li><p>1、<strong>混合操作</strong></p>
+</li>
+<li><ul>
+<li>通过所有测试的片元在写入颜色缓冲区时，片元颜色值和颜色缓冲中已存在的颜色值进行混合运算，决定最终留在屏幕上的颜色是什么，混合方式允许用户自行设置。</li>
+</ul>
+</li>
+<li><p>2、<strong>抖动操作</strong></p>
+</li>
+<li><ul>
+<li>抖动是一种针对对于可用颜色较少的显示系统，以牺牲分辨率为代价，通过颜色值的快速切换闪烁来增加显示颜色数量的技术。抖动操作是和硬件相关的，允许用户所做的操作就只有打开或关闭抖动操作。</li>
+</ul>
+</li>
+<li><p>3、<strong>逻辑操作</strong></p>
+</li>
+<li><ul>
+<li>在片元和帧缓冲区对应的值之间会进行一个逻辑操作，其运算结果将替换掉当前帧缓冲区中对应的值。逻辑运算方式允许用户自行设置。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、StencilBuffer（模版缓冲）的使用-⭐"><a href="#四、StencilBuffer（模版缓冲）的使用-⭐" class="headerlink" title="四、StencilBuffer（模版缓冲）的使用 ⭐"></a>四、StencilBuffer（模版缓冲）的使用 ⭐</h3><ul>
+<li>启用模板缓冲的写入。</li>
+<li>渲染物体，更新模板缓冲的内容。</li>
+<li>禁用模板缓冲的写入。</li>
+<li>渲染（其它）物体，这次根据模板缓冲的内容丢弃特定的片段。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">glEnable(GL_STENCIL_TEST);<span class="comment">//启用模板测试</span></span><br><span class="line">glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);<span class="comment">//设置测试通过或失败时的行为</span></span><br><span class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);<span class="comment">//清除颜色缓冲、深度缓冲和模版缓冲</span></span><br><span class="line"></span><br><span class="line">glStencilFunc(GL_ALWAYS, <span class="number">1</span>, <span class="number">0xFF</span>);<span class="comment">//允许所有的片元通过模版测试并修改模板缓冲</span></span><br><span class="line">glStencilMask(<span class="number">0xFF</span>);<span class="comment">//启用模板缓冲写入</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//更改模版缓冲的内容</span></span><br><span class="line"></span><br><span class="line">glStencilFunc(GL_NOTEQUAL, <span class="number">1</span>, <span class="number">0xFF</span>);<span class="comment">//只允许绘制模版缓冲上值为1的对应像素</span></span><br><span class="line">glStencilMask(<span class="number">0x00</span>);<span class="comment">//禁止模板缓冲的写入</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//渲染其他物体</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="9、请列举出3种以上的三维模型常见的表示格式"><a href="#9、请列举出3种以上的三维模型常见的表示格式" class="headerlink" title="9、请列举出3种以上的三维模型常见的表示格式"></a>9、请列举出3种以上的三维模型常见的表示格式</h2><ul>
+<li>OBJ</li>
+<li>FPX</li>
+<li>STL</li>
+<li>3ds</li>
+<li>DAE</li>
+<li>ABC</li>
+</ul>
+<h2 id="10、已知一个立方体环境映射对应的六个面上的图片"><a href="#10、已知一个立方体环境映射对应的六个面上的图片" class="headerlink" title="10、已知一个立方体环境映射对应的六个面上的图片"></a>10、已知一个立方体环境映射对应的六个面上的图片</h2><p>​    <strong>分别假定为X_POSITVIE_PIC.jpg, X_NEGATIVE_PIC.jpg, Y_POSITIVE_PIC.jpg, Y_NEGATIVE_PIC.jpg, Z_POSITIVE_PIC.jpg, Z_NEGATIVE_PIC.jpg，请用OBJ格式表示一个长度为1的立方体，并把每个面分别贴上给定的六个图片。</strong>（？？？？？）</p>
+<p>a)    OBJ格式，顶点+face面片</p>
+<p>b)    Gltf格式，把所有文件压缩打包</p>
+<p>啥啥啥？暂留</p>
+<h2 id="11、分析下面的程序并计算"><a href="#11、分析下面的程序并计算" class="headerlink" title="11、分析下面的程序并计算"></a>11、分析下面的程序并计算</h2><p>​    <strong>在下面的例子中，计算对应1234四个顶点所对应的四边形上的一个点（-1.0, 0.5, 0.0）对应的纹理坐标是多少？按照最近邻域滤波方法，该点对应的颜色是什么？</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*	Create checkerboard texture	*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	checkImageWidth 64</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	checkImageHeight 64</span></span><br><span class="line"><span class="keyword">static</span> GLubyte checkImage[checkImageHeight][checkImageWidth][<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> GL_VERSION_1_1</span></span><br><span class="line"><span class="keyword">static</span> GLuint texName;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//生成8X8的黑白相间棋盘格子</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">makeCheckImage</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> i, j, c;</span><br><span class="line">   <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; checkImageHeight; i++)</span><br><span class="line">   &#123;</span><br><span class="line">      <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; checkImageWidth; j++)</span><br><span class="line">      &#123;</span><br><span class="line">         c = ((((i &amp; <span class="number">0x8</span>) == <span class="number">0</span>) ^ ((j &amp; <span class="number">0x8</span>)) == <span class="number">0</span>)) * <span class="number">255</span>;</span><br><span class="line">         checkImage[i][j][<span class="number">0</span>] = (GLubyte) c;</span><br><span class="line">         checkImage[i][j][<span class="number">1</span>] = (GLubyte) c;</span><br><span class="line">         checkImage[i][j][<span class="number">2</span>] = (GLubyte) c;</span><br><span class="line">         checkImage[i][j][<span class="number">3</span>] = (GLubyte) <span class="number">255</span>;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glClearColor (<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">   glShadeModel(GL_FLAT);</span><br><span class="line">   glEnable(GL_DEPTH_TEST);</span><br><span class="line"></span><br><span class="line">   makeCheckImage();</span><br><span class="line">   glPixelStorei(GL_UNPACK_ALIGNMENT, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> GL_VERSION_1_1</span></span><br><span class="line">   glGenTextures(<span class="number">1</span>, &amp;texName);</span><br><span class="line">   glBindTexture(GL_TEXTURE_2D, texName);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);</span><br><span class="line">   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);</span><br><span class="line">   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);</span><br><span class="line">   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> GL_VERSION_1_1</span></span><br><span class="line">   glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGBA, checkImageWidth, checkImageHeight, <span class="number">0</span>, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">   glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, <span class="number">4</span>, checkImageWidth, checkImageHeight, <span class="number">0</span>, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br><span class="line">   glEnable(GL_TEXTURE_2D);</span><br><span class="line">   glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> GL_VERSION_1_1</span></span><br><span class="line">   glBindTexture(GL_TEXTURE_2D, texName);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">   glBegin(GL_QUADS);</span><br><span class="line">   <span class="comment">//第一个</span></span><br><span class="line">   glTexCoord2f(<span class="number">0.0</span>, <span class="number">0.0</span>); glVertex3f(<span class="number">-2.0</span>, <span class="number">-1.0</span>, <span class="number">0.0</span>);</span><br><span class="line">   <span class="comment">//第二个</span></span><br><span class="line">   glTexCoord2f(<span class="number">0.0</span>, <span class="number">1.0</span>); glVertex3f(<span class="number">-2.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>);</span><br><span class="line">   <span class="comment">//第三个</span></span><br><span class="line">   glTexCoord2f(<span class="number">1.0</span>, <span class="number">1.0</span>); glVertex3f(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>);</span><br><span class="line">   <span class="comment">//第四个</span></span><br><span class="line">   glTexCoord2f(<span class="number">1.0</span>, <span class="number">0.0</span>); glVertex3f(<span class="number">0.0</span>, <span class="number">-1.0</span>, <span class="number">0.0</span>);</span><br><span class="line"></span><br><span class="line">   glTexCoord2f(<span class="number">0.0</span>, <span class="number">0.0</span>); glVertex3f(<span class="number">1.0</span>, <span class="number">-1.0</span>, <span class="number">0.0</span>);</span><br><span class="line">   glTexCoord2f(<span class="number">0.0</span>, <span class="number">1.0</span>); glVertex3f(<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>);</span><br><span class="line">   glTexCoord2f(<span class="number">1.0</span>, <span class="number">1.0</span>); glVertex3f(<span class="number">2.41421</span>, <span class="number">1.0</span>, <span class="number">-1.41421</span>);</span><br><span class="line">   glTexCoord2f(<span class="number">1.0</span>, <span class="number">0.0</span>); glVertex3f(<span class="number">2.41421</span>, <span class="number">-1.0</span>, <span class="number">-1.41421</span>);</span><br><span class="line">   glEnd();</span><br><span class="line">   glFlush();</span><br><span class="line">   glDisable(GL_TEXTURE_2D);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reshape</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glViewport(<span class="number">0</span>, <span class="number">0</span>, (GLsizei) w, (GLsizei) h);</span><br><span class="line">   glMatrixMode(GL_PROJECTION);</span><br><span class="line">   glLoadIdentity();</span><br><span class="line">   gluPerspective(<span class="number">60.0</span>, (GLfloat) w/(GLfloat) h, <span class="number">1.0</span>, <span class="number">30.0</span>);</span><br><span class="line">   glMatrixMode(GL_MODELVIEW);</span><br><span class="line">   glLoadIdentity();</span><br><span class="line">   glTranslatef(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">-3.6</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">keyboard</span> <span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> key, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">switch</span> (key) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">27</span>:</span><br><span class="line">         <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   glutInit(&amp;argc, argv);</span><br><span class="line">   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);</span><br><span class="line">   glutInitWindowSize(<span class="number">250</span>, <span class="number">250</span>);</span><br><span class="line">   glutInitWindowPosition(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">   glutCreateWindow(argv[<span class="number">0</span>]);</span><br><span class="line">   init();</span><br><span class="line">   glutDisplayFunc(display);</span><br><span class="line">   glutReshapeFunc(reshape);</span><br><span class="line">   glutKeyboardFunc(keyboard);</span><br><span class="line">   glutMainLoop();</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="12、采用GPU编程，请说明Vertex-Shader-和-Fragment-Shader-的输入输出坐标系是什么-输入输出的主要参数是什么？"><a href="#12、采用GPU编程，请说明Vertex-Shader-和-Fragment-Shader-的输入输出坐标系是什么-输入输出的主要参数是什么？" class="headerlink" title="12、采用GPU编程，请说明Vertex Shader 和 Fragment Shader 的输入输出坐标系是什么? 输入输出的主要参数是什么？"></a>12、采用GPU编程，请说明Vertex Shader 和 Fragment Shader 的输入输出坐标系是什么? 输入输出的主要参数是什么？</h2><h3 id="一、Vertex-Shader"><a href="#一、Vertex-Shader" class="headerlink" title="一、Vertex Shader"></a>一、Vertex Shader</h3><ul>
+<li><p>输入的是局部空间坐标 世界空间 （<strong>顶点坐标从模型空间变换到裁切空间</strong>）</p>
+</li>
+<li><p>输出的是裁剪空间坐标</p>
+</li>
+<li><p>主要输入参数</p>
+</li>
+<li><ul>
+<li><p>用户定义的顶点属性</p>
+</li>
+<li><p>用户定义的uniform变量</p>
+</li>
+<li><p>内置的属性输入变量</p>
+</li>
+<li><ul>
+<li>gl_Vertex</li>
+<li>gl_Normal</li>
+<li>gl_Color</li>
+<li>gl_SecondaryColor</li>
+<li>gl_TexCoordn</li>
+<li>gl_FogCoord</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>主要输出参数</p>
+</li>
+<li><ul>
+<li><p>用户定义的varying变量</p>
+</li>
+<li><p>内置的属性输出变量</p>
+</li>
+<li><ul>
+<li><p>gl_Position</p>
+</li>
+<li><p>gl_FrontColor</p>
+</li>
+<li><p>gl_BackColor</p>
+</li>
+<li><p>gl_FrontSecondaryColor</p>
+</li>
+<li><p>gl_BackSecondaryColor</p>
+</li>
+<li><p>gl_TexCoord[n]</p>
+</li>
+<li><p>gl_FogFragCoord</p>
+</li>
+<li><p>gl_PointSize</p>
+</li>
+<li><p>gl_ClipVertex</p>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220109001917728.png" alt="image-20220109001917728"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、Fragment-Shader"><a href="#二、Fragment-Shader" class="headerlink" title="二、Fragment Shader"></a>二、Fragment Shader</h3><ul>
+<li><p>输入的是屏幕空间坐标（顶点着色器到片元着色器之间，裁剪空间坐标会转换到标准化设备坐标（NDC），再转换到屏幕空间坐标，这过程是无法编程的）</p>
+</li>
+<li><p>屏幕空间坐标(应该)</p>
+</li>
+<li><p>主要输入参数</p>
+</li>
+<li><ul>
+<li><p>用户定义的顶点属性</p>
+</li>
+<li><p>用户定义的uniform变量</p>
+</li>
+<li><p>内置的属性输入变量</p>
+</li>
+<li><ul>
+<li>gl_FragCoord</li>
+<li>gl_Color</li>
+<li>gl_SecondaryColor</li>
+<li>gl_TexCoord[n]</li>
+<li>gl_FogFragCoord</li>
+<li>gl_FrontFacing</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>主要输出参数</p>
+</li>
+<li><ul>
+<li><p>discard fragment被丢弃的片元</p>
+</li>
+<li><p>内置的属性输出变量</p>
+</li>
+<li><ul>
+<li>gl_FragColor</li>
+<li>gl_FragDepth</li>
+<li>gl_FragData[n]</li>
+</ul>
+</li>
+<li><p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220109001941440.png" alt="image-20220109001941440"></p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://hello-david.github.io/archives/e8814f3.html">https://hello-david.github.io/archives/e8814f3.html</a></p>
+</blockquote>
+<h2 id="13、在shader编程中，如何使用多重纹理。"><a href="#13、在shader编程中，如何使用多重纹理。" class="headerlink" title="13、在shader编程中，如何使用多重纹理。"></a>13、在shader编程中，如何使用<strong>多重</strong>纹理。</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">///////////////////////////////////////////////////////片源着色器中</span></span><br><span class="line"><span class="meta">#version 330 core</span></span><br><span class="line">    in vec2 tex_coord0;</span><br><span class="line">    in vec2 tex_coord1;</span><br><span class="line">    layout (location = <span class="number">0</span>) out vec4 color;</span><br><span class="line">    uniform sampler2D tex1;<span class="comment">//第一个2D纹理采样对象</span></span><br><span class="line">    uniform sampler2D tex2;<span class="comment">//第二个2D纹理采样对象</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        color = texture(tex1, tex_coord0) + texture(tex2, tex_coord1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">///////////////////////////////////////////////////////Main程序中</span></span><br><span class="line"> GLuint tex1,tex2;<span class="comment">//主程序中纹理的id</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建纹理tex1</span></span><br><span class="line">	glGenTextures(<span class="number">1</span>, &amp;tex1);</span><br><span class="line">	glBindTexture(GL_TEXTURE_2D, tex1);</span><br><span class="line">	glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGB, width, height, <span class="number">0</span>, GL_BGR, GL_UNSIGNED_BYTE, data1);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//设定纹理过滤与纹理环绕方式</span></span><br><span class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);</span><br><span class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);</span><br><span class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br><span class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);</span><br><span class="line">	glGenerateMipmap(GL_TEXTURE_2D);</span><br><span class="line"></span><br><span class="line">     <span class="comment">//创建纹理tex2</span></span><br><span class="line">	glGenTextures(<span class="number">1</span>, &amp;tex2);</span><br><span class="line">	glBindTexture(GL_TEXTURE_2D, tex2);</span><br><span class="line">	glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGB, width, height, <span class="number">0</span>, GL_BGR, GL_UNSIGNED_BYTE, data2);</span><br><span class="line"></span><br><span class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);</span><br><span class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);</span><br><span class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br><span class="line">	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);</span><br><span class="line">	glGenerateMipmap(GL_TEXTURE_2D);</span><br><span class="line"></span><br><span class="line">    glUseProgram(prog); <span class="comment">//prog是已绑定顶点和片元着色器的链接程序</span></span><br><span class="line"></span><br><span class="line">    GLint tex1_uniform_loc = glGetUniformLocation(prog, <span class="string">&quot;tex1&quot;</span>);<span class="comment">//对于第一个纹理，我们需要获取到片元着色器中第一个纹理采样对象（uniform sampler2D tex1）</span></span><br><span class="line">    glUniform1i(tex1_uniform_loc, <span class="number">0</span>);<span class="comment">//指定这个纹理采样对象使用0这个值</span></span><br><span class="line">    glActiveTexture(GL_TEXTURE0);<span class="comment">//激活GL_TEXTURE0纹理单元</span></span><br><span class="line">    glBindTexture(GL_TEXTURE_2D, tex1);<span class="comment">//把tex1纹理绑定到激活的纹理单元上</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//重复操作</span></span><br><span class="line">    GLint tex2_uniform_loc = glGetUniformLocation(prog, <span class="string">&quot;tex2&quot;</span>);<span class="comment">//uniform sampler2D tex2</span></span><br><span class="line">    glUniform1i(tex2_uniform_loc, <span class="number">1</span>);</span><br><span class="line">    glActiveTexture(GL_TEXTURE1);<span class="comment">//这里激活了另一个纹理对象</span></span><br><span class="line">    glBindTexture(GL_TEXTURE_2D, tex2);<span class="comment">//把第二个纹理绑定上去</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>或者去看<a target="_blank" rel="noopener" href="https://learnopengl-cn.github.io/02%20Lighting/04%20Lighting%20maps/#:~:text=%E5%BA%A6%E5%B0%B1%E5%A5%BD%E4%BA%86%E3%80%82-,%E9%87%87%E6%A0%B7%E9%95%9C%E9%9D%A2%E5%85%89%E8%B4%B4%E5%9B%BE,-%E9%95%9C%E9%9D%A2%E5%85%89">https://learnopengl-cn.github.io/02%20Lighting/04%20Lighting%20maps/#:~:text=%E5%BA%A6%E5%B0%B1%E5%A5%BD%E4%BA%86%E3%80%82-,%E9%87%87%E6%A0%B7%E9%95%9C%E9%9D%A2%E5%85%89%E8%B4%B4%E5%9B%BE,-%E9%95%9C%E9%9D%A2%E5%85%89</a></p>
+</blockquote>
+<h2 id="14、在Compute-Shader中，-workgroup-和-工作单元等的关系"><a href="#14、在Compute-Shader中，-workgroup-和-工作单元等的关系" class="headerlink" title="14、在Compute Shader中， workgroup 和 工作单元等的关系"></a>14、在Compute Shader中， workgroup 和 工作单元等的关系</h2><p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/image-20220109005651316.png" alt="image-20220109005651316"></p>
+<p>​    在计算着色器中，并行性更为直接：任务以组为单位进行执行，称为<strong>工作组（workgroup）</strong>。</p>
+<p>​    拥有邻居的工作组杯称为<strong>本地工作组（local workgroup）</strong>。</p>
+<p>​    这些本地工作组可以组成更大的组，称为<strong>全局工作组（global workgroup）</strong>，通常作为执行命令的一个单位。</p>
+<p>​    <strong>计算着色器会被全局工作组中的每一个本地工作组中的每一个单元调用一次</strong>。工作组的每一个单元被称为<strong>工作项（work item）</strong>。每一次调用被称为一次执行，工作项之间可以通过变量和显存进行通信。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#version 430 core					<span class="comment">//xyz声明了本地工作组的大小，如果忽略z，就是xy的二维工作组</span></span></span><br><span class="line">layout (local_size_x = <span class="number">32</span>, local_size_y = <span class="number">32</span>, local_size_z = <span class="number">32</span>) in;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Do nothing</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>一个4x4x1全局工作组示例，一个全局工作组内包含若干个局部工作组，在一个局部工作组内又会包含多个工作单元。</strong></p>
+<p>事实上它们都是3维的，为了适应1维、2维的任务，只需把额外的2维或1维设为0即可。</p>
+<p><strong>计算着色器有5个内建变量</strong>：</p>
+<ul>
+<li>1、<strong>本地工作组</strong>的大小（三维向量）（gl_WorkGroupSize），就是上述的local_size_x/y/z</li>
+<li>2、全局工作组的大小（三维向量）（gl_NumWorkGroups）</li>
+<li>3、当前工作单元在本地工作组中的坐标（三维向量）（gl_LocalInvocationID）</li>
+<li>4、本地工作组在全局工作组中的坐标（三维向量）（gl_WorkGroupID）</li>
+</ul>
+<p>基于上面三个还能进一步算出：</p>
+<ul>
+<li>5、工作单元在全局工作组的三维索引（三维向量）（gl_GlobalInvocationID）</li>
+<li>6、工作单元在本地工作组的一维索引（一维的值）（gl_LocalInvocationIndex）</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9881630fb542">https://www.jianshu.com/p/9881630fb542</a></p>
+</blockquote>
+<h2 id="13、Buffer-Texture-Buffer-Image-Buffer-之间的区别和联系"><a href="#13、Buffer-Texture-Buffer-Image-Buffer-之间的区别和联系" class="headerlink" title="13、Buffer, Texture Buffer, Image Buffer 之间的区别和联系"></a>13、Buffer, Texture Buffer, Image Buffer 之间的区别和联系</h2><h2 id="14、Shader和主程序之间如何传递数据。"><a href="#14、Shader和主程序之间如何传递数据。" class="headerlink" title="14、Shader和主程序之间如何传递数据。"></a>14、Shader和主程序之间如何传递数据。</h2><h3 id="一、使用location这一元数据指定输入的-Attribute变量"><a href="#一、使用location这一元数据指定输入的-Attribute变量" class="headerlink" title="一、使用location这一元数据指定输入的 Attribute变量"></a>一、使用<code>location</code>这一元数据指定输入的 Attribute变量</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *vertexShaderSource =<span class="string">&quot;#version 330 core\n&quot;</span></span><br><span class="line">    <span class="string">&quot;layout (location = 0) in vec3 aPos;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;layout (location = 1) in vec3 aColor;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;out vec3 ourColor;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;void main()\n&quot;</span></span><br><span class="line">    <span class="string">&quot;&#123;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;   gl_Position = vec4(aPos, 1.0);\n&quot;</span></span><br><span class="line">    <span class="string">&quot;   ourColor = aColor;\n&quot;</span></span><br><span class="line">    <span class="string">&quot;&#125;\0&quot;</span>;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> <span class="keyword">unsigned</span> <span class="keyword">int</span> VBO, VAO;</span><br><span class="line">    glGenVertexArrays(<span class="number">1</span>, &amp;VAO);</span><br><span class="line">    glGenBuffers(<span class="number">1</span>, &amp;VBO);</span><br><span class="line">    <span class="comment">// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).</span></span><br><span class="line">    glBindVertexArray(VAO);</span><br><span class="line"></span><br><span class="line">    glBindBuffer(GL_ARRAY_BUFFER, VBO);</span><br><span class="line">    glBufferData(GL_ARRAY_BUFFER, <span class="keyword">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// position attribute</span></span><br><span class="line">    glVertexAttribPointer(<span class="number">0</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">6</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)<span class="number">0</span>);</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">0</span>);</span><br><span class="line">    <span class="comment">// color attribute</span></span><br><span class="line">    glVertexAttribPointer(<span class="number">1</span>, <span class="number">3</span>, GL_FLOAT, GL_FALSE, <span class="number">6</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>), (<span class="keyword">void</span>*)(<span class="number">3</span> * <span class="keyword">sizeof</span>(<span class="keyword">float</span>)));</span><br><span class="line">    glEnableVertexAttribArray(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="二、Uniform变量"><a href="#二、Uniform变量" class="headerlink" title="二、Uniform变量"></a>二、Uniform变量</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">uniform <span class="keyword">float</span> myUniform1;</span><br><span class="line"> layout (location = <span class="number">17</span>) uniform vec4 myUniform2;<span class="comment">//指定位置的Uniform变量</span></span><br><span class="line"> <span class="comment">//获取uniform变量位置</span></span><br><span class="line"> GLint myUniform1Location = glGetUniformLocation(myProgram, <span class="string">&quot;myUniform1&quot;</span>);</span><br><span class="line"></span><br><span class="line"> glUseProgram(myProgram);</span><br><span class="line"> <span class="comment">//根据glGetUniformLocation函数获取的位置向着色器传值</span></span><br><span class="line"> glUniform1f(myUniform1Location, <span class="number">45.2f</span>);</span><br><span class="line"> <span class="comment">//或者直接对指定位置传值</span></span><br><span class="line"> glUniform4f(<span class="number">17</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、使用Uniform-Block-（UBO）"><a href="#三、使用Uniform-Block-（UBO）" class="headerlink" title="三、使用Uniform Block （UBO）"></a>三、使用Uniform Block （UBO）</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//layout(std140)语句告诉OpenGL这个Uniform块使用的是std140布局</span></span><br><span class="line">  layout (std140) uniform ExampleBlock</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">float</span> value;</span><br><span class="line">       vec3 <span class="built_in">vector</span>;</span><br><span class="line">       mat4 matrix;</span><br><span class="line">       <span class="keyword">float</span> values[<span class="number">3</span>];</span><br><span class="line">       <span class="keyword">bool</span> boolean;</span><br><span class="line">       <span class="keyword">int</span> integer;</span><br><span class="line">   &#125;;</span><br><span class="line">  <span class="comment">//使用Uniform缓冲对象UBO</span></span><br><span class="line">   GLuint uboExampleBlock;</span><br><span class="line">   glGenBuffers(<span class="number">1</span>, &amp;uboExampleBlock);</span><br><span class="line">   glBindBuffer(GL_UNIFORM_BUFFER, uboExampleBlock);</span><br><span class="line">   glBufferData(GL_UNIFORM_BUFFER, <span class="number">150</span>, <span class="literal">NULL</span>, GL_STATIC_DRAW); <span class="comment">// 分配150个字节的内存空间</span></span><br><span class="line">   glBindBuffer(GL_UNIFORM_BUFFER, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">   <span class="comment">//通过UniformBlock的名字找到对应的索引</span></span><br><span class="line">   GLuint block_index = glGetUniformBlockIndex(ProgramID, <span class="string">&quot;ExampleBlock&quot;</span>);</span><br><span class="line">   <span class="comment">//把ExampleBlock绑定到0号绑定点上</span></span><br><span class="line">   glUniformBlockBinding(ProgramID, block_index, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">   <span class="comment">//把Uniform缓冲对象绑定到同样的绑定点上</span></span><br><span class="line">   glBindBufferBase(GL_UNIFORM_BUFFER, <span class="number">0</span>, uboExampleBlock);</span><br><span class="line">   <span class="comment">// 或者</span></span><br><span class="line">   glBindBufferRange(GL_UNIFORM_BUFFER, <span class="number">0</span>, uboExampleBlock, <span class="number">0</span>, <span class="number">150</span>);</span><br><span class="line"></span><br><span class="line">   <span class="comment">//修改UBO内的数据来更新UniformBlock</span></span><br><span class="line">   glBindBuffer(GL_UNIFORM_BUFFER, uboExampleBlock);</span><br><span class="line">   GLint b = <span class="literal">true</span>; <span class="comment">//GLSL中的布尔值是4个字节大小</span></span><br><span class="line">   glBufferSubData(GL_UNIFORM_BUFFER, <span class="number">142</span>, <span class="number">4</span>, &amp;b);</span><br><span class="line">   glBindBuffer(GL_UNIFORM_BUFFER, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="注：Varying变量不是着色器与程序传递数据"><a href="#注：Varying变量不是着色器与程序传递数据" class="headerlink" title="注：Varying变量不是着色器与程序传递数据"></a>注：Varying变量不是着色器与程序传递数据</h3><h3 id="varying：在顶点着色器和片元着色器中传递参数，在顶点着色器中被修改，在片元着色器中只读。"><a href="#varying：在顶点着色器和片元着色器中传递参数，在顶点着色器中被修改，在片元着色器中只读。" class="headerlink" title="varying：在顶点着色器和片元着色器中传递参数，在顶点着色器中被修改，在片元着色器中只读。"></a>varying：在顶点着色器和片元着色器中传递参数，在顶点着色器中被修改，在片元着色器中只读。</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/" rel="next" title="OpenGL期末汇总2-纹理">
+                <i class="fa fa-chevron-left"></i> OpenGL期末汇总2-纹理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Zhairest" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/#/user/home?id=70879973" target="_blank" title="CloudMusic">
+                      
+                        <i class="fa fa-fw fa-cloud"></i>CloudMusic</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E3%80%81%E4%BA%8C%E7%AB%A0%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">第一、二章：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81OpenGL%E4%B8%AD%E8%83%BD%E6%B8%B2%E6%9F%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9FGLU-%E5%8F%AF%E4%BB%A5%E6%B8%B2%E6%9F%93%E5%93%AA%E4%BA%9B%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1、OpenGL中能渲染的基本元素是什么？GLU 可以渲染哪些基本元素？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0"><span class="nav-number">2.</span> <span class="nav-text">第三章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%94%A8%E6%A1%86%E5%9B%BE%E8%AF%B4%E6%98%8EOpenGL%E7%9A%84%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B%EF%BC%8C%E5%B9%B6%E7%AE%80%E8%A6%81%E8%AF%B4%E6%98%8E%E6%AF%8F%E4%B8%AA%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%82"><span class="nav-number">2.1.</span> <span class="nav-text">2、用框图说明OpenGL的渲染流程，并简要说明每个坐标系。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E6%8A%95%E5%BD%B1%E5%8F%98%E6%8D%A2%E7%9A%84%E8%AE%BE%E7%BD%AE%EF%BC%8CgluPerspective-glFrustum-glOrtho%E7%AD%89%E7%9A%84%E5%85%B7%E4%BD%93%E5%90%AB%E4%B9%89%EF%BC%8CgluLookAt%E5%87%BD%E6%95%B0%E7%9A%84%E5%85%B7%E4%BD%93%E5%8F%82%E6%95%B0%E5%92%8C%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E3%80%82"><span class="nav-number">2.2.</span> <span class="nav-text">3、投影变换的设置，gluPerspective, glFrustum, glOrtho等的具体含义，gluLookAt函数的具体参数和使用方法。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-glFrustum"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.glFrustum()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-gluPerspective"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.gluPerspective()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-glOrtho"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. glOrtho()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-gluLookAt%EF%BC%88%EF%BC%89"><span class="nav-number">2.2.4.</span> <span class="nav-text">4.gluLookAt（）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E3%80%81%E4%BA%94%E7%AB%A0"><span class="nav-number">3.</span> <span class="nav-text">第四、五章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E5%86%99%E5%87%BAOpenGL%E4%B8%AD%E5%B1%80%E9%83%A8%E5%85%89%E7%85%A7%E7%9A%84%E6%96%B9%E7%A8%8B%EF%BC%8C%E8%A6%81%E5%8C%85%E5%90%AB%E7%9A%84%E7%B3%BB%E6%95%B0%E6%9C%89%E5%85%89%E6%BA%90%E5%8F%82%E6%95%B0%E3%80%81%E6%9D%90%E6%96%99%E5%8F%82%E6%95%B0%E3%80%81%E8%81%9A%E5%85%89%E7%81%AF%E7%9A%84%E5%8F%82%E6%95%B0%E3%80%81%E8%A1%B0%E5%87%8F%E5%8F%82%E6%95%B0%E7%AD%89%EF%BC%8C%E6%96%B9%E7%A8%8B%E8%A6%81%E8%A1%A8%E7%A4%BA%E6%98%AF%E5%A4%9A%E4%B8%AA%E5%85%89%E6%BA%90%E7%9A%84%E3%80%82"><span class="nav-number">3.1.</span> <span class="nav-text">4、写出OpenGL中局部光照的方程，要包含的系数有光源参数、材料参数、聚光灯的参数、衰减参数等，方程要表示是多个光源的。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E8%AF%B7%E7%9C%8B%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%B8%80%E6%AE%B5%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%B9%B6%E8%AE%A1%E7%AE%97%E4%B8%89%E4%B8%AA%E9%A1%B6%E7%82%B9%E2%91%A0%E3%80%81%E2%91%A1%E5%92%8C%E2%91%A2%E5%A4%84%E7%9A%84%E5%85%89%E7%85%A7%E7%9A%84%E9%A2%9C%E8%89%B2%E5%80%BC%E3%80%82"><span class="nav-number">3.2.</span> <span class="nav-text">5、请看下面的一段程序，并计算三个顶点①、②和③处的光照的颜色值。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC9%E7%AB%A0"><span class="nav-number">4.</span> <span class="nav-text">第9章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E5%9C%A8OpenGL%E4%B8%AD%EF%BC%8C%E4%BD%BF%E7%94%A8%E7%BA%B9%E7%90%86%E7%9A%84%E6%AD%A5%E9%AA%A4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E7%BA%B9%E7%90%86%E5%9D%90%E6%A0%87%E5%92%8C%E7%BA%B9%E7%90%86%E9%83%BD%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E7%A8%8B%E5%BA%8F%E8%AE%A1%E7%AE%97%E5%87%BA%E6%9D%A5%EF%BC%8C%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%BA%B9%E7%90%86%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">6、在OpenGL中，使用纹理的步骤是什么？纹理坐标和纹理都可以通过程序计算出来，自动生成纹理的原理是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BA%B9%E7%90%86%E7%9A%84%E6%AD%A5%E9%AA%A4%EF%BC%884%E6%AD%A5%EF%BC%8C%E5%A6%82%E6%9E%9C%E5%AF%BC%E5%85%A5%E7%BA%B9%E7%90%86%E5%9B%BE%E5%83%8F%E4%B8%8D%E7%AE%97%E7%9A%84%E8%AF%9D%EF%BC%89-%E7%AC%AC%E4%B8%83%E7%89%88%E4%B8%AD%E6%96%87%E7%89%88P248"><span class="nav-number">4.1.1.</span> <span class="nav-text">使用纹理的步骤（4步，如果导入纹理图像不算的话）(第七版中文版P248)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%BA%B9%E7%90%86%E7%94%B1glTexGen-%E5%87%BD%E6%95%B0%E6%9D%A5%E5%AE%9E%E7%8E%B0%E3%80%82%E8%A6%81%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%BA%B9%E7%90%86%E5%9D%90%E6%A0%87%EF%BC%8C%E9%A6%96%E5%85%88%E8%A6%81%E6%8C%87%E5%AE%9A%E4%BB%A5%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E6%A8%A1%E5%BC%8F%E6%9D%A5%E7%94%9F%E6%88%90%E7%BA%B9%E7%90%86%E5%9D%90%E6%A0%87%E3%80%82%E7%BA%B9%E7%90%86%E5%9D%90%E6%A0%87%E7%94%9F%E6%88%90%E6%A8%A1%E5%BC%8F%E6%9C%89%EF%BC%9A"><span class="nav-number">4.1.2.</span> <span class="nav-text">自动生成纹理由glTexGen()函数来实现。要自动生成纹理坐标，首先要指定以什么样的模式来生成纹理坐标。纹理坐标生成模式有：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BA%B9%E7%90%86%E7%9A%84%E5%8F%8D%E8%B5%B0%E6%A0%B7%EF%BC%9F%E8%AF%B4%E6%98%8E%E5%85%B6%E5%8E%9F%E7%90%86%E3%80%82Mipmap"><span class="nav-number">4.3.</span> <span class="nav-text">7、如何实现纹理的反走样？说明其原理。Mipmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E5%B8%A7%E7%BC%93%E5%AD%98%E6%9C%89%E5%87%A0%E7%A7%8D%EF%BC%8C%E4%BB%80%E4%B9%88%E5%8F%AB%E7%89%87%E5%85%83%EF%BC%8C%E7%89%87%E5%85%83%E7%9A%84%E6%B5%8B%E8%AF%95%E5%92%8C%E6%93%8D%E4%BD%9C%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E6%98%8E%E7%99%BDstencilbuffer%E7%9A%84%E4%BD%BF%E7%94%A8%E3%80%82-%E7%AC%AC%E4%B8%83%E7%89%88P310"><span class="nav-number">4.4.</span> <span class="nav-text">8、帧缓存有几种，什么叫片元，片元的测试和操作有哪些？明白stencilbuffer的使用。(第七版P310)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%B8%A7%E7%BC%93%E5%AD%98%E6%9C%89%E5%87%A0%E7%A7%8D%EF%BC%884%E7%A7%8D%EF%BC%89"><span class="nav-number">4.4.1.</span> <span class="nav-text">一、帧缓存有几种（4种）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BB%80%E4%B9%88%E5%8F%AB%E7%89%87%E5%85%83"><span class="nav-number">4.4.2.</span> <span class="nav-text">二、什么叫片元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%89%87%E5%85%83%E7%9A%84%E6%B5%8B%E8%AF%95%E5%92%8C%E6%93%8D%E4%BD%9C%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%884%E4%B8%AA%E6%B5%8B%E8%AF%95%EF%BC%8C3%E4%B8%AA%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="nav-number">4.4.3.</span> <span class="nav-text">三、片元的测试和操作有哪些（4个测试，3个操作）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81StencilBuffer%EF%BC%88%E6%A8%A1%E7%89%88%E7%BC%93%E5%86%B2%EF%BC%89%E7%9A%84%E4%BD%BF%E7%94%A8-%E2%AD%90"><span class="nav-number">4.4.4.</span> <span class="nav-text">四、StencilBuffer（模版缓冲）的使用 ⭐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81%E8%AF%B7%E5%88%97%E4%B8%BE%E5%87%BA3%E7%A7%8D%E4%BB%A5%E4%B8%8A%E7%9A%84%E4%B8%89%E7%BB%B4%E6%A8%A1%E5%9E%8B%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.5.</span> <span class="nav-text">9、请列举出3种以上的三维模型常见的表示格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81%E5%B7%B2%E7%9F%A5%E4%B8%80%E4%B8%AA%E7%AB%8B%E6%96%B9%E4%BD%93%E7%8E%AF%E5%A2%83%E6%98%A0%E5%B0%84%E5%AF%B9%E5%BA%94%E7%9A%84%E5%85%AD%E4%B8%AA%E9%9D%A2%E4%B8%8A%E7%9A%84%E5%9B%BE%E7%89%87"><span class="nav-number">4.6.</span> <span class="nav-text">10、已知一个立方体环境映射对应的六个面上的图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81%E5%88%86%E6%9E%90%E4%B8%8B%E9%9D%A2%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%B9%B6%E8%AE%A1%E7%AE%97"><span class="nav-number">4.7.</span> <span class="nav-text">11、分析下面的程序并计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81%E9%87%87%E7%94%A8GPU%E7%BC%96%E7%A8%8B%EF%BC%8C%E8%AF%B7%E8%AF%B4%E6%98%8EVertex-Shader-%E5%92%8C-Fragment-Shader-%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%9D%90%E6%A0%87%E7%B3%BB%E6%98%AF%E4%BB%80%E4%B9%88-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8F%82%E6%95%B0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">4.8.</span> <span class="nav-text">12、采用GPU编程，请说明Vertex Shader 和 Fragment Shader 的输入输出坐标系是什么? 输入输出的主要参数是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Vertex-Shader"><span class="nav-number">4.8.1.</span> <span class="nav-text">一、Vertex Shader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Fragment-Shader"><span class="nav-number">4.8.2.</span> <span class="nav-text">二、Fragment Shader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81%E5%9C%A8shader%E7%BC%96%E7%A8%8B%E4%B8%AD%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%A4%9A%E9%87%8D%E7%BA%B9%E7%90%86%E3%80%82"><span class="nav-number">4.9.</span> <span class="nav-text">13、在shader编程中，如何使用多重纹理。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81%E5%9C%A8Compute-Shader%E4%B8%AD%EF%BC%8C-workgroup-%E5%92%8C-%E5%B7%A5%E4%BD%9C%E5%8D%95%E5%85%83%E7%AD%89%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">4.10.</span> <span class="nav-text">14、在Compute Shader中， workgroup 和 工作单元等的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81Buffer-Texture-Buffer-Image-Buffer-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB"><span class="nav-number">4.11.</span> <span class="nav-text">13、Buffer, Texture Buffer, Image Buffer 之间的区别和联系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81Shader%E5%92%8C%E4%B8%BB%E7%A8%8B%E5%BA%8F%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE%E3%80%82"><span class="nav-number">4.12.</span> <span class="nav-text">14、Shader和主程序之间如何传递数据。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8location%E8%BF%99%E4%B8%80%E5%85%83%E6%95%B0%E6%8D%AE%E6%8C%87%E5%AE%9A%E8%BE%93%E5%85%A5%E7%9A%84-Attribute%E5%8F%98%E9%87%8F"><span class="nav-number">4.12.1.</span> <span class="nav-text">一、使用location这一元数据指定输入的 Attribute变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Uniform%E5%8F%98%E9%87%8F"><span class="nav-number">4.12.2.</span> <span class="nav-text">二、Uniform变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BD%BF%E7%94%A8Uniform-Block-%EF%BC%88UBO%EF%BC%89"><span class="nav-number">4.12.3.</span> <span class="nav-text">三、使用Uniform Block （UBO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%EF%BC%9AVarying%E5%8F%98%E9%87%8F%E4%B8%8D%E6%98%AF%E7%9D%80%E8%89%B2%E5%99%A8%E4%B8%8E%E7%A8%8B%E5%BA%8F%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE"><span class="nav-number">4.12.4.</span> <span class="nav-text">注：Varying变量不是着色器与程序传递数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#varying%EF%BC%9A%E5%9C%A8%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8%E5%92%8C%E7%89%87%E5%85%83%E7%9D%80%E8%89%B2%E5%99%A8%E4%B8%AD%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%EF%BC%8C%E5%9C%A8%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8%E4%B8%AD%E8%A2%AB%E4%BF%AE%E6%94%B9%EF%BC%8C%E5%9C%A8%E7%89%87%E5%85%83%E7%9D%80%E8%89%B2%E5%99%A8%E4%B8%AD%E5%8F%AA%E8%AF%BB%E3%80%82"><span class="nav-number">4.12.5.</span> <span class="nav-text">varying：在顶点着色器和片元着色器中传递参数，在顶点着色器中被修改，在片元着色器中只读。</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhairest</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
