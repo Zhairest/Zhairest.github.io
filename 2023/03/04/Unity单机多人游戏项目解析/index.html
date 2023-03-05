@@ -79,29 +79,29 @@
 
 
 
-<meta name="description" content="对于之前用Unity做的课设有点遗忘，做点笔记回顾一下，顺便整理复习。本课设基于《Tanks!》改编^ ^   ((((大胆承认抄袭^ ^)（今天骑车上了江上大桥，很开心） 用单例传递全局数据https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011492260&#x2F;article&#x2F;details&#x2F;113836431 在GameManager中去使用单例获得     关于Unity的协程https:&#x2F;&#x2F;bl">
+<meta name="description" content="对于之前用Unity做的课设有点遗忘，做点笔记回顾一下，顺便整理复习。（今天骑车上了江上大桥，很开心） 用单例传递全局数据https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011492260&#x2F;article&#x2F;details&#x2F;113836431 在GameManager中  去使用单例获得     关于Unity的协程https:&#x2F;&#x2F;blog.csdn.net&#x2F;fdyshlk&#x2F;article&#x2F;detai">
 <meta property="og:type" content="article">
-<meta property="og:title" content="课设Unity项目解析">
-<meta property="og:url" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="【Unity】单机多人实时对战游戏 项目解析">
+<meta property="og:url" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
-<meta property="og:description" content="对于之前用Unity做的课设有点遗忘，做点笔记回顾一下，顺便整理复习。本课设基于《Tanks!》改编^ ^   ((((大胆承认抄袭^ ^)（今天骑车上了江上大桥，很开心） 用单例传递全局数据https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011492260&#x2F;article&#x2F;details&#x2F;113836431 在GameManager中去使用单例获得     关于Unity的协程https:&#x2F;&#x2F;bl">
+<meta property="og:description" content="对于之前用Unity做的课设有点遗忘，做点笔记回顾一下，顺便整理复习。（今天骑车上了江上大桥，很开心） 用单例传递全局数据https:&#x2F;&#x2F;blog.csdn.net&#x2F;u011492260&#x2F;article&#x2F;details&#x2F;113836431 在GameManager中  去使用单例获得     关于Unity的协程https:&#x2F;&#x2F;blog.csdn.net&#x2F;fdyshlk&#x2F;article&#x2F;detai">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img1.png">
-<meta property="og:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img2.png">
-<meta property="og:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img3.png">
-<meta property="og:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img4.png">
-<meta property="og:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img11.png">
-<meta property="og:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img6.png">
-<meta property="og:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img7.png">
-<meta property="og:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img8.png">
-<meta property="og:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img9.png">
-<meta property="og:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img10.png">
+<meta property="og:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img1.png">
+<meta property="og:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img2.png">
+<meta property="og:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img3.png">
+<meta property="og:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img4.png">
+<meta property="og:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img11.png">
+<meta property="og:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img6.png">
+<meta property="og:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img7.png">
+<meta property="og:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img8.png">
+<meta property="og:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img9.png">
+<meta property="og:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img10.png">
 <meta property="article:published_time" content="2023-03-04T07:27:01.000Z">
-<meta property="article:modified_time" content="2023-03-05T07:03:22.210Z">
+<meta property="article:modified_time" content="2023-03-05T13:43:33.089Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img1.png">
+<meta name="twitter:image" content="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img1.png">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/03/04/课设Unity项目解析/"/>
+  <link rel="canonical" href="http://example.com/2023/03/04/Unity单机多人游戏项目解析/"/>
 
 
 
 
 
-  <title>课设Unity项目解析 | 旋转公寓的阁楼</title>
+  <title>【Unity】单机多人实时对战游戏 项目解析 | 旋转公寓的阁楼</title>
   
 
 
@@ -274,7 +274,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -291,7 +291,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">课设Unity项目解析</h1>
+          <h1 class="post-title" itemprop="name headline">【Unity】单机多人实时对战游戏 项目解析</h1>
         
 
         <div class="post-meta">
@@ -319,7 +319,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-03-05T15:03:22+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-05T21:43:33+08:00">
                 2023-03-05
               </time>
             
@@ -347,7 +347,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  329
+                  315
                 </span>
               
 
@@ -372,26 +372,30 @@
       
 
       
-        <p>对于之前用Unity做的课设有点遗忘，做点笔记回顾一下，顺便整理复习。<br>本课设基于《Tanks!》改编^ ^   ((((大胆承认抄袭^ ^)<br>（今天骑车上了江上大桥，很开心）</p>
+        <p>对于之前用Unity做的课设有点遗忘，做点笔记回顾一下，顺便整理复习。<br>（今天骑车上了江上大桥，很开心）</p>
 <h1 id="用单例传递全局数据"><a href="#用单例传递全局数据" class="headerlink" title="用单例传递全局数据"></a>用单例传递全局数据</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011492260/article/details/113836431">https://blog.csdn.net/u011492260/article/details/113836431</a></p>
-<p>在GameManager中<img src="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img1.png" class><br>去使用单例获得</p>
-<img src="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img2.png" class>
+<p>在GameManager中</p>
+<img src="/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img1.png" class>
+<p>去使用单例获得</p>
+<img src="/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img2.png" class>
 
 
 
 <h1 id="关于Unity的协程"><a href="#关于Unity的协程" class="headerlink" title="关于Unity的协程"></a>关于Unity的协程</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fdyshlk/article/details/72667814">https://blog.csdn.net/fdyshlk/article/details/72667814</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44705559/article/details/118052537">https://blog.csdn.net/qq_44705559/article/details/118052537</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42385019/article/details/107809482">https://blog.csdn.net/qq_42385019/article/details/107809482</a></p>
-<img src="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img3.png" class>
+<img src="/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img3.png" class>
 <p>这里用协程是希望使用其wait功能去做一个缓执行，改善游戏的节奏感。（嗯抄就）<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/cbbbc/article/details/50456761">https://blog.csdn.net/cbbbc/article/details/50456761</a></p>
-<img src="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img4.png" class>
+<img src="/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img4.png" class>
 
-<p>在其他地方可以更方便地看到协程的用处：<img src="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img11.png" class><br>例如这里用了个Timer强制固定了每次近战攻击的间隔是1s</p>
-<h1 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h1><img src="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img6.png" class>
+<p>在其他地方可以更方便地看到协程的用处：<img src="/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img11.png" class><br>例如这里用了个Timer强制固定了每次近战攻击的间隔是1s</p>
+<h1 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h1><img src="/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img6.png" class>
 <p>在本游戏中添加了很多interface，主要对同类型的物品都提供接口，方便调用，减耦合。</p>
-<img src="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img7.png" class>
-<img src="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img8.png" class>
+<img src="/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img7.png" class>
+
+<img src="/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img8.png" class>
 <p>例如上图中，对于不同武器的shoot，我们会有不同的效果。使用Interface可以爽爽地调用。例下图：此处是normalWeapon.cs中继承的接口，调用了内部函数LeftHit();</p>
-<img src="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img9.png" class>
-<img src="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img10.png" class>
+<img src="/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img9.png" class>
+
+<img src="/2023/03/04/Unity%E5%8D%95%E6%9C%BA%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/img10.png" class>
 <p>实现了如果玩家手持的是近战武器，则接口会直接调用近战武器的攻击函数，很方便！！（这个近战攻击的函数是不是太复杂了)<br>GREAT！</p>
 <h1 id><a href="#" class="headerlink" title></a></h1>
       
@@ -423,8 +427,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89_%E5%85%A8%E6%99%AF%E5%9B%BE%E5%83%8F%E6%8B%BC%E6%8E%A5/" rel="next" title="计算机视觉-图像的局部特征信息及全景图像拼接">
-                <i class="fa fa-chevron-left"></i> 计算机视觉-图像的局部特征信息及全景图像拼接
+              <a href="/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89_%E5%85%A8%E6%99%AF%E5%9B%BE%E5%83%8F%E6%8B%BC%E6%8E%A5/" rel="next" title="【计算机视觉】图像的局部特征信息及全景图像拼接">
+                <i class="fa fa-chevron-left"></i> 【计算机视觉】图像的局部特征信息及全景图像拼接
               </a>
             
           </div>
@@ -433,8 +437,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2023/03/05/test/" rel="prev" title="test">
-                test <i class="fa fa-chevron-right"></i>
+              <a href="/2023/03/05/Hexo%E6%B7%BB%E5%8A%A0%E5%9B%BE%E7%89%87/" rel="prev" title="【Hexo】在hexo中添加图片格式_并且不用删除文件名">
+                【Hexo】在hexo中添加图片格式_并且不用删除文件名 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -529,7 +533,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
