@@ -86,17 +86,17 @@
 <meta property="og:site_name" content="旋转公寓的阁楼">
 <meta property="og:description" content="概述1. 消隐隐藏表面消除，最简单方法就是使用z-buffer深度缓存区。 2. OpenGL的光分成环境光，散射光，镜面光和发射光。 环境光 Ambient Light​    在环境中充分散射，几乎来自于所有方向。 散射光 Diffuse Light镜面光 Specular Light发射光 Emissive Light3. 材料颜色OpenGL根据材料反射的光来模拟它的颜色。 简单的例子在场">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145345676.png">
-<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145453185.png">
-<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145650263.png">
-<meta property="og:image" content="http://example.com/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150610126.png">
-<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121150804323.png">
+<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121145345676.png">
+<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121145453185.png">
+<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121145650263.png">
+<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150610126.png">
+<meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150804323.png">
 <meta property="article:published_time" content="2021-11-19T11:08:34.000Z">
 <meta property="article:modified_time" content="2023-03-05T03:04:19.815Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145345676.png">
+<meta name="twitter:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121145345676.png">
 
 
 
@@ -452,19 +452,22 @@
 
 
 <h3 id="1-颜色"><a href="#1-颜色" class="headerlink" title="1.  颜色"></a>1.  颜色</h3><p>​    OpenGL的颜色与<strong>GL_AMBIENT、GL_DIFFUSE、GL_SPECULAR</strong>有关。</p>
-<p>​    <strong>默认的环境光是白色</strong>，但是我们可以把它改成red！<img src="OpenGL-第五章-光照/image-20211121145345676.png" alt="image-20211121145345676" style="zoom: 67%;" /></p>
+<p>​    <strong>默认的环境光是白色</strong>，但是我们可以把它改成red！<img src="/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121145345676.png" alt="image-20211121145345676" style="zoom: 67%;"></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GLfloat myRed[] = &#123; <span class="number">1.0</span>,<span class="number">0.0</span>,<span class="number">0.0</span>,<span class="number">1.0</span> &#125;;</span><br><span class="line">glLightfv(GL_LIGHT0, GL_AMBIENT, myRed);</span><br><span class="line"></span><br><span class="line">glLightfv(GL_LIGHT0, GL_DIFFUSE, myRed);</span><br><span class="line">glLightfv(GL_LIGHT0, GL_SPECULAR, myRed);</span><br></pre></td></tr></table></figure>
 
-<p>​    GL_DIFFUSE则最接近我们理解的颜色，它默认白色，我们也可以改！<img src="OpenGL-第五章-光照/image-20211121145453185.png" alt="image-20211121145453185" style="zoom: 67%;" /></p>
-<p>GL_SPECULAR则影响物体上镜面亮点的颜色，一般想创建逼真效果，其与GL_DIFFUSE相同即可。<img src="OpenGL-第五章-光照/image-20211121145650263.png" alt="image-20211121145650263" style="zoom:67%;" /></p>
+<p>​    GL_DIFFUSE则最接近我们理解的颜色，它默认白色，我们也可以改！<img src="/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121145453185.png" alt="image-20211121145453185" style="zoom: 67%;"></p>
+<p>GL_SPECULAR则影响物体上镜面亮点的颜色，一般想创建逼真效果，其与GL_DIFFUSE相同即可。<img src="/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121145650263.png" alt="image-20211121145650263" style="zoom:67%;"></p>
 <h3 id="2-位置与衰减"><a href="#2-位置与衰减" class="headerlink" title="2. 位置与衰减"></a>2. 位置与衰减</h3><p>​    <strong>方向性光源</strong>：当光源位置无限远，默认光线平行，例如太阳。</p>
 <p>​    <strong>位置性光源</strong>：它的位置决定了光线的效果，例如台灯。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GLfloat light_position[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span> &#125;;	</span><br><span class="line">glLightfv(GL_LIGHT0, GL_POSITION, light_position);</span><br></pre></td></tr></table></figure>
 
 <p>​    如果给定的向量第四个<strong>值为0，则表示其为方向性光源，即平行光</strong>。<strong>若非0，则默认是位置性光源，即太阳</strong>（也可以限制为聚光灯）。</p>
 <p>​    当然，对于位置性光源，还可以进行一个<strong>光强度随位置增加的衰减：对其乘以衰减因子</strong>。</p>
-<p><img src="/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150610126.png" alt="image-20211121150610126"></p>
-<h3 id="3-聚光灯"><a href="#3-聚光灯" class="headerlink" title="3.聚光灯"></a>3.聚光灯</h3><p>若将位置性光源限制为聚光灯，需要GL_SPOT_CUTOFF参数，光锥的最大角度是这个值的俩倍。<img src="OpenGL-第五章-光照/image-20211121150804323.png" alt="image-20211121150804323" style="zoom:50%;" /></p>
+<img src="/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150610126.png" class title="image-20211121150610126">
+
+
+
+<h3 id="3-聚光灯"><a href="#3-聚光灯" class="headerlink" title="3.聚光灯"></a>3.聚光灯</h3><p>若将位置性光源限制为聚光灯，需要GL_SPOT_CUTOFF参数，光锥的最大角度是这个值的俩倍。<img src="/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150804323.png" alt="image-20211121150804323" style="zoom:50%;"></p>
 <p>可以用如下代码限制光锥切角： 还需要指定聚光灯方向和光锥的轴：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, <span class="number">45.0</span>);</span><br><span class="line"></span><br><span class="line">GLfloat spot_direction[] = &#123; <span class="number">-1.0</span>, <span class="number">-1.0</span>, <span class="number">0.0</span> &#125;;</span><br><span class="line">glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_direction);</span><br></pre></td></tr></table></figure>
 
@@ -721,7 +724,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
