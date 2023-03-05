@@ -89,10 +89,10 @@
 <meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145345676.png">
 <meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145453185.png">
 <meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121145650263.png">
-<meta property="og:image" content="http://example.com/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150610126.png">
+<meta property="og:image" content="http://example.com/img/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150610126.png">
 <meta property="og:image" content="http://example.com/2021/11/19/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/OpenGL-第五章-光照/image-20211121150804323.png">
 <meta property="article:published_time" content="2021-11-19T11:08:34.000Z">
-<meta property="article:modified_time" content="2021-11-21T07:52:11.451Z">
+<meta property="article:modified_time" content="2023-03-04T16:16:53.353Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-11-21T15:52:11+08:00">
-                2021-11-21
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-05T00:16:53+08:00">
+                2023-03-05
               </time>
             
           </span>
@@ -463,7 +463,7 @@
 
 <p>​    如果给定的向量第四个<strong>值为0，则表示其为方向性光源，即平行光</strong>。<strong>若非0，则默认是位置性光源，即太阳</strong>（也可以限制为聚光灯）。</p>
 <p>​    当然，对于位置性光源，还可以进行一个<strong>光强度随位置增加的衰减：对其乘以衰减因子</strong>。</p>
-<p><img src="/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150610126.png" alt="image-20211121150610126"></p>
+<p><img src="/img/OpenGL-%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%85%89%E7%85%A7/image-20211121150610126.png" alt="image-20211121150610126"></p>
 <h3 id="3-聚光灯"><a href="#3-聚光灯" class="headerlink" title="3.聚光灯"></a>3.聚光灯</h3><p>若将位置性光源限制为聚光灯，需要GL_SPOT_CUTOFF参数，光锥的最大角度是这个值的俩倍。<img src="OpenGL-第五章-光照/image-20211121150804323.png" alt="image-20211121150804323" style="zoom:50%;" /></p>
 <p>可以用如下代码限制光锥切角： 还需要指定聚光灯方向和光锥的轴：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, <span class="number">45.0</span>);</span><br><span class="line"></span><br><span class="line">GLfloat spot_direction[] = &#123; <span class="number">-1.0</span>, <span class="number">-1.0</span>, <span class="number">0.0</span> &#125;;</span><br><span class="line">glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_direction);</span><br></pre></td></tr></table></figure>
@@ -721,7 +721,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -734,7 +734,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

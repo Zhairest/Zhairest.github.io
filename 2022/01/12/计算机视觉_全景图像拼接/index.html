@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机视觉," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="兜兜转转，又到了一年的末尾，只是这一年还有期末大作业留到了考试结束之后https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;6844904088094638094 前言：​    本次作业包含了Harris角点检测，RANSAC以及HOG描述符，最终将会利用这些工具来完成全景拼接。当然，你可以通过增加新的内容，例如可以通过SIFT算法来进行特征的检测和描述、利用透视变换来增加对out of plane图像">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机视觉-图像的局部特征信息及全景图像拼接">
+<meta property="og:url" content="http://example.com/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89_%E5%85%A8%E6%99%AF%E5%9B%BE%E5%83%8F%E6%8B%BC%E6%8E%A5/index.html">
+<meta property="og:site_name" content="旋转公寓的阁楼">
+<meta property="og:description" content="兜兜转转，又到了一年的末尾，只是这一年还有期末大作业留到了考试结束之后https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;6844904088094638094 前言：​    本次作业包含了Harris角点检测，RANSAC以及HOG描述符，最终将会利用这些工具来完成全景拼接。当然，你可以通过增加新的内容，例如可以通过SIFT算法来进行特征的检测和描述、利用透视变换来增加对out of plane图像">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112125844669.png">
+<meta property="og:image" content="http://example.com/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112130401140.png">
+<meta property="og:image" content="http://example.com/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112130422729.png">
+<meta property="og:image" content="http://example.com/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112144257944.png">
+<meta property="og:image" content="http://example.com/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112144305491.png">
+<meta property="og:image" content="http://example.com/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112144319928.png">
+<meta property="article:published_time" content="2022-01-12T04:33:50.000Z">
+<meta property="article:modified_time" content="2023-03-05T02:37:47.563Z">
+<meta property="article:author" content="Zhairest">
+<meta property="article:tag" content="计算机视觉">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112125844669.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/01/12/计算机视觉_全景图像拼接/"/>
+
+
+
+
+
+  <title>计算机视觉-图像的局部特征信息及全景图像拼接 | 旋转公寓的阁楼</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋转公寓的阁楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">储物间</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89_%E5%85%A8%E6%99%AF%E5%9B%BE%E5%83%8F%E6%8B%BC%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋转公寓的阁楼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机视觉-图像的局部特征信息及全景图像拼接</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-12T12:33:50+08:00">
+                2022-01-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-05T10:37:47+08:00">
+                2023-03-05
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.7k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>兜兜转转，又到了一年的末尾，只是这一年还有期末大作业留到了考试结束之后<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904088094638094">https://juejin.cn/post/6844904088094638094</a></p>
+<h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>​    本次作业包含了Harris角点检测，RANSAC以及HOG描述符，最终将会利用这些工具来完成全景拼接。当然，你可以通过增加新的内容，例如可以通过SIFT算法来进行特征的检测和描述、利用透视变换来增加对out of plane图像的支持。同时，也鼓励大家自己拍摄照片来实现全景的拼接，这样才能获取额外的分数。</p>
+<p>​    提示：如果你要实现360°的拼接，可能需要把affine变换改为透视变换才能有比较好的结果。求解透视变换时候可能会遇到求解Ax=0的问题，这时候可以参考下DLT算法，即direct linear transform算法。简单而言，就是对矩阵A做一把SVD，找出V中最小的奇异值所对应的特征向量就是其中的一个解（参见PPT）。</p>
+<p>​    除了代码之外，你还需要完成提交一份文档，对你的算法流程以及代码进行原理说明和注释。</p>
+<pre><code>基于Matlab；
+</code></pre>
+<h1 id="内容概述："><a href="#内容概述：" class="headerlink" title="内容概述："></a>内容概述：</h1><h2 id="全景拼接简介"><a href="#全景拼接简介" class="headerlink" title="全景拼接简介"></a>全景拼接简介</h2><p>​    全景拼接技术是计算机视觉的一项早期实践。早在2007年，Matthew Brown 以及 David G. Lowe两人就发表了一篇著名的全景拼接文章panoramic image stitching paper.自那之后，自动全景拼接技术便被广泛地应用开来。这期中包括了Google街景，手机里面的全景模式，以及各类的全景拼接软件（例如Photosynth 以及 Auto Stitch）。<br>​    在本次作业中，我们将会<strong>从多张照片中检测并且匹配关键点，从而构建一张全景图片</strong>。这其中包含了以下几个任务：</p>
+<ol>
+<li>利用Harris角点检测算子来寻找关键点</li>
+<li>建构用于描述每个关键点的算子（descriptor） 比较来自两幅不同图片的两组关键点，并且将它们匹配起来。</li>
+<li>给定一组匹配的关键点，利用最小二乘法找到仿射变换矩阵（affine transformation matrix）将一幅图片上的点映射到另一幅图片上。</li>
+<li>利用RANSAC算法估计一个更加准确、稳定的仿射变换矩阵。 给定变换矩阵，利用它来变换图片并且拼接到另一幅图片上来，从而形成全景图片。</li>
+<li>利用另一组描述算子（HOG）得到另一组拼接结果。</li>
+</ol>
+<h1 id="前置知识（复制粘贴）"><a href="#前置知识（复制粘贴）" class="headerlink" title="前置知识（复制粘贴）"></a>前置知识（复制粘贴）</h1><h2 id="模块-1-Harris-角点检测"><a href="#模块-1-Harris-角点检测" class="headerlink" title="模块 1 Harris 角点检测"></a>模块 1 Harris 角点检测</h2><p>在本节中，你将会利用Harris角点检测算子来定位图片的关键点。Harris角点检测算法包括了如下几个步骤：</p>
+<p><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112125844669.png" alt="image-20220112125844669"></p>
+<h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><ul>
+<li>可重复检测</li>
+<li>精确定位</li>
+<li>包含图像的高频信息</li>
+</ul>
+<h3 id="本质："><a href="#本质：" class="headerlink" title="本质："></a>本质：</h3><p>寻找图像的二维信号变化，在角点区域附近，图像的梯度有两个或更多的变化方向。</p>
+<p><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112130401140.png" alt="image-20220112130401140"></p>
+<p> 而角点有如下的数理规律：</p>
+<p>​    对于平坦区域，在水平和竖直方向上的梯度小；对于边缘区域，在水平和竖直两个方向上有一者梯度大，一者梯度小；对于角点，则在两个方向上都有较大的梯度。下图较形象地描述了三者的区别。<img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112130422729.png" alt="image-20220112130422729"></p>
+<h3 id="Harris角点检测的数学表达："><a href="#Harris角点检测的数学表达：" class="headerlink" title="Harris角点检测的数学表达："></a>Harris角点检测的数学表达：</h3><p><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112144257944.png" alt="image-20220112144257944"></p>
+<p><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112144305491.png" alt="image-20220112144305491"></p>
+<p><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%A4%A7%E4%BD%9C%E4%B8%9A/image-20220112144319928.png" alt="image-20220112144319928"></p>
+<p>​    Harris角点检测可以保证图像特征的平移不变性、旋转不变性、强度（光照）不变性，但缺陷在于无法保证尺度不变（缩放不变），因此对于不同的窗口大小，能够检测出的角点有所不同。这就导致了特征因拍摄距离的变化而发生变化，无法做到特征的稳定性。</p>
+<h2 id="模块-2-关键点的描述及其匹配"><a href="#模块-2-关键点的描述及其匹配" class="headerlink" title="模块 2 关键点的描述及其匹配"></a>模块 2 关键点的描述及其匹配</h2><p>​    我们已经能够利用Harris角点检测算法来定位两张图片中的关键点。接下来我们需要对检测到的关键点进行匹配，确定好两张图片中哪些点是一一对应的。这就需要我们<strong>先对关键点进行描述</strong>。那如何进行关键点描述呢？一个简单的方法是，<strong>选取关键点周围的一个固定区域，并利用该区域的信息生成一组描述向量descriptors.</strong></p>
+<h3 id="模块-2-1-生成描述向量"><a href="#模块-2-1-生成描述向量" class="headerlink" title="模块 2.1 生成描述向量"></a>模块 2.1 生成描述向量</h3><p>​    首先，利用前面的代码完成图像特征点的选取</p>
+<p>​    然后，你需要完成 describe_key points 函数，从而对<strong>每个特征点生成对应的描述符</strong>。</p>
+<p>​    由于用于测试的两张图片并没有发生过多的几何变化，因此我们可以简单地认为它们的scale都相同。所以在进行描述的时候，我们可以简单地在特征点周围框定一个固定大小的window来进行特征点描述(比如，选择一个16<em>16大小的窗口，从而截出一个*<em>patch image</em></em>)。<br>​    由于该实例比较简单，我们也可以<strong>直接用像素值来进行来当描述好的向量（即展开成一维向量）</strong>。当然，为了增加光照稳定性，我们可以<strong>将这个向量进行标准正态化</strong>。</p>
+<p>​    (是不是意味着我绕着这个点把相邻的截取下来就可以了)</p>
+<h3 id="模块-2-2-匹配描述子"><a href="#模块-2-2-匹配描述子" class="headerlink" title="模块 2.2 匹配描述子"></a>模块 2.2 匹配描述子</h3><p>​    接着, 完成 match_descriptors 函数并找到两组描述子集合中相匹配的向量。首先，从两张图片中各取一个描述子（也就是关键点生成的向量），计算它们的欧氏距离。利用欧氏距离来判定它们是不是对应的一组描述子: 如果这一对描述子的距离显著小于其他的距离，那么我们认为它们是一组对应的特征点。我们将对应的特征点连接到一起，并将匹配的点连接到一起。</p>
+<h1 id="代码实战体验"><a href="#代码实战体验" class="headerlink" title="代码实战体验"></a>代码实战体验</h1><h2 id="首先是寻找角点"><a href="#首先是寻找角点" class="headerlink" title="首先是寻找角点"></a>首先是寻找角点</h2><p>算出偏导数，X=imfilter(img,[-1 0 1]);再根据公式计算X2,XY等等。  <br><code>h=fspecial(&#39;gaussian&#39;,[9 9],2);</code><br>用高斯卷积核进行平滑处理，然后计算最重要的M矩阵M=[A(h,w) C(h,w);C(h,w) B(h,w)];同时用R(h,w)=det(M) - k*(trace(M)^2);进行角点的检测。</p>
+<p>这里记录一个Mmax用于确定判断角点的阈值。先用阈值过滤掉一部分的角点，然后再用非极大值抑制进行细化R_corner=(R&gt;=(Q*RMax)).*R；寻找3x3邻域内的最大值，只有一个交点在8邻域内是该邻域的最大点时，才认为该点是角点，R_localMax = nlfilter(R,[3 3],fun);</p>
+<p>最后</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[row,col]=find(R_localMax(<span class="number">2</span>:height<span class="number">-1</span>,<span class="number">2</span>:width<span class="number">-1</span>)==R_corner(<span class="number">2</span>:height<span class="number">-1</span>,<span class="number">2</span>:width<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+<p>即可得出坐标。 </p>
+<p>本来得到的结果是角点的行列分开的一维向量，但是不方便计算，于是就进行了更改。</p>
+<h2 id="然后需要对找到的角点进行描述，方便后续对比连线"><a href="#然后需要对找到的角点进行描述，方便后续对比连线" class="headerlink" title="然后需要对找到的角点进行描述，方便后续对比连线"></a>然后需要对找到的角点进行描述，方便后续对比连线</h2><p>这里根据之前的角点检测结果进行一个循环，找到角点就对其进行周边16*16进行获取，进行俩个for循环，获取位置值和相对位置值，以便后续操作。在进行描述之后，就要对于描述好的向量进行一个匹配了，这里用到欧氏距离计算。通过计算两点之间的欧氏距离来完成特征点的匹配，然后分组进行配对，从第一组中任选一个特征向量v1，计算它与第二组每个特征向量之间的距离，我们就得到了v1与其他特征向量之间的距离。 如果离v1最近的特征向量分别是v21,v22,v1和v21的距离远小于v1和v22的距离，那么认为v1和v21就是一组。 也就是说d(v1,v21)/d(v1,v22)需要小于某个阈值，据此，可以找出所有的匹配点。</p>
+<h2 id="变换矩阵"><a href="#变换矩阵" class="headerlink" title="变换矩阵"></a>变换矩阵</h2><p>然后利用这组对应的像素点计算从图片二映射到图片一的变换矩阵，也就是拟合 affine变换矩阵，使得 p2 * H = p1、</p>
+<h2 id="RANSAC"><a href="#RANSAC" class="headerlink" title="RANSAC"></a>RANSAC</h2><p>随机选取若干组match点rd = randi([1 length],1,fpoints);计算affine的变换矩阵：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rref_P = h* matcher2;</span><br><span class="line">rref_P(<span class="number">1</span>,:) = rref_P(<span class="number">1</span>,:)./rref_P(<span class="number">3</span>,:);</span><br><span class="line">rref_P(<span class="number">2</span>,:) = rref_P(<span class="number">2</span>,:)./rref_P(<span class="number">3</span>,:); </span><br><span class="line">error = (rref_P(<span class="number">1</span>,:) - matcher1(<span class="number">1</span>,:)).^<span class="number">2</span> + (rref_P(<span class="number">2</span>,:) - matcher1(<span class="number">2</span>,:)).^<span class="number">2</span>;</span><br><span class="line"><span class="comment">//计算有效数据点(inliers)的数目  </span></span><br><span class="line"><span class="keyword">if</span>(n &gt;= length*<span class="number">.95</span>) num=h;</span><br><span class="line">inliers = find(error&lt;errorhold);</span><br></pre></td></tr></table></figure>
+
+<p>记录有效点数目最大的那组参数，返回输出即可。</p>
+<h2 id="HOG梯度直方图"><a href="#HOG梯度直方图" class="headerlink" title="HOG梯度直方图"></a>HOG梯度直方图</h2><p>换用HOG来计算特征点的特征，先求出图像的梯度和每个像素点对应的梯度方向。首先进行一个图像的扩展，用于方便进行边缘的梯度计算。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">calculate_image = <span class="built_in">zeros</span>(row+<span class="number">2</span>,col+<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">2</span>:row+<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> j = <span class="number">2</span>:col+<span class="number">1</span></span><br><span class="line">            <span class="built_in">calculate_image</span>(i,j) = <span class="built_in">double_image</span>(i<span class="number">-1</span>,j<span class="number">-1</span>);</span><br><span class="line">        end</span><br><span class="line">    end</span><br><span class="line"><span class="comment">//然后就开始用3*3的窗口求梯度即可，用俩个for循环求，分别把求出来的值塞入</span></span><br><span class="line"><span class="built_in">gradx_image</span>(i+<span class="number">1</span>,j+<span class="number">1</span>) = <span class="built_in">sum</span>(<span class="built_in">sum</span>(Sx));</span><br><span class="line"><span class="built_in">grady_image</span>(i+<span class="number">1</span>,j+<span class="number">1</span>) = <span class="built_in">sum</span>(<span class="built_in">sum</span>(Sy));</span><br><span class="line"></span><br><span class="line"><span class="built_in">tidu</span>(i,j) = <span class="built_in">floor</span>(ang/angle_range);</span><br><span class="line"><span class="comment">//计算梯度直方图 将图片分成若干个cell，并对每个cell计算梯度直方图（2*2个cell）</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> b&lt;=width&amp;&amp;a&lt;=height</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">ceil</span>(k/<span class="number">16</span>)&lt;=<span class="number">8</span> &amp;&amp; (k-<span class="built_in">ceil</span>(k/<span class="number">16</span>)*<span class="number">16</span>)&lt;=<span class="number">8</span>)</span><br><span class="line">                <span class="built_in">temp</span>(<span class="number">1</span>,<span class="built_in">tidu</span>(a,b)+<span class="number">1</span>)=<span class="built_in">temp</span>(<span class="number">1</span>,<span class="built_in">tidu</span>(a,b)+<span class="number">1</span>)+<span class="built_in">sqrt</span>(<span class="built_in">gradx</span>(a,b)*<span class="built_in">gradx</span>(a,b)+<span class="built_in">grady</span>(a,b)*<span class="built_in">grady</span>(a,b));</span><br><span class="line">                end……</span><br><span class="line"></span><br><span class="line"><span class="comment">//然后  %将若干个cell合成一个block，并将里面的梯度直方图转成特征向量 （将4个cell合并成一个block生成特征向量）</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> u=<span class="number">1</span>:<span class="number">36</span></span><br><span class="line">           <span class="built_in">universe</span>(i,u)= <span class="built_in">temp</span>(u);</span><br><span class="line">        end即可。</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="线性融合"><a href="#线性融合" class="headerlink" title="线性融合"></a>线性融合</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">%确定融合区域的左边界和右边界</span><br><span class="line"></span><br><span class="line">warped_image(isnan(warped_image))=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">%给图片<span class="number">1</span>确定一个权重矩阵: - 从图片<span class="number">1</span>的最左边到融合区域的最左边，weight为<span class="number">1</span> - 从融合区域的最左边到图片<span class="number">1</span>的最右边，weight从<span class="number">1</span>到<span class="number">0</span>进行分布</span><br><span class="line"></span><br><span class="line">maskA = (warped_image(:,:,<span class="number">1</span>)&gt;<span class="number">0</span> |warped_image(:,:,<span class="number">2</span>)&gt;<span class="number">0</span> | warped_image(:,:,<span class="number">3</span>)&gt;<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">newImage = zeros(size(warped_image));</span><br><span class="line"></span><br><span class="line">newImage(y:y+size(unwarped_image,<span class="number">1</span>)<span class="number">-1</span>, x: x+size(unwarped_image,<span class="number">2</span>)<span class="number">-1</span>,:) = unwarped_image;</span><br><span class="line"></span><br><span class="line">mask = (newImage(:,:,<span class="number">1</span>)&gt;<span class="number">0</span> | newImage(:,:,<span class="number">2</span>)&gt;<span class="number">0</span> | newImage(:,:,<span class="number">3</span>)&gt;<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">mask = <span class="keyword">and</span>(maskA, mask);</span><br><span class="line"></span><br><span class="line">% 分别对左右两张图片应用权重矩阵</span><br><span class="line"></span><br><span class="line">[~,col] = find(mask);</span><br><span class="line"></span><br><span class="line">left = min(col);</span><br><span class="line"></span><br><span class="line">right = max(col);</span><br><span class="line"></span><br><span class="line">mask = ones(size(mask));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>( x&lt;<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    mask(:,left:right) = repmat(linspace(<span class="number">0</span>,<span class="number">1</span>,right-left+<span class="number">1</span>),size(mask,<span class="number">1</span>),<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">    mask(:,left:right) = repmat(linspace(<span class="number">1</span>,<span class="number">0</span>,right-left+<span class="number">1</span>),size(mask,<span class="number">1</span>),<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">中间还有一点处理，最后相加即可</span><br><span class="line"></span><br><span class="line">%将两张图相加</span><br><span class="line"></span><br><span class="line">newImage(:,:,<span class="number">1</span>) = warped_image(:,:,<span class="number">1</span>) + newImage(:,:,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">newImage(:,:,<span class="number">2</span>) = warped_image(:,:,<span class="number">2</span>) + newImage(:,:,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">newImage(:,:,<span class="number">3</span>) = warped_image(:,:,<span class="number">3</span>) + newImage(:,:,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+
+<p>Code已上传Github</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag"># 计算机视觉</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/01/06/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/" rel="next" title="OpenGL期末复习提纲">
+                <i class="fa fa-chevron-left"></i> OpenGL期末复习提纲
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/03/04/%E8%AF%BE%E8%AE%BEUnity%E9%A1%B9%E7%9B%AE%E8%A7%A3%E6%9E%90/" rel="prev" title="课设Unity项目解析">
+                课设Unity项目解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Zhairest" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/#/user/home?id=70879973" target="_blank" title="CloudMusic">
+                      
+                        <i class="fa fa-fw fa-cloud"></i>CloudMusic</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E6%A6%82%E8%BF%B0%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">内容概述：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E6%99%AF%E6%8B%BC%E6%8E%A5%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">全景拼接简介</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%EF%BC%88%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">前置知识（复制粘贴）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97-1-Harris-%E8%A7%92%E7%82%B9%E6%A3%80%E6%B5%8B"><span class="nav-number">3.1.</span> <span class="nav-text">模块 1 Harris 角点检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E7%9A%84%EF%BC%9A"><span class="nav-number">3.1.1.</span> <span class="nav-text">目的：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E8%B4%A8%EF%BC%9A"><span class="nav-number">3.1.2.</span> <span class="nav-text">本质：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Harris%E8%A7%92%E7%82%B9%E6%A3%80%E6%B5%8B%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE%EF%BC%9A"><span class="nav-number">3.1.3.</span> <span class="nav-text">Harris角点检测的数学表达：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97-2-%E5%85%B3%E9%94%AE%E7%82%B9%E7%9A%84%E6%8F%8F%E8%BF%B0%E5%8F%8A%E5%85%B6%E5%8C%B9%E9%85%8D"><span class="nav-number">3.2.</span> <span class="nav-text">模块 2 关键点的描述及其匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97-2-1-%E7%94%9F%E6%88%90%E6%8F%8F%E8%BF%B0%E5%90%91%E9%87%8F"><span class="nav-number">3.2.1.</span> <span class="nav-text">模块 2.1 生成描述向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97-2-2-%E5%8C%B9%E9%85%8D%E6%8F%8F%E8%BF%B0%E5%AD%90"><span class="nav-number">3.2.2.</span> <span class="nav-text">模块 2.2 匹配描述子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E6%88%98%E4%BD%93%E9%AA%8C"><span class="nav-number">4.</span> <span class="nav-text">代码实战体验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E6%98%AF%E5%AF%BB%E6%89%BE%E8%A7%92%E7%82%B9"><span class="nav-number">4.1.</span> <span class="nav-text">首先是寻找角点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%84%B6%E5%90%8E%E9%9C%80%E8%A6%81%E5%AF%B9%E6%89%BE%E5%88%B0%E7%9A%84%E8%A7%92%E7%82%B9%E8%BF%9B%E8%A1%8C%E6%8F%8F%E8%BF%B0%EF%BC%8C%E6%96%B9%E4%BE%BF%E5%90%8E%E7%BB%AD%E5%AF%B9%E6%AF%94%E8%BF%9E%E7%BA%BF"><span class="nav-number">4.2.</span> <span class="nav-text">然后需要对找到的角点进行描述，方便后续对比连线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E6%8D%A2%E7%9F%A9%E9%98%B5"><span class="nav-number">4.3.</span> <span class="nav-text">变换矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RANSAC"><span class="nav-number">4.4.</span> <span class="nav-text">RANSAC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HOG%E6%A2%AF%E5%BA%A6%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">4.5.</span> <span class="nav-text">HOG梯度直方图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E8%9E%8D%E5%90%88"><span class="nav-number">4.6.</span> <span class="nav-text">线性融合</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhairest</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
