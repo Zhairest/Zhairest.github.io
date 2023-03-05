@@ -86,17 +86,17 @@
 <meta property="og:site_name" content="旋转公寓的阁楼">
 <meta property="og:description" content="hh我又来了 上一章讲了VAO、VBO、EBO和Shader的内容，这节课我们来学习纹理咯~ 1、导入纹理资源​    这里我们选用了stb_image.h（一个非常流行的单头文件图像加载库）进行导入。 123456#define STB_IMAGE_IMPLEMENTATION#include &quot;stb_image.h&quot;int width, height, nrChannel">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102225201158.png">
-<meta property="og:image" content="http://example.com/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/filter_nearest.png">
-<meta property="og:image" content="http://example.com/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/filter_linear.png">
-<meta property="og:image" content="http://example.com/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102230636954.png">
-<meta property="og:image" content="http://example.com/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220103101428137.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102225201158.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/filter_nearest.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/filter_linear.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102230636954.png">
+<meta property="og:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220103101428137.png">
 <meta property="article:published_time" content="2022-01-02T13:35:24.000Z">
-<meta property="article:modified_time" content="2023-03-04T16:16:59.841Z">
+<meta property="article:modified_time" content="2023-03-05T03:05:04.166Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102225201158.png">
+<meta name="twitter:image" content="http://example.com/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102225201158.png">
 
 
 
@@ -314,7 +314,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-03-05T00:16:59+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-05T11:05:04+08:00">
                 2023-03-05
               </time>
             
@@ -400,17 +400,17 @@
 
 
 <h2 id="3、停-在下一步之前加点新东西吧—纹理环绕方式"><a href="#3、停-在下一步之前加点新东西吧—纹理环绕方式" class="headerlink" title="3、停!在下一步之前加点新东西吧—纹理环绕方式"></a>3、停!在下一步之前加点新东西吧—纹理环绕方式</h2><p>​    纹理坐标的范围通常是从(0, 0)到(1, 1)，那如果我们把纹理坐标设置在范围之外会发生什么？OpenGL默认的行为是重复这个纹理图像，但是也有更多选择！</p>
-<p><img src="/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102225201158.png" alt="image-20220102225201158"></p>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102225201158.png" alt="image-20220102225201158"></p>
 <p>​    可以在绑定纹理对象之后使用这个函数进行改变：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以使用glTexParameter*函数对单独的一个坐标轴设置（s、t（如果是使用3D纹理那么还有一个r）它们和x、y、z是等价的）</span></span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);</span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);</span><br><span class="line"></span><br><span class="line"><span class="comment">//上文选择了GL_MIRRORED_REPEAT，如果我们选择GL_CLAMP_TO_BORDER选项，我们还需要指定一个边缘的颜色。这需要使用glTexParameter函数的fv后缀形式，用GL_TEXTURE_BORDER_COLOR作为它的选项，并且传递一个float数组作为边缘的颜色值：</span></span><br><span class="line"><span class="keyword">float</span> borderColor[] = &#123; <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span> &#125;;</span><br><span class="line">glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);</span><br></pre></td></tr></table></figure>
 
 <p>​    </p>
 <h2 id="4、再来点–纹理过滤"><a href="#4、再来点–纹理过滤" class="headerlink" title="4、再来点–纹理过滤"></a>4、再来点–纹理过滤</h2><p>​    纹理过滤是对于你给定的纹理坐标和纹理本身的像素不对等而产生的弥补方法。例如，你发现你的两个相邻的纹理坐标，对应到纹理像素上都是一个像素，那我到底怎么取呢？这就用到了纹理过滤。</p>
 <p>​    GL_NEAREST（也叫邻近过滤，Nearest Neighbor Filtering）是OpenGL默认的纹理过滤方式，OpenGL会选择中心点最接近纹理坐标的那个像素。</p>
-<p><img src="/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/filter_nearest.png" alt="img"></p>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/filter_nearest.png" alt="img"></p>
 <p>​    GL_LINEAR（也叫线性过滤，(Bi)linear Filtering）它会基于纹理坐标附近的纹理像素，计算出一个插值，近似出这些纹理像素之间的颜色。一个纹理像素的中心距离纹理坐标越近，那么这个纹理像素的颜色对最终的样本颜色的贡献越大。</p>
-<p><img src="/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/filter_linear.png" alt="img"></p>
-<p><img src="/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102230636954.png" alt="image-20220102230636954"></p>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/filter_linear.png" alt="img"></p>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102230636954.png" alt="image-20220102230636954"></p>
 <p>​    我们需要使用glTexParameter*函数为其指定过滤方式。这段代码看起来会和纹理环绕方式的设置很相似：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);</span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br></pre></td></tr></table></figure>
 
@@ -423,7 +423,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//OpenGL有一个glGenerateMipmaps函数，在创建完一个纹理后调用它OpenGL就会承担接下来的所有工作了。</span></span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);</span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br></pre></td></tr></table></figure>
 
 <p>​    在渲染中切换多级渐远纹理级别(Level)时，OpenGL在两个不同级别的多级渐远纹理层之间会产生不真实的生硬边界。就像普通的纹理过滤一样，切换多级渐远纹理级别时你也可以在两个不同多级渐远纹理级别之间使用NEAREST和LINEAR过滤。</p>
-<p><img src="/img/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220103101428137.png" alt="image-20220103101428137"></p>
+<p><img src="/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220103101428137.png" alt="image-20220103101428137"></p>
 <p>​    最重要的事情别忘了，mipmap只适用看远处的物体（也就是缩小纹理），你可不能指望它去放大纹理！</p>
 <h2 id="7、阶段性总结"><a href="#7、阶段性总结" class="headerlink" title="7、阶段性总结"></a>7、阶段性总结</h2><p>​    大概，纹理加载的代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// load and create a texture </span></span><br><span class="line">    <span class="comment">// -------------------------</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> texture;</span><br><span class="line">    glGenTextures(<span class="number">1</span>, &amp;texture);</span><br><span class="line">    glBindTexture(GL_TEXTURE_2D, texture); <span class="comment">// all upcoming GL_TEXTURE_2D operations now have effect on this texture object</span></span><br><span class="line">    <span class="comment">// set the texture wrapping parameters</span></span><br><span class="line">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	<span class="comment">// set texture wrapping to GL_REPEAT (default wrapping method)</span></span><br><span class="line">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);</span><br><span class="line">    <span class="comment">// set texture filtering parameters</span></span><br><span class="line">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);</span><br><span class="line">    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br><span class="line">    <span class="comment">// load image, create texture and generate mipmaps</span></span><br><span class="line">    <span class="keyword">int</span> width, height, nrChannels;</span><br><span class="line">    <span class="comment">// The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> *data = stbi_load(FileSystem::getPath(<span class="string">&quot;resources/textures/container.jpg&quot;</span>).c_str(), &amp;width, &amp;height, &amp;nrChannels, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (data)</span><br><span class="line">    &#123;</span><br><span class="line">        glTexImage2D(GL_TEXTURE_2D, <span class="number">0</span>, GL_RGB, width, height, <span class="number">0</span>, GL_RGB, GL_UNSIGNED_BYTE, data);</span><br><span class="line">        glGenerateMipmap(GL_TEXTURE_2D);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Failed to load texture&quot;</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    stbi_image_free(data);</span><br><span class="line"></span><br><span class="line"><span class="comment">//在loop中绘制</span></span><br><span class="line"><span class="comment">// bind Texture</span></span><br><span class="line">	glBindTexture(GL_TEXTURE_2D, texture);</span><br><span class="line"></span><br><span class="line"><span class="comment">// render container</span></span><br><span class="line">    ourShader.use();</span><br><span class="line">    glBindVertexArray(VAO);</span><br><span class="line">    glDrawElements(GL_TRIANGLES, <span class="number">6</span>, GL_UNSIGNED_INT, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>

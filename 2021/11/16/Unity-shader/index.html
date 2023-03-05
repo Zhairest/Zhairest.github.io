@@ -86,18 +86,18 @@
 <meta property="og:site_name" content="旋转公寓的阁楼">
 <meta property="og:description" content="概括讲述了Unity shader的基本代码格式，建议看完渲染流水线再来看。">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/img/Unity-shader/image-20211121131304409.png">
-<meta property="og:image" content="http://example.com/img/Unity-shader/image-20211121123058929.png">
-<meta property="og:image" content="http://example.com/img/Unity-shader/image-20211121123120716.png">
-<meta property="og:image" content="http://example.com/img/Unity-shader/image-20211121123219881.png">
-<meta property="og:image" content="http://example.com/img/Unity-shader/image-20211117143648273.png">
-<meta property="og:image" content="http://example.com/img/Unity-shader/image-20211117152005645.png">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211121131304409.png">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211121123058929.png">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211121123120716.png">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211121123219881.png">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211117143648273.png">
+<meta property="og:image" content="http://example.com/Unity-shader/image-20211117152005645.png">
 <meta property="article:published_time" content="2021-11-16T02:58:37.000Z">
-<meta property="article:modified_time" content="2023-03-04T16:17:07.598Z">
+<meta property="article:modified_time" content="2023-03-05T03:04:19.865Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/Unity-shader/image-20211121131304409.png">
+<meta name="twitter:image" content="http://example.com/Unity-shader/image-20211121131304409.png">
 
 
 
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-03-05T00:17:07+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-05T11:04:19+08:00">
                 2023-03-05
               </time>
             
@@ -374,7 +374,7 @@
 
 
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="空间投影变换"><a href="#空间投影变换" class="headerlink" title="空间投影变换"></a>空间投影变换</h2><p>…请跳转到《图形渲染流水线》一节，在那里给出了清晰的解释。</p>
-<h2 id="现代gpu渲染流水线"><a href="#现代gpu渲染流水线" class="headerlink" title="现代gpu渲染流水线"></a>现代gpu渲染流水线</h2><p><img src="/img/Unity-shader/image-20211121131304409.png" alt="image-20211121131304409"></p>
+<h2 id="现代gpu渲染流水线"><a href="#现代gpu渲染流水线" class="headerlink" title="现代gpu渲染流水线"></a>现代gpu渲染流水线</h2><p><img src="/Unity-shader/image-20211121131304409.png" alt="image-20211121131304409"></p>
 <hr>
 <h2 id="Shader概念"><a href="#Shader概念" class="headerlink" title="Shader概念"></a>Shader概念</h2><p>​    shader是渲染流水线的一部分，由顶点着色器和片段着色器构成（着色器(Shader)是运行在GPU上的小程序。这些小程序为图形渲染管线的某个特定部分而运行。从基本意义上来说，着色器只是一种把输入转化为输出的程序。着色器也是一种非常独立的程序，因为它们之间不能相互通信；它们之间唯一的沟通只有通过输入和输出。）</p>
 <p>​    unity用cg编写，OpenGL用glsl，direct3d用hlsl。<strong>unity基于hlsl产生的cg</strong>。</p>
@@ -395,9 +395,9 @@
 
 <p>​    2D最常使用，例如<strong>漫反射贴图，法线贴图</strong>。其defaulttexture可以用各种颜色 black red</p>
 <p>​    <strong>Cube</strong>全称CubeMapTexture立方体纹理，由六张有联系的2D贴图拼成的立方体，主要用于<strong>反射</strong>，例如Skybox和ReflectionProb</p>
-<p><img src="/img/Unity-shader/image-20211121123058929.png" alt="image-20211121123058929"></p>
-<h4 id="不要忘记，如果要在subshader的pass中使用，需要在CGPROGRAM段之内进行声明："><a href="#不要忘记，如果要在subshader的pass中使用，需要在CGPROGRAM段之内进行声明：" class="headerlink" title="不要忘记，如果要在subshader的pass中使用，需要在CGPROGRAM段之内进行声明："></a>不要忘记，如果要在subshader的pass中使用，需要在CGPROGRAM段之内进行声明：</h4><p><img src="/img/Unity-shader/image-20211121123120716.png" alt="image-20211121123120716"></p>
-<p><img src="/img/Unity-shader/image-20211121123219881.png" alt="image-20211121123219881"></p>
+<p><img src="/Unity-shader/image-20211121123058929.png" alt="image-20211121123058929"></p>
+<h4 id="不要忘记，如果要在subshader的pass中使用，需要在CGPROGRAM段之内进行声明："><a href="#不要忘记，如果要在subshader的pass中使用，需要在CGPROGRAM段之内进行声明：" class="headerlink" title="不要忘记，如果要在subshader的pass中使用，需要在CGPROGRAM段之内进行声明："></a>不要忘记，如果要在subshader的pass中使用，需要在CGPROGRAM段之内进行声明：</h4><p><img src="/Unity-shader/image-20211121123120716.png" alt="image-20211121123120716"></p>
+<p><img src="/Unity-shader/image-20211121123219881.png" alt="image-20211121123219881"></p>
 <p>​    <strong>开放属性与CG属性的对应关系：</strong> </p>
 <ol>
 <li>​    <strong>Float 和 Range 前面加入 float half fixed</strong></li>
@@ -407,7 +407,7 @@
 <hr>
 <h3 id="SubShader"><a href="#SubShader" class="headerlink" title="SubShader"></a>SubShader</h3><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">SubShader</span><br><span class="line">    &#123;</span><br><span class="line">    	Tags &#123; &quot;RenderType&quot;=&quot;Opaque&quot; &#125;</span><br><span class="line">        <span class="comment">//渲染状况</span></span><br><span class="line">        cull back</span><br><span class="line">    	LOD <span class="number">200</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//1:LOD Level of Detail, 根据LOD来设置使用不同版本的Shader;</span></span><br><span class="line"><span class="comment">//2:着色器中给SubShader一个LOD值，程序来设置这个shader的LOD值，只有第一个小于等于LOD值subShader才会被执行;</span></span><br><span class="line"><span class="comment">//3: 每个shader最多只会有一个SubShader被使用;</span></span><br><span class="line">    	</span><br><span class="line">        Pass</span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            ...</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">FallBack &quot;Diffuse&quot;</span><br></pre></td></tr></table></figure>
 
-<h4 id="tags"><a href="#tags" class="headerlink" title="tags"></a><strong>tags</strong></h4><h5 id="1-渲染队列"><a href="#1-渲染队列" class="headerlink" title="1. 渲染队列"></a>1. 渲染队列</h5><p>​    可以用Tags{“Quene”=”Geometry+1”}来指定队列，unity有五种指定的队列。当然也可以在材质面板中选择<img src="/img/Unity-shader/image-20211117143648273.png" alt="image-20211117143648273"></p>
+<h4 id="tags"><a href="#tags" class="headerlink" title="tags"></a><strong>tags</strong></h4><h5 id="1-渲染队列"><a href="#1-渲染队列" class="headerlink" title="1. 渲染队列"></a>1. 渲染队列</h5><p>​    可以用Tags{“Quene”=”Geometry+1”}来指定队列，unity有五种指定的队列。当然也可以在材质面板中选择<img src="/Unity-shader/image-20211117143648273.png" alt="image-20211117143648273"></p>
 <h5 id="2-渲染类型"><a href="#2-渲染类型" class="headerlink" title="2. 渲染类型"></a>2. 渲染类型</h5><p>​    RenderType可以进行划分，便于替换深度纹理</p>
 <p>​    比如 Tags { “RenderType”=”Opaque” } 普通shader。再比如Transparent为半透明等等等等</p>
 <h5 id="3-禁用批处理"><a href="#3-禁用批处理" class="headerlink" title="3. 禁用批处理"></a>3. 禁用批处理</h5><p>​    DisableBatching，使用批处理时，几何体可能被变换到世界空间，模型空间被丢弃，这会导致用模型空间顶点坐标的shader出问题。</p>
@@ -453,7 +453,7 @@
 </ol>
 <h4 id="3-片段着色器输出语义"><a href="#3-片段着色器输出语义" class="headerlink" title="3. 片段着色器输出语义"></a>3. 片段着色器输出语义</h4><p>​    只会输出一个fixed4类型的颜色信息，输出的值会存到渲染目标中，因此只有一个<strong>SV_TARGET</strong>语义</p>
 <h3 id="在CG中调用属性变量"><a href="#在CG中调用属性变量" class="headerlink" title="在CG中调用属性变量"></a>在CG中调用属性变量</h3><p>​    如果在properties中定义开放的属性，想要在shader中访问，需要在CG块中再次声明。</p>
-<p><img src="/img/Unity-shader/image-20211117152005645.png" alt="image-20211117152005645"></p>
+<p><img src="/Unity-shader/image-20211117152005645.png" alt="image-20211117152005645"></p>
 <p>​    <strong>可以看到：</strong></p>
 <ol>
 <li>​    <strong>Float 和 Range 前面加入 float half fixed</strong></li>

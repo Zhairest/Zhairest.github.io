@@ -86,14 +86,14 @@
 <meta property="og:site_name" content="旋转公寓的阁楼">
 <meta property="og:description" content="概括讲述了在Unity Shader的特别存在，也就是高度抽象的表面着色器。">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/img/Unity-shader3/v2-3828a0cafa4d2f5f6372d1d3e9d17a12_r.jpg">
-<meta property="og:image" content="http://example.com/img/Unity-shader3/v2-2d5e6d1de528ac425502547beb41b24a_r.jpg">
+<meta property="og:image" content="http://example.com/Unity-shader3/v2-3828a0cafa4d2f5f6372d1d3e9d17a12_r.jpg">
+<meta property="og:image" content="http://example.com/Unity-shader3/v2-2d5e6d1de528ac425502547beb41b24a_r.jpg">
 <meta property="article:published_time" content="2021-11-18T12:19:22.000Z">
-<meta property="article:modified_time" content="2023-03-04T16:17:11.217Z">
+<meta property="article:modified_time" content="2023-03-05T03:04:37.150Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/Unity-shader3/v2-3828a0cafa4d2f5f6372d1d3e9d17a12_r.jpg">
+<meta name="twitter:image" content="http://example.com/Unity-shader3/v2-3828a0cafa4d2f5f6372d1d3e9d17a12_r.jpg">
 
 
 
@@ -311,7 +311,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-03-05T00:17:11+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-05T11:04:37+08:00">
                 2023-03-05
               </time>
             
@@ -386,8 +386,8 @@
 <h2 id="法线贴图"><a href="#法线贴图" class="headerlink" title="法线贴图"></a>法线贴图</h2><p>​    法线贴图可以逐像素修改物体表面法线的方向，使得产生凹凸不平的假象。以此可以实现低模的基础上实现高模的细节了。</p>
 <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Properties</span><br><span class="line">  &#123;</span><br><span class="line">     ......</span><br><span class="line">      _Normal (&quot;Normal Map&quot;, <span class="number">2</span>D) = &quot;bump&quot; &#123;&#125;</span><br><span class="line">      _Bumpiness (&quot;Bumpiness&quot;, Range(<span class="number">0</span>, <span class="number">1</span>)) = <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">struct Input</span><br><span class="line">  &#123;</span><br><span class="line">      float2 uv_MainTex;</span><br><span class="line">      float2 uv_Normal;</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="type">void</span> surf (Input IN, <span class="keyword">inout</span> SurfaceOutputStandard o)</span><br><span class="line">  &#123;</span><br><span class="line">  	......</span><br><span class="line">       <span class="comment">// 采样法线贴图并解包</span></span><br><span class="line">      fixed3 n = UnpackNormal(tex2D(_Normal, IN.uv_Normal));</span><br><span class="line">      n *= float3(_Bumpiness, _Bumpiness, <span class="number">1</span>);</span><br><span class="line">      o.Normal = n;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/img/Unity-shader3/v2-3828a0cafa4d2f5f6372d1d3e9d17a12_r.jpg" alt="img"></p>
-<h2 id="表面着色器其他函数"><a href="#表面着色器其他函数" class="headerlink" title="表面着色器其他函数"></a>表面着色器其他函数</h2><p><img src="/img/Unity-shader3/v2-2d5e6d1de528ac425502547beb41b24a_r.jpg" alt="表面着色器的计算流程"></p>
+<p><img src="/Unity-shader3/v2-3828a0cafa4d2f5f6372d1d3e9d17a12_r.jpg" alt="img"></p>
+<h2 id="表面着色器其他函数"><a href="#表面着色器其他函数" class="headerlink" title="表面着色器其他函数"></a>表面着色器其他函数</h2><p><img src="/Unity-shader3/v2-2d5e6d1de528ac425502547beb41b24a_r.jpg" alt="表面着色器的计算流程"></p>
 <p>​    虽说表面着色器是对于顶点着色器的高度封装，但是还是有很多可以定义的函数的。</p>
 <h3 id="比如，可以通过对顶点修改函数的修改，实现顶点修改的效果，例如模型朝法线方向膨胀。"><a href="#比如，可以通过对顶点修改函数的修改，实现顶点修改的效果，例如模型朝法线方向膨胀。" class="headerlink" title="比如，可以通过对顶点修改函数的修改，实现顶点修改的效果，例如模型朝法线方向膨胀。"></a>比如，可以通过对顶点修改函数的修改，实现顶点修改的效果，例如模型朝法线方向膨胀。</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Unlit/9_Expansion&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _MainTex (&quot;MainTex&quot;, 2D) = &quot;white&quot; &#123;&#125;</span><br><span class="line">        _Expansion (&quot;Expansion&quot;, Range(0, 0.1)) = 0</span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        CGPROGRAM</span><br><span class="line"></span><br><span class="line">        // 添加自定义顶点修函数vert</span><br><span class="line">        #pragma surface surf Lambert vertex:vert</span><br><span class="line"></span><br><span class="line">        struct Input</span><br><span class="line">        &#123;</span><br><span class="line">            float2 uv_MainTex;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        sampler2D _MainTex;</span><br><span class="line">        fixed _Expansion;</span><br><span class="line"></span><br><span class="line">        // 顶点修改函数，输入/输出appdata_full结构体</span><br><span class="line">        void vert (inout appdata_full v)</span><br><span class="line">        &#123;</span><br><span class="line">            v.vertex.xyz += v.normal * _Expansion;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void surf (Input IN, inout SurfaceOutput o)</span><br><span class="line">        &#123;</span><br><span class="line">            o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb;</span><br><span class="line">        &#125;</span><br><span class="line">        ENDCG</span><br><span class="line">    &#125;</span><br><span class="line">    FallBack &quot;Diffuse&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
