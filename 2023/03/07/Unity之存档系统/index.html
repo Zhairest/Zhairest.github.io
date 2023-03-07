@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Unity," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Unity存档系统​    本笔记参考以下内容：阿严-存档系统      数据持久化-PlayerPrefs PlayerPrefs​    PlayerPrefs是Unity提供的可以用于存储&#x2F;读取玩家数据的公共类。 Unity Documentation PlayerPrefs简单用法​    PlayerPrefs的数据存储类似键值对存储方式，一个键对应一个值。 PlayerPrefs只提供">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Unity】存档系统 (PlayerPrefs Json)">
+<meta property="og:url" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="旋转公寓的阁楼">
+<meta property="og:description" content="Unity存档系统​    本笔记参考以下内容：阿严-存档系统      数据持久化-PlayerPrefs PlayerPrefs​    PlayerPrefs是Unity提供的可以用于存储&#x2F;读取玩家数据的公共类。 Unity Documentation PlayerPrefs简单用法​    PlayerPrefs的数据存储类似键值对存储方式，一个键对应一个值。 PlayerPrefs只提供">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307092323863.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307100522105.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307100631321.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307103243277.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307103150116.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307103341442.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307104734616.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307105131521.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307120333005.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307120453487.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307120524902.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307110145181.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307110332489.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307110424519.png">
+<meta property="article:published_time" content="2023-03-07T01:12:57.000Z">
+<meta property="article:modified_time" content="2023-03-07T04:42:32.070Z">
+<meta property="article:author" content="Zhairest">
+<meta property="article:tag" content="Unity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307092323863.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2023/03/07/Unity之存档系统/"/>
+
+
+
+
+
+  <title>【Unity】存档系统 (PlayerPrefs Json) | 旋转公寓的阁楼</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋转公寓的阁楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">储物间</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋转公寓的阁楼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Unity】存档系统 (PlayerPrefs Json)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-03-07T09:12:57+08:00">
+                2023-03-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-07T12:42:32+08:00">
+                2023-03-07
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Unity存档系统"><a href="#Unity存档系统" class="headerlink" title="Unity存档系统"></a><strong>Unity存档系统</strong></h1><p>​    本笔记参考以下内容：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1nQ4y1z7pZ">阿严-存档系统</a>      <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/482843971">数据持久化-PlayerPrefs</a></p>
+<h2 id="PlayerPrefs"><a href="#PlayerPrefs" class="headerlink" title="PlayerPrefs"></a><strong>PlayerPrefs</strong></h2><p>​    <strong>PlayerPrefs是Unity提供的可以用于存储/读取玩家数据的公共类。</strong></p>
+<p><a target="_blank" rel="noopener" href="https://docs.unity3d.com/ScriptReference/PlayerPrefs.html">Unity Documentation</a></p>
+<h3 id="PlayerPrefs简单用法"><a href="#PlayerPrefs简单用法" class="headerlink" title="PlayerPrefs简单用法"></a><strong>PlayerPrefs简单用法</strong></h3><p>​    PlayerPrefs的数据存储类似键值对存储方式，一个键对应一个值。 PlayerPrefs只提供三种数据方法：int、float、string，其中其键的类型只能是String，值的类型可以是：int、float、string对应三种API，且这三种API都没有其他重载方法。</p>
+<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307092323863.png" class title="image-20230307092323863">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PlayerPrefs.SetInt(&quot;Age&quot;, 1);</span><br><span class="line">PlayerPrefs.SetString(&quot;Name&quot;, &quot;asdasddddd&quot;);</span><br><span class="line">PlayerPrefs.SetFloat(&quot;Float&quot;, 103.2f);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections;</span><br><span class="line">using System.Collections.Generic;</span><br><span class="line">using UnityEngine;</span><br><span class="line"> </span><br><span class="line">public class lesson1 : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    // Start is called before the first frame update</span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        #region PlayerPrefs是什么</span><br><span class="line">        //是Unity提供的可以用于存储读取玩家数据的公共类</span><br><span class="line">        #endregion</span><br><span class="line"> </span><br><span class="line">        #region 存储相关</span><br><span class="line">        //PlayerPrefs的数据存储 类似于键值对存储 一个键对应一个值</span><br><span class="line">        //提供了存储3种数据的方法 int float string</span><br><span class="line">        //键：string类型</span><br><span class="line">        //值：int float string 对应3种API</span><br><span class="line"> </span><br><span class="line">        PlayerPrefs.SetInt(&quot;myAge&quot;, 18);</span><br><span class="line">        PlayerPrefs.SetFloat(&quot;myHeight&quot;, 170.5f);</span><br><span class="line">        PlayerPrefs.SetString(&quot;myName&quot;, &quot;xx&quot;);</span><br><span class="line">        //直接调用Set相关方法 只会把数据存到内存里</span><br><span class="line">        //当游戏结束时 Unity会自动把数据存到硬盘里</span><br><span class="line">        //如果游戏不是正常结束的 而是崩溃 数据是不会存到硬盘中的</span><br><span class="line">        </span><br><span class="line">        PlayerPrefs.Save();</span><br><span class="line">        //只要调用该方法 就会马上存储到硬盘中</span><br><span class="line"> </span><br><span class="line">        //PlayerPrefs是有局限性的 它只能存三种类型的数据</span><br><span class="line">        //如果你想要存储别的类型的数据 只能降低精度 或者上升精度来进行存储</span><br><span class="line">        bool sex = true;</span><br><span class="line">        PlayerPrefs.SetInt(&quot;sex&quot;, sex ? 1 : 0);</span><br><span class="line"> </span><br><span class="line">        //如果不同类型用同一键名进行存储 会进行覆盖</span><br><span class="line">        //PlayerPrefs.SetFloat(&quot;myAge&quot;, 20.2f);</span><br><span class="line">        #endregion</span><br><span class="line"> </span><br><span class="line">        #region 读取相关</span><br><span class="line">        //注意：运行时 只要你Set了对应键值对</span><br><span class="line">        //即使你没有马上存储Save在本地</span><br><span class="line">        //也能够读取出信息</span><br><span class="line"> </span><br><span class="line">        //int</span><br><span class="line">        int age = PlayerPrefs.GetInt(&quot;myAge&quot;);</span><br><span class="line">        print(age);</span><br><span class="line">        //如果找不到myAge对应的值 就会返回函数的第二个参数 默认值</span><br><span class="line">        age = PlayerPrefs.GetInt(&quot;myAge&quot;, 100);</span><br><span class="line">        print(age);</span><br><span class="line"> </span><br><span class="line">        //float</span><br><span class="line">        float height = PlayerPrefs.GetFloat(&quot;myHeight&quot;);</span><br><span class="line">        print(height);</span><br><span class="line"> </span><br><span class="line">        //string</span><br><span class="line">        string name = PlayerPrefs.GetString(&quot;myName&quot;);</span><br><span class="line"> </span><br><span class="line">        //第二个参数 默认值 对于我们的作用</span><br><span class="line">        //就是 在得到没有的数据的时候 就可以用它来进行基础数据的初始化</span><br><span class="line"> </span><br><span class="line">        //判断数据是否存在</span><br><span class="line">        if (PlayerPrefs.HasKey(&quot;myName&quot;))</span><br><span class="line">        &#123;</span><br><span class="line">            print(&quot;存在myName对应的键值对数据&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        #endregion</span><br><span class="line"> </span><br><span class="line">        #region 删除数据</span><br><span class="line">        //删除指定键值对</span><br><span class="line">        PlayerPrefs.DeleteKey(&quot;myAge&quot;);</span><br><span class="line"> </span><br><span class="line">        //删除所有存储的信息</span><br><span class="line">        PlayerPrefs.DeleteAll();</span><br><span class="line">        #endregion</span><br><span class="line">    &#125;</span><br><span class="line">&#125;//https://blog.csdn.net/HAL2020/article/details/119883285 让我们一起飞翔</span><br></pre></td></tr></table></figure>
+
+<p>​    上面的三句API就相当于把一个数据存储到了<strong>内存注册表</strong>中(注意，现在还是在内存上而不是在硬盘上)。使用Windows系统时，按下Win+R，输入regedit，找到对应Unity的目录即可搜索到。</p>
+<blockquote>
+<p><strong>Window</strong> PlayerPrefs存储在HKCU\SoftWare\ [公司名称]\ [产品名称]项下的注册表中 步骤：运行 regedit -&gt; HKEY_CURRENT_USER -&gt; SOFTWARE -&gt; Unity -&gt; UnityEditor -&gt; 公司名称 -&gt; 产品名称</p>
+<p><strong>Android</strong> /data/data/包名/shared_prefs/pkg-name.xml</p>
+<p><strong>IOS</strong> /Library/Preferences/ [应用ID].plist</p>
+<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307100522105.png" class title="image-20230307100522105">
+</blockquote>
+<p>​    如果我们想把内存的数据存储到硬盘中，只有两种方式，一种就是游戏自然结束，关闭后Unity会把数据存入硬盘中。另一种就是我们调用<strong>PlayerPrefs.Save()方法进行直接保存，只要调用这个方法就会马上存储到硬盘中</strong>。注意：如果不使用PlayerPrefs.Save()，如果游戏在运行中奔溃了那么数据是会丢失的。</p>
+<h3 id="使用JsonUtility-ToJson-去存储更复杂的数据"><a href="#使用JsonUtility-ToJson-去存储更复杂的数据" class="headerlink" title="使用JsonUtility.ToJson()去存储更复杂的数据"></a>使用JsonUtility.ToJson()去存储更复杂的数据</h3><img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307100631321.png" class title="image-20230307100631321">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//使用JsonUtility.ToJson(Data); 可以使任何类型的值变成Json，如何就可以存储除了上述三种API以外的内容</span><br><span class="line">//这里更推荐</span><br><span class="line">var json = JsonUtility.ToJson(data,true);	</span><br><span class="line">//第二个参数为true则会生成更易读标准的Json格式！当然若不用true会更轻量快速。</span><br></pre></td></tr></table></figure>
+
+<p>​    值得注意的是，如果我们传入的是单一类型，则会因为其不是可序列化的数据而转化出为空。我们可以直接在类中使用JsonUtility.ToJson(this); 即可将该类中所有变量转化为整体输出。</p>
+<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307103243277.png" class title="image-20230307103243277">
+
+<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307103150116.png" class title="image-20230307103150116">
+
+<p>​    可以看到，ToJson()也只能转化公有的String和序列化之后的字段。<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307103341442.png" class title="image-20230307103341442"></p>
+<p>​    其实能被序列化的字段，都会在inspector中显示出来。</p>
+<h3 id="同样，还有FromJson"><a href="#同样，还有FromJson" class="headerlink" title="同样，还有FromJson();"></a>同样，还有FromJson();</h3><p><a target="_blank" rel="noopener" href="https://docs.unity3d.com/ScriptReference/JsonUtility.ToJson.html">JsonUtility.ToJson - Unity Documentation - Scripting API</a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><blockquote>
+<p><strong>优点：</strong>快捷、简单、易懂、存储方便</p>
+<p><strong>缺点：</strong>重复工作量繁多、自定义数据类需要自己去实现存储/读取的方式，而且代码的相似度极高。数据容易被修改，只要找到对应文件夹位置，就可以轻易的进行数据修改。</p>
+</blockquote>
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><p>​    Json是一种很常见的数据存储格式，最大的特点就是它的键值对以及对象的格式。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一份正确格式的JSON案例</span></span><br><span class="line"><span class="comment">// 大括号表示一个对象</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 冒号代表键值对的对应关系</span></span><br><span class="line">    <span class="comment">// 逗号表示分割符类似C#分号“;”的作用</span></span><br><span class="line">    <span class="comment">// 注意：Json当中键一定要用双引号包裹</span></span><br><span class="line">    <span class="attr">&quot;age&quot;</span> : <span class="number">18</span>,</span><br><span class="line">    <span class="attr">&quot;sex&quot;</span> : <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// 用于测试的浮点类型是支持浮点数的</span></span><br><span class="line">    <span class="attr">&quot;testF&quot;</span> : <span class="number">1.4</span>,</span><br><span class="line">    <span class="comment">// 中括号代表数组</span></span><br><span class="line">    <span class="attr">&quot;ids&quot;</span> : [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">    <span class="attr">&quot;students&quot;</span> : [&#123;<span class="attr">&quot;name&quot;</span>:<span class="string">&quot;小红&quot;</span>, <span class="attr">&quot;age&quot;</span>:<span class="number">10</span>, <span class="attr">&quot;sex&quot;</span>:<span class="literal">false</span>&#125;,</span><br><span class="line">                 &#123;<span class="attr">&quot;name&quot;</span>:<span class="string">&quot;小红1&quot;</span>, <span class="attr">&quot;age&quot;</span>:<span class="number">7</span>, <span class="attr">&quot;sex&quot;</span>:<span class="literal">false</span>&#125;,</span><br><span class="line">                 &#123;<span class="attr">&quot;name&quot;</span>:<span class="string">&quot;小红2&quot;</span>, <span class="attr">&quot;age&quot;</span>:<span class="number">1</span>, <span class="attr">&quot;sex&quot;</span>:<span class="literal">false</span>&#125;,],</span><br><span class="line">    <span class="attr">&quot;home&quot;</span> : &#123;<span class="attr">&quot;address&quot;</span> : <span class="string">&quot;深圳&quot;</span>, <span class="attr">&quot;street&quot;</span> : <span class="string">&quot;111111&quot;</span>&#125;,</span><br><span class="line">    <span class="attr">&quot;isNull&quot;</span> : <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">// 字典的话 键值会变成双引号，以后转换的时候需要注意！！</span></span><br><span class="line">    <span class="attr">&quot;dic&quot;</span> : &#123;<span class="attr">&quot;1&quot;</span>:<span class="string">&quot;123&quot;</span>, <span class="attr">&quot;2&quot;</span>:<span class="string">&quot;234&quot;</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JsonUtlity"><a href="#JsonUtlity" class="headerlink" title="JsonUtlity"></a>JsonUtlity</h3><p>​    JsonUtlity是Unity自带的用于解析Json的公共类，它可以将<strong>内存对象序列化为Json格式的字符串</strong>，该能将Json字符串反序列化为类对象。之前也已经使用过了。</p>
+<h3 id="File-WriteAllText-path-data"><a href="#File-WriteAllText-path-data" class="headerlink" title="File.WriteAllText(path,data)"></a>File.WriteAllText(path,data)</h3><img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307104734616.png" alt="image-20230307104734616" style="zoom:80%;">
+
+<p>该函数旨在将JSON数据存入到硬盘中，具体地址由于各个平台不同而回变化，图中使用Application.persistentDataPath，是Unity自带的一个跨平台存储地址。<a target="_blank" rel="noopener" href="https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html">Application.persistentDataPath - Unity Documentation - Scripting API </a></p>
+<p>同时也可以使用TryCatch捕获异常：<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307105131521.png" alt="image-20230307105131521" style="zoom:50%;"></p>
+<h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><p>大体框架还是用的Up那一套，可以在下链接获得：<a target="_blank" rel="noopener" href="https://github.com/AtCloudStudio/SaveSystemTutorial">Github地址</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">//SaveByJson.cs</span><br><span class="line">using System.IO;</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">namespace SaveSystemTutorial</span><br><span class="line">&#123;</span><br><span class="line">    public class SaveByJSON</span><br><span class="line">    &#123;</span><br><span class="line">        public static void SaveByJson(string fileName, object data)</span><br><span class="line">        &#123;</span><br><span class="line">            var json = JsonUtility.ToJson(data);</span><br><span class="line">            var path = Path.Combine(Application.persistentDataPath, fileName);</span><br><span class="line"></span><br><span class="line">            File.WriteAllText(path, json);</span><br><span class="line">            Debug.Log(&quot;我已使用Json存档在&quot; + path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static T LoadFromJson&lt;T&gt;(string fileName)</span><br><span class="line">        &#123;</span><br><span class="line">            var path = Path.Combine(Application.persistentDataPath, fileName);</span><br><span class="line">            var json = File.ReadAllText(path);  </span><br><span class="line">            var data=JsonUtility.FromJson&lt;T&gt;(json);</span><br><span class="line">            Debug.Log(&quot;我已使用Json恢复存档在&quot; + data);</span><br><span class="line">            return data;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public static void DeleteJson(string fileName)</span><br><span class="line">        &#123;</span><br><span class="line">            var path = Path.Combine(Application.persistentDataPath, fileName);</span><br><span class="line">            File.Delete(path);</span><br><span class="line">            Debug.Log(&quot;我已删除Json存档&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">using System;			//PlayerData.cs</span><br><span class="line">using UnityEngine;</span><br><span class="line"></span><br><span class="line">namespace SaveSystemTutorial</span><br><span class="line">&#123;  </span><br><span class="line">    public class PlayerData : MonoBehaviour</span><br><span class="line">    &#123;</span><br><span class="line">        [SerializeField] string playerName = &quot;Player Name&quot;;</span><br><span class="line">        [SerializeField] int level = 0;</span><br><span class="line">        [SerializeField] int coin = 0;</span><br><span class="line"></span><br><span class="line">        public const string FILE_NAME = &quot;JSON_SAVE.moximoxi&quot;;</span><br><span class="line">        public string Name =&gt; playerName;</span><br><span class="line">        public int Level =&gt; level;</span><br><span class="line">        public int Coin =&gt; coin;</span><br><span class="line">        public Vector3 Position =&gt; transform.position;</span><br><span class="line"></span><br><span class="line">        public class USERDATA</span><br><span class="line">        &#123;</span><br><span class="line">            public string Name;</span><br><span class="line">            public int Level;</span><br><span class="line">            public int Coin;</span><br><span class="line">            public USERDATA(string n, int l, int c)</span><br><span class="line">            &#123;</span><br><span class="line">                Name = n; Level = l; Coin = c;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        public void Save()</span><br><span class="line">        &#123;</span><br><span class="line">            //SaveByPrefs();</span><br><span class="line">            SaveByJson();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void Load()</span><br><span class="line">        &#123;</span><br><span class="line">            //LoadByPrefs();</span><br><span class="line">            LoadByJson();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        #region PlayerPrefs</span><br><span class="line">        void SaveByPrefs()</span><br><span class="line">        &#123;</span><br><span class="line">            PlayerPrefs.SetString(&quot;PlayerName&quot;, playerName);</span><br><span class="line">            PlayerPrefs.SetInt(&quot;PlayerLever&quot;, level);</span><br><span class="line">            PlayerPrefs.SetInt(&quot;PlayerCoin&quot;, coin);</span><br><span class="line">        &#125;</span><br><span class="line">        void LoadByPrefs()</span><br><span class="line">        &#123;</span><br><span class="line">            playerName=PlayerPrefs.GetString(&quot;PlayerName&quot;, playerName);</span><br><span class="line">            level=PlayerPrefs.GetInt(&quot;PlayerLever&quot;, level);</span><br><span class="line">            coin=PlayerPrefs.GetInt(&quot;PlayerCoin&quot;, coin);</span><br><span class="line">        &#125;</span><br><span class="line">        #endregion</span><br><span class="line"></span><br><span class="line">        #region JSON</span><br><span class="line">        void SaveByJson()</span><br><span class="line">        &#123;</span><br><span class="line">            SaveByJSON.SaveByJson(FILE_NAME,SavingData());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        void LoadByJson()</span><br><span class="line">        &#123;</span><br><span class="line">            var saveData = SaveByJSON.LoadFromJson&lt;USERDATA&gt;(FILE_NAME);</span><br><span class="line">            LoadData(saveData);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        object SavingData()</span><br><span class="line">        &#123;</span><br><span class="line">            return new USERDATA(playerName,level,coin);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        private void LoadData(USERDATA data)</span><br><span class="line">        &#123;</span><br><span class="line">            playerName = data.Name; level = data.Level; coin = data.Coin;</span><br><span class="line">        &#125;</span><br><span class="line">        #endregion</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>成果：<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307120333005.png" class title="image-20230307120333005"></p>
+<p>随机输入一串数据，点击Save，显示已保存。</p>
+<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307120453487.png" class title="image-20230307120453487">
+
+<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307120524902.png" class title="image-20230307120524902">
+
+<p>重新Load，也能实现读取，非常GOOD&lt;(￣︶￣)↗</p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307110145181.png" class title="image-20230307110145181">
+
+<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307110332489.png" class title="image-20230307110332489"> 
+
+<img src="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/image-20230307110424519.png" class title="image-20230307110424519">
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"># Unity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%A8%A1%E5%BC%8F/" rel="next" title="【设计模式】对象池模式">
+                <i class="fa fa-chevron-left"></i> 【设计模式】对象池模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/03/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8BSOLID%E5%8E%9F%E5%88%99/" rel="prev" title="【设计模式】SOLID原则">
+                【设计模式】SOLID原则 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Zhairest" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/#/user/home?id=70879973" target="_blank" title="CloudMusic">
+                      
+                        <i class="fa fa-fw fa-cloud"></i>CloudMusic</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Unity%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">Unity存档系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PlayerPrefs"><span class="nav-number">1.1.</span> <span class="nav-text">PlayerPrefs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PlayerPrefs%E7%AE%80%E5%8D%95%E7%94%A8%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">PlayerPrefs简单用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8JsonUtility-ToJson-%E5%8E%BB%E5%AD%98%E5%82%A8%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">使用JsonUtility.ToJson()去存储更复杂的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%A0%B7%EF%BC%8C%E8%BF%98%E6%9C%89FromJson"><span class="nav-number">1.1.3.</span> <span class="nav-text">同样，还有FromJson();</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.1.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON"><span class="nav-number">1.2.</span> <span class="nav-text">JSON</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JsonUtlity"><span class="nav-number">1.2.1.</span> <span class="nav-text">JsonUtlity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File-WriteAllText-path-data"><span class="nav-number">1.2.2.</span> <span class="nav-text">File.WriteAllText(path,data)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="nav-number">1.2.3.</span> <span class="nav-text">实战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">1.2.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhairest</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
