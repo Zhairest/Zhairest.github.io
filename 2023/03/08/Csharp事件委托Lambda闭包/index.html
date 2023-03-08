@@ -82,31 +82,31 @@
 <meta name="description" content="关于委托和事件，更推荐看这个视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV163411S7QG ​    ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑相信我↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 委托 Delegate​    委托，事件，匿名函数，Lambda ​     ​    （下文中把函数和方法混为一谈，默认二者相">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【C#】委托 事件 Lambda 闭包问题">
-<meta property="og:url" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/index.html">
+<meta property="og:url" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
 <meta property="og:description" content="关于委托和事件，更推荐看这个视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV163411S7QG ​    ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑相信我↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 委托 Delegate​    委托，事件，匿名函数，Lambda ​     ​    （下文中把函数和方法混为一谈，默认二者相">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308200720979.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308201157283.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308201643879.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308202536887.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308203334447.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230307174045922.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230307174027354.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308205657186.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308212955037.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213048208.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213129591.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213141662.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213401026.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213439001.png">
-<meta property="og:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213513786.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308200720979.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308201157283.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308201643879.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308202536887.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308203334447.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230307174045922.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230307174027354.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308205657186.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308212955037.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213048208.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213129591.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213141662.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213401026.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213439001.png">
+<meta property="og:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213513786.png">
 <meta property="article:published_time" content="2023-03-08T10:49:02.000Z">
-<meta property="article:modified_time" content="2023-03-08T15:39:09.815Z">
+<meta property="article:modified_time" content="2023-03-08T16:14:33.004Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308200720979.png">
+<meta name="twitter:image" content="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308200720979.png">
 
 
 
@@ -136,7 +136,7 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/03/08/C# 事件委托/"/>
+  <link rel="canonical" href="http://example.com/2023/03/08/Csharp事件委托Lambda闭包/"/>
 
 
 
@@ -279,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-03-08T23:39:09+08:00">
-                2023-03-08
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-09T00:14:33+08:00">
+                2023-03-09
               </time>
             
           </span>
@@ -397,16 +397,16 @@
 </blockquote>
 <h3 id="例如："><a href="#例如：" class="headerlink" title="例如："></a>例如：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var foo=new Foo(MyFunc);	//委托的声明时 必须传入一个参数（当然后面可以删掉，为空会报错）</span><br><span class="line">foo+= MyFunc;</span><br><span class="line">foo+= MyFunc2;</span><br><span class="line">foo+= MyFunc;</span><br><span class="line">foo?.Invoke();					//?.Invoke() 可以避免为空的报错</span><br><span class="line"></span><br><span class="line">void MyFunc()&#123;			//某函数</span><br><span class="line">	&quot;hello&quot;.Dump();					//此处的Dump是LINQpad7 特有的功能</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void MyFunc2()</span><br><span class="line">&#123;</span><br><span class="line">	&quot;World&quot;.Dump();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">delegate void Foo();	//委托</span><br></pre></td></tr></table></figure>
 
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308200720979.png" class title="image-20230308200720979">
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308200720979.png" class title="image-20230308200720979">
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var foo=new Foo(MyFunc);	//委托的实例化 </span><br><span class="line">foo.Invoke(10).Dump();		//Or foo(10).Dump();</span><br><span class="line"></span><br><span class="line">string MyFunc(int b)&#123;			//某函数</span><br><span class="line">	return (b+1).ToString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">delegate string Foo(int a);	//委托			//带参数的委托</span><br><span class="line">//如果有多个，只会返回最后加的东西</span><br></pre></td></tr></table></figure>
 
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308201157283.png" class title="image-20230308201157283">
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308201157283.png" class title="image-20230308201157283">
 
 <h4 id="委托作为回调函数"><a href="#委托作为回调函数" class="headerlink" title="委托作为回调函数"></a>委托作为回调函数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MyHeavyJob(MyCallback);</span><br><span class="line"></span><br><span class="line">void MyHeavyJob(Callback callback)&#123;</span><br><span class="line">	Thread.Sleep(1500);</span><br><span class="line">	</span><br><span class="line">	callback();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void MyCallback()</span><br><span class="line">&#123;</span><br><span class="line">	&quot;Job Done&quot;.Dump();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">delegate void Callback();</span><br></pre></td></tr></table></figure>
 
-<p>过了1.5s以后，输出<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308201643879.png" class title="image-20230308201643879"></p>
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308202536887.png" class title="image-20230308202536887">
+<p>过了1.5s以后，输出<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308201643879.png" class title="image-20230308201643879"></p>
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308202536887.png" class title="image-20230308202536887">
 
 <p>​    如图，委托相当于给函数的参数加了一个接口，你可以放入你想放入的参数，只不过这个参数，是对于这个委托合适的函数（即你可以自定义方式，更便捷）。</p>
 <p>​    委托本身还可以进一步定制化，例如图中MyRule可以改成泛型T。</p>
@@ -418,7 +418,7 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PickOne(10,20,MySpecialRule).Dump();</span><br><span class="line"></span><br><span class="line">int  PickOne(int a,int b,Func&lt;int,int,bool&gt; rule)</span><br><span class="line">&#123;</span><br><span class="line">	if(rule(a,b))return a;</span><br><span class="line">	else return b;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool MySpecialRule (int x, int y)&#123;</span><br><span class="line">	return true;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308203334447.png" class title="image-20230308203334447">
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308203334447.png" class title="image-20230308203334447">
 
 <h3 id="匿名委托"><a href="#匿名委托" class="headerlink" title="匿名委托"></a>匿名委托</h3><p>反正名字也不重要了，为啥还要留一个委托名字是吧，于是匿名委托出现，请对比上图</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PickOne(10,20, delegate(int a,int b)&#123;return true; &#125;).Dump();</span><br><span class="line"></span><br><span class="line">int  PickOne(int a,int b,Func&lt;int,int,bool&gt; rule)</span><br><span class="line">&#123;</span><br><span class="line">	if(rule(a,b))return a;</span><br><span class="line">	else return b;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -438,7 +438,7 @@
 <h3 id="Unity中"><a href="#Unity中" class="headerlink" title="Unity中"></a>Unity中</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">//首先先说明一点，委托的本质是一个类</span><br><span class="line">//委托(代理) 是存有对某个方法的引用的一种引用类型变量。</span><br><span class="line">//委托语法:delegate &lt;return type&gt; &lt;delegate-name&gt; &lt;parameter list&gt;</span><br><span class="line">public class DelegateTest : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    //声明一个没有返回值的委托,委托可以写在类中也可以写在类名的外面</span><br><span class="line">    public delegate void PrintString(string value);</span><br><span class="line">    </span><br><span class="line">    //普通的方法,输出你传入的字符串</span><br><span class="line">    public void DebugString(string s)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(s);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        DebugString(&quot;普通的方法&quot;);</span><br><span class="line">        //声明一个委托并且将和委托具有相同参数类型的方法DebugString传入</span><br><span class="line">        PrintString p1 = new PrintString(DebugString);</span><br><span class="line">        //此时这个委托具有和 DebugString方法相同的功能</span><br><span class="line">        p1(&quot;委托测试&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <p>​    委托即使得一个函数也能使用另一个函数的功能了？</p>
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230307174045922.png" alt="image-20230307174045922" style="zoom:80%;">
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230307174045922.png" alt="image-20230307174045922" style="zoom:80%;">
 
 <blockquote>
 <p>​    例如，假设您有两个方法A和B，A需要调用B来完成某个任务。您可以使用委托将方法B作为参数传递给方法A，使得方法A可以通过委托调用方法B，从而完成该任务</p>
@@ -447,7 +447,7 @@
 <p>​    <strong>简单来说就是委托执行的时候可以执行多个方法</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">//多播(组播),委托对象可使用 &quot;+&quot; 运算符进行合并。一个合并委托调用它所合并的两个委托。只有相同类型的委托可被合并。&quot;-&quot; 运算符可用于从合并的委托中移除组件委托。</span><br><span class="line">public class DelegateTest : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    //声明一个没有返回值的委托,委托可以写在类中也可以写在类名的外面</span><br><span class="line">    public delegate void PrintString(string value);</span><br><span class="line">    </span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        //声明一个委托并且将和委托具有相同参数类型的方法DebugString传入</span><br><span class="line">        PrintString p ;</span><br><span class="line">        PrintString p1 = new PrintString(DebugStringOne);</span><br><span class="line">        PrintString p2 = new PrintString(DebugStringTwo);</span><br><span class="line">       </span><br><span class="line">        p = p1;</span><br><span class="line">        p += p2;</span><br><span class="line">        //调用多播</span><br><span class="line">        p(&quot;委托测试&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    //普通的方法,输出你传入的字符串</span><br><span class="line">    public void DebugStringOne(string s)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(&quot;DebugStringOne:&quot; + s);</span><br><span class="line">    &#125;</span><br><span class="line">    public void DebugStringTwo(string s)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(&quot;DebugStringTwo:&quot; + s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230307174027354.png" alt="image-20230307174027354" style="zoom: 67%;">
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230307174027354.png" alt="image-20230307174027354" style="zoom: 67%;">
 
 
 
@@ -474,7 +474,7 @@
 <p>为什么要在类里面声明事件？这里想到了观察者模式，当类中有东西发生变化，我们可以用事件对外界发出通知。</p>
 <h3 id="Event与观察者模式"><a href="#Event与观察者模式" class="headerlink" title="Event与观察者模式"></a>Event与观察者模式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var demo =new Demo();</span><br><span class="line">demo.MyValueChanged+= ()=&gt; &quot;value changed observed&quot;.Dump();	//所谓的观测者，即注册了事件的</span><br><span class="line">demo.Myvalue = 10;</span><br><span class="line">demo.Myvalue = 12;</span><br><span class="line">demo.Myvalue = 14;</span><br><span class="line"></span><br><span class="line">class Demo</span><br><span class="line">&#123;</span><br><span class="line">		int myValue;</span><br><span class="line">		public int Myvalue</span><br><span class="line">		&#123;</span><br><span class="line">		get&#123;return myValue;&#125;</span><br><span class="line">		set&#123;</span><br><span class="line">			myValue=value;</span><br><span class="line">			MyValueChanged?.Invoke();	//在调用Myvalue的set，即被赋值时，会发出通知</span><br><span class="line">		   &#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		public event Action MyValueChanged;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%5Cimage-20230308205657186.png" class title="image-20230308205657186">
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308205657186.png" class title="image-20230308205657186">
 
 <p>​    很明显，这时候成功完成了观察者模式。</p>
 <h3 id="事件的作用"><a href="#事件的作用" class="headerlink" title="事件的作用"></a><strong>事件的作用</strong></h3><p>1.防止外部随意置空委托</p>
@@ -493,24 +493,24 @@
 </blockquote>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.无参无返回值</span></span><br><span class="line"><span class="comment">// ***注意：Lambda表达式是无法单独使用的，是需要配合委托或者事件使用的</span></span><br><span class="line">Action ac = ()=&gt;&#123;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.有参数无返回值</span></span><br><span class="line">Action ac = (<span class="built_in">int</span> <span class="keyword">value</span>)=&gt;&#123;</span><br><span class="line">    Console.WriteLine(<span class="keyword">value</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.甚至参数类型都可以省略，只要参数类型和委托或事件容器一致的就行</span></span><br><span class="line"><span class="comment">// 因为我们通过泛型占位字母指定了我们的类型，所以我们可以省略参数类型</span></span><br><span class="line">Action&lt;<span class="built_in">int</span>&gt; ac = (<span class="keyword">value</span>)=&gt;&#123;</span><br><span class="line">    Console.WriteLine(<span class="keyword">value</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4.有返回值的</span></span><br><span class="line">Func&lt;<span class="built_in">string</span>, <span class="built_in">int</span>&gt; ac = (<span class="keyword">value</span>)=&gt;&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;123&quot;</span>;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308212955037.png" alt="image-20230308212955037" style="zoom: 33%;">
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308212955037.png" alt="image-20230308212955037" style="zoom: 33%;">
 
-<h3 id="典型的lambda"><a href="#典型的lambda" class="headerlink" title="典型的lambda"></a>典型的lambda</h3><img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213048208.png" alt="image-20230308213048208" style="zoom: 50%;">
+<h3 id="典型的lambda"><a href="#典型的lambda" class="headerlink" title="典型的lambda"></a>典型的lambda</h3><img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213048208.png" alt="image-20230308213048208" style="zoom: 50%;">
 
 <p>​    Func有返回值，所以第三个是返回类型。</p>
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213129591.png" alt="image-20230308213129591" style="zoom:50%;">
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213129591.png" alt="image-20230308213129591" style="zoom:50%;">
 
 <p>​    Action没有返回值</p>
-<h4 id="predicate"><a href="#predicate" class="headerlink" title="predicate"></a>predicate</h4><img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213141662.png" alt="image-20230308213141662" style="zoom:50%;">
+<h4 id="predicate"><a href="#predicate" class="headerlink" title="predicate"></a>predicate</h4><img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213141662.png" alt="image-20230308213141662" style="zoom:50%;">
 
 <p>第三种是只能输入一个参数，只能返回一个bool值，这里表示s若全大写且相同即返回true。</p>
-<h3 id="用在回调函数"><a href="#用在回调函数" class="headerlink" title="用在回调函数"></a>用在回调函数</h3><img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213401026.png" alt="image-20230308213401026" style="zoom:50%;">
+<h3 id="用在回调函数"><a href="#用在回调函数" class="headerlink" title="用在回调函数"></a>用在回调函数</h3><img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213401026.png" alt="image-20230308213401026" style="zoom:50%;">
 
 <h3 id="和List配合的过滤功能"><a href="#和List配合的过滤功能" class="headerlink" title="和List配合的过滤功能"></a>和List配合的过滤功能</h3><p>比如，过滤出List中大于3的值并输出。</p>
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213439001.png" alt="image-20230308213439001" style="zoom: 50%;">
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213439001.png" alt="image-20230308213439001" style="zoom: 50%;">
 
 <p>​    可以用Lambda用一行写出</p>
-<img src="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/image-20230308213513786.png" alt="image-20230308213513786" style="zoom: 50%;">
+<img src="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/image-20230308213513786.png" alt="image-20230308213513786" style="zoom: 50%;">
 
 <p>​    这里l1就是List，Where是List内置的方法，定位某一个元素。</p>
 <p>​    n即为输入的，右边是决定条件，这一套就会遍历输出实现上述效果。</p>
@@ -590,7 +590,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/" rel="next" title="【C#】 随想笔记">
+              <a href="/2023/03/07/Csharp%E7%AC%94%E8%AE%B0/" rel="next" title="【C#】 随想笔记">
                 <i class="fa fa-chevron-left"></i> 【C#】 随想笔记
               </a>
             
@@ -600,7 +600,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2023/03/08/C#%20%E5%9F%BA%E7%A1%80/" rel="prev" title="【C#】 基础篇">
+              <a href="/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/" rel="prev" title="【C#】 基础篇">
                 【C#】 基础篇 <i class="fa fa-chevron-right"></i>
               </a>
             

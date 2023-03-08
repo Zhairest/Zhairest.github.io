@@ -82,18 +82,18 @@
 <meta name="description" content="C#几乎遗忘，复习+学习一些知识 属性get和set访问器（Accessor）​    在面向对象编程（OOP）中，是不允许外界直接对类的私有成员变量直接访问的。C#中就要用set和get方法来访问私有成员变量，它们相当于外界访问对象的一个通道，一个“接口”，又称成员属性的访问器。 ​    属性（Property）的访问器（Accessor）包含有助于获取（读取或计算）或设置（写入）属性的可执行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【C#】 随想笔记">
-<meta property="og:url" content="http://example.com/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:url" content="http://example.com/2023/03/07/Csharp%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
 <meta property="og:description" content="C#几乎遗忘，复习+学习一些知识 属性get和set访问器（Accessor）​    在面向对象编程（OOP）中，是不允许外界直接对类的私有成员变量直接访问的。C#中就要用set和get方法来访问私有成员变量，它们相当于外界访问对象的一个通道，一个“接口”，又称成员属性的访问器。 ​    属性（Property）的访问器（Accessor）包含有助于获取（读取或计算）或设置（写入）属性的可执行">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/image-20230307210954813.png">
-<meta property="og:image" content="http://example.com/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/image-20230307211649187.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Csharp%E7%AC%94%E8%AE%B0/image-20230307210954813.png">
+<meta property="og:image" content="http://example.com/2023/03/07/Csharp%E7%AC%94%E8%AE%B0/image-20230307211649187.png">
 <meta property="article:published_time" content="2023-03-07T08:40:47.000Z">
-<meta property="article:modified_time" content="2023-03-08T16:04:54.810Z">
+<meta property="article:modified_time" content="2023-03-08T16:14:40.186Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/image-20230307210954813.png">
+<meta name="twitter:image" content="http://example.com/2023/03/07/Csharp%E7%AC%94%E8%AE%B0/image-20230307210954813.png">
 
 
 
@@ -123,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/03/07/C# 笔记/"/>
+  <link rel="canonical" href="http://example.com/2023/03/07/Csharp笔记/"/>
 
 
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/07/Csharp%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -311,7 +311,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-03-09T00:04:54+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-09T00:14:40+08:00">
                 2023-03-09
               </time>
             
@@ -479,9 +479,9 @@
 <h4 id="三、动态访问成员调用方法（上一步操作后已获取实例对象）"><a href="#三、动态访问成员调用方法（上一步操作后已获取实例对象）" class="headerlink" title="三、动态访问成员调用方法（上一步操作后已获取实例对象）"></a>三、动态访问成员调用方法（上一步操作后已获取实例对象）</h4><p>System.Reflection.MethodInfo method = type.GetMethod(“方法名”);//获得方法</p>
 <p>System.Reflection.MethodInfo.Invoke(object , new object[]{参数}) //调用的类实例和实例参数</p>
 <h1 id="特性-Attribute"><a href="#特性-Attribute" class="headerlink" title="特性 Attribute"></a>特性 Attribute</h1><p>​    特性是一种允许我们向程序的程序集添加元数据的语言结构，它是用于保存程序结构信息的某种特殊类型的类。特性提供功能强大的方法以将声明信息与C#代码（类型、方法、属性等）相关联。特性与程序实体关联后，即可在运行时使用反射查询特性信息。特性的目的是告诉编译器把程序结构的某组元数据嵌入程序集中，它可以放置在几乎所有的声明中（类、变量、函数等等申明）。</p>
-<p>​    简单理解：特性本质是一个类，我们可以利用特性类为元数据添加额外信息，比如一个类、成员变量、成员方法等等为他们添加更多的额外信息，之后可以通过反射来获取得到这些额外信息。<img src="/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/image-20230307210954813.png" alt style="zoom: 67%;"></p>
+<p>​    简单理解：特性本质是一个类，我们可以利用特性类为元数据添加额外信息，比如一个类、成员变量、成员方法等等为他们添加更多的额外信息，之后可以通过反射来获取得到这些额外信息。<img src="/2023/03/07/Csharp%E7%AC%94%E8%AE%B0/image-20230307210954813.png" alt style="zoom: 67%;"></p>
 <p>​    如上即可将speed的值限制在-100到100之间，在unity的Inspector中显示为一个滑动条。</p>
-<img src="/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/image-20230307211649187.png" alt="image-20230307211649187" style="zoom:67%;">
+<img src="/2023/03/07/Csharp%E7%AC%94%E8%AE%B0/image-20230307211649187.png" alt="image-20230307211649187" style="zoom:67%;">
 
 <p>​    又如图即可在仅改变代码不运行的情况下看到效果了。</p>
 <p>​    当然，特性还有很多，自行查阅咯。</p>
@@ -525,7 +525,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/" rel="prev" title="【C#】委托 事件 Lambda 闭包问题">
+              <a href="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/" rel="prev" title="【C#】委托 事件 Lambda 闭包问题">
                 【C#】委托 事件 Lambda 闭包问题 <i class="fa fa-chevron-right"></i>
               </a>
             
