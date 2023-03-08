@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C#," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于委托和事件，更推荐看这个视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV163411S7QG ​    ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑相信我↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 委托(Delegate)​    委托，事件，匿名函数，Lambda ​     ​    （下文中把函数和方法混为一谈，默认二者">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C#】委托 事件 Lambda">
+<meta property="og:url" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/index.html">
+<meta property="og:site_name" content="旋转公寓的阁楼">
+<meta property="og:description" content="关于委托和事件，更推荐看这个视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV163411S7QG ​    ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑相信我↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 委托(Delegate)​    委托，事件，匿名函数，Lambda ​     ​    （下文中把函数和方法混为一谈，默认二者">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308200720979.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308201157283.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308201643879.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308202536887.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308203334447.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230307174045922.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230307174027354.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308205657186.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308212955037.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213048208.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213129591.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213141662.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213401026.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213439001.png">
+<meta property="og:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213513786.png">
+<meta property="article:published_time" content="2023-03-08T10:49:02.000Z">
+<meta property="article:modified_time" content="2023-03-08T13:57:53.879Z">
+<meta property="article:author" content="Zhairest">
+<meta property="article:tag" content="C#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308200720979.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2023/03/08/C-之事件-委托/"/>
+
+
+
+
+
+  <title>【C#】委托 事件 Lambda | 旋转公寓的阁楼</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旋转公寓的阁楼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">储物间</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旋转公寓的阁楼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【C#】委托 事件 Lambda</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-03-08T18:49:02+08:00">
+                2023-03-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-08T21:57:53+08:00">
+                2023-03-08
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.5k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>关于委托和事件，更推荐看这个视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV163411S7QG">https://www.bilibili.com/video/BV163411S7QG</a></strong></p>
+<p>​    ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑相信我↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑</p>
+<h1 id="委托-Delegate"><a href="#委托-Delegate" class="headerlink" title="委托(Delegate)"></a>委托(Delegate)</h1><p>​    <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/491655559">委托，事件，匿名函数，Lambda</a></p>
+<p>​    </p>
+<p>​    （下文中把函数和方法混为一谈，默认二者相等，其实这里用方法更合适）</p>
+<h3 id="委托的作用"><a href="#委托的作用" class="headerlink" title="委托的作用"></a>委托的作用</h3><ul>
+<li>​    函数传参（例如回调函数）</li>
+<li>​    基于委托去声明事件，并注册</li>
+</ul>
+<p>​    **委托相当于把某一个方法当成参数,当执行委托的时候就相当于执行了方法,所以这个方法必须和委托具有相同的参数类型.**<a target="_blank" rel="noopener" href="https://blog.csdn.net/sam_game/article/details/53894802">https://blog.csdn.net/sam_game/article/details/53894802</a></p>
+<p>​    委托是函数(方法)的容器，可以理解为表示函数(方法)的变量类型，用来存储、传递函数(方法)。委托的本质是一个类，用来定义函数(方法)的类型(返回值和参数的类型)，不同的函数(方法)必须对应和各自”格式”一致的委托。</p>
+<p>​    <strong>注意：我们时刻要记住委托变量是函数的容器</strong></p>
+<blockquote>
+<p>例如，假设有一个委托：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MyDelegate (string s);</span><br><span class="line"></span><br><span class="line">delegate void Fun();</span><br><span class="line">// ***注意：(在同一语句块中)委托不存在同名的两个委托，编辑器会报错误的，它不是函数不能重载</span><br><span class="line">delegate int Fun2(int a);// 表示用来装载或者传递返回值为int 有一个int参数的函数的委托容器规则</span><br></pre></td></tr></table></figure>
+
+<p>上面的委托可被用于引用任何一个带有一个单一的 <em>string</em> 参数的方法，并返回一个 <em>int</em> 类型变量。</p>
+</blockquote>
+<h3 id="例如："><a href="#例如：" class="headerlink" title="例如："></a>例如：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var foo=new Foo(MyFunc);	//委托的声明时 必须传入一个参数（当然后面可以删掉，为空会报错）</span><br><span class="line">foo+= MyFunc;</span><br><span class="line">foo+= MyFunc2;</span><br><span class="line">foo+= MyFunc;</span><br><span class="line">foo?.Invoke();					//?.Invoke() 可以避免为空的报错</span><br><span class="line"></span><br><span class="line">void MyFunc()&#123;			//某函数</span><br><span class="line">	&quot;hello&quot;.Dump();					//此处的Dump是LINQpad7 特有的功能</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void MyFunc2()</span><br><span class="line">&#123;</span><br><span class="line">	&quot;World&quot;.Dump();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">delegate void Foo();	//委托</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308200720979.png" class title="image-20230308200720979">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var foo=new Foo(MyFunc);	//委托的实例化 </span><br><span class="line">foo.Invoke(10).Dump();		//Or foo(10).Dump();</span><br><span class="line"></span><br><span class="line">string MyFunc(int b)&#123;			//某函数</span><br><span class="line">	return (b+1).ToString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">delegate string Foo(int a);	//委托			//带参数的委托</span><br><span class="line">//如果有多个，只会返回最后加的东西</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308201157283.png" class title="image-20230308201157283">
+
+<h4 id="委托作为回调函数"><a href="#委托作为回调函数" class="headerlink" title="委托作为回调函数"></a>委托作为回调函数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MyHeavyJob(MyCallback);</span><br><span class="line"></span><br><span class="line">void MyHeavyJob(Callback callback)&#123;</span><br><span class="line">	Thread.Sleep(1500);</span><br><span class="line">	</span><br><span class="line">	callback();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void MyCallback()</span><br><span class="line">&#123;</span><br><span class="line">	&quot;Job Done&quot;.Dump();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">delegate void Callback();</span><br></pre></td></tr></table></figure>
+
+<p>过了1.5s以后，输出<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308201643879.png" class title="image-20230308201643879"></p>
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308202536887.png" class title="image-20230308202536887">
+
+<p>​    如图，委托相当于给函数的参数加了一个接口，你可以放入你想放入的参数，只不过这个参数，是对于这个委托合适的函数（即你可以自定义方式，更便捷）。</p>
+<p>​    委托本身还可以进一步定制化，例如图中MyRule可以改成泛型T。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var rule = new MyRule&lt;int&gt;(MySpecialRule);</span><br><span class="line">rule(10,20).Dump();</span><br><span class="line"></span><br><span class="line">bool MySpecialRule (int x, int y)&#123;</span><br><span class="line">	return true;	</span><br><span class="line">&#125;</span><br><span class="line">bool MySpecialRule2 (int x, int y)&#123;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">delegate bool MyRule&lt;T&gt;(T x ,T y); </span><br></pre></td></tr></table></figure>
+
+<h3 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h3><p>​    我们发现上面委托的MyRule名字其实不重要，叫啥其实无所谓。于是官方提供了强类型委托，即Action。所以Action即是一种没有返回值的委托。同理，Func其实就是有返回值的委托</p>
+<blockquote>
+<p>可以使用此委托将方法作为参数传递，而无需显式声明自定义委托。 封装的方法必须与此委托定义的方法签名相对应。 这意味着封装的方法必须没有参数，也没有返回值。 (C# 中，该方法必须返回 <code>void</code>）</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PickOne(10,20,MySpecialRule).Dump();</span><br><span class="line"></span><br><span class="line">int  PickOne(int a,int b,Func&lt;int,int,bool&gt; rule)</span><br><span class="line">&#123;</span><br><span class="line">	if(rule(a,b))return a;</span><br><span class="line">	else return b;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool MySpecialRule (int x, int y)&#123;</span><br><span class="line">	return true;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308203334447.png" class title="image-20230308203334447">
+
+<h3 id="匿名委托"><a href="#匿名委托" class="headerlink" title="匿名委托"></a>匿名委托</h3><p>反正名字也不重要了，为啥还要留一个委托名字是吧，于是匿名委托出现，请对比上图</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PickOne(10,20, delegate(int a,int b)&#123;return true; &#125;).Dump();</span><br><span class="line"></span><br><span class="line">int  PickOne(int a,int b,Func&lt;int,int,bool&gt; rule)</span><br><span class="line">&#123;</span><br><span class="line">	if(rule(a,b))return a;</span><br><span class="line">	else return b;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h4><p>​    匿名函数就是没有名字的函数;匿名函数的使用主要是配合委托和事件进行使用的;脱离委托和事件是不会使用匿名函数的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// 1.无参无返回</span><br><span class="line">// ***注意:我们是无法申明匿名函数的,匿名函数是无法脱离了委托和事件存在的,所以匿名函数申明必须作为委托或者事件的右值赋值给委托或者事件,而无法单独存在.</span><br><span class="line">Action ac = delegate ()&#123;</span><br><span class="line">    Console.WriteLine(&quot;123&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">// 执行匿名函数</span><br><span class="line">ac();</span><br><span class="line"></span><br><span class="line">//2.有参数</span><br><span class="line">Action&lt;int ,string&gt; b = delegate (int a, string b)&#123;</span><br><span class="line">    Console.WriteLine(a);</span><br><span class="line">    Console.WriteLine(b);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//3.有返回值</span><br><span class="line">Func&lt;string&gt; func = delegate ()&#123;</span><br><span class="line">  return &quot;123123&quot;;  </span><br><span class="line">&#125;;</span><br><span class="line">// 执行</span><br><span class="line">Console.WriteLine(func());</span><br><span class="line"></span><br><span class="line">//4.一般情况会作为函数参数传递或者作为函数返回值</span><br><span class="line">// 作为参数传递时</span><br><span class="line">class Test&#123;</span><br><span class="line">    public Action action;</span><br><span class="line">    public void DoSomething(int a, Action fun)&#123;</span><br><span class="line">       Console.WriteLine(a);</span><br><span class="line">        fun();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public Action GetFun()&#123;</span><br><span class="line">        return delegate ()&#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Test2&#123;</span><br><span class="line">    static void Main()&#123;</span><br><span class="line">        // 参数传递</span><br><span class="line">        Test t = new Test();</span><br><span class="line">        t.DoSomething(100, delegate ()&#123;</span><br><span class="line">           Console.WriteLine(&quot;随着参数传入的匿名函数&quot;); </span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        // 返回值</span><br><span class="line">        Action ac = t.GetFun();</span><br><span class="line">        ac();</span><br><span class="line">        // 我们也可以直接一步到位</span><br><span class="line">        // 我们先看前一半ac()返回了一个函数名,函数名＋后一半&quot;()&quot;相当于调用这个 函数</span><br><span class="line">        ac()();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="匿名函数的缺点"><a href="#匿名函数的缺点" class="headerlink" title="匿名函数的缺点"></a><strong>匿名函数的缺点</strong></h4><p>添加到委托或者事件容器后,不记录下来的话,我们无法单独移除,因为我们的匿名函数没有函数名,所以唯一的方法是把委托或者事件容器全部清空才行.</p>
+<h3 id="Lambda（更多看下列详解）"><a href="#Lambda（更多看下列详解）" class="headerlink" title="Lambda（更多看下列详解）"></a>Lambda（更多看下列详解）</h3><p>当然，现在没人会写上面这种形式的匿名委托了，大家都用Lambda表达式，仔细对比</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PickOne(10,20, (a,b)=&gt;true ).Dump();</span><br><span class="line"></span><br><span class="line">int  PickOne(int a,int b,Func&lt;int,int,bool&gt; rule)</span><br><span class="line">&#123;</span><br><span class="line">	if(rule(a,b))return a;</span><br><span class="line">	else return b;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个表达式 <strong>(a,b)=&gt;true</strong> ，归根结底就是一种委托，它最终会被转成Action或者Func</p>
+<blockquote>
+<p>即：delegate(int a,int b){return true;}</p>
+<p>等于 (a,b)=&gt;true</p>
+</blockquote>
+<h3 id="Unity中"><a href="#Unity中" class="headerlink" title="Unity中"></a>Unity中</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">//首先先说明一点，委托的本质是一个类</span><br><span class="line">//委托(代理) 是存有对某个方法的引用的一种引用类型变量。</span><br><span class="line">//委托语法:delegate &lt;return type&gt; &lt;delegate-name&gt; &lt;parameter list&gt;</span><br><span class="line">public class DelegateTest : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    //声明一个没有返回值的委托,委托可以写在类中也可以写在类名的外面</span><br><span class="line">    public delegate void PrintString(string value);</span><br><span class="line">    </span><br><span class="line">    //普通的方法,输出你传入的字符串</span><br><span class="line">    public void DebugString(string s)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(s);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        DebugString(&quot;普通的方法&quot;);</span><br><span class="line">        //声明一个委托并且将和委托具有相同参数类型的方法DebugString传入</span><br><span class="line">        PrintString p1 = new PrintString(DebugString);</span><br><span class="line">        //此时这个委托具有和 DebugString方法相同的功能</span><br><span class="line">        p1(&quot;委托测试&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    委托即使得一个函数也能使用另一个函数的功能了？</p>
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230307174045922.png" alt="image-20230307174045922" style="zoom:80%;">
+
+<blockquote>
+<p>​    例如，假设您有两个方法A和B，A需要调用B来完成某个任务。您可以使用委托将方法B作为参数传递给方法A，使得方法A可以通过委托调用方法B，从而完成该任务</p>
+</blockquote>
+<h3 id="多播委托"><a href="#多播委托" class="headerlink" title="多播委托"></a><strong>多播委托</strong></h3><p>​    <strong>多播</strong>：委托对象可使用 “+” 运算符进行合并。一个合并委托调用它所合并的两个委托。只有相同类型的委托可被合并。”-“ 运算符可用于从合并的委托中移除组件委托。 (上面出现过了，但我懒得删咯)</p>
+<p>​    <strong>简单来说就是委托执行的时候可以执行多个方法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">//多播(组播),委托对象可使用 &quot;+&quot; 运算符进行合并。一个合并委托调用它所合并的两个委托。只有相同类型的委托可被合并。&quot;-&quot; 运算符可用于从合并的委托中移除组件委托。</span><br><span class="line">public class DelegateTest : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    //声明一个没有返回值的委托,委托可以写在类中也可以写在类名的外面</span><br><span class="line">    public delegate void PrintString(string value);</span><br><span class="line">    </span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        //声明一个委托并且将和委托具有相同参数类型的方法DebugString传入</span><br><span class="line">        PrintString p ;</span><br><span class="line">        PrintString p1 = new PrintString(DebugStringOne);</span><br><span class="line">        PrintString p2 = new PrintString(DebugStringTwo);</span><br><span class="line">       </span><br><span class="line">        p = p1;</span><br><span class="line">        p += p2;</span><br><span class="line">        //调用多播</span><br><span class="line">        p(&quot;委托测试&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    //普通的方法,输出你传入的字符串</span><br><span class="line">    public void DebugStringOne(string s)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(&quot;DebugStringOne:&quot; + s);</span><br><span class="line">    &#125;</span><br><span class="line">    public void DebugStringTwo(string s)</span><br><span class="line">    &#123;</span><br><span class="line">        Debug.Log(&quot;DebugStringTwo:&quot; + s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230307174027354.png" alt="image-20230307174027354" style="zoom: 67%;">
+
+
+
+<h1 id="事件Event"><a href="#事件Event" class="headerlink" title="事件Event"></a>事件Event</h1><p>​    <strong>事件是基于委托的存在，事件是委托的安全包裹，让委托的使用更具有安全性。</strong></p>
+<p>​    上面可知，委托在声明时，必须立刻注册一个方法。但是用事件可以不用急。</p>
+<p>​    事件在类中声明且生成，且通过使用同一个类或其他类中的委托与事件处理程序关联。包含事件的类用于发布事件。这被称为 <strong>发布器（publisher）</strong> 类。其他接受该事件的类被称为 <strong>订阅器（subscriber）</strong> 类。事件使用 <strong>发布-订阅（publisher-subscriber）</strong> 模型。（观察者模型？）</p>
+<blockquote>
+<p>​    <strong>发布器（publisher）</strong> 是一个包含事件和委托定义的对象。事件和委托之间的联系也定义在这个对象中。发布器（publisher）类的对象调用这个事件，并通知其他的对象。</p>
+<p>​    <strong>订阅器（subscriber）</strong> 是一个接受事件并提供事件处理程序的对象。在发布器（publisher）类中的委托调用订阅器（subscriber）类中的方法（事件处理程序）。</p>
+</blockquote>
+<p>​    在类的内部声明事件，首先必须声明该事件的委托类型。例如：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">BoilerLogHandler</span>(<span class="params"><span class="built_in">string</span> status</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​    然后，声明事件本身，使用 <strong>event</strong> 关键字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 基于上面的委托定义事件</span><br><span class="line">public event BoilerLogHandler BoilerEventLog;</span><br></pre></td></tr></table></figure>
+
+<p>​    上面的代码定义了一个名为 <em>BoilerLogHandler</em> 的委托和一个名为 <em>BoilerEventLog</em> 的事件，该事件在生成的时候会调用委托。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先我们要记住:</span></span><br><span class="line"><span class="comment">// 事件相对于委托的区别：</span></span><br><span class="line"><span class="comment">// 1.不能在类的外部赋值</span></span><br><span class="line"><span class="comment">// 2.不能在类外部调用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 举例:</span></span><br><span class="line"><span class="keyword">class</span> <span class="title">Test2</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        Test t = <span class="keyword">new</span> Test();</span><br><span class="line">        <span class="comment">// 我们会发现,我们的委托是可以在类的外部被点(.)出来使用的</span></span><br><span class="line">        t.myFun = <span class="literal">null</span>;</span><br><span class="line">        <span class="comment">// 但是我们的Event不行,尽管它是Public的访问修饰符</span></span><br><span class="line">        <span class="comment">// Event能做的只能是在类的外部执行增(+=)和删(-=),不允许赋值操作</span></span><br><span class="line">    </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 我们的委托是可以在类的外部被调用的</span></span><br><span class="line">        t.myFun();</span><br><span class="line">        t.myFun.Invoke();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 但是我们的事件Event是做不到的,如果我们需要调用Event是需要在类的内部进行封装方法的</span></span><br><span class="line">        <span class="comment">// ***注意:事件是不能作为临时变量在函数中使用的,也就是我们在函数中是无法申明事件的,它只能作为成员存在于类\接口\结构体中,但是委托是可以的        </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="没听懂？来看简单的"><a href="#没听懂？来看简单的" class="headerlink" title="没听懂？来看简单的"></a>没听懂？来看简单的</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var demo =new Demo();</span><br><span class="line">demo.MyEvent+= ()=&gt; &quot;hello&quot;.Dump();</span><br><span class="line">demo.InvokeEvent();</span><br><span class="line"></span><br><span class="line">class Demo</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">		public event Action MyEvent;		//action就是一个委托，这里实例化一个event</span><br><span class="line">		</span><br><span class="line">		public void InvokeEvent()</span><br><span class="line">		&#123;</span><br><span class="line">			//MyEvent();		//等于MyEvent.Invoke();</span><br><span class="line">			MyEvent?.Invoke();	//同样的，Event注册的委托若为空，则报错</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么要在类里面声明事件？这里想到了观察者模式，当类中有东西发生变化，我们可以用事件对外界发出通知。</p>
+<h3 id="Event与观察者模式"><a href="#Event与观察者模式" class="headerlink" title="Event与观察者模式"></a>Event与观察者模式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var demo =new Demo();</span><br><span class="line">demo.MyValueChanged+= ()=&gt; &quot;value changed observed&quot;.Dump();	//所谓的观测者，即注册了事件的</span><br><span class="line">demo.Myvalue = 10;</span><br><span class="line">demo.Myvalue = 12;</span><br><span class="line">demo.Myvalue = 14;</span><br><span class="line"></span><br><span class="line">class Demo</span><br><span class="line">&#123;</span><br><span class="line">		int myValue;</span><br><span class="line">		public int Myvalue</span><br><span class="line">		&#123;</span><br><span class="line">		get&#123;return myValue;&#125;</span><br><span class="line">		set&#123;</span><br><span class="line">			myValue=value;</span><br><span class="line">			MyValueChanged?.Invoke();	//在调用Myvalue的set，即被赋值时，会发出通知</span><br><span class="line">		   &#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		public event Action MyValueChanged;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308205657186.png" class title="image-20230308205657186">
+
+<p>​    很明显，这时候成功完成了观察者模式。</p>
+<h3 id="事件的作用"><a href="#事件的作用" class="headerlink" title="事件的作用"></a><strong>事件的作用</strong></h3><p>1.防止外部随意置空委托</p>
+<p>2.防止外部随意调用委托</p>
+<p>3.事件相当于对委托进行了一次封装让其更安全</p>
+<blockquote>
+<p>例如，假设您正在编写一个窗体应用程序，该应用程序包含一个按钮。您可以使用事件来处理当用户单击该按钮时发生的事件。在这种情况下，按钮是事件的发布者对象，窗体是事件的订阅者对象。当用户单击按钮时，按钮会触发Click事件，通知窗体执行特定的操作，例如弹出一个消息框或执行一些计算等。</p>
+</blockquote>
+<h1 id="Lambda表达式拓展重复-以前写的不舍得删"><a href="#Lambda表达式拓展重复-以前写的不舍得删" class="headerlink" title="Lambda表达式拓展重复(以前写的不舍得删)"></a><strong>Lambda表达式拓展重复(以前写的不舍得删)</strong></h1><p>​    Lambda表达式可以理解为匿名函数的简写形式，它除了写法上的不同外，使用上和功能上完全与匿名函数一模一样，优缺点也是一模一样的，同理，它也是需要配合委托或者事件使用的。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.无参无返回值</span></span><br><span class="line"><span class="comment">// ***注意：Lambda表达式是无法单独使用的，是需要配合委托或者事件使用的</span></span><br><span class="line">Action ac = ()=&gt;&#123;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.有参数无返回值</span></span><br><span class="line">Action ac = (<span class="built_in">int</span> <span class="keyword">value</span>)=&gt;&#123;</span><br><span class="line">    Console.WriteLine(<span class="keyword">value</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.甚至参数类型都可以省略，只要参数类型和委托或事件容器一致的就行</span></span><br><span class="line"><span class="comment">// 因为我们通过泛型占位字母指定了我们的类型，所以我们可以省略参数类型</span></span><br><span class="line">Action&lt;<span class="built_in">int</span>&gt; ac = (<span class="keyword">value</span>)=&gt;&#123;</span><br><span class="line">    Console.WriteLine(<span class="keyword">value</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4.有返回值的</span></span><br><span class="line">Func&lt;<span class="built_in">string</span>, <span class="built_in">int</span>&gt; ac = (<span class="keyword">value</span>)=&gt;&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;123&quot;</span>;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308212955037.png" alt="image-20230308212955037" style="zoom: 50%;">
+
+<h3 id="典型的lambda"><a href="#典型的lambda" class="headerlink" title="典型的lambda"></a>典型的lambda</h3><img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213048208.png" class title="image-20230308213048208">
+
+<p>​    Func有返回值，所以第三个是返回类型。</p>
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213129591.png" class title="image-20230308213129591">
+
+<p>​    Action没有返回值</p>
+<h4 id="predicate"><a href="#predicate" class="headerlink" title="predicate"></a>predicate</h4><img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213141662.png" class title="image-20230308213141662">
+
+<p>第三种是只能输入一个参数，只能返回一个bool值，这里表示s若全大写且相同即返回true。</p>
+<h3 id="用在回调函数"><a href="#用在回调函数" class="headerlink" title="用在回调函数"></a>用在回调函数</h3><img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213401026.png" alt="image-20230308213401026" style="zoom:50%;">
+
+<h3 id="和List配合的过滤功能"><a href="#和List配合的过滤功能" class="headerlink" title="和List配合的过滤功能"></a>和List配合的过滤功能</h3><p>比如，过滤出List中大于3的值并输出。</p>
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213439001.png" alt="image-20230308213439001" style="zoom:67%;">
+
+<p>​    可以用Lambda用一行写出</p>
+<img src="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/image-20230308213513786.png" alt="image-20230308213513786" style="zoom:67%;">
+
+<p>​    这里l1就是List，Where是List内置的方法，定位某一个元素。</p>
+<p>​    n即为输入的，右边是决定条件，这一套就会遍历输出实现上述效果。</p>
+<h3 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h3><p>​    unity中for循环使用lambda表达式注意闭包问题</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/03/07/C-%E7%AC%94%E8%AE%B0/" rel="next" title="【C#】 随想笔记">
+                <i class="fa fa-chevron-left"></i> 【C#】 随想笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/03/08/C-%E5%9F%BA%E7%A1%80/" rel="prev" title="【C#】 基础">
+                【C#】 基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Zhairest" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/#/user/home?id=70879973" target="_blank" title="CloudMusic">
+                      
+                        <i class="fa fa-fw fa-cloud"></i>CloudMusic</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A7%94%E6%89%98-Delegate"><span class="nav-number">1.</span> <span class="nav-text">委托(Delegate)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.0.1.</span> <span class="nav-text">委托的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%A6%82%EF%BC%9A"><span class="nav-number">1.0.2.</span> <span class="nav-text">例如：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">委托作为回调函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Action"><span class="nav-number">1.0.3.</span> <span class="nav-text">Action</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%A7%94%E6%89%98"><span class="nav-number">1.0.4.</span> <span class="nav-text">匿名委托</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">匿名函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">匿名函数的缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda%EF%BC%88%E6%9B%B4%E5%A4%9A%E7%9C%8B%E4%B8%8B%E5%88%97%E8%AF%A6%E8%A7%A3%EF%BC%89"><span class="nav-number">1.0.5.</span> <span class="nav-text">Lambda（更多看下列详解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unity%E4%B8%AD"><span class="nav-number">1.0.6.</span> <span class="nav-text">Unity中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%92%AD%E5%A7%94%E6%89%98"><span class="nav-number">1.0.7.</span> <span class="nav-text">多播委托</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6Event"><span class="nav-number">2.</span> <span class="nav-text">事件Event</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%A1%E5%90%AC%E6%87%82%EF%BC%9F%E6%9D%A5%E7%9C%8B%E7%AE%80%E5%8D%95%E7%9A%84"><span class="nav-number">2.0.1.</span> <span class="nav-text">没听懂？来看简单的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event%E4%B8%8E%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.0.2.</span> <span class="nav-text">Event与观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.0.3.</span> <span class="nav-text">事件的作用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8B%93%E5%B1%95%E9%87%8D%E5%A4%8D-%E4%BB%A5%E5%89%8D%E5%86%99%E7%9A%84%E4%B8%8D%E8%88%8D%E5%BE%97%E5%88%A0"><span class="nav-number">3.</span> <span class="nav-text">Lambda表达式拓展重复(以前写的不舍得删)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E7%9A%84lambda"><span class="nav-number">3.0.1.</span> <span class="nav-text">典型的lambda</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#predicate"><span class="nav-number">3.0.1.1.</span> <span class="nav-text">predicate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E5%9C%A8%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.0.2.</span> <span class="nav-text">用在回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%92%8CList%E9%85%8D%E5%90%88%E7%9A%84%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD"><span class="nav-number">3.0.3.</span> <span class="nav-text">和List配合的过滤功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="nav-number">3.0.4.</span> <span class="nav-text">性能问题</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhairest</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
