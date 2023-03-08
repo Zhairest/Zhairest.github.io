@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="C#几乎遗忘，复习+学习一些知识 垃圾回收机制GC(Garbage Collector)​    垃圾回收的过程是在遍历**堆(Heap)**上动态分配的所有对象，通过识别它们是否被引用来确定哪些对象是垃圾，哪些对象仍要被使用，所谓的垃圾就是没有被任何变量，对象引用的内存，垃圾就需要被回收释放。 ​    垃圾回收有很多种算法，比如：引用计数(Reference Counting)、标记清除(Ma">
+<meta name="description" content="C#几乎遗忘，复习+学习一些知识 属性get和set访问器（Accessor）​    在面向对象编程（OOP）中，是不允许外界直接对类的私有成员变量直接访问的。C#中就要用set和get方法来访问私有成员变量，它们相当于外界访问对象的一个通道，一个“接口”，又称成员属性的访问器。 ​    属性（Property）的访问器（Accessor）包含有助于获取（读取或计算）或设置（写入）属性的可执行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【C#】 随想笔记">
-<meta property="og:url" content="http://example.com/2023/03/07/C-%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:url" content="http://example.com/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
-<meta property="og:description" content="C#几乎遗忘，复习+学习一些知识 垃圾回收机制GC(Garbage Collector)​    垃圾回收的过程是在遍历**堆(Heap)**上动态分配的所有对象，通过识别它们是否被引用来确定哪些对象是垃圾，哪些对象仍要被使用，所谓的垃圾就是没有被任何变量，对象引用的内存，垃圾就需要被回收释放。 ​    垃圾回收有很多种算法，比如：引用计数(Reference Counting)、标记清除(Ma">
+<meta property="og:description" content="C#几乎遗忘，复习+学习一些知识 属性get和set访问器（Accessor）​    在面向对象编程（OOP）中，是不允许外界直接对类的私有成员变量直接访问的。C#中就要用set和get方法来访问私有成员变量，它们相当于外界访问对象的一个通道，一个“接口”，又称成员属性的访问器。 ​    属性（Property）的访问器（Accessor）包含有助于获取（读取或计算）或设置（写入）属性的可执行">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2023/03/07/C-%E7%AC%94%E8%AE%B0/image-20230307210954813.png">
-<meta property="og:image" content="http://example.com/2023/03/07/C-%E7%AC%94%E8%AE%B0/image-20230307211649187.png">
+<meta property="og:image" content="http://example.com/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/image-20230307210954813.png">
+<meta property="og:image" content="http://example.com/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/image-20230307211649187.png">
 <meta property="article:published_time" content="2023-03-07T08:40:47.000Z">
-<meta property="article:modified_time" content="2023-03-08T14:35:34.532Z">
+<meta property="article:modified_time" content="2023-03-08T16:04:54.810Z">
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/03/07/C-%E7%AC%94%E8%AE%B0/image-20230307210954813.png">
+<meta name="twitter:image" content="http://example.com/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/image-20230307210954813.png">
 
 
 
@@ -123,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/03/07/C-笔记/"/>
+  <link rel="canonical" href="http://example.com/2023/03/07/C# 笔记/"/>
 
 
 
@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/07/C-%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -311,8 +311,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-03-08T22:35:34+08:00">
-                2023-03-08
+              <time title="更新于" itemprop="dateModified" datetime="2023-03-09T00:04:54+08:00">
+                2023-03-09
               </time>
             
           </span>
@@ -339,7 +339,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6k
+                  4.4k
                 </span>
               
 
@@ -365,33 +365,6 @@
 
       
         <p>C#几乎遗忘，复习+学习一些知识</p>
-<h1 id="垃圾回收机制GC-Garbage-Collector"><a href="#垃圾回收机制GC-Garbage-Collector" class="headerlink" title="垃圾回收机制GC(Garbage Collector)"></a>垃圾回收机制GC(Garbage Collector)</h1><p>​    垃圾回收的过程是在遍历**堆(Heap)**上动态分配的所有对象，通过识别它们是否被引用来确定哪些对象是垃圾，哪些对象仍要被使用，所谓的垃圾就是没有被任何变量，对象引用的内存，垃圾就需要被回收释放。</p>
-<p>​    垃圾回收有很多种算法，比如：<strong>引用计数(Reference Counting)、标记清除(Mark Sweep)、标记整理(Mark Compact)、复制集合(Copy Collection).</strong></p>
-<blockquote>
-<p>​    注意：GC只负责堆(Heap)内存的垃圾回收，<strong>引用类型都是存在堆(Heap)中</strong>的，所以它的分配和释放都是通过垃圾回收机制来管理。</p>
-<p>​    栈(Stack)上的内存是有系统自动管理的，<strong>值类型在栈(Stack)中</strong>分配内存的，他们有自己的生命周期，不用对他们进行管理，会自动分配和释放。</p>
-</blockquote>
-<p>​    在GC（Garbage Collection）过程中，垃圾回收器会检查堆（Heap）中的所有对象，搜索它们的引用，来判断这些对象是否还在作用域中。如果对象不在作用域中，它将被标记为需要删除。然后垃圾回收器会将这些被标记为需要删除的对象删除，收回它们所占用的内存空间。堆中的对象和代码中对象引用越多，垃圾回收过程中要进行的操作就越多，其开销也就越大。</p>
-<p>​    堆内存空间不足、系统定时自动回收垃圾以及强制GC都会触发垃圾回收操作。频繁的进行堆内存分配和释放将会导致频繁的GC。</p>
-<p>​    在Unity中，只有<strong>值类型局部变量</strong>被分配在栈（Stack）中，它们不会引起GC，其他所有类型的数据都分配在堆中，由GC系统进行回收。</p>
-<p>​    由GC引起的性能问题 主要表现 为：帧率低、性能时好时坏以及断断续续的出现卡顿。</p>
-<h3 id="优化方法"><a href="#优化方法" class="headerlink" title="优化方法"></a><strong>优化方法</strong></h3><ol>
-<li>对于子弹等不断重复出现消失的物体使用<strong>对象池Object Pooling</strong>管理</li>
-<li><strong>游戏载入新场景时，显示调用GC.Collection回收垃圾</strong>（因为载入场景本身就要等待，GC运行造成卡顿也没事）</li>
-<li>使用<strong>SriptableObject（脚本化对象）</strong>，其相当于资源文件，在实例化的时只是复制了引用（在实例化Prefab时是把数据复制了一遍）</li>
-<li>启用<strong>增量垃圾收集</strong>（增量垃圾收集将垃圾收集分解到若干帧中完成，避免出现尖峰，这些尖峰意味着进行垃圾收集那一帧的物理时间远远超过维持 60FPS 所需的 16 毫秒限制，这会导致游戏卡顿）</li>
-<li><strong>不要在需要频繁调用的函数中写有会产生内存分配操作的代码，尤其是在Update中</strong></li>
-<li><strong>尽量为需要长时间存活的资源创建大对象。（&gt;=85000字节的对象为大对象）</strong></li>
-<li><strong>减少装箱拆箱代码</strong></li>
-</ol>
-<h3 id="C-内存回收机制原理："><a href="#C-内存回收机制原理：" class="headerlink" title="C#内存回收机制原理："></a><strong>C#内存回收机制原理：</strong></h3><p>​    <strong>内存回收机制存在三代内存：0代内存、1代内存、2代内存；</strong></p>
-<p>​    代的概念：代是垃圾回收机制中使用的一种算法(分代算法)，每次新分配的对象都会被配置在第0代内存中，每次新分配都可能会进行垃圾回收以释放内存(0代内存满时)；在第一次内存回收过程开始时候，垃圾回收器会认为堆中全是内存，会进行以下两步：</p>
-<ol>
-<li><p>标记对象：从根（静态字段、方法参数）开始检查引用对象，标记后为可达对象，未标记为不可达对象，不可达对象就被认为是垃圾。</p>
-</li>
-<li><p>搬迁对象压缩堆（挂起执行托管代码线程）释放未标记的对象，搬迁可达对象，修改引用地址。</p>
-</li>
-</ol>
 <h1 id="属性get和set访问器（Accessor）"><a href="#属性get和set访问器（Accessor）" class="headerlink" title="属性get和set访问器（Accessor）"></a>属性get和set访问器（Accessor）</h1><p>​    在面向对象编程（OOP）中，是不允许外界直接对类的私有成员变量直接访问的。C#中就要用set和get方法来访问私有成员变量，它们相当于外界访问对象的一个通道，一个“接口”，又称<strong>成员属性的访问器</strong>。</p>
 <p>​    属性（Property）的<strong>访问器（Accessor）</strong>包含有助于获取（读取或计算）或设置（写入）属性的可执行语句。访问器（Accessor）声明可包含一个 get 访问器、一个 set 访问器，或者同时包含二者。</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44023930/article/details/123447507">https://blog.csdn.net/weixin_44023930/article/details/123447507</a></p>
@@ -417,39 +390,6 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Father&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">// 这时候这个Son这个类是无法被其他类继承的</span><br><span class="line">sealed class Son&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>​     在面向对象程序的设计中，密封类的主要作用就是不允许底层子类被继承，可以保证程序的规范性、安全性，以便制作复杂系统和框架的时候更方便；</p>
-<h1 id="结构体与类的区别"><a href="#结构体与类的区别" class="headerlink" title="结构体与类的区别"></a>结构体与类的区别</h1><p>​    结构体和类最大的区别是存储空间上的区别，因为结构体是值类型，类是引用类型，因此它们在存储位置是不同的，一个在栈上，一个在堆上；</p>
-<p>​    结构体和类在使用上很类似，结构体甚至可以用面向对象的思想来形容一类对象。结构体具备着面向对象思想中的封装特性，但是它不具备继承和多态的特性，因此大大减少了它的使用频率。由于结构体不具备继承的特性，所以它不能够使用protected保护访问修饰符。</p>
-<ol>
-<li>结构体是值类型，类是引用类型</li>
-<li>结构体存在栈中，类存在堆中</li>
-<li>结构体成员不能使用protected访问修饰符，而类可以</li>
-<li>结构体成员变量申明不能指定初始值，而类可以</li>
-<li>结构体不能申明无参的构造函数，而类可以</li>
-<li>结构体申明有参构造函数后，无参构造函数不会被顶替</li>
-<li>结构体不能申明析构函数，而类可以</li>
-<li>结构体不能被继承，而类可以</li>
-<li>结构体需要在构造函数中初始化所有成员变量，而类随意</li>
-<li>结构体不能被静态static修饰(不存在静态结构体)，而类可以</li>
-<li>结构体不能在自己内部申明和自己一样的结构体变量，而类可以</li>
-</ol>
-<h3 id="如何选择结构体和类"><a href="#如何选择结构体和类" class="headerlink" title="如何选择结构体和类"></a>如何选择结构体和类</h3><p>1.想要用继承和多态时候，直接淘汰结构体，比如玩家、怪物等等</p>
-<p>2.对象数据集合时，优先考虑结构体，比如位置、坐标等等</p>
-<p>3.从值类型和引用类型赋值时的区别上去考虑，比如经常被赋值传递的对象，并且改变赋值对象，原对象不想跟着变化时，就用结构体。比如坐标、向量、旋转等等。</p>
-<h1 id="抽象类和接口的区别"><a href="#抽象类和接口的区别" class="headerlink" title="抽象类和接口的区别"></a>抽象类和接口的区别</h1><p>​    <strong>抽象类和抽象方法：</strong>abstract修饰的类和方法，抽象类不能实例化，抽象方法只能在抽象类中申明，是个纯虚方法，必须在子类中实现</p>
-<p>​    <strong>接口：</strong>interface自定义类型，是行为的抽象，不包含成员变量，仅包含方法、属性、索引器、事件、成员都不能实现，建议不写访问修饰符，默认public。</p>
-<h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><p>1.都可以被继承</p>
-<p>2.都不能被直接实例化</p>
-<p>3.都可以包含方法申明</p>
-<p>4.子类必须实现未实现的方法</p>
-<p>5.都遵循里氏替换原则</p>
-<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><p>1.抽象类中可以有构造函数；接口不行</p>
-<p>2.抽象类只能被单一继承；接口可以被继承多个</p>
-<p>3.抽象类中可以有成员变量；接口不能</p>
-<p>4.抽象类中可以申明成员方法，虚方法，抽象方法，静态方法；接口中只能申明没有实现的抽象方法</p>
-<p>5.抽象类方法可以使用访问修饰符；接口中建议不写，默认public</p>
-<h3 id="如何选择抽象类和接口："><a href="#如何选择抽象类和接口：" class="headerlink" title="如何选择抽象类和接口："></a>如何选择抽象类和接口：</h3><p>表示对象的用抽象类，表示拓展的用接口，不同对象拥有的共同行为，我们往往可以使用接口来实现。</p>
-<p>举个例子：</p>
-<p>动物是一类对象，我们自然会选择抽象类；而飞翔是一个行为，我们自然会选择接口。</p>
 <h1 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h1><p>​    对于所有面向对象的语言，复制永远是一个容易引发讨论的题目，C#中也不例外。</p>
 <p>​    在System.Object类中，有一个受保护的方法object.MemberwiseClone(),这个方法实现了对象的复制。事实上，它所实现的就是我们所称的浅拷贝。</p>
 <h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a><strong>深拷贝</strong></h3><p>​    指的是<strong>拷贝一个对象时，不仅仅把对象的引用进行复制，还把该对象引用的值也一起拷贝</strong>。这样进行<strong>深拷贝后的拷贝对象就和源对象互相独立，其中任何一个对象的改动都不会对另外一个对象造成影响</strong>。比如一个黄狗叫大黄，使用克隆术克隆另外一个黄狗叫小黄，这样大黄和小黄就相对独立了，他们不互相影响。在.NET中int,double以及结构体和枚举等。</p>
@@ -508,10 +448,15 @@
 
 
 
-<h1 id="反射-Reflection"><a href="#反射-Reflection" class="headerlink" title="反射 Reflection"></a>反射 Reflection</h1><p>​    反射指程序可以访问、检测和修改它本身状态或行为的一种能力。程序正在运行时，可以查看其他程序集或者自身的元数据。一个正在运行的程序查看本身或者其他程序的元数据的行为就叫反射。</p>
+<h1 id="反射-Reflection"><a href="#反射-Reflection" class="headerlink" title="反射 Reflection"></a>反射 Reflection</h1><p>​    反射指<strong>程序运行时，可以动态获取类型信息，动态创建对象，动态访问成员的过程</strong>，也可以说是<strong>动态访问、检测和修改它本身状态或行为的一种行为</strong>。</p>
+<p>​    <strong>又或者说： 一个正在运行的程序查看本身或者其他程序的元数据的行为</strong>就叫反射。</p>
+<blockquote>
+<p>​    元数据：编译后的最基本数据单元，就是一堆表，反射就是解析这些元数据。</p>
+</blockquote>
 <p>​    简单理解：在程序运行时候，通过反射可以得到其他程序集或者自己程序集代码的各种信息，例如：类、函数、变量、对象等等，实例化它们，执行它们，操作它们。</p>
-<p>​    <strong>关键类：Type、Assembly、Activator。</strong></p>
+<p>​    <strong>关键类：Type、Assembly、Activator。</strong>主要使用类库System.Reflection</p>
 <p>​    为什么学习反射？Unity引擎的基本工作机制就是建立在反射的基础上的，学习反射是为了之后学习Unity引擎的基本工作原理做铺垫。</p>
+<p>​    反射要点：如何获取类型，根据类型来动态创建对象，反射获取方法以及动态调用方法，动态创建委托</p>
 <h3 id="用途："><a href="#用途：" class="headerlink" title="用途："></a>用途：</h3><ul>
 <li>它允许在运行时查看特性（attribute）信息。</li>
 <li>它允许审查集合中的各种类型，以及实例化这些类型。</li>
@@ -527,10 +472,16 @@
 <li>1、性能问题：使用反射基本上是一种解释操作，用于字段和方法接入时要远慢于直接代码。因此反射机制主要应用在对灵活性和拓展性要求很高的系统框架上，普通程序不建议使用。</li>
 <li>2、使用反射会模糊程序内部逻辑；程序员希望在源代码中看到程序的逻辑，反射却绕过了源代码的技术，因而会带来维护的问题，反射代码比相应的直接代码更复杂。</li>
 </ul>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><h4 id="一、动态获取类型信息"><a href="#一、动态获取类型信息" class="headerlink" title="一、动态获取类型信息"></a>一、动态获取类型信息</h4><p>1.System.Reflection.Assembly.Load(“XXXX.dll”) 动态加载程序集</p>
+<p>2.System.Type.GetType(“XXXX类名”); //动态获取某程序集中某类信息</p>
+<p>3.obj.GetType(); //已知对象获取类信息 ——或者——typeof(类型) //已知类类型</p>
+<h4 id="二、动态创建对象实例（上一步操作后获得类对象）"><a href="#二、动态创建对象实例（上一步操作后获得类对象）" class="headerlink" title="二、动态创建对象实例（上一步操作后获得类对象）"></a>二、动态创建对象实例（上一步操作后获得类对象）</h4><p>System.Activator.CreateInstance(Type type);</p>
+<h4 id="三、动态访问成员调用方法（上一步操作后已获取实例对象）"><a href="#三、动态访问成员调用方法（上一步操作后已获取实例对象）" class="headerlink" title="三、动态访问成员调用方法（上一步操作后已获取实例对象）"></a>三、动态访问成员调用方法（上一步操作后已获取实例对象）</h4><p>System.Reflection.MethodInfo method = type.GetMethod(“方法名”);//获得方法</p>
+<p>System.Reflection.MethodInfo.Invoke(object , new object[]{参数}) //调用的类实例和实例参数</p>
 <h1 id="特性-Attribute"><a href="#特性-Attribute" class="headerlink" title="特性 Attribute"></a>特性 Attribute</h1><p>​    特性是一种允许我们向程序的程序集添加元数据的语言结构，它是用于保存程序结构信息的某种特殊类型的类。特性提供功能强大的方法以将声明信息与C#代码（类型、方法、属性等）相关联。特性与程序实体关联后，即可在运行时使用反射查询特性信息。特性的目的是告诉编译器把程序结构的某组元数据嵌入程序集中，它可以放置在几乎所有的声明中（类、变量、函数等等申明）。</p>
-<p>​    简单理解：特性本质是一个类，我们可以利用特性类为元数据添加额外信息，比如一个类、成员变量、成员方法等等为他们添加更多的额外信息，之后可以通过反射来获取得到这些额外信息。<img src="/2023/03/07/C-%E7%AC%94%E8%AE%B0/image-20230307210954813.png" alt style="zoom: 67%;"></p>
+<p>​    简单理解：特性本质是一个类，我们可以利用特性类为元数据添加额外信息，比如一个类、成员变量、成员方法等等为他们添加更多的额外信息，之后可以通过反射来获取得到这些额外信息。<img src="/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/image-20230307210954813.png" alt style="zoom: 67%;"></p>
 <p>​    如上即可将speed的值限制在-100到100之间，在unity的Inspector中显示为一个滑动条。</p>
-<img src="/2023/03/07/C-%E7%AC%94%E8%AE%B0/image-20230307211649187.png" alt="image-20230307211649187" style="zoom:67%;">
+<img src="/2023/03/07/C#%20%E7%AC%94%E8%AE%B0/image-20230307211649187.png" alt="image-20230307211649187" style="zoom:67%;">
 
 <p>​    又如图即可在仅改变代码不运行的情况下看到效果了。</p>
 <p>​    当然，特性还有很多，自行查阅咯。</p>
@@ -574,8 +525,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2023/03/08/C-%E4%B9%8B%E4%BA%8B%E4%BB%B6-%E5%A7%94%E6%89%98/" rel="prev" title="【C#】委托 事件 Lambda">
-                【C#】委托 事件 Lambda <i class="fa fa-chevron-right"></i>
+              <a href="/2023/03/08/C#%20%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/" rel="prev" title="【C#】委托 事件 Lambda 闭包问题">
+                【C#】委托 事件 Lambda 闭包问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -733,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6GC-Garbage-Collector"><span class="nav-number">1.</span> <span class="nav-text">垃圾回收机制GC(Garbage Collector)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.1.</span> <span class="nav-text">优化方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">1.0.2.</span> <span class="nav-text">C#内存回收机制原理：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7get%E5%92%8Cset%E8%AE%BF%E9%97%AE%E5%99%A8%EF%BC%88Accessor%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">属性get和set访问器（Accessor）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%99%A8%EF%BC%88Indexer%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">索引器（Indexer）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Estatic%E5%92%8Cconst"><span class="nav-number">4.</span> <span class="nav-text">关于static和const</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#as"><span class="nav-number">5.</span> <span class="nav-text">as</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sealed%E5%AF%86%E5%B0%81%E7%B1%BB"><span class="nav-number">6.</span> <span class="nav-text">sealed密封类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.</span> <span class="nav-text">结构体与类的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E7%B1%BB"><span class="nav-number">7.0.1.</span> <span class="nav-text">如何选择结构体和类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">8.</span> <span class="nav-text">抽象类和接口的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9"><span class="nav-number">8.0.1.</span> <span class="nav-text">相同点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="nav-number">8.0.2.</span> <span class="nav-text">不同点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%EF%BC%9A"><span class="nav-number">8.0.3.</span> <span class="nav-text">如何选择抽象类和接口：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">9.</span> <span class="nav-text">浅拷贝和深拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">9.0.1.</span> <span class="nav-text">深拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-number">9.0.2.</span> <span class="nav-text">浅拷贝</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%8F%E5%8F%98%E9%80%86%E5%8F%98"><span class="nav-number">10.</span> <span class="nav-text">协变逆变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E5%8F%98%EF%BC%9A"><span class="nav-number">10.0.1.</span> <span class="nav-text">协变：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%8F%98%EF%BC%9A"><span class="nav-number">10.0.2.</span> <span class="nav-text">逆变：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8-iterator"><span class="nav-number">11.</span> <span class="nav-text">迭代器 iterator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8yield-return%E8%AF%AD%E6%B3%95%E7%B3%96%E5%AE%9E%E7%8E%B0%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">11.0.1.</span> <span class="nav-text">用yield return语法糖实现迭代器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8yield-return%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B8%BA%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%AE%9E%E7%8E%B0%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">11.0.2.</span> <span class="nav-text">用yield return语法糖为泛型类实现迭代器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B"><span class="nav-number">12.</span> <span class="nav-text">var隐式类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84-Reflection"><span class="nav-number">13.</span> <span class="nav-text">反射 Reflection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E9%80%94%EF%BC%9A"><span class="nav-number">13.0.1.</span> <span class="nav-text">用途：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="nav-number">13.0.2.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="nav-number">13.0.3.</span> <span class="nav-text">缺点：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E6%80%A7-Attribute"><span class="nav-number">14.</span> <span class="nav-text">特性 Attribute</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7get%E5%92%8Cset%E8%AE%BF%E9%97%AE%E5%99%A8%EF%BC%88Accessor%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">属性get和set访问器（Accessor）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%99%A8%EF%BC%88Indexer%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">索引器（Indexer）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Estatic%E5%92%8Cconst"><span class="nav-number">3.</span> <span class="nav-text">关于static和const</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#as"><span class="nav-number">4.</span> <span class="nav-text">as</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sealed%E5%AF%86%E5%B0%81%E7%B1%BB"><span class="nav-number">5.</span> <span class="nav-text">sealed密封类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">6.</span> <span class="nav-text">浅拷贝和深拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">6.0.1.</span> <span class="nav-text">深拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-number">6.0.2.</span> <span class="nav-text">浅拷贝</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%8F%E5%8F%98%E9%80%86%E5%8F%98"><span class="nav-number">7.</span> <span class="nav-text">协变逆变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E5%8F%98%EF%BC%9A"><span class="nav-number">7.0.1.</span> <span class="nav-text">协变：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%8F%98%EF%BC%9A"><span class="nav-number">7.0.2.</span> <span class="nav-text">逆变：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8-iterator"><span class="nav-number">8.</span> <span class="nav-text">迭代器 iterator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8yield-return%E8%AF%AD%E6%B3%95%E7%B3%96%E5%AE%9E%E7%8E%B0%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">8.0.1.</span> <span class="nav-text">用yield return语法糖实现迭代器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8yield-return%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B8%BA%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%AE%9E%E7%8E%B0%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">8.0.2.</span> <span class="nav-text">用yield return语法糖为泛型类实现迭代器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#var%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B"><span class="nav-number">9.</span> <span class="nav-text">var隐式类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84-Reflection"><span class="nav-number">10.</span> <span class="nav-text">反射 Reflection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E9%80%94%EF%BC%9A"><span class="nav-number">10.0.1.</span> <span class="nav-text">用途：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="nav-number">10.0.2.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="nav-number">10.0.3.</span> <span class="nav-text">缺点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%B3%95"><span class="nav-number">10.0.4.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8A%A8%E6%80%81%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="nav-number">10.0.4.1.</span> <span class="nav-text">一、动态获取类型信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%EF%BC%88%E4%B8%8A%E4%B8%80%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%90%8E%E8%8E%B7%E5%BE%97%E7%B1%BB%E5%AF%B9%E8%B1%A1%EF%BC%89"><span class="nav-number">10.0.4.2.</span> <span class="nav-text">二、动态创建对象实例（上一步操作后获得类对象）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%8A%A8%E6%80%81%E8%AE%BF%E9%97%AE%E6%88%90%E5%91%98%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%88%E4%B8%8A%E4%B8%80%E6%AD%A5%E6%93%8D%E4%BD%9C%E5%90%8E%E5%B7%B2%E8%8E%B7%E5%8F%96%E5%AE%9E%E4%BE%8B%E5%AF%B9%E8%B1%A1%EF%BC%89"><span class="nav-number">10.0.4.3.</span> <span class="nav-text">三、动态访问成员调用方法（上一步操作后已获取实例对象）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E6%80%A7-Attribute"><span class="nav-number">11.</span> <span class="nav-text">特性 Attribute</span></a></li></ol></div>
             
 
           </div>
