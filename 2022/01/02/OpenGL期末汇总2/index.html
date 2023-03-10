@@ -1,85 +1,12 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html lang=zh>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="OpenGL," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="hh我又来了 上一章讲了VAO、VBO、EBO和Shader的内容，这节课我们来学习纹理咯~ 1、导入纹理资源​    这里我们选用了stb_image.h（一个非常流行的单头文件图像加载库）进行导入。 123456#define STB_IMAGE_IMPLEMENTATION#include &quot;stb_image.h&quot;int width, height, nrChannel">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="hh我又来了 上一章讲了VAO、VBO、EBO和Shader的内容，这节课我们来学习纹理咯~ 1、导入纹理资源​    这里我们选用了stb_image.h（一个非常流行的单头文件图像加载库）进行导入。 123456#define STB_IMAGE_IMPLEMENTATION#include &quot;stb_image.h&quot;int width, height, nrChannel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【OpenGL】期末汇总2-纹理">
 <meta property="og:url" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/index.html">
@@ -97,272 +24,137 @@
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102225201158.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>【OpenGL】期末汇总2-纹理</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Gemini',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://example.com/2022/01/02/OpenGL期末汇总2/"/>
-
-
-
-
-
-  <title>【OpenGL】期末汇总2-纹理 | 旋转公寓的阁楼</title>
-  
-
-
-
-
-
-
-
-
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
+<body class="max-width mx-auto px3 ltr">
     
-  
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="الأعلى" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Inici</a></li><!--
+     --><!--
+       --><li><a href="/about/">Qui som</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Post Anterior" href="/2022/01/06/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Post Següent" href="/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Adalt" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Compartir Post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&text=【OpenGL】期末汇总2-纹理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&title=【OpenGL】期末汇总2-纹理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&is_video=false&description=【OpenGL】期末汇总2-纹理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【OpenGL】期末汇总2-纹理&body=Check out this article: http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&title=【OpenGL】期末汇总2-纹理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&title=【OpenGL】期末汇总2-纹理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&title=【OpenGL】期末汇总2-纹理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&title=【OpenGL】期末汇总2-纹理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&name=【OpenGL】期末汇总2-纹理&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&t=【OpenGL】期末汇总2-纹理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">旋转公寓的阁楼</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
     </div>
-      
-        <p class="site-subtitle">储物间</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AF%BC%E5%85%A5%E7%BA%B9%E7%90%86%E8%B5%84%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">1、导入纹理资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%BA%94%E7%94%A8%E7%BA%B9%E7%90%86%EF%BC%81"><span class="toc-number">2.</span> <span class="toc-text">2、应用纹理！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%81%9C-%E5%9C%A8%E4%B8%8B%E4%B8%80%E6%AD%A5%E4%B9%8B%E5%89%8D%E5%8A%A0%E7%82%B9%E6%96%B0%E4%B8%9C%E8%A5%BF%E5%90%A7%E2%80%94%E7%BA%B9%E7%90%86%E7%8E%AF%E7%BB%95%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">3、停!在下一步之前加点新东西吧—纹理环绕方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%86%8D%E6%9D%A5%E7%82%B9%E2%80%93%E7%BA%B9%E7%90%86%E8%BF%87%E6%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">4、再来点–纹理过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E6%9D%A5%E7%82%B9%E5%A4%9A%E7%BA%A7%E6%B8%90%E8%BF%9C%E7%BA%B9%E7%90%86Mipmap"><span class="toc-number">5.</span> <span class="toc-text">5、来点多级渐远纹理Mipmap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">7、阶段性总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81%E7%BA%B9%E7%90%86%E5%8D%95%E5%85%83"><span class="toc-number">7.</span> <span class="toc-text">8、纹理单元</span></a></li></ol>
+    </div>
+  </span>
 </div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旋转公寓的阁楼">
-    </span>
-
-    
-      <header class="post-header">
-
+    <div class="content index py4">
         
-        
-          <h1 class="post-title" itemprop="name headline">【OpenGL】期末汇总2-纹理</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-02T21:35:24+08:00">
-                2022-01-02
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2023-03-07T16:33:51+08:00">
-                2023-03-07
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  3.1k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
     
+    <h1 class="posttitle" itemprop="name headline">
+        【OpenGL】期末汇总2-纹理
+    </h1>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Zhairest</span>
+      </span>
       
+    <div class="postdate">
+      
+        <time datetime="2022-01-02T13:35:24.000Z" itemprop="datePublished">2022-01-02</time>
+        
+      
+    </div>
+
+
       
 
       
-        <p>hh我又来了</p>
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/OpenGL/" rel="tag">OpenGL</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>hh我又来了</p>
 <p>上一章讲了VAO、VBO、EBO和Shader的内容，这节课我们来学习纹理咯~</p>
 <h2 id="1、导入纹理资源"><a href="#1、导入纹理资源" class="headerlink" title="1、导入纹理资源"></a>1、导入纹理资源</h2><p>​    这里我们选用了stb_image.h（一个非常流行的单头文件图像加载库）进行导入。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STB_IMAGE_IMPLEMENTATION</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stb_image.h&quot;</span></span></span><br><span class="line"><span class="keyword">int</span> width, height, nrChannels;</span><br><span class="line"><span class="comment">//这个函数首先接受一个图像文件的位置作为输入。</span></span><br><span class="line"><span class="comment">//接下来它需要三个int作为它的第二、第三和第四个参数，stb_image.h将会用图像的宽度、高度和颜色通道的个数填充这三个变量。</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> *data = stbi_load(<span class="string">&quot;container.jpg&quot;</span>, &amp;width, &amp;height, &amp;nrChannels, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
@@ -454,408 +246,138 @@
 
 <p>​    学到这，我只想说，OpenGL你是不是太古老了，这些步骤在今日看起来已经有点繁琐了…….但是其实用起来还好吧233</p>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/" rel="next" title="【OpenGL】期末汇总-关于VBO和Shader">
-                <i class="fa fa-chevron-left"></i> 【OpenGL】期末汇总-关于VBO和Shader
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/01/06/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/" rel="prev" title="【OpenGL】期末复习提纲">
-                【OpenGL】期末复习提纲 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
+</article>
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/head.jpg"
-                alt="" />
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">34</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="mailto:cosmicism@qq.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="https://music.163.com/#/user/home?id=70879973" target="_blank" title="CloudMusic">
-                      
-                        <i class="fa fa-fw fa-cloud"></i>CloudMusic</a>
-                  </span>
-                
-            </div>
-          
-
-          
-          
-
-          
-          
-            <div class="links-of-blogroll motion-element links-of-blogroll-block">
-              <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-link"></i>
-                Links
-              </div>
-              <ul class="links-of-blogroll-list">
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
-                  </li>
-                
-              </ul>
-            </div>
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%AF%BC%E5%85%A5%E7%BA%B9%E7%90%86%E8%B5%84%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">1、导入纹理资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%BA%94%E7%94%A8%E7%BA%B9%E7%90%86%EF%BC%81"><span class="nav-number">2.</span> <span class="nav-text">2、应用纹理！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%81%9C-%E5%9C%A8%E4%B8%8B%E4%B8%80%E6%AD%A5%E4%B9%8B%E5%89%8D%E5%8A%A0%E7%82%B9%E6%96%B0%E4%B8%9C%E8%A5%BF%E5%90%A7%E2%80%94%E7%BA%B9%E7%90%86%E7%8E%AF%E7%BB%95%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">3、停!在下一步之前加点新东西吧—纹理环绕方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E5%86%8D%E6%9D%A5%E7%82%B9%E2%80%93%E7%BA%B9%E7%90%86%E8%BF%87%E6%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">4、再来点–纹理过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E6%9D%A5%E7%82%B9%E5%A4%9A%E7%BA%A7%E6%B8%90%E8%BF%9C%E7%BA%B9%E7%90%86Mipmap"><span class="nav-number">5.</span> <span class="nav-text">5、来点多级渐远纹理Mipmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">7、阶段性总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E7%BA%B9%E7%90%86%E5%8D%95%E5%85%83"><span class="nav-number">7.</span> <span class="nav-text">8、纹理单元</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
 
 
         
-      </div>
-    </main>
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Zhairest</span>
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+        
+      </ul>
+    </div>
 
-  
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AF%BC%E5%85%A5%E7%BA%B9%E7%90%86%E8%B5%84%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">1、导入纹理资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%BA%94%E7%94%A8%E7%BA%B9%E7%90%86%EF%BC%81"><span class="toc-number">2.</span> <span class="toc-text">2、应用纹理！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%81%9C-%E5%9C%A8%E4%B8%8B%E4%B8%80%E6%AD%A5%E4%B9%8B%E5%89%8D%E5%8A%A0%E7%82%B9%E6%96%B0%E4%B8%9C%E8%A5%BF%E5%90%A7%E2%80%94%E7%BA%B9%E7%90%86%E7%8E%AF%E7%BB%95%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">3、停!在下一步之前加点新东西吧—纹理环绕方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%86%8D%E6%9D%A5%E7%82%B9%E2%80%93%E7%BA%B9%E7%90%86%E8%BF%87%E6%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">4、再来点–纹理过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E6%9D%A5%E7%82%B9%E5%A4%9A%E7%BA%A7%E6%B8%90%E8%BF%9C%E7%BA%B9%E7%90%86Mipmap"><span class="toc-number">5.</span> <span class="toc-text">5、来点多级渐远纹理Mipmap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E9%98%B6%E6%AE%B5%E6%80%A7%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">7、阶段性总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81%E7%BA%B9%E7%90%86%E5%8D%95%E5%85%83"><span class="toc-number">7.</span> <span class="toc-text">8、纹理单元</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&text=【OpenGL】期末汇总2-纹理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&title=【OpenGL】期末汇总2-纹理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&is_video=false&description=【OpenGL】期末汇总2-纹理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【OpenGL】期末汇总2-纹理&body=Check out this article: http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&title=【OpenGL】期末汇总2-纹理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&title=【OpenGL】期末汇总2-纹理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&title=【OpenGL】期末汇总2-纹理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&title=【OpenGL】期末汇总2-纹理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&name=【OpenGL】期末汇总2-纹理&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/&t=【OpenGL】期末汇总2-纹理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
 </div>
 
-
-
-
-
-
-
-
-
-        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-
-
         
-      </div>
-    </footer>
-
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
-
-    
-
+    2021-2023
+    Zhairest
   </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Inici</a></li><!--
+     --><!--
+       --><li><a href="/about/">Qui som</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
 
   
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
   
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"انسخ!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "تم النسخ!");
+      e.clearSelection();
+    })
+  })
+  </script>
 
 
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Umami Analytics -->
 
+<!-- Disqus Comments -->
 
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
+<!-- utterances Comments -->
 
 </body>
 </html>

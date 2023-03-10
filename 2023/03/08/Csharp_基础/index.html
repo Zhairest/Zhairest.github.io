@@ -1,85 +1,12 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html lang=zh>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="C#," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="面向对象的三大特性封装隐藏对象的属性和方法，可以用public，protected，private，internal关键字来区分不同的暴露程度 继承子类继承父类的属性和方法，使用sealed关键字可以终止继承 多态同一个对象调用函数的不同表现，静态多态用重写实现，动态多态用虚函数实现。可以用关键字virtual、abstrac、interface来定义动态多态的形式 C#的值类型和引用类型C# 数">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="面向对象的三大特性封装隐藏对象的属性和方法，可以用public，protected，private，internal关键字来区分不同的暴露程度 继承子类继承父类的属性和方法，使用sealed关键字可以终止继承 多态同一个对象调用函数的不同表现，静态多态用重写实现，动态多态用虚函数实现。可以用关键字virtual、abstrac、interface来定义动态多态的形式 C#的值类型和引用类型C# 数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【C#】 基础篇">
 <meta property="og:url" content="http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/index.html">
@@ -95,272 +22,137 @@
 <meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/image-20230309001046157.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>【C#】 基础篇</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Gemini',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://example.com/2023/03/08/Csharp_基础/"/>
-
-
-
-
-
-  <title>【C#】 基础篇 | 旋转公寓的阁楼</title>
-  
-
-
-
-
-
-
-
-
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
+<body class="max-width mx-auto px3 ltr">
     
-  
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="الأعلى" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Inici</a></li><!--
+     --><!--
+       --><li><a href="/about/">Qui som</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Post Anterior" href="/2023/03/10/%E7%AE%97%E6%B3%95%E5%90%88%E9%9B%86%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Post Següent" href="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Adalt" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Compartir Post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&text=【C#】 基础篇"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&title=【C#】 基础篇"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&is_video=false&description=【C#】 基础篇"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【C#】 基础篇&body=Check out this article: http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&title=【C#】 基础篇"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&title=【C#】 基础篇"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&title=【C#】 基础篇"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&title=【C#】 基础篇"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&name=【C#】 基础篇&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&t=【C#】 基础篇"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">旋转公寓的阁楼</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
     </div>
-      
-        <p class="site-subtitle">储物间</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">面向对象的三大特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-number">1.2.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-number">1.3.</span> <span class="toc-text">多态</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-%E7%9A%84%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">C#的值类型和引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%BC%E7%B1%BB%E5%9E%8B%EF%BC%88Value-types%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">值类型（Value types）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%EF%BC%88Reference-types%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">引用类型（Reference types）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%EF%BC%88Object%EF%BC%89%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">对象（Object）类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%EF%BC%88Dynamic%EF%BC%89%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.2.</span> <span class="toc-text">动态（Dynamic）类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88String%EF%BC%89%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.3.</span> <span class="toc-text">字符串（String）类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%9C%89%EF%BC%9Aclass%E3%80%81interface-%E6%88%96-delegate%E3%80%82"><span class="toc-number">2.2.4.</span> <span class="toc-text">用户自定义引用类型有：class、interface 或 delegate。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%EF%BC%88Pointer-types%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">指针类型（Pointer types）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.4.</span> <span class="toc-text">值类型和引用类型的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.4.1.</span> <span class="toc-text">内存区域上的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%B7%E8%B4%9D%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="toc-number">2.4.2.</span> <span class="toc-text">拷贝策略：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A3%85%E7%AE%B1%E5%92%8C%E6%8B%86%E7%AE%B1-object"><span class="toc-number">3.</span> <span class="toc-text">装箱和拆箱 object</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E7%AE%B1%EF%BC%9A%E5%80%BC%E7%B1%BB%E5%9E%8B-%E3%80%8B%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8Bobject"><span class="toc-number">3.1.</span> <span class="toc-text">装箱：值类型&#x3D;&#x3D;&#x3D;&#x3D;》引用类型object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%86%E7%AE%B1%EF%BC%9A%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8Bobject-%E3%80%8B%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.2.</span> <span class="toc-text">拆箱：引用类型object&#x3D;&#x3D;&#x3D;&#x3D;》值类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6-GC"><span class="toc-number">4.</span> <span class="toc-text">垃圾回收 GC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">4.0.1.</span> <span class="toc-text">优化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="toc-number">4.0.2.</span> <span class="toc-text">C#内存回收机制原理：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">5.</span> <span class="toc-text">结构体与类的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E7%B1%BB"><span class="toc-number">5.0.1.</span> <span class="toc-text">如何选择结构体和类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">6.</span> <span class="toc-text">抽象类与接口的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%EF%BC%9A"><span class="toc-number">6.0.1.</span> <span class="toc-text">抽象类：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-number">6.0.2.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9"><span class="toc-number">6.0.3.</span> <span class="toc-text">相同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="toc-number">6.0.4.</span> <span class="toc-text">不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%EF%BC%9A"><span class="toc-number">6.0.5.</span> <span class="toc-text">如何选择抽象类和接口：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%B9%E5%99%A8%E7%B1%BB"><span class="toc-number">7.</span> <span class="toc-text">C#中常用的容器类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Stack%E6%A0%88"><span class="toc-number">7.0.1.</span> <span class="toc-text">Stack栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Queue%E9%98%9F%E5%88%97"><span class="toc-number">7.0.2.</span> <span class="toc-text">Queue队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Array%E6%95%B0%E7%BB%84"><span class="toc-number">7.0.3.</span> <span class="toc-text">Array数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8"><span class="toc-number">7.0.4.</span> <span class="toc-text">ArrayList数组列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#List%E5%88%97%E8%A1%A8"><span class="toc-number">7.0.5.</span> <span class="toc-text">List列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkList%E9%93%BE%E8%A1%A8"><span class="toc-number">7.0.6.</span> <span class="toc-text">LinkList链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashTable%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%88%E6%95%A3%E5%88%97%E8%A1%A8%EF%BC%89"><span class="toc-number">7.0.7.</span> <span class="toc-text">HashTable哈希表（散列表）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Directionary-lt-TKey-TVaule-gt-%E5%AD%97%E5%85%B8"><span class="toc-number">7.0.8.</span> <span class="toc-text">Directionary&lt;TKey,TVaule&gt;字典</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashSet"><span class="toc-number">7.0.9.</span> <span class="toc-text">HashSet</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#String%E3%80%81StringBuffer%E5%92%8CStringBuilder"><span class="toc-number">8.</span> <span class="toc-text">String、StringBuffer和StringBuilder</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%96%B9%E9%9D%A2%E7%9A%84%E6%AF%94%E8%BE%83%EF%BC%9AStringBuilder-gt-StringBuffer-gt-String"><span class="toc-number">8.0.1.</span> <span class="toc-text">运行速度方面的比较：StringBuilder &gt;StringBuffer &gt; String</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E6%97%B6%EF%BC%8CString-%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%80%9F%E5%BA%A6%E5%B9%B6%E4%B8%8D%E4%BC%9A%E6%AF%94-StringBuffer%E5%AF%B9%E8%B1%A1%E6%85%A2%E3%80%82"><span class="toc-number">8.0.2.</span> <span class="toc-text">字符串拼接时，String 对象的速度并不会比 StringBuffer对象慢。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-number">8.0.3.</span> <span class="toc-text">线程安全性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E7%9A%84%E6%80%BB%E7%BB%93"><span class="toc-number">8.0.4.</span> <span class="toc-text">假的总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-number">9.</span> <span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD"><span class="toc-number">9.0.1.</span> <span class="toc-text">性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8"><span class="toc-number">9.0.2.</span> <span class="toc-text">安全</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for%E5%92%8Cforeach"><span class="toc-number">10.</span> <span class="toc-text">for和foreach</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach%E9%81%8D%E5%8E%86%E7%9A%84%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="toc-number">10.0.1.</span> <span class="toc-text">foreach遍历的实现逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E5%9C%A8foreach%E9%81%8D%E5%8E%86%E4%B8%AD%E6%9B%B4%E6%94%B9%E6%BA%90%E9%9B%86%E5%90%88"><span class="toc-number">10.0.2.</span> <span class="toc-text">为什么不能在foreach遍历中更改源集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84-%E4%B8%8D%E5%8C%85%E6%8B%AC%E9%94%AF%E9%BD%BF%E6%95%B0%E7%BB%84-%E6%9B%B4%E5%8A%A0%E6%96%B9%E4%BE%BF"><span class="toc-number">10.0.3.</span> <span class="toc-text">foreach处理多维数组(不包括锯齿数组)更加方便</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ref%E5%92%8Cout"><span class="toc-number">11.</span> <span class="toc-text">ref和out</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ref"><span class="toc-number">11.0.1.</span> <span class="toc-text">ref</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#out"><span class="toc-number">11.0.2.</span> <span class="toc-text">out</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref%E5%92%8Cout%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">11.0.3.</span> <span class="toc-text">ref和out的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%A3%E8%AF%80%EF%BC%9A"><span class="toc-number">11.0.3.1.</span> <span class="toc-text">口诀：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="toc-number">11.0.3.2.</span> <span class="toc-text">相同点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="toc-number">11.0.3.3.</span> <span class="toc-text">不同点：</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
 </div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旋转公寓的阁楼">
-    </span>
-
-    
-      <header class="post-header">
-
+    <div class="content index py4">
         
-        
-          <h1 class="post-title" itemprop="name headline">【C#】 基础篇</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-03-08T22:05:55+08:00">
-                2023-03-08
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2023-03-09T00:34:30+08:00">
-                2023-03-09
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  7.2k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
     
+    <h1 class="posttitle" itemprop="name headline">
+        【C#】 基础篇
+    </h1>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Zhairest</span>
+      </span>
       
+    <div class="postdate">
+      
+        <time datetime="2023-03-08T14:05:55.000Z" itemprop="datePublished">2023-03-08</time>
+        
+      
+    </div>
+
+
       
 
       
-        <h1 id="面向对象的三大特性"><a href="#面向对象的三大特性" class="headerlink" title="面向对象的三大特性"></a>面向对象的三大特性</h1><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a><strong>封装</strong></h2><p>隐藏对象的属性和方法，可以用public，protected，private，internal关键字来区分不同的暴露程度</p>
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/C/" rel="tag">C#</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="面向对象的三大特性"><a href="#面向对象的三大特性" class="headerlink" title="面向对象的三大特性"></a>面向对象的三大特性</h1><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a><strong>封装</strong></h2><p>隐藏对象的属性和方法，可以用public，protected，private，internal关键字来区分不同的暴露程度</p>
 <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a><strong>继承</strong></h2><p>子类继承父类的属性和方法，使用sealed关键字可以终止继承</p>
 <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a><strong>多态</strong></h2><p>同一个对象调用函数的不同表现，静态多态用重写实现，动态多态用虚函数实现。可以用关键字virtual、abstrac、interface来定义动态多态的形式</p>
 <h1 id="C-的值类型和引用类型"><a href="#C-的值类型和引用类型" class="headerlink" title="C#的值类型和引用类型"></a>C#的值类型和引用类型</h1><p><a target="_blank" rel="noopener" href="https://www.runoob.com/csharp/csharp-data-types.html">C# 数据类型</a></p>
@@ -702,408 +494,138 @@
 </li>
 </ul>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/C/" rel="tag"># C#</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2023/03/08/Csharp%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98Lambda%E9%97%AD%E5%8C%85/" rel="next" title="【C#】委托 事件 Lambda 闭包问题">
-                <i class="fa fa-chevron-left"></i> 【C#】委托 事件 Lambda 闭包问题
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/03/10/%E7%AE%97%E6%B3%95%E5%90%88%E9%9B%86%E5%9F%BA%E7%A1%80/" rel="prev" title="算法合集 C++ 剑指Offer">
-                算法合集 C++ 剑指Offer <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
+</article>
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/head.jpg"
-                alt="" />
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">34</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="mailto:cosmicism@qq.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="https://music.163.com/#/user/home?id=70879973" target="_blank" title="CloudMusic">
-                      
-                        <i class="fa fa-fw fa-cloud"></i>CloudMusic</a>
-                  </span>
-                
-            </div>
-          
-
-          
-          
-
-          
-          
-            <div class="links-of-blogroll motion-element links-of-blogroll-block">
-              <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-link"></i>
-                Links
-              </div>
-              <ul class="links-of-blogroll-list">
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
-                  </li>
-                
-              </ul>
-            </div>
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">面向对象的三大特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">1.2.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">1.3.</span> <span class="nav-text">多态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E7%9A%84%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">C#的值类型和引用类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%BC%E7%B1%BB%E5%9E%8B%EF%BC%88Value-types%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">值类型（Value types）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%EF%BC%88Reference-types%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">引用类型（Reference types）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%EF%BC%88Object%EF%BC%89%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">对象（Object）类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%EF%BC%88Dynamic%EF%BC%89%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.2.</span> <span class="nav-text">动态（Dynamic）类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88String%EF%BC%89%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.2.3.</span> <span class="nav-text">字符串（String）类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%9C%89%EF%BC%9Aclass%E3%80%81interface-%E6%88%96-delegate%E3%80%82"><span class="nav-number">2.2.4.</span> <span class="nav-text">用户自定义引用类型有：class、interface 或 delegate。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%EF%BC%88Pointer-types%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">指针类型（Pointer types）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.</span> <span class="nav-text">值类型和引用类型的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.1.</span> <span class="nav-text">内存区域上的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="nav-number">2.4.2.</span> <span class="nav-text">拷贝策略：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A3%85%E7%AE%B1%E5%92%8C%E6%8B%86%E7%AE%B1-object"><span class="nav-number">3.</span> <span class="nav-text">装箱和拆箱 object</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%85%E7%AE%B1%EF%BC%9A%E5%80%BC%E7%B1%BB%E5%9E%8B-%E3%80%8B%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8Bobject"><span class="nav-number">3.1.</span> <span class="nav-text">装箱：值类型&#x3D;&#x3D;&#x3D;&#x3D;》引用类型object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%86%E7%AE%B1%EF%BC%9A%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8Bobject-%E3%80%8B%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">拆箱：引用类型object&#x3D;&#x3D;&#x3D;&#x3D;》值类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6-GC"><span class="nav-number">4.</span> <span class="nav-text">垃圾回收 GC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-number">4.0.1.</span> <span class="nav-text">优化方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">4.0.2.</span> <span class="nav-text">C#内存回收机制原理：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.</span> <span class="nav-text">结构体与类的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E7%B1%BB"><span class="nav-number">5.0.1.</span> <span class="nav-text">如何选择结构体和类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.</span> <span class="nav-text">抽象类与接口的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%EF%BC%9A"><span class="nav-number">6.0.1.</span> <span class="nav-text">抽象类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">6.0.2.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9"><span class="nav-number">6.0.3.</span> <span class="nav-text">相同点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="nav-number">6.0.4.</span> <span class="nav-text">不同点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%EF%BC%9A"><span class="nav-number">6.0.5.</span> <span class="nav-text">如何选择抽象类和接口：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%B9%E5%99%A8%E7%B1%BB"><span class="nav-number">7.</span> <span class="nav-text">C#中常用的容器类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack%E6%A0%88"><span class="nav-number">7.0.1.</span> <span class="nav-text">Stack栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue%E9%98%9F%E5%88%97"><span class="nav-number">7.0.2.</span> <span class="nav-text">Queue队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Array%E6%95%B0%E7%BB%84"><span class="nav-number">7.0.3.</span> <span class="nav-text">Array数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8"><span class="nav-number">7.0.4.</span> <span class="nav-text">ArrayList数组列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List%E5%88%97%E8%A1%A8"><span class="nav-number">7.0.5.</span> <span class="nav-text">List列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkList%E9%93%BE%E8%A1%A8"><span class="nav-number">7.0.6.</span> <span class="nav-text">LinkList链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTable%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%88%E6%95%A3%E5%88%97%E8%A1%A8%EF%BC%89"><span class="nav-number">7.0.7.</span> <span class="nav-text">HashTable哈希表（散列表）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Directionary-lt-TKey-TVaule-gt-%E5%AD%97%E5%85%B8"><span class="nav-number">7.0.8.</span> <span class="nav-text">Directionary&lt;TKey,TVaule&gt;字典</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet"><span class="nav-number">7.0.9.</span> <span class="nav-text">HashSet</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String%E3%80%81StringBuffer%E5%92%8CStringBuilder"><span class="nav-number">8.</span> <span class="nav-text">String、StringBuffer和StringBuilder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%96%B9%E9%9D%A2%E7%9A%84%E6%AF%94%E8%BE%83%EF%BC%9AStringBuilder-gt-StringBuffer-gt-String"><span class="nav-number">8.0.1.</span> <span class="nav-text">运行速度方面的比较：StringBuilder &gt;StringBuffer &gt; String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E6%97%B6%EF%BC%8CString-%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%80%9F%E5%BA%A6%E5%B9%B6%E4%B8%8D%E4%BC%9A%E6%AF%94-StringBuffer%E5%AF%B9%E8%B1%A1%E6%85%A2%E3%80%82"><span class="nav-number">8.0.2.</span> <span class="nav-text">字符串拼接时，String 对象的速度并不会比 StringBuffer对象慢。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">8.0.3.</span> <span class="nav-text">线程安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%87%E7%9A%84%E6%80%BB%E7%BB%93"><span class="nav-number">8.0.4.</span> <span class="nav-text">假的总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B"><span class="nav-number">9.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD"><span class="nav-number">9.0.1.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8"><span class="nav-number">9.0.2.</span> <span class="nav-text">安全</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#for%E5%92%8Cforeach"><span class="nav-number">10.</span> <span class="nav-text">for和foreach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#foreach%E9%81%8D%E5%8E%86%E7%9A%84%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="nav-number">10.0.1.</span> <span class="nav-text">foreach遍历的实现逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E5%9C%A8foreach%E9%81%8D%E5%8E%86%E4%B8%AD%E6%9B%B4%E6%94%B9%E6%BA%90%E9%9B%86%E5%90%88"><span class="nav-number">10.0.2.</span> <span class="nav-text">为什么不能在foreach遍历中更改源集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#foreach%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84-%E4%B8%8D%E5%8C%85%E6%8B%AC%E9%94%AF%E9%BD%BF%E6%95%B0%E7%BB%84-%E6%9B%B4%E5%8A%A0%E6%96%B9%E4%BE%BF"><span class="nav-number">10.0.3.</span> <span class="nav-text">foreach处理多维数组(不包括锯齿数组)更加方便</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ref%E5%92%8Cout"><span class="nav-number">11.</span> <span class="nav-text">ref和out</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ref"><span class="nav-number">11.0.1.</span> <span class="nav-text">ref</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#out"><span class="nav-number">11.0.2.</span> <span class="nav-text">out</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ref%E5%92%8Cout%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">11.0.3.</span> <span class="nav-text">ref和out的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%A3%E8%AF%80%EF%BC%9A"><span class="nav-number">11.0.3.1.</span> <span class="nav-text">口诀：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="nav-number">11.0.3.2.</span> <span class="nav-text">相同点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="nav-number">11.0.3.3.</span> <span class="nav-text">不同点：</span></a></li></ol></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
 
 
         
-      </div>
-    </main>
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Zhairest</span>
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+        
+      </ul>
+    </div>
 
-  
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">面向对象的三大特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-number">1.2.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-number">1.3.</span> <span class="toc-text">多态</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-%E7%9A%84%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">C#的值类型和引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%BC%E7%B1%BB%E5%9E%8B%EF%BC%88Value-types%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">值类型（Value types）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%EF%BC%88Reference-types%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">引用类型（Reference types）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%EF%BC%88Object%EF%BC%89%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">对象（Object）类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%EF%BC%88Dynamic%EF%BC%89%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.2.</span> <span class="toc-text">动态（Dynamic）类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88String%EF%BC%89%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.3.</span> <span class="toc-text">字符串（String）类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E6%9C%89%EF%BC%9Aclass%E3%80%81interface-%E6%88%96-delegate%E3%80%82"><span class="toc-number">2.2.4.</span> <span class="toc-text">用户自定义引用类型有：class、interface 或 delegate。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%EF%BC%88Pointer-types%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">指针类型（Pointer types）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.4.</span> <span class="toc-text">值类型和引用类型的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.4.1.</span> <span class="toc-text">内存区域上的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%B7%E8%B4%9D%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="toc-number">2.4.2.</span> <span class="toc-text">拷贝策略：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A3%85%E7%AE%B1%E5%92%8C%E6%8B%86%E7%AE%B1-object"><span class="toc-number">3.</span> <span class="toc-text">装箱和拆箱 object</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E7%AE%B1%EF%BC%9A%E5%80%BC%E7%B1%BB%E5%9E%8B-%E3%80%8B%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8Bobject"><span class="toc-number">3.1.</span> <span class="toc-text">装箱：值类型&#x3D;&#x3D;&#x3D;&#x3D;》引用类型object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%86%E7%AE%B1%EF%BC%9A%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8Bobject-%E3%80%8B%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.2.</span> <span class="toc-text">拆箱：引用类型object&#x3D;&#x3D;&#x3D;&#x3D;》值类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6-GC"><span class="toc-number">4.</span> <span class="toc-text">垃圾回收 GC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">4.0.1.</span> <span class="toc-text">优化方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="toc-number">4.0.2.</span> <span class="toc-text">C#内存回收机制原理：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">5.</span> <span class="toc-text">结构体与类的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E7%B1%BB"><span class="toc-number">5.0.1.</span> <span class="toc-text">如何选择结构体和类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">6.</span> <span class="toc-text">抽象类与接口的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%EF%BC%9A"><span class="toc-number">6.0.1.</span> <span class="toc-text">抽象类：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-number">6.0.2.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9"><span class="toc-number">6.0.3.</span> <span class="toc-text">相同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="toc-number">6.0.4.</span> <span class="toc-text">不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%EF%BC%9A"><span class="toc-number">6.0.5.</span> <span class="toc-text">如何选择抽象类和接口：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%B9%E5%99%A8%E7%B1%BB"><span class="toc-number">7.</span> <span class="toc-text">C#中常用的容器类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Stack%E6%A0%88"><span class="toc-number">7.0.1.</span> <span class="toc-text">Stack栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Queue%E9%98%9F%E5%88%97"><span class="toc-number">7.0.2.</span> <span class="toc-text">Queue队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Array%E6%95%B0%E7%BB%84"><span class="toc-number">7.0.3.</span> <span class="toc-text">Array数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8"><span class="toc-number">7.0.4.</span> <span class="toc-text">ArrayList数组列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#List%E5%88%97%E8%A1%A8"><span class="toc-number">7.0.5.</span> <span class="toc-text">List列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkList%E9%93%BE%E8%A1%A8"><span class="toc-number">7.0.6.</span> <span class="toc-text">LinkList链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashTable%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%88%E6%95%A3%E5%88%97%E8%A1%A8%EF%BC%89"><span class="toc-number">7.0.7.</span> <span class="toc-text">HashTable哈希表（散列表）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Directionary-lt-TKey-TVaule-gt-%E5%AD%97%E5%85%B8"><span class="toc-number">7.0.8.</span> <span class="toc-text">Directionary&lt;TKey,TVaule&gt;字典</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashSet"><span class="toc-number">7.0.9.</span> <span class="toc-text">HashSet</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#String%E3%80%81StringBuffer%E5%92%8CStringBuilder"><span class="toc-number">8.</span> <span class="toc-text">String、StringBuffer和StringBuilder</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E9%80%9F%E5%BA%A6%E6%96%B9%E9%9D%A2%E7%9A%84%E6%AF%94%E8%BE%83%EF%BC%9AStringBuilder-gt-StringBuffer-gt-String"><span class="toc-number">8.0.1.</span> <span class="toc-text">运行速度方面的比较：StringBuilder &gt;StringBuffer &gt; String</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E6%97%B6%EF%BC%8CString-%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%80%9F%E5%BA%A6%E5%B9%B6%E4%B8%8D%E4%BC%9A%E6%AF%94-StringBuffer%E5%AF%B9%E8%B1%A1%E6%85%A2%E3%80%82"><span class="toc-number">8.0.2.</span> <span class="toc-text">字符串拼接时，String 对象的速度并不会比 StringBuffer对象慢。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-number">8.0.3.</span> <span class="toc-text">线程安全性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E7%9A%84%E6%80%BB%E7%BB%93"><span class="toc-number">8.0.4.</span> <span class="toc-text">假的总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-number">9.</span> <span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD"><span class="toc-number">9.0.1.</span> <span class="toc-text">性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8"><span class="toc-number">9.0.2.</span> <span class="toc-text">安全</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for%E5%92%8Cforeach"><span class="toc-number">10.</span> <span class="toc-text">for和foreach</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach%E9%81%8D%E5%8E%86%E7%9A%84%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="toc-number">10.0.1.</span> <span class="toc-text">foreach遍历的实现逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E5%9C%A8foreach%E9%81%8D%E5%8E%86%E4%B8%AD%E6%9B%B4%E6%94%B9%E6%BA%90%E9%9B%86%E5%90%88"><span class="toc-number">10.0.2.</span> <span class="toc-text">为什么不能在foreach遍历中更改源集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach%E5%A4%84%E7%90%86%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84-%E4%B8%8D%E5%8C%85%E6%8B%AC%E9%94%AF%E9%BD%BF%E6%95%B0%E7%BB%84-%E6%9B%B4%E5%8A%A0%E6%96%B9%E4%BE%BF"><span class="toc-number">10.0.3.</span> <span class="toc-text">foreach处理多维数组(不包括锯齿数组)更加方便</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ref%E5%92%8Cout"><span class="toc-number">11.</span> <span class="toc-text">ref和out</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ref"><span class="toc-number">11.0.1.</span> <span class="toc-text">ref</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#out"><span class="toc-number">11.0.2.</span> <span class="toc-text">out</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ref%E5%92%8Cout%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">11.0.3.</span> <span class="toc-text">ref和out的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%A3%E8%AF%80%EF%BC%9A"><span class="toc-number">11.0.3.1.</span> <span class="toc-text">口诀：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="toc-number">11.0.3.2.</span> <span class="toc-text">相同点：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="toc-number">11.0.3.3.</span> <span class="toc-text">不同点：</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&text=【C#】 基础篇"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&title=【C#】 基础篇"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&is_video=false&description=【C#】 基础篇"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【C#】 基础篇&body=Check out this article: http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&title=【C#】 基础篇"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&title=【C#】 基础篇"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&title=【C#】 基础篇"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&title=【C#】 基础篇"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&name=【C#】 基础篇&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/08/Csharp_%E5%9F%BA%E7%A1%80/&t=【C#】 基础篇"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
 </div>
 
-
-
-
-
-
-
-
-
-        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-
-
         
-      </div>
-    </footer>
-
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
-
-    
-
+    2021-2023
+    Zhairest
   </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Inici</a></li><!--
+     --><!--
+       --><li><a href="/about/">Qui som</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
 
   
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
   
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"انسخ!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "تم النسخ!");
+      e.clearSelection();
+    })
+  })
+  </script>
 
 
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Umami Analytics -->
 
+<!-- Disqus Comments -->
 
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
+<!-- utterances Comments -->
 
 </body>
 </html>

@@ -1,85 +1,12 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html lang=zh>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.jpg?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.jpg?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Unity," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="[TOC] 1.属性 Properties在外部访问类内部变量的需求，除了设其为public，还可以用properties。其在内部封装变量，称其为域，可以用get{}set{}对其内部进行访问。 123456789101112131415161718192021public class Properties : MonoBehaviour&amp;#123;    private int experie">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="[TOC] 1.属性 Properties在外部访问类内部变量的需求，除了设其为public，还可以用properties。其在内部封装变量，称其为域，可以用get{}set{}对其内部进行访问。 123456789101112131415161718192021public class Properties : MonoBehaviour&amp;#123;    private int experie">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity-IntermediateScript">
 <meta property="og:url" content="http://example.com/2021/11/02/Unity-IntermediateScript/index.html">
@@ -91,272 +18,137 @@
 <meta property="article:author" content="Zhairest">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Unity-IntermediateScript</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Gemini',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://example.com/2021/11/02/Unity-IntermediateScript/"/>
-
-
-
-
-
-  <title>Unity-IntermediateScript | 旋转公寓的阁楼</title>
-  
-
-
-
-
-
-
-
-
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
+<body class="max-width mx-auto px3 ltr">
     
-  
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="الأعلى" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Inici</a></li><!--
+     --><!--
+       --><li><a href="/about/">Qui som</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Post Anterior" href="/2021/11/03/Unity%E6%9D%82%E8%AE%B0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Post Següent" href="/2021/10/31/Unity-BasicScript2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Adalt" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Compartir Post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/11/02/Unity-IntermediateScript/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/11/02/Unity-IntermediateScript/&text=Unity-IntermediateScript"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/11/02/Unity-IntermediateScript/&title=Unity-IntermediateScript"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/11/02/Unity-IntermediateScript/&is_video=false&description=Unity-IntermediateScript"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity-IntermediateScript&body=Check out this article: http://example.com/2021/11/02/Unity-IntermediateScript/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/11/02/Unity-IntermediateScript/&title=Unity-IntermediateScript"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/11/02/Unity-IntermediateScript/&title=Unity-IntermediateScript"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/11/02/Unity-IntermediateScript/&title=Unity-IntermediateScript"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/11/02/Unity-IntermediateScript/&title=Unity-IntermediateScript"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/11/02/Unity-IntermediateScript/&name=Unity-IntermediateScript&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/11/02/Unity-IntermediateScript/&t=Unity-IntermediateScript"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">旋转公寓的阁楼</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
     </div>
-      
-        <p class="site-subtitle">储物间</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B1%9E%E6%80%A7-Properties"><span class="toc-number">1.</span> <span class="toc-text">1.属性 Properties</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%89%E5%85%83%E6%93%8D%E4%BD%9C%E7%AC%A6-Ternary-Operator"><span class="toc-number">2.</span> <span class="toc-text">2.三元操作符 Ternary Operator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B-Statics"><span class="toc-number">3.</span> <span class="toc-text">3.静态类型 Statics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%87%8D%E8%BD%BD-Overloading"><span class="toc-number">4.</span> <span class="toc-text">4.重载 Overloading</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B3%9B%E5%9E%8B-Generics"><span class="toc-number">5.</span> <span class="toc-text">5.泛型 Generics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BB%A7%E6%89%BF-inheritance"><span class="toc-number">6.</span> <span class="toc-text">6.继承 inheritance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%A4%9A%E6%80%81-Polymorphism"><span class="toc-number">7.</span> <span class="toc-text">7.多态 Polymorphism</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E6%88%90%E5%91%98%E9%9A%90%E8%97%8F-MemberHiding"><span class="toc-number">8.</span> <span class="toc-text">8.成员隐藏 MemberHiding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%A6%86%E7%9B%96-Overriding"><span class="toc-number">9.</span> <span class="toc-text">9.覆盖 Overriding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E6%8E%A5%E5%8F%A3-Interfaces"><span class="toc-number">10.</span> <span class="toc-text">10.接口 Interfaces</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95-Extension-Method"><span class="toc-number">11.</span> <span class="toc-text">11.扩展方法 Extension Method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-Namespaces"><span class="toc-number">12.</span> <span class="toc-text">12.Namespaces</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E5%88%97%E8%A1%A8%E5%92%8C%E5%AD%97%E5%85%B8-Lists-and-Dictionaries"><span class="toc-number">13.</span> <span class="toc-text">13.列表和字典 Lists and Dictionaries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E6%90%BA%E7%A8%8B-Coroutine"><span class="toc-number">14.</span> <span class="toc-text">14.携程 Coroutine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E5%9B%9B%E5%85%83%E6%95%B0-Quaternions"><span class="toc-number">15.</span> <span class="toc-text">15.四元数 Quaternions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E5%A7%94%E6%89%98-Delegates"><span class="toc-number">16.</span> <span class="toc-text">16.委托 Delegates</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E7%89%B9%E6%80%A7-Attributes"><span class="toc-number">17.</span> <span class="toc-text">17.特性 Attributes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-%E4%BA%8B%E4%BB%B6-Events"><span class="toc-number">18.</span> <span class="toc-text">18.事件 Events</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thanks"><span class="toc-number">19.</span> <span class="toc-text">Thanks:</span></a></li></ol>
+    </div>
+  </span>
 </div>
 
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/02/Unity-IntermediateScript/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="旋转公寓的阁楼">
-    </span>
-
-    
-      <header class="post-header">
-
+    <div class="content index py4">
         
-        
-          <h1 class="post-title" itemprop="name headline">Unity-IntermediateScript</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-02T09:20:00+08:00">
-                2021-11-02
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2021-11-03T10:27:16+08:00">
-                2021-11-03
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2.9k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
     
+    <h1 class="posttitle" itemprop="name headline">
+        Unity-IntermediateScript
+    </h1>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Zhairest</span>
+      </span>
       
+    <div class="postdate">
+      
+        <time datetime="2021-11-02T01:20:00.000Z" itemprop="datePublished">2021-11-02</time>
+        
+      
+    </div>
+
+
       
 
       
-        <p>[TOC]</p>
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Unity/" rel="tag">Unity</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>[TOC]</p>
 <h3 id="1-属性-Properties"><a href="#1-属性-Properties" class="headerlink" title="1.属性 Properties"></a>1.属性 Properties</h3><p>在外部访问类内部变量的需求，除了设其为public，还可以用properties。其在内部封装变量，称其为域，可以用get{}set{}对其内部进行访问。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Properties : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    private int experience;//这是一个私有的域</span><br><span class="line">    //想要在类外访问他，就需要来一个Properties</span><br><span class="line">    //首字母大写</span><br><span class="line">    public int Experience  </span><br><span class="line">    &#123;   //括号内是属性的访问器</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line">            return experience;</span><br><span class="line">        &#125;           //取值时调用</span><br><span class="line">        set</span><br><span class="line">        &#123;</span><br><span class="line">            experience=value;</span><br><span class="line">        &#125;           //赋值时调用</span><br><span class="line">        //不实现其中一个，就能做到只读或者只写，这是public做不到的</span><br><span class="line">        //2.其可以在内部加函数，或者返回值进行特定转变（例子是用   输入经验值却返回等级</span><br><span class="line">    &#125;</span><br><span class="line">    public int Experience1&#123;get;set;&#125;//缩写 </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -455,408 +247,138 @@
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Es411t7rL?p=10">https://www.bilibili.com/video/BV1Es411t7rL?p=10</a></p>
 <p>只是不求甚解地过了一遍，具体还是要在实践中熟练了，才算学会。</p>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Unity/" rel="tag"># Unity</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2021/10/31/Unity-BasicScript2/" rel="next" title="Unity-BasicScript2">
-                <i class="fa fa-chevron-left"></i> Unity-BasicScript2
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/11/03/Unity%E6%9D%82%E8%AE%B0/" rel="prev" title="Unity杂记">
-                Unity杂记 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
+</article>
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/head.jpg"
-                alt="" />
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">34</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="mailto:cosmicism@qq.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="https://music.163.com/#/user/home?id=70879973" target="_blank" title="CloudMusic">
-                      
-                        <i class="fa fa-fw fa-cloud"></i>CloudMusic</a>
-                  </span>
-                
-            </div>
-          
-
-          
-          
-
-          
-          
-            <div class="links-of-blogroll motion-element links-of-blogroll-block">
-              <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-link"></i>
-                Links
-              </div>
-              <ul class="links-of-blogroll-list">
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
-                  </li>
-                
-              </ul>
-            </div>
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%B1%9E%E6%80%A7-Properties"><span class="nav-number">1.</span> <span class="nav-text">1.属性 Properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%89%E5%85%83%E6%93%8D%E4%BD%9C%E7%AC%A6-Ternary-Operator"><span class="nav-number">2.</span> <span class="nav-text">2.三元操作符 Ternary Operator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B-Statics"><span class="nav-number">3.</span> <span class="nav-text">3.静态类型 Statics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%87%8D%E8%BD%BD-Overloading"><span class="nav-number">4.</span> <span class="nav-text">4.重载 Overloading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%B3%9B%E5%9E%8B-Generics"><span class="nav-number">5.</span> <span class="nav-text">5.泛型 Generics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%BB%A7%E6%89%BF-inheritance"><span class="nav-number">6.</span> <span class="nav-text">6.继承 inheritance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%A4%9A%E6%80%81-Polymorphism"><span class="nav-number">7.</span> <span class="nav-text">7.多态 Polymorphism</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%88%90%E5%91%98%E9%9A%90%E8%97%8F-MemberHiding"><span class="nav-number">8.</span> <span class="nav-text">8.成员隐藏 MemberHiding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E8%A6%86%E7%9B%96-Overriding"><span class="nav-number">9.</span> <span class="nav-text">9.覆盖 Overriding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E6%8E%A5%E5%8F%A3-Interfaces"><span class="nav-number">10.</span> <span class="nav-text">10.接口 Interfaces</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95-Extension-Method"><span class="nav-number">11.</span> <span class="nav-text">11.扩展方法 Extension Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-Namespaces"><span class="nav-number">12.</span> <span class="nav-text">12.Namespaces</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-%E5%88%97%E8%A1%A8%E5%92%8C%E5%AD%97%E5%85%B8-Lists-and-Dictionaries"><span class="nav-number">13.</span> <span class="nav-text">13.列表和字典 Lists and Dictionaries</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-%E6%90%BA%E7%A8%8B-Coroutine"><span class="nav-number">14.</span> <span class="nav-text">14.携程 Coroutine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-%E5%9B%9B%E5%85%83%E6%95%B0-Quaternions"><span class="nav-number">15.</span> <span class="nav-text">15.四元数 Quaternions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-%E5%A7%94%E6%89%98-Delegates"><span class="nav-number">16.</span> <span class="nav-text">16.委托 Delegates</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-%E7%89%B9%E6%80%A7-Attributes"><span class="nav-number">17.</span> <span class="nav-text">17.特性 Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-%E4%BA%8B%E4%BB%B6-Events"><span class="nav-number">18.</span> <span class="nav-text">18.事件 Events</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thanks"><span class="nav-number">19.</span> <span class="nav-text">Thanks:</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
 
 
         
-      </div>
-    </main>
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2021 &mdash; <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Zhairest</span>
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+        
+      </ul>
+    </div>
 
-  
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B1%9E%E6%80%A7-Properties"><span class="toc-number">1.</span> <span class="toc-text">1.属性 Properties</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%89%E5%85%83%E6%93%8D%E4%BD%9C%E7%AC%A6-Ternary-Operator"><span class="toc-number">2.</span> <span class="toc-text">2.三元操作符 Ternary Operator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B-Statics"><span class="toc-number">3.</span> <span class="toc-text">3.静态类型 Statics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%87%8D%E8%BD%BD-Overloading"><span class="toc-number">4.</span> <span class="toc-text">4.重载 Overloading</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B3%9B%E5%9E%8B-Generics"><span class="toc-number">5.</span> <span class="toc-text">5.泛型 Generics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BB%A7%E6%89%BF-inheritance"><span class="toc-number">6.</span> <span class="toc-text">6.继承 inheritance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%A4%9A%E6%80%81-Polymorphism"><span class="toc-number">7.</span> <span class="toc-text">7.多态 Polymorphism</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E6%88%90%E5%91%98%E9%9A%90%E8%97%8F-MemberHiding"><span class="toc-number">8.</span> <span class="toc-text">8.成员隐藏 MemberHiding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%A6%86%E7%9B%96-Overriding"><span class="toc-number">9.</span> <span class="toc-text">9.覆盖 Overriding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E6%8E%A5%E5%8F%A3-Interfaces"><span class="toc-number">10.</span> <span class="toc-text">10.接口 Interfaces</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95-Extension-Method"><span class="toc-number">11.</span> <span class="toc-text">11.扩展方法 Extension Method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-Namespaces"><span class="toc-number">12.</span> <span class="toc-text">12.Namespaces</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E5%88%97%E8%A1%A8%E5%92%8C%E5%AD%97%E5%85%B8-Lists-and-Dictionaries"><span class="toc-number">13.</span> <span class="toc-text">13.列表和字典 Lists and Dictionaries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E6%90%BA%E7%A8%8B-Coroutine"><span class="toc-number">14.</span> <span class="toc-text">14.携程 Coroutine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E5%9B%9B%E5%85%83%E6%95%B0-Quaternions"><span class="toc-number">15.</span> <span class="toc-text">15.四元数 Quaternions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E5%A7%94%E6%89%98-Delegates"><span class="toc-number">16.</span> <span class="toc-text">16.委托 Delegates</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E7%89%B9%E6%80%A7-Attributes"><span class="toc-number">17.</span> <span class="toc-text">17.特性 Attributes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-%E4%BA%8B%E4%BB%B6-Events"><span class="toc-number">18.</span> <span class="toc-text">18.事件 Events</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Thanks"><span class="toc-number">19.</span> <span class="toc-text">Thanks:</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/11/02/Unity-IntermediateScript/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/11/02/Unity-IntermediateScript/&text=Unity-IntermediateScript"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/11/02/Unity-IntermediateScript/&title=Unity-IntermediateScript"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/11/02/Unity-IntermediateScript/&is_video=false&description=Unity-IntermediateScript"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity-IntermediateScript&body=Check out this article: http://example.com/2021/11/02/Unity-IntermediateScript/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/11/02/Unity-IntermediateScript/&title=Unity-IntermediateScript"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/11/02/Unity-IntermediateScript/&title=Unity-IntermediateScript"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/11/02/Unity-IntermediateScript/&title=Unity-IntermediateScript"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/11/02/Unity-IntermediateScript/&title=Unity-IntermediateScript"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/11/02/Unity-IntermediateScript/&name=Unity-IntermediateScript&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/11/02/Unity-IntermediateScript/&t=Unity-IntermediateScript"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
 </div>
 
-
-
-
-
-
-
-
-
-        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-
-
-
         
-      </div>
-    </footer>
-
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
-
-    
-
+    2021-2023
+    Zhairest
   </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Inici</a></li><!--
+     --><!--
+       --><li><a href="/about/">Qui som</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
 
   
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
   
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"انسخ!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "تم النسخ!");
+      e.clearSelection();
+    })
+  })
+  </script>
 
 
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Umami Analytics -->
 
+<!-- Disqus Comments -->
 
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
+<!-- utterances Comments -->
 
 </body>
 </html>
