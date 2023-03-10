@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
 <meta property="og:description" content="hh我又来了 上一章讲了VAO、VBO、EBO和Shader的内容，这节课我们来学习纹理咯~ 1、导入纹理资源​    这里我们选用了stb_image.h（一个非常流行的单头文件图像加载库）进行导入。 123456#define STB_IMAGE_IMPLEMENTATION#include &quot;stb_image.h&quot;int width, height, nrChannel">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102225201158.png">
 <meta property="og:image" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/filter_nearest.png">
 <meta property="og:image" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/filter_linear.png">
@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220103101428137.png">
 <meta property="article:published_time" content="2022-01-02T13:35:24.000Z">
 <meta property="article:modified_time" content="2023-03-07T08:33:51.484Z">
-<meta property="article:author" content="Zhairest">
+<meta property="article:author" content="Frostsea">
 <meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB2/image-20220102225201158.png">
@@ -60,18 +60,18 @@
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="الأعلى" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/">Inici</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/about/">Qui som</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/archives/">Articles</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      -->
       </ul>
     </span>
@@ -79,18 +79,18 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Post Anterior" href="/2022/01/06/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="上一篇" href="/2022/01/06/OpenGL%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Post Següent" href="/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="下一篇" href="/2022/01/02/OpenGL%E6%9C%9F%E6%9C%AB%E6%B1%87%E6%80%BB/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
-        <li><a class="icon" aria-label="Adalt" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Compartir Post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
-      <span id="i-next" class="info" style="display:none;">Post Següent</span>
-      <span id="i-top" class="info" style="display:none;">Adalt</span>
-      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
     </span>
     <br/>
     <div id="share" style="display: none">
@@ -129,7 +129,7 @@
 
     <div class="meta">
       <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Zhairest</span>
+        <span itemprop="name">Frostsea</span>
       </span>
       
     <div class="postdate">
@@ -258,11 +258,11 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">首页</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">关于</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">归档</a></li>
         
       </ul>
     </div>
@@ -289,10 +289,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
     </div>
 
   </div>
@@ -305,18 +305,25 @@
     
     
     2021-2023
-    Zhairest
+    Frostsea
   </div>
   <div class="footer-right">
     <nav>
       <ul>
         <!--
-       --><li><a href="/">Inici</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/about/">Qui som</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/archives/">Articles</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      -->
+
+
+     <!--这一段是不蒜子的访问量统计代码-->
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
+
       </ul>
     </nav>
   </div>
@@ -345,7 +352,7 @@
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"انسخ!\">";
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
     btn += '<i class="far fa-clone"></i>';
     btn += '</span>'; 
     // mount it!
@@ -356,7 +363,7 @@
       }
     });
     clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "تم النسخ!");
+      e.trigger.setAttribute('aria-label', "复制成功！");
       e.clearSelection();
     })
   })

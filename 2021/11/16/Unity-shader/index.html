@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://example.com/2021/11/16/Unity-shader/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
 <meta property="og:description" content="概括讲述了Unity shader的基本代码格式，建议看完渲染流水线再来看。">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2021/11/16/Unity-shader/image-20211121131304409.png">
 <meta property="og:image" content="http://example.com/2021/11/16/Unity-shader/image-20211121123058929.png">
 <meta property="og:image" content="http://example.com/2021/11/16/Unity-shader/image-20211121123120716.png">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://example.com/2021/11/16/Unity-shader/image-20211117152005645.png">
 <meta property="article:published_time" content="2021-11-16T02:58:37.000Z">
 <meta property="article:modified_time" content="2023-03-07T08:35:39.086Z">
-<meta property="article:author" content="Zhairest">
+<meta property="article:author" content="Frostsea">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2021/11/16/Unity-shader/image-20211121131304409.png">
@@ -61,18 +61,18 @@
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="الأعلى" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/">Inici</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/about/">Qui som</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/archives/">Articles</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      -->
       </ul>
     </span>
@@ -80,18 +80,18 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Post Anterior" href="/2021/11/17/Unity-shader2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="上一篇" href="/2021/11/17/Unity-shader2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Post Següent" href="/2021/11/12/OpenGL-%E4%B8%B4%E6%97%B6%E7%AC%94-%E9%94%AE%E7%9B%98-%E8%AE%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="下一篇" href="/2021/11/12/OpenGL-%E4%B8%B4%E6%97%B6%E7%AC%94-%E9%94%AE%E7%9B%98-%E8%AE%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
-        <li><a class="icon" aria-label="Adalt" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Compartir Post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
-      <span id="i-next" class="info" style="display:none;">Post Següent</span>
-      <span id="i-top" class="info" style="display:none;">Adalt</span>
-      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
     </span>
     <br/>
     <div id="share" style="display: none">
@@ -130,7 +130,7 @@
 
     <div class="meta">
       <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Zhairest</span>
+        <span itemprop="name">Frostsea</span>
       </span>
       
     <div class="postdate">
@@ -177,7 +177,7 @@
 <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_Name(&quot;Display Name&quot;,type) = defaultValue[&#123;options&#125;]</span><br><span class="line"><span class="comment">//属性名字（“显示的名字”，属性的类型）=将shader指定给材质时初始化的默认值</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="1-数值类properties"><a href="#1-数值类properties" class="headerlink" title="1. 数值类properties"></a>1. 数值类properties</h4><p>​    基本都是float，有以下俩种</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name(&quot;display name&quot;, Float)=number</span><br><span class="line">name(&quot;display name&quot;, Range(min,max))=number</span><br></pre></td></tr></table></figure>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">name</span>(<span class="string">&quot;display name&quot;</span>, <span class="built_in">Float</span>)=<span class="keyword">number</span></span><br><span class="line"><span class="keyword">name</span>(<span class="string">&quot;display name&quot;</span>, <span class="built_in">Range</span>(<span class="built_in">min</span>,<span class="built_in">max</span>))=<span class="keyword">number</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="2-颜色和向量类properties"><a href="#2-颜色和向量类properties" class="headerlink" title="2. 颜色和向量类properties"></a>2. 颜色和向量类properties</h4><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name(&quot;display name&quot;, Color)=(number,number,number,number)<span class="comment">//RGBA</span></span><br><span class="line">name(&quot;display name&quot;, Vector)=(number1,number2,number3,number4)</span><br></pre></td></tr></table></figure>
 
@@ -302,11 +302,11 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">首页</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">关于</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">归档</a></li>
         
       </ul>
     </div>
@@ -333,10 +333,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
     </div>
 
   </div>
@@ -349,18 +349,25 @@
     
     
     2021-2023
-    Zhairest
+    Frostsea
   </div>
   <div class="footer-right">
     <nav>
       <ul>
         <!--
-       --><li><a href="/">Inici</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/about/">Qui som</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/archives/">Articles</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      -->
+
+
+     <!--这一段是不蒜子的访问量统计代码-->
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
+
       </ul>
     </nav>
   </div>
@@ -389,7 +396,7 @@
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"انسخ!\">";
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
     btn += '<i class="far fa-clone"></i>';
     btn += '</span>'; 
     // mount it!
@@ -400,7 +407,7 @@
       }
     });
     clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "تم النسخ!");
+      e.trigger.setAttribute('aria-label', "复制成功！");
       e.clearSelection();
     })
   })

@@ -12,10 +12,10 @@
 <meta property="og:url" content="http://example.com/2021/10/31/Unity-BasicScript2/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
 <meta property="og:description" content="[TOC] 1.DataTypes初级分为Value和Reference Value：int float double bool char Structs{Vector3,Quatenion} Reference: Classes{Transform,GameObject} 12345void Start()    &amp;#123;        Transform tran&#x3D;transform;	&#x2F;">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-31T10:47:11.000Z">
-<meta property="article:modified_time" content="2021-11-03T02:28:51.780Z">
-<meta property="article:author" content="Zhairest">
+<meta property="article:modified_time" content="2023-03-10T13:14:31.929Z">
+<meta property="article:author" content="Frostsea">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
     
@@ -54,18 +54,18 @@
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="الأعلى" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/">Inici</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/about/">Qui som</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/archives/">Articles</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      -->
       </ul>
     </span>
@@ -73,18 +73,18 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Post Anterior" href="/2021/11/02/Unity-IntermediateScript/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="上一篇" href="/2021/11/02/Unity-IntermediateScript/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Post Següent" href="/2021/10/31/Unity-BasicScript/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="下一篇" href="/2021/10/31/Unity-BasicScript/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
-        <li><a class="icon" aria-label="Adalt" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Compartir Post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
-      <span id="i-next" class="info" style="display:none;">Post Següent</span>
-      <span id="i-top" class="info" style="display:none;">Adalt</span>
-      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
     </span>
     <br/>
     <div id="share" style="display: none">
@@ -123,7 +123,7 @@
 
     <div class="meta">
       <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Zhairest</span>
+        <span itemprop="name">Frostsea</span>
       </span>
       
     <div class="postdate">
@@ -152,24 +152,24 @@
 <h3 id="1-DataTypes"><a href="#1-DataTypes" class="headerlink" title="1.DataTypes"></a>1.DataTypes</h3><p>初级分为Value和Reference</p>
 <p>Value：int float double bool char Structs{Vector3,Quatenion}</p>
 <p>Reference: Classes{Transform,GameObject}</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        Transform tran=transform;	//这里的transform就是组件 故是地址 共同改变了属于是</span><br><span class="line">        tran.position = new Vector3(0,0,2);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Transform tran=transform;	<span class="comment">//这里的transform就是组件 故是地址 共同改变了属于是</span></span><br><span class="line">        tran.position = <span class="keyword">new</span> Vector3(<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="2-类的使用"><a href="#2-类的使用" class="headerlink" title="2.类的使用"></a>2.类的使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Fuc1&#123;</span><br><span class="line">       int a1;</span><br><span class="line">    	public Fun1(int aa1)&#123;	//Constructor //no return value</span><br><span class="line">           a1=aa1;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">public Fuc1 fuc1=new Fuc1();</span><br></pre></td></tr></table></figure>
+<h3 id="2-类的使用"><a href="#2-类的使用" class="headerlink" title="2.类的使用"></a>2.类的使用</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Fuc1</span>&#123;</span><br><span class="line">       <span class="built_in">int</span> a1;</span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="title">Fun1</span>(<span class="params"><span class="built_in">int</span> aa1</span>)</span>&#123;	<span class="comment">//Constructor //no return value</span></span><br><span class="line">           a1=aa1;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"><span class="keyword">public</span> Fuc1 fuc1=<span class="keyword">new</span> Fuc1();</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="3-Instantiate"><a href="#3-Instantiate" class="headerlink" title="3.Instantiate()"></a>3.Instantiate()</h3><p>Instantiate函数实例化是将original对象的所有子物体和子组件完全复制，成为一个新的对象。这个新的对象拥有与源对象完全一样的东西，包括坐标值等。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public Rigidbody rocketPrefab;	//需要绑定一个带Rigidbody的物体</span><br><span class="line">	public Transform barrelEnd;	//需要绑定一个(空)物体,坐标就是生成位置</span><br><span class="line">   void Update()</span><br><span class="line">   &#123;</span><br><span class="line">       if(Input.GetKeyDown(KeyCode.K))</span><br><span class="line">       &#123;	//在Inspector中绑定物品即可 //可以用来生成子弹</span><br><span class="line">           Instantiate(rocketPrefab);</span><br><span class="line">           //第二种 第二三个参数是新克隆体的位置和旋转值</span><br><span class="line">           Instantiate(rocketPrefab,barrelEnd.position,barrelEnd.rotation);   </span><br><span class="line">           //第三种，当作刚体可以进行力的施加</span><br><span class="line">           Rigidbody rocketRigid;</span><br><span class="line">           rocketRigid=Instantiate(rocketPrefab,barrelEnd.position,barrelEnd.rotation) as Rigidbody;</span><br><span class="line">           rocketRigid.AddForce(Vector3.up * 500);</span><br><span class="line">           //因为克隆出来的物体会一直存在，所以如果是子弹什么的可以加一个定时销毁的脚本</span><br><span class="line">       &#125;	</span><br><span class="line">   &#125;	</span><br></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Rigidbody rocketPrefab;	<span class="comment">//需要绑定一个带Rigidbody的物体</span></span><br><span class="line">	<span class="keyword">public</span> Transform barrelEnd;	<span class="comment">//需要绑定一个(空)物体,坐标就是生成位置</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">if</span>(Input.GetKeyDown(KeyCode.K))</span><br><span class="line">       &#123;	<span class="comment">//在Inspector中绑定物品即可 //可以用来生成子弹</span></span><br><span class="line">           Instantiate(rocketPrefab);</span><br><span class="line">           <span class="comment">//第二种 第二三个参数是新克隆体的位置和旋转值</span></span><br><span class="line">           Instantiate(rocketPrefab,barrelEnd.position,barrelEnd.rotation);   </span><br><span class="line">           <span class="comment">//第三种，当作刚体可以进行力的施加</span></span><br><span class="line">           Rigidbody rocketRigid;</span><br><span class="line">           rocketRigid=Instantiate(rocketPrefab,barrelEnd.position,barrelEnd.rotation) <span class="keyword">as</span> Rigidbody;</span><br><span class="line">           rocketRigid.AddForce(Vector3.up * <span class="number">500</span>);</span><br><span class="line">           <span class="comment">//因为克隆出来的物体会一直存在，所以如果是子弹什么的可以加一个定时销毁的脚本</span></span><br><span class="line">       &#125;	</span><br><span class="line">   &#125;	</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="4-数组Array"><a href="#4-数组Array" class="headerlink" title="4.数组Array"></a>4.数组Array</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int[] array1=new int[4];</span><br><span class="line">   int[] array2=&#123;1,3,54,53&#125;;</span><br><span class="line">   public GameObject[] players;  //public即可界面编辑</span><br><span class="line">   void Start()</span><br><span class="line">   &#123;</span><br><span class="line">       array1[0]=2;</span><br><span class="line">       players=GameObject.FindGameObjectsWithTag(&quot;player&quot;);//用指定的标签去寻找</span><br><span class="line">       for (int i = 0; i &lt; players.Length; i++)</span><br><span class="line">           Debug.Log(&quot;Goodbye&quot;+i+players[i].name);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-数组Array"><a href="#4-数组Array" class="headerlink" title="4.数组Array"></a>4.数组Array</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span>[] array1=<span class="keyword">new</span> <span class="built_in">int</span>[<span class="number">4</span>];</span><br><span class="line">   <span class="built_in">int</span>[] array2=&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">54</span>,<span class="number">53</span>&#125;;</span><br><span class="line">   <span class="keyword">public</span> GameObject[] players;  <span class="comment">//public即可界面编辑</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line">   &#123;</span><br><span class="line">       array1[<span class="number">0</span>]=<span class="number">2</span>;</span><br><span class="line">       players=GameObject.FindGameObjectsWithTag(<span class="string">&quot;player&quot;</span>);<span class="comment">//用指定的标签去寻找</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; players.Length; i++)</span><br><span class="line">           Debug.Log(<span class="string">&quot;Goodbye&quot;</span>+i+players[i].name);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="5-Invoke"><a href="#5-Invoke" class="headerlink" title="5.Invoke()"></a>5.Invoke()</h3><p>允许安排一个延时调用的函数。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public Object target;</span><br><span class="line">    void SpawnObject()</span><br><span class="line">    &#123;</span><br><span class="line">        float x=Random.Range(-3.0f, 3.0f);</span><br><span class="line">        float z=Random.Range(-3.0f, 3.0f);</span><br><span class="line">        Instantiate(target,new Vector3(x,1,z),Quaternion.identity);</span><br><span class="line">    &#125;</span><br><span class="line">    void Start()</span><br><span class="line">    &#123;</span><br><span class="line">        Invoke(&quot;SpawnObject&quot;,2);</span><br><span class="line">        //延时俩秒调用 </span><br><span class="line">        //只有不需要传入参数，且返回类型为void的函数才能用Invoke调用</span><br><span class="line">        InvokeRepeating(&quot;SpawnObject&quot;,2,1);</span><br><span class="line">        //延时俩秒调用，并且之后每隔一秒调用一次</span><br><span class="line">        CancelInvoke();</span><br><span class="line">        CancelInvoke(&quot;SpawnObject&quot;);</span><br><span class="line">        //停止延时调用</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object target;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SpawnObject</span>(<span class="params"></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">float</span> x=Random.Range(<span class="number">-3.0f</span>, <span class="number">3.0f</span>);</span><br><span class="line">        <span class="built_in">float</span> z=Random.Range(<span class="number">-3.0f</span>, <span class="number">3.0f</span>);</span><br><span class="line">        Instantiate(target,<span class="keyword">new</span> Vector3(x,<span class="number">1</span>,z),Quaternion.identity);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Invoke(<span class="string">&quot;SpawnObject&quot;</span>,<span class="number">2</span>);</span><br><span class="line">        <span class="comment">//延时俩秒调用 </span></span><br><span class="line">        <span class="comment">//只有不需要传入参数，且返回类型为void的函数才能用Invoke调用</span></span><br><span class="line">        InvokeRepeating(<span class="string">&quot;SpawnObject&quot;</span>,<span class="number">2</span>,<span class="number">1</span>);</span><br><span class="line">        <span class="comment">//延时俩秒调用，并且之后每隔一秒调用一次</span></span><br><span class="line">        CancelInvoke();</span><br><span class="line">        CancelInvoke(<span class="string">&quot;SpawnObject&quot;</span>);</span><br><span class="line">        <span class="comment">//停止延时调用</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="6-Enumeration-Enum"><a href="#6-Enumeration-Enum" class="headerlink" title="6.Enumeration/Enum"></a>6.Enumeration/Enum</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">enum Enum1&#123; North, East, South, West&#125;;	</span><br><span class="line">//enum 可以写在class外/注意大写 因为这是类不是变量/注意最后的；</span><br><span class="line">   void Start()</span><br><span class="line">   &#123;</span><br><span class="line">       Enum1 myEnum;</span><br><span class="line">       myEnum = Enum1.North;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="6-Enumeration-Enum"><a href="#6-Enumeration-Enum" class="headerlink" title="6.Enumeration/Enum"></a>6.Enumeration/Enum</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">enum</span> Enum1&#123; North, East, South, West&#125;;	</span><br><span class="line"><span class="comment">//enum 可以写在class外/注意大写 因为这是类不是变量/注意最后的；</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line">   &#123;</span><br><span class="line">       Enum1 myEnum;</span><br><span class="line">       myEnum = Enum1.North;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>Thanks：</p>
@@ -190,11 +190,11 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">首页</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">关于</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">归档</a></li>
         
       </ul>
     </div>
@@ -221,10 +221,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
     </div>
 
   </div>
@@ -237,18 +237,25 @@
     
     
     2021-2023
-    Zhairest
+    Frostsea
   </div>
   <div class="footer-right">
     <nav>
       <ul>
         <!--
-       --><li><a href="/">Inici</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/about/">Qui som</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/archives/">Articles</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      -->
+
+
+     <!--这一段是不蒜子的访问量统计代码-->
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
+
       </ul>
     </nav>
   </div>
@@ -277,7 +284,7 @@
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"انسخ!\">";
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
     btn += '<i class="far fa-clone"></i>';
     btn += '</span>'; 
     // mount it!
@@ -288,7 +295,7 @@
       }
     });
     clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "تم النسخ!");
+      e.trigger.setAttribute('aria-label', "复制成功！");
       e.clearSelection();
     })
   })

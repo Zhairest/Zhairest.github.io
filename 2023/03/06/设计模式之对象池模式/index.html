@@ -12,12 +12,12 @@
 <meta property="og:url" content="http://example.com/2023/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
 <meta property="og:description" content="Object Pool Pattern 对象池模式​    使用固定的对象池重用对象，取代单独地分配和释放对象，以此来达到提升性能和优化内存使用的目的。（该模式不属于GOF23种模式范畴，但是在游戏开发中非常常见） ​    游戏中常常要创建大量的游戏对象，如果这些对象长期占用一些内存而没有触发垃圾回收机制（以下简称GC）或者过于频繁的触发GC就会导致游戏的帧数暴跌，在移动设备直接造成卡死的现象。">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%A8%A1%E5%BC%8F/image-20230306233733457.png">
 <meta property="og:image" content="http://example.com/2023/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%A8%A1%E5%BC%8F/image-20230306233841435.png">
 <meta property="article:published_time" content="2023-03-06T14:57:37.000Z">
-<meta property="article:modified_time" content="2023-03-07T04:42:37.262Z">
-<meta property="article:author" content="Zhairest">
+<meta property="article:modified_time" content="2023-03-10T13:13:38.438Z">
+<meta property="article:author" content="Frostsea">
 <meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%A8%A1%E5%BC%8F/image-20230306233733457.png">
@@ -57,18 +57,18 @@
 <body class="max-width mx-auto px3 ltr">
     
       <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="القائمة"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="الأعلى" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
   <span id="menu">
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/">Inici</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/about/">Qui som</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/archives/">Articles</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      -->
       </ul>
     </span>
@@ -76,18 +76,18 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Post Anterior" href="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="上一篇" href="/2023/03/07/Unity%E4%B9%8B%E5%AD%98%E6%A1%A3%E7%B3%BB%E7%BB%9F/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Post Següent" href="/2023/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="下一篇" href="/2023/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
-        <li><a class="icon" aria-label="Adalt" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Compartir Post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
-      <span id="i-next" class="info" style="display:none;">Post Següent</span>
-      <span id="i-top" class="info" style="display:none;">Adalt</span>
-      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
     </span>
     <br/>
     <div id="share" style="display: none">
@@ -126,7 +126,7 @@
 
     <div class="meta">
       <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Zhairest</span>
+        <span itemprop="name">Frostsea</span>
       </span>
       
     <div class="postdate">
@@ -167,7 +167,7 @@
 <p>​    详情请看以下视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14T4y197bW">Unity对象池</a></p>
 <p>​    <a target="_blank" rel="noopener" href="https://docs.unity3d.com/2021.1/Documentation/ScriptReference/Pool.ObjectPool_1.html">官方DOC</a></p>
 <p>​    其实最主要是其中的Initialize()函数，可以参考以下UP主的泛型代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using UnityEngine.Pool;</span><br><span class="line"></span><br><span class="line">public class BasePool&lt;T&gt; : MonoBehaviour where T : Component</span><br><span class="line">&#123;</span><br><span class="line">    [SerializeField] protected T prefab;</span><br><span class="line">    [SerializeField] int defaultSize = 100;</span><br><span class="line">    [SerializeField] int maxSize = 500;</span><br><span class="line">    </span><br><span class="line">    ObjectPool&lt;T&gt; pool;</span><br><span class="line"></span><br><span class="line">    public int ActiveCount =&gt; pool.CountActive;</span><br><span class="line">    public int InactiveCount =&gt; pool.CountInactive;</span><br><span class="line">    public int TotalCount =&gt; pool.CountAll;</span><br><span class="line"></span><br><span class="line">    protected void Initialize(bool collectionCheck = true) =&gt; </span><br><span class="line">        pool = new ObjectPool&lt;T&gt;(</span><br><span class="line">        OnCreatePoolItem, 			//创建对象池对象的函数 </span><br><span class="line">        OnGetPoolItem, 				</span><br><span class="line">        OnReleasePoolItem, </span><br><span class="line">        OnDestroyPoolItem, </span><br><span class="line">        collectionCheck, 				//默认为true，编辑器中的调试功能</span><br><span class="line">        defaultSize,						//初始池大小（这里没有固定大小，建议调试测试）</span><br><span class="line">        maxSize);</span><br><span class="line"></span><br><span class="line">    protected virtual T OnCreatePoolItem() =&gt; Instantiate(prefab, transform);</span><br><span class="line">    protected virtual void OnGetPoolItem(T obj) =&gt; obj.gameObject.SetActive(true);</span><br><span class="line">    protected virtual void OnReleasePoolItem(T obj) =&gt; obj.gameObject.SetActive(false);</span><br><span class="line">    protected virtual void OnDestroyPoolItem(T obj) =&gt; Destroy(obj.gameObject);</span><br><span class="line"></span><br><span class="line">    public T Get() =&gt; pool.Get();</span><br><span class="line">    public void Release(T obj) =&gt; pool.Release(obj);</span><br><span class="line">    public void Clear() =&gt; pool.Clear();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.Pool;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BasePool</span>&lt;<span class="title">T</span>&gt; : <span class="title">MonoBehaviour</span> <span class="keyword">where</span> <span class="title">T</span> : <span class="title">Component</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="keyword">protected</span> T prefab;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="built_in">int</span> defaultSize = <span class="number">100</span>;</span><br><span class="line">    [<span class="meta">SerializeField</span>] <span class="built_in">int</span> maxSize = <span class="number">500</span>;</span><br><span class="line">    </span><br><span class="line">    ObjectPool&lt;T&gt; pool;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> ActiveCount =&gt; pool.CountActive;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> InactiveCount =&gt; pool.CountInactive;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> TotalCount =&gt; pool.CountAll;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">Initialize</span>(<span class="params"><span class="built_in">bool</span> collectionCheck = <span class="literal">true</span></span>)</span> =&gt; </span><br><span class="line">        pool = <span class="keyword">new</span> ObjectPool&lt;T&gt;(</span><br><span class="line">        OnCreatePoolItem, 			<span class="comment">//创建对象池对象的函数 </span></span><br><span class="line">        OnGetPoolItem, 				</span><br><span class="line">        OnReleasePoolItem, </span><br><span class="line">        OnDestroyPoolItem, </span><br><span class="line">        collectionCheck, 				<span class="comment">//默认为true，编辑器中的调试功能</span></span><br><span class="line">        defaultSize,						<span class="comment">//初始池大小（这里没有固定大小，建议调试测试）</span></span><br><span class="line">        maxSize);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> T <span class="title">OnCreatePoolItem</span>(<span class="params"></span>)</span> =&gt; Instantiate(prefab, transform);</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnGetPoolItem</span>(<span class="params">T obj</span>)</span> =&gt; obj.gameObject.SetActive(<span class="literal">true</span>);</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnReleasePoolItem</span>(<span class="params">T obj</span>)</span> =&gt; obj.gameObject.SetActive(<span class="literal">false</span>);</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnDestroyPoolItem</span>(<span class="params">T obj</span>)</span> =&gt; Destroy(obj.gameObject);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">Get</span>(<span class="params"></span>)</span> =&gt; pool.Get();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Release</span>(<span class="params">T obj</span>)</span> =&gt; pool.Release(obj);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Clear</span>(<span class="params"></span>)</span> =&gt; pool.Clear();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://github.com/AtCloudStudio/UnityObjectPoolTutorial">对象池_github地址</a></p>
 <h2 id="实际体验"><a href="#实际体验" class="headerlink" title="实际体验"></a>实际体验</h2><img src="/2023/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%AF%B9%E8%B1%A1%E6%B1%A0%E6%A8%A1%E5%BC%8F/image-20230306233733457.png" class title="image-20230306233733457">
@@ -193,11 +193,11 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">首页</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">关于</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">归档</a></li>
         
       </ul>
     </div>
@@ -224,10 +224,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
     </div>
 
   </div>
@@ -240,18 +240,25 @@
     
     
     2021-2023
-    Zhairest
+    Frostsea
   </div>
   <div class="footer-right">
     <nav>
       <ul>
         <!--
-       --><li><a href="/">Inici</a></li><!--
+       --><li><a href="/">首页</a></li><!--
      --><!--
-       --><li><a href="/about/">Qui som</a></li><!--
+       --><li><a href="/about/">关于</a></li><!--
      --><!--
-       --><li><a href="/archives/">Articles</a></li><!--
+       --><li><a href="/archives/">归档</a></li><!--
      -->
+
+
+     <!--这一段是不蒜子的访问量统计代码-->
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
+
       </ul>
     </nav>
   </div>
@@ -280,7 +287,7 @@
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"انسخ!\">";
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
     btn += '<i class="far fa-clone"></i>';
     btn += '</span>'; 
     // mount it!
@@ -291,7 +298,7 @@
       }
     });
     clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "تم النسخ!");
+      e.trigger.setAttribute('aria-label', "复制成功！");
       e.clearSelection();
     })
   })
