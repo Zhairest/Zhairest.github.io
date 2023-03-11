@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="《SWCS》游戏简介游戏类型：线下多人即时对战休闲小游戏 游戏要素：武器拾取 不同武器的攻击 毒圈机制  主体玩法：游戏刚开始将确定游戏人数以及回合制。玩家将从固定地点生成，拾取地面上随机生成的武器，可以通过武器特殊攻击或者投掷武器来对他人造成伤害。互相攻击的同时，也要注意寻找有利地点，避免毒圈的攻击。 游戏模式：统一固定摄像机视角下的多人对战游戏。   控制方式：每位玩家可以在键盘和手柄中选择自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity个人游戏架构解析">
+<meta property="og:url" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="旋转公寓的阁楼">
+<meta property="og:description" content="《SWCS》游戏简介游戏类型：线下多人即时对战休闲小游戏 游戏要素：武器拾取 不同武器的攻击 毒圈机制  主体玩法：游戏刚开始将确定游戏人数以及回合制。玩家将从固定地点生成，拾取地面上随机生成的武器，可以通过武器特殊攻击或者投掷武器来对他人造成伤害。互相攻击的同时，也要注意寻找有利地点，避免毒圈的攻击。 游戏模式：统一固定摄像机视角下的多人对战游戏。   控制方式：每位玩家可以在键盘和手柄中选择自">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/Game6.png">
+<meta property="og:image" content="http://example.com/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311224846000.png">
+<meta property="og:image" content="http://example.com/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311223135053.png">
+<meta property="og:image" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311234205041.png">
+<meta property="og:image" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311234147279.png">
+<meta property="article:published_time" content="2023-03-11T11:13:24.000Z">
+<meta property="article:modified_time" content="2023-03-11T16:13:31.700Z">
+<meta property="article:author" content="Frostsea">
+<meta property="article:tag" content="Unity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/Game6.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Unity个人游戏架构解析</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/03/11/CPP%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&text=Unity个人游戏架构解析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&is_video=false&description=Unity个人游戏架构解析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity个人游戏架构解析&body=Check out this article: http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&name=Unity个人游戏架构解析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&t=Unity个人游戏架构解析"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%8ASWCS%E3%80%8B%E6%B8%B8%E6%88%8F%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">《SWCS》游戏简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%8ASWCS%E3%80%8B-%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">《SWCS》 整体结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E4%B8%BB%E4%BD%93%E9%80%BB%E8%BE%91%E4%BB%A3%E7%A0%81%E9%83%A8%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">游戏主体逻辑代码部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GameManager"><span class="toc-number">3.1.</span> <span class="toc-text">GameManager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PlayerManager"><span class="toc-number">3.2.</span> <span class="toc-text">PlayerManager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GameData"><span class="toc-number">3.3.</span> <span class="toc-text">GameData</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interface-IPickable"><span class="toc-number">3.4.</span> <span class="toc-text">interface IPickable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interface-IPlayerLeft"><span class="toc-number">3.5.</span> <span class="toc-text">interface IPlayerLeft</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interface-IPlayerHealth"><span class="toc-number">3.6.</span> <span class="toc-text">interface IPlayerHealth</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NormalWeapon"><span class="toc-number">3.7.</span> <span class="toc-text">NormalWeapon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ShootWeapon"><span class="toc-number">3.8.</span> <span class="toc-text">ShootWeapon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ExplodeWeapon"><span class="toc-number">3.9.</span> <span class="toc-text">ExplodeWeapon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PoisonRingController"><span class="toc-number">3.10.</span> <span class="toc-text">PoisonRingController</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Unity个人游戏架构解析
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Frostsea</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-03-11T11:13:24.000Z" itemprop="datePublished">2023-03-11</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Unity/" rel="tag">Unity</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="《SWCS》游戏简介"><a href="#《SWCS》游戏简介" class="headerlink" title="《SWCS》游戏简介"></a>《SWCS》游戏简介</h1><p><strong>游戏类型：</strong>线下多人即时对战休闲小游戏</p>
+<p><strong>游戏要素</strong>：武器拾取 不同武器的攻击 毒圈机制 </p>
+<p><strong>主体玩法</strong>：游戏刚开始将确定游戏人数以及回合制。玩家将从固定地点生成，拾取地面上随机生成的武器，可以通过武器特殊攻击或者投掷武器来对他人造成伤害。互相攻击的同时，也要注意寻找有利地点，避免毒圈的攻击。</p>
+<p><strong>游戏模式</strong>：统一固定摄像机视角下的多人对战游戏。</p>
+<img src="/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/Game6.png" class title="Game6">
+
+<p><strong>控制方式</strong>：每位玩家可以在键盘和手柄中选择自己的控制方式。其中以键盘为例，ws控制前后，ad控制转向，e捡起地上的武器，j进行武器攻击，k进行投掷攻击。</p>
+<p><strong>胜利条件</strong>：消灭所有敌人，赢下之前设定的规则。</p>
+<h1 id="《SWCS》-整体结构"><a href="#《SWCS》-整体结构" class="headerlink" title="《SWCS》 整体结构"></a>《SWCS》 整体结构</h1><p>整个Unity游戏项目整体结构，可分为如下5部分：</p>
+<ul>
+<li><strong>场景对象</strong> ：不会产生互动的可视物体对象，例如建筑，灯光。</li>
+<li><strong>游戏对象</strong> ：参与互动的游戏对象，例如玩家，武器，毒圈。</li>
+<li><strong>游戏逻辑</strong> ：负责控制游戏的逻辑，因为体量较小，其逻辑对象一般用单例实现的。</li>
+<li><strong>非游戏性对象</strong> ：负责增强游戏效果，但不是直接的游戏逻辑，例如UI，HUD，特效，声音。</li>
+<li><strong>工具</strong> ：负责辅助编码，例如日志工具，调试工具。</li>
+</ul>
+<p>本篇暂时只侧重提及游戏逻辑的框架及实现。</p>
+<p><img src="/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311224846000.png" alt="游戏主体场景层级图"><img src="/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311223135053.png" alt="image-20230311223135053"></p>
+<h1 id="游戏主体逻辑代码部分"><a href="#游戏主体逻辑代码部分" class="headerlink" title="游戏主体逻辑代码部分"></a>游戏主体逻辑代码部分</h1><h2 id="GameManager"><a href="#GameManager" class="headerlink" title="GameManager"></a>GameManager</h2><p>GameManager是控制游戏主体逻辑运行的重要工具，实现了游戏的主要状态转换和流程控制。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">private</span> <span class="built_in">int</span> m_NumRoundsToWin = <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">int</span> m_NumPlayer = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">float</span> m_GameStartDelay = <span class="number">7f</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">float</span> m_StartDelay = <span class="number">3f</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">float</span> m_EndDelay = <span class="number">3f</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">float</span> m_WeaponAppearPerSec=<span class="number">10f</span>;</span><br><span class="line">  <span class="keyword">public</span> Text m_MessageText;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> GameObject[] m_PlayerPrefab;     <span class="comment">//玩家角色预制体（暂时读取顺序是固定的，后续可以加上random或者自己选择，亦或不同角色有不同能力）</span></span><br><span class="line">  <span class="keyword">public</span> CameraController m_CameraControl;    </span><br><span class="line">  Camera _camera;</span><br><span class="line">  <span class="keyword">public</span> GameObject[] m_WeaponPrefab;     <span class="comment">//武器预制体数组</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> PlayerManager[] m_Players;       </span><br><span class="line"><span class="comment">//public WeaponManager[] m_Weapons;</span></span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">int</span> m_WeaponNumber;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">int</span> m_RoundNumber;      <span class="comment">//当前轮数</span></span><br><span class="line">  <span class="keyword">private</span> WaitForSeconds m_GameStartWait;</span><br><span class="line">  <span class="keyword">private</span> WaitForSeconds m_StartWait;</span><br><span class="line">  <span class="keyword">private</span> WaitForSeconds m_EndWait;</span><br><span class="line">  <span class="keyword">private</span> PlayerManager m_RoundWinner;</span><br><span class="line">  <span class="keyword">private</span> PlayerManager m_GameWinner;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> PoisonRingController poison;</span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">float</span> WeaponAppearRange;</span><br></pre></td></tr></table></figure>
+
+<p>这里定义了主要的游戏运行变量，例如可在开局设置的游戏局数，武器出现次数等等；</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span>	</span><br><span class="line">&#123;</span><br><span class="line">    m_NumRoundsToWin = GameData.Instance.GameRoundNumber;   <span class="comment">//运用单例获得</span></span><br><span class="line">    m_NumPlayer = GameData.Instance.PlayerNumber;</span><br><span class="line">    <span class="comment">//Debug.Log(m_NumRoundsToWin);</span></span><br><span class="line"></span><br><span class="line">    _camera = Camera.main.GetComponent&lt;Camera&gt;();</span><br><span class="line">    _camera.depthTextureMode = DepthTextureMode.Depth;      <span class="comment">//设置相机.depthTextureMode模式，为shader获取深度图做准备</span></span><br><span class="line">    _camera.allowHDR = <span class="literal">true</span>;                                <span class="comment">//允许摄像机HDR模式增强电弧强度</span></span><br><span class="line"></span><br><span class="line">    WeaponAppearRange = <span class="number">15f</span>;</span><br><span class="line">    m_GameStartWait= <span class="keyword">new</span> WaitForSeconds(m_GameStartDelay);</span><br><span class="line">    m_StartWait = <span class="keyword">new</span> WaitForSeconds(m_StartDelay);</span><br><span class="line">    m_EndWait = <span class="keyword">new</span> WaitForSeconds(m_EndDelay);</span><br><span class="line"></span><br><span class="line">    StartCoroutine(GameStart());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">GameStart</span>(<span class="params"></span>)                         <span class="comment">///回合开始之前</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> m_GameStartWait;</span><br><span class="line">    SpawnAllPlayers();</span><br><span class="line">    SpawnAllWeaponsOpen();</span><br><span class="line">    SetCameraTargets();</span><br><span class="line">    StartCoroutine(SpanAllWeapons());</span><br><span class="line">    StartCoroutine(GameLoop());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在Start()函数中对于游戏主要数据进行了初始化，并利用协程实现一个计时器的效果，优化游戏节奏。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">SpawnAllPlayers</span>(<span class="params"></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; m_NumPlayer; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        m_Players[i].m_Instance = Instantiate(m_PlayerPrefab[i], m_Players[i].m_SpawnPoint.position, m_Players[i].m_SpawnPoint.rotation) <span class="keyword">as</span> GameObject;</span><br><span class="line">        m_Players[i].m_PlayerNumber = i + <span class="number">1</span>;</span><br><span class="line">        m_Players[i].Setup();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对玩家的预制体进行实例化，生成在预先设置的SpawnPoint；</p>
+<p>以下是游戏最主要的循环MainLoop()</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">GameLoop</span>(<span class="params"></span>)  <span class="comment">//Main Loop!!!</span></span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="title">StartCoroutine</span>(<span class="params">RoundStarting(</span>))</span>;</span><br><span class="line">        <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="title">StartCoroutine</span>(<span class="params">RoundPlaying(</span>))</span>;</span><br><span class="line">        <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="title">StartCoroutine</span>(<span class="params">RoundEnding(</span>))</span>;</span><br><span class="line">        <span class="keyword">if</span> (m_GameWinner != <span class="literal">null</span>)   <span class="comment">//如果有了胜者</span></span><br><span class="line">        &#123;</span><br><span class="line">            SceneManager.LoadScene(<span class="number">2</span>);	<span class="comment">//跳转场景</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            StartCoroutine(GameLoop());	<span class="comment">//继续循环</span></span><br><span class="line">        &#125;     </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">RoundStarting</span>(<span class="params"></span>)                         <span class="comment">///回合开始之前</span></span></span><br><span class="line">&#123;</span><br><span class="line">    m_RoundWinner = <span class="literal">null</span>;</span><br><span class="line">    ResetAllPlayers();</span><br><span class="line">    DisablePlayerControl();</span><br><span class="line">    KillAllWeapons();</span><br><span class="line">    poison.GameRestart();</span><br><span class="line">    m_CameraControl.SetStartPositionAndSize();</span><br><span class="line">    m_RoundNumber++;</span><br><span class="line">    m_MessageText.text = <span class="string">&quot;ROUND &quot;</span> + m_RoundNumber;</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> m_StartWait;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">RoundPlaying</span>(<span class="params"></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    EnableControl();</span><br><span class="line">    m_MessageText.text = <span class="built_in">string</span>.Empty;</span><br><span class="line">    <span class="keyword">while</span> (!OnePlayerLeft())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> IEnumerator <span class="title">RoundEnding</span>(<span class="params"></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    DisablePlayerControl();</span><br><span class="line">    m_RoundWinner = GetRoundWinner();</span><br><span class="line">    <span class="keyword">if</span> (m_RoundWinner != <span class="literal">null</span>) m_RoundWinner.m_Wins++;</span><br><span class="line">    m_GameWinner = GetGameWinner();</span><br><span class="line">    <span class="built_in">string</span> message = EndMessage();</span><br><span class="line">    m_MessageText.text = message;</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> m_EndWait;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后便是一些UI输出，检测玩家胜利的代码了，就不多说了。</p>
+<h2 id="PlayerManager"><a href="#PlayerManager" class="headerlink" title="PlayerManager"></a>PlayerManager</h2><p>玩家管理器主要负责对每一个玩家进行控制，并控制其预制体身上已绑定好的脚本的运行。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//PlayerManager的变量</span></span><br><span class="line"><span class="keyword">public</span> Color m_PlayerColor;         <span class="comment">//玩家的颜色</span></span><br><span class="line"><span class="keyword">public</span> Transform m_SpawnPoint;      <span class="comment">//这里是在public手动更改的spawn位置，后续可以考虑进行一个随机出现（但是不会靠的太近）</span></span><br><span class="line"></span><br><span class="line">[<span class="meta">HideInInspector</span>] <span class="keyword">public</span> <span class="built_in">int</span> m_PlayerNumber;        <span class="comment">//玩家编号</span></span><br><span class="line">[<span class="meta">HideInInspector</span>] <span class="keyword">public</span> <span class="built_in">string</span> m_ColoredPlayerText;</span><br><span class="line">[<span class="meta">HideInInspector</span>] <span class="keyword">public</span> GameObject m_Instance;</span><br><span class="line">[<span class="meta">HideInInspector</span>] <span class="keyword">public</span> <span class="built_in">int</span> m_Wins;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> PlayerMove m_Movement;</span><br><span class="line"><span class="keyword">private</span> PlayerThrow m_Throwing;</span><br><span class="line"><span class="keyword">private</span> PlayerShoot m_Shooting;</span><br><span class="line"><span class="keyword">private</span> PlayerPickUp m_Picking;</span><br><span class="line"><span class="keyword">private</span> GameObject m_CanvasGameObject;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//玩家的初始设置函数</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Setup</span>(<span class="params"></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    m_Movement = m_Instance.GetComponent&lt;PlayerMove&gt;();</span><br><span class="line">    m_Throwing = m_Instance.GetComponent&lt;PlayerThrow&gt;();</span><br><span class="line">    m_Shooting = m_Instance.GetComponent&lt;PlayerShoot&gt;();</span><br><span class="line">    m_Picking = m_Instance.GetComponent&lt;PlayerPickUp&gt;();</span><br><span class="line">    m_CanvasGameObject = m_Instance.GetComponentInChildren&lt;Canvas&gt;().gameObject;</span><br><span class="line"></span><br><span class="line">    m_Movement.m_PlayerNumber = m_PlayerNumber;</span><br><span class="line">    m_Throwing.m_PlayerNumber = m_PlayerNumber;</span><br><span class="line">    m_Shooting.m_PlayerNumber = m_PlayerNumber;</span><br><span class="line">    m_Picking.m_PlayerNumber = m_PlayerNumber;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//颜色这一块还是需要看 //负责控制每个玩家对应的文本颜色</span></span><br><span class="line">    m_ColoredPlayerText = <span class="string">&quot;&lt;color=#&quot;</span> + ColorUtility.ToHtmlStringRGB(m_PlayerColor) + <span class="string">&quot;&gt;PLAYER &quot;</span> + m_PlayerNumber + <span class="string">&quot;&lt;/color&gt;&quot;</span>;</span><br><span class="line">    MeshRenderer[] renderers = m_Instance.GetComponentsInChildren&lt;MeshRenderer&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; renderers.Length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        renderers[i].material.color = m_PlayerColor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="GameData"><a href="#GameData" class="headerlink" title="GameData"></a>GameData</h2><p>作为游戏全局的GameData，自然想到用单例模式去做更加的方便。</p>
+<p>其中主要存放游戏玩家的数量以及游戏总局数，用单例方便获取。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//全局的单例类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GameData</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> GameData Instance &#123; <span class="keyword">get</span>; <span class="keyword">private</span> <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> PlayerNumber &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> GameRoundNumber &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (Instance == <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Instance = <span class="keyword">this</span>;</span><br><span class="line">            DontDestroyOnLoad(gameObject);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            Destroy(gameObject);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="interface-IPickable"><a href="#interface-IPickable" class="headerlink" title="interface IPickable"></a>interface IPickable</h2><p>在编写游戏时，经常遇见在一个物体上的行为影响到另一个物体，例如玩家捡起地上的武器，需要获取到武器对象并生成在玩家手上。这时候如果一直通过传统的方式去判断并获取武器的对象，代码层面就显得是否麻烦。于是引入接口，简化代码。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IPickable</span>  <span class="comment">///第一个接口，用于改变人物和武器的一些状态</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> GameObject <span class="title">GetPrefab</span>(<span class="params"></span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetPickInHand</span>(<span class="params"></span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetThrowable</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该接口定义了关于玩家获取地上触碰到的武器的GetPrefab()，设置武器状态为已捡起的SetPickInHand()以及设置武器状态为已扔出的SetThrowable()。</p>
+<p>以GetPrefab()为例，在NormalWeapon.cs中实现了该接口</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">NormalWeapon</span> : <span class="title">MonoBehaviour</span>, <span class="title">IPickable</span>, <span class="title">IPlayerLeft</span> </span><br><span class="line">&#123;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> GameObject <span class="title">GetPrefab</span>(<span class="params"></span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">    	<span class="keyword">return</span> prefab;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样子玩家的PickThings()函数就可以这样子写</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PickThings</span>(<span class="params">Collider other</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (isCollider &amp;&amp; Input.GetButtonDown(m_PickButton))</span><br><span class="line">    &#123;</span><br><span class="line">        IPickable pick = other.gameObject.GetComponent&lt;IPickable&gt;();	</span><br><span class="line">        <span class="keyword">if</span> (pick != <span class="literal">null</span>)	<span class="comment">//只要other有Ipickable组件，就说明它是可以捡起的武器！</span></span><br><span class="line">        &#123;</span><br><span class="line">            GameObject prefab1 = pick.GetPrefab();<span class="comment">//直接获取实例，并显示在玩家手中</span></span><br><span class="line"></span><br><span class="line">            GameObject prefabInstance = Instantiate(prefab1, m_PickTransform.position, <span class="keyword">this</span>.transform.rotation, <span class="keyword">this</span>.transform);</span><br><span class="line">            prefabInstance.name = <span class="string">&quot;yourweapon&quot;</span>;</span><br><span class="line"></span><br><span class="line">            IPickable NowPickup = prefabInstance.GetComponent&lt;IPickable&gt;();</span><br><span class="line">            NowPickup.SetPickInHand();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        DestroyImmediate(other.transform.gameObject);</span><br><span class="line">        isPicked = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="interface-IPlayerLeft"><a href="#interface-IPlayerLeft" class="headerlink" title="interface IPlayerLeft"></a>interface IPlayerLeft</h2><p>当玩家捡起武器之后，按下普通攻击（即实现武器的普通效果，如近战武器则近身攻击，远程武器则射出子弹，投掷武器则没有效果）后，需要进行判断去实现不同的效果。此时有一个接口就可以省去麻烦的判断，直接通过接口调用不同武器的效果即可。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">interface</span> <span class="title">IPlayerLeft</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PlayerShootOrHit</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">GoShoot</span>(<span class="params"></span>)      <span class="comment">///坐稳了，要发射了</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Debug.Log(&quot;进入了PlayerShoot里面的Goshoot（）中，等待调用接口&quot;);</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.transform.Find(<span class="string">&quot;yourweapon&quot;</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            m_isShoot = <span class="literal">true</span>;</span><br><span class="line">            GameObject Weapon = <span class="keyword">this</span>.transform.Find(<span class="string">&quot;yourweapon&quot;</span>).gameObject;</span><br><span class="line">            <span class="comment"><span class="doctag">///</span>用接口实现不同的射击或者近战攻击</span></span><br><span class="line">            IPlayerLeft playerLeft = Weapon.GetComponent&lt;IPlayerLeft&gt;(); </span><br><span class="line">            playerLeft.PlayerShootOrHit();</span><br><span class="line">            StartCoroutine(Timer());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//yield return new WaitForSeconds(1f);    ///每次劈砍的近战攻击都得等待一秒钟</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>而在NormalWeapon中，实现的效果即是下文NormalWeapon段落中会提到的普通攻击效果。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PlayerShootOrHit</span>(<span class="params"></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    LeftHit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="interface-IPlayerHealth"><a href="#interface-IPlayerHealth" class="headerlink" title="interface IPlayerHealth"></a>interface IPlayerHealth</h2><p>又比如当武器扔出、射出子弹碰到玩家，这时候应该从武器角度去实现玩家血量的减少。同理将玩家血量设置的接口暴露给武器进行控制将是一个不错的解决方案。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title">IPlayerHealth</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ChangeHealth</span>(<span class="params"><span class="built_in">float</span> delta</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerHealth</span> : <span class="title">MonoBehaviour</span>, <span class="title">IPlayerHealth</span>, <span class="title">IPlayer</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ChangeHealth</span>(<span class="params"><span class="built_in">float</span> delta</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        m_CurrentHealth += delta;</span><br><span class="line">        SetHealthUI();</span><br><span class="line">        <span class="keyword">if</span> (m_CurrentHealth &lt;= <span class="number">0f</span> &amp;&amp; !m_IsDead) OnDeath();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在Weapon脚本中：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//  Debug.Log(&quot;Ispickinhand&quot; + isPickInhand + &quot;  isshot&quot; + isShoot + other.name);</span></span><br><span class="line">    <span class="keyword">if</span> (isPickInhand &amp;&amp; isThrow &amp;&amp; other.name != <span class="string">&quot;Plane&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">float</span> damage = <span class="number">30f</span>;	<span class="comment">//可控制伤害大小</span></span><br><span class="line">        <span class="keyword">if</span> (other.CompareTag(<span class="string">&quot;Player&quot;</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            other.GetComponent&lt;IPlayerHealth&gt;().ChangeHealth(-damage);</span><br><span class="line">            other.GetComponent&lt;IPlayerChangePosition&gt;().ChangePosition(<span class="keyword">this</span>.transform.forward, <span class="number">20f</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="NormalWeapon"><a href="#NormalWeapon" class="headerlink" title="NormalWeapon"></a>NormalWeapon</h2><p>普通武器属于只能捡起来近战攻击或者蓄力投掷的武器。</p>
+<p>以下为近战攻击的函数，使用Unity自带的射线实现了检测敌人，并通过调用接口对敌人造成了伤害以及击退效果。同时若检测到的是子弹，则能对子弹实现反弹效果。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">LeftHit</span>(<span class="params"></span>)  <span class="comment">///近战攻击</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment"><span class="doctag">///</span>检测武器前方一段范围有没有东西</span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span>若有，则获取，判定物体</span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span>若为物体，且有rigidbody，则施加反弹的力</span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span>若为player，则产生伤害，并鸡腿</span></span><br><span class="line">        <span class="comment">//Debug.Log(&quot;进入了左键近战攻击的脚本&quot;);    </span></span><br><span class="line">        Ray ray = <span class="keyword">new</span> Ray(<span class="keyword">this</span>.transform.position+ <span class="keyword">this</span>.transform.parent.transform.forward.normalized, <span class="keyword">this</span>.transform.parent.transform.forward);</span><br><span class="line">        <span class="built_in">float</span> lineDistance = <span class="number">1f</span>;</span><br><span class="line">        LayerMask layerMaskPlayer = LayerMask.GetMask(<span class="string">&quot;Player&quot;</span>);</span><br><span class="line">        LayerMask layerMaskWeapon = LayerMask.GetMask(<span class="string">&quot;Equipment&quot;</span>);</span><br><span class="line">        LayerMask layerMaskBullet = LayerMask.GetMask(<span class="string">&quot;Bullet&quot;</span>);</span><br><span class="line">        RaycastHit outPlayer;</span><br><span class="line">        RaycastHit outEquipment;</span><br><span class="line">        RaycastHit outBullet;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">bool</span> isColliderPlayer = Physics.Raycast(ray, <span class="keyword">out</span> outPlayer, lineDistance, layerMaskPlayer);</span><br><span class="line">        <span class="built_in">bool</span> isColliderEquipment = Physics.Raycast(ray, <span class="keyword">out</span> outEquipment, lineDistance, layerMaskWeapon);</span><br><span class="line">        <span class="built_in">bool</span> isColliderBullet = Physics.Raycast(ray, <span class="keyword">out</span> outBullet, lineDistance, layerMaskBullet);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (isColliderPlayer)</span><br><span class="line">        &#123;</span><br><span class="line">            outPlayer.collider.gameObject.GetComponent&lt;IPlayerHealth&gt;().ChangeHealth(-m_damage);</span><br><span class="line">            outPlayer.collider.gameObject.GetComponent&lt;IPlayerChangePosition&gt;().ChangePosition(<span class="keyword">this</span>.transform.forward,<span class="number">50f</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isColliderEquipment &amp;&amp; outEquipment.collider.gameObject.GetComponent&lt;Rigidbody&gt;())</span><br><span class="line">        &#123;</span><br><span class="line">            outEquipment.collider.gameObject.GetComponent&lt;Rigidbody&gt;().AddForce(-outEquipment.collider.transform.forward);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(isColliderBullet)    <span class="comment"><span class="doctag">///</span>加入了Bullet的反弹作用</span></span><br><span class="line">        &#123;</span><br><span class="line">            outBullet.collider.gameObject.GetComponent&lt;Rigidbody&gt;().AddForce(-outBullet.collider.transform.forward);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.GetComponentInParent&lt;PlayerShoot&gt;().m_isShoot = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ShootWeapon"><a href="#ShootWeapon" class="headerlink" title="ShootWeapon"></a>ShootWeapon</h2><p>主要实现了左键发射武器（即该武器的子弹），不同的武器也有着不同的伤害和射速。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">BulletOut</span>(<span class="params"></span>) <span class="comment">///射出一颗子弹</span></span></span><br><span class="line">  &#123;</span><br><span class="line">      GameObject pre_bullet = Instantiate(m_Bullet, m_ShootPlace.position, Quaternion.identity);</span><br><span class="line">      pre_bullet.AddComponent&lt;Rigidbody&gt;();</span><br><span class="line">      pre_bullet.transform.SetParent(<span class="literal">null</span>);</span><br><span class="line">      pre_bullet.transform.forward = m_ShootPlace.forward;</span><br><span class="line">      pre_bullet.GetComponent&lt;Rigidbody&gt;().velocity = <span class="number">20f</span> * m_ShootPlace.forward+<span class="keyword">new</span> Vector3(<span class="number">0</span>,<span class="number">1.0f</span>,<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">IEnumerator <span class="title">Shoot30</span>(<span class="params"></span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; shootNumPerTime; i++)</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForSeconds</span>(<span class="params">shootBulletTime</span>)</span>;	<span class="comment">//此处可以对不同武器进行设置，去调整不同射速</span></span><br><span class="line">          BulletOut();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FinalShoot</span>(<span class="params"></span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">if</span> (isPickInhand &amp;&amp; !isShoot)</span><br><span class="line">      &#123;</span><br><span class="line">          StartCoroutine(Shoot30());</span><br><span class="line">          isShoot = <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ExplodeWeapon"><a href="#ExplodeWeapon" class="headerlink" title="ExplodeWeapon"></a>ExplodeWeapon</h2><p>爆炸武器应该是比较难制作的一部分</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> m_MaxDamage = <span class="number">100f</span>;        <span class="comment">//炸弹造成的最大伤害</span></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> m_ExplosionForce = <span class="number">1000f</span>;      <span class="comment">//炸弹冲击力</span></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> m_MaxLifetime = <span class="number">2f</span>;        <span class="comment">//炸弹最长生命周期</span></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">float</span> m_ExplosionRadius = <span class="number">10f</span>;        <span class="comment">//爆炸半径</span></span><br><span class="line"><span class="keyword">public</span> GameObject prefab;</span><br></pre></td></tr></table></figure>
+
+<p>主要设置在投掷出去之后碰到人才会爆炸。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnTriggerEnter</span>(<span class="params">Collider other</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (isPickInhand &amp;&amp; isThrow &amp;&amp; (<span class="comment">/*other.name == &quot;Plane&quot;*/</span> other.CompareTag(<span class="string">&quot;Plane&quot;</span>) || other.CompareTag(<span class="string">&quot;Player&quot;</span>)))    <span class="comment"><span class="doctag">///</span>炸弹只有在碰撞人物或者物体之后才会爆炸</span></span><br><span class="line">    &#123;</span><br><span class="line">        Collider[] colliders = Physics.OverlapSphere(transform.position, m_ExplosionRadius, m_PlayerMask);        <span class="comment">//筛选出爆炸范围内的玩家</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; colliders.Length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Rigidbody targetRigidbody = colliders[i].GetComponent&lt;Rigidbody&gt;();</span><br><span class="line">            <span class="keyword">if</span> (!targetRigidbody)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            targetRigidbody.AddExplosionForce(m_ExplosionForce, transform.position, m_ExplosionRadius);     <span class="comment">//为收到爆炸影响的物体施加力</span></span><br><span class="line"></span><br><span class="line">            PlayerHealth targetHealth = targetRigidbody.GetComponent&lt;PlayerHealth&gt;();</span><br><span class="line">            <span class="keyword">if</span> (!targetHealth)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="built_in">float</span> damage = CalculateDamage(targetRigidbody.position);</span><br><span class="line"></span><br><span class="line">            Debug.Log(other.name);</span><br><span class="line">            <span class="keyword">if</span>(other.GetComponent&lt;IPlayerHealth&gt;() != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                other.GetComponent&lt;IPlayerHealth&gt;().ChangeHealth(-damage);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        m_ExplosionParticles.transform.parent = <span class="literal">null</span>;	<span class="comment">//实现粒子效果</span></span><br><span class="line">        m_ExplosionParticles.Play();</span><br><span class="line"></span><br><span class="line">        Destroy(m_ExplosionParticles.gameObject, m_ExplosionParticles.main.duration); </span><br><span class="line">        Destroy(gameObject);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以及我们对于投掷的爆炸武器，要对其投掷点与玩家的距离为依据去设计不同的伤害</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="built_in">float</span> <span class="title">CalculateDamage</span>(<span class="params">Vector3 targetPosition</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    Vector3 explosionToTarget = targetPosition - transform.position;</span><br><span class="line">    <span class="built_in">float</span> explosionDistance = explosionToTarget.magnitude;</span><br><span class="line">    <span class="built_in">float</span> relativeDistance = (m_ExplosionRadius - explosionDistance) / m_ExplosionRadius;</span><br><span class="line">    <span class="built_in">float</span> damage = relativeDistance * m_MaxDamage;</span><br><span class="line">    damage = Mathf.Max(<span class="number">0f</span>, damage);</span><br><span class="line">    <span class="keyword">return</span> damage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="PoisonRingController"><a href="#PoisonRingController" class="headerlink" title="PoisonRingController"></a>PoisonRingController</h2><p>主要用于控制游戏中毒圈的收缩。</p>
+<img src="/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311234205041.png" class title="image-20230311234205041">
+
+<img src="/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311234147279.png" class title="image-20230311234147279">
+
+<p>游戏中的毒圈其实就是以圆柱体为原型去做的，去掉了圆柱体的碰撞体以及刚体。实现毒圈效果的主要工作其实是在于shader的编写。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%8ASWCS%E3%80%8B%E6%B8%B8%E6%88%8F%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">《SWCS》游戏简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%8ASWCS%E3%80%8B-%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">《SWCS》 整体结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E4%B8%BB%E4%BD%93%E9%80%BB%E8%BE%91%E4%BB%A3%E7%A0%81%E9%83%A8%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">游戏主体逻辑代码部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GameManager"><span class="toc-number">3.1.</span> <span class="toc-text">GameManager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PlayerManager"><span class="toc-number">3.2.</span> <span class="toc-text">PlayerManager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GameData"><span class="toc-number">3.3.</span> <span class="toc-text">GameData</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interface-IPickable"><span class="toc-number">3.4.</span> <span class="toc-text">interface IPickable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interface-IPlayerLeft"><span class="toc-number">3.5.</span> <span class="toc-text">interface IPlayerLeft</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#interface-IPlayerHealth"><span class="toc-number">3.6.</span> <span class="toc-text">interface IPlayerHealth</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NormalWeapon"><span class="toc-number">3.7.</span> <span class="toc-text">NormalWeapon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ShootWeapon"><span class="toc-number">3.8.</span> <span class="toc-text">ShootWeapon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ExplodeWeapon"><span class="toc-number">3.9.</span> <span class="toc-text">ExplodeWeapon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PoisonRingController"><span class="toc-number">3.10.</span> <span class="toc-text">PoisonRingController</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&text=Unity个人游戏架构解析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&is_video=false&description=Unity个人游戏架构解析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity个人游戏架构解析&body=Check out this article: http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&name=Unity个人游戏架构解析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&t=Unity个人游戏架构解析"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2023
+    Frostsea
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     -->
+
+
+     <!--这一段是不蒜子的访问量统计代码-->
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
+
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
