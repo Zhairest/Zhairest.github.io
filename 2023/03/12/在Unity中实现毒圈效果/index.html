@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="首先，毒圈应该是透明的，隐约有电离层的效果。透明只局限于中间，边缘则应该不完全透明。 首先完成正常shader的编写： 基础Shader12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152Shader &quot;Frostsea&#x2F;POISON_2023&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Unity】用Shader实现毒圈效果">
+<meta property="og:url" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/index.html">
+<meta property="og:site_name" content="旋转公寓的阁楼">
+<meta property="og:description" content="首先，毒圈应该是透明的，隐约有电离层的效果。透明只局限于中间，边缘则应该不完全透明。 首先完成正常shader的编写： 基础Shader12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152Shader &quot;Frostsea&#x2F;POISON_2023&amp;quo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312135220029.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312135233306.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312135737723.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312140024074.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312140239938.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312141022592.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312141320979.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312142752432.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312142732634.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312143600208.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312143903201.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312144226915.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312144625736.png">
+<meta property="og:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312144633936.png">
+<meta property="article:published_time" content="2023-03-12T01:50:08.000Z">
+<meta property="article:modified_time" content="2023-03-12T06:50:15.281Z">
+<meta property="article:author" content="Frostsea">
+<meta property="article:tag" content="Unity">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312135220029.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>【Unity】用Shader实现毒圈效果</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&text=【Unity】用Shader实现毒圈效果"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&title=【Unity】用Shader实现毒圈效果"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&is_video=false&description=【Unity】用Shader实现毒圈效果"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【Unity】用Shader实现毒圈效果&body=Check out this article: http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&title=【Unity】用Shader实现毒圈效果"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&title=【Unity】用Shader实现毒圈效果"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&title=【Unity】用Shader实现毒圈效果"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&title=【Unity】用Shader实现毒圈效果"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&name=【Unity】用Shader实现毒圈效果&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&t=【Unity】用Shader实现毒圈效果"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80Shader"><span class="toc-number">1.</span> <span class="toc-text">基础Shader</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E9%A2%9C%E8%89%B2"><span class="toc-number">2.</span> <span class="toc-text">返回颜色</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A0%E5%85%A5%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C"><span class="toc-number">3.</span> <span class="toc-text">加入透明效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E9%80%8F%E6%98%8E%EF%BC%8C%E8%BE%B9%E7%BC%98%E6%9C%89%E6%95%88%E6%9E%9C"><span class="toc-number">4.</span> <span class="toc-text">中间透明，边缘有效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8C%E5%96%84%E8%83%8C%E9%9D%A2%E5%89%94%E9%99%A4%E7%9A%84%E6%95%88%E6%9E%9C"><span class="toc-number">5.</span> <span class="toc-text">完善背面剔除的效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">小总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        【Unity】用Shader实现毒圈效果
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Frostsea</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-03-12T01:50:08.000Z" itemprop="datePublished">2023-03-12</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Unity/" rel="tag">Unity</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>首先，毒圈应该是透明的，隐约有电离层的效果。透明只局限于中间，边缘则应该不完全透明。</p>
+<p>首先完成正常shader的编写：</p>
+<h1 id="基础Shader"><a href="#基础Shader" class="headerlink" title="基础Shader"></a>基础Shader</h1><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Frostsea/POISON_2023&quot;</span><br><span class="line">&#123;</span><br><span class="line">	Properties</span><br><span class="line">	&#123;</span><br><span class="line">		_MainTex(&quot;MainTex&quot;,<span class="number">2</span>D)=&quot;white&quot;&#123;&#125;	<span class="comment">//主要纹理</span></span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SubShader</span><br><span class="line">	&#123;</span><br><span class="line">		Pass	<span class="comment">//算法写在pass通道</span></span><br><span class="line">		&#123;</span><br><span class="line">			CGPROGRAM</span><br><span class="line">            <span class="meta">#include &quot;UnityCG.cginc&quot;	//引用unitycg的头文件，内置方便的函数</span></span><br><span class="line">            <span class="meta">#pragma vertex vert		//顶点函数</span></span><br><span class="line">            <span class="meta">#pragma fragment frag	//片源函数</span></span><br><span class="line"></span><br><span class="line">            struct a2v</span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : POSITION;	<span class="comment">//模型空间的坐标</span></span><br><span class="line">                float2 uv : TEXCOORD0;	<span class="comment">//uv 坐标存在在纹理上面</span></span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            struct v2f</span><br><span class="line">            &#123;</span><br><span class="line">                float4 pos : SV_POSITION; <span class="comment">//裁剪空间的坐标</span></span><br><span class="line">                float2 uv : TEXCOORD0;	<span class="comment">//纹理</span></span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="type">sampler2D</span> _MainTex;	<span class="comment">//声明纹理，才能使用</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            v2f vert(a2v i)	<span class="comment">//顶点函数</span></span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                <span class="comment">//顶点变换到裁剪空间去</span></span><br><span class="line">                o.pos = UnityObjectToClipPos(i.pos);</span><br><span class="line">                o.uv = i.uv;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            float4 frag(v2f u) : SV_TARGET <span class="comment">//不规定最后返回的类型</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//对纹理进行采样</span></span><br><span class="line">                float4 tex = tex2D(_MainTex,u.uv);<span class="comment">//使用函数对uv坐标进行采样</span></span><br><span class="line">                <span class="keyword">return</span> tex;</span><br><span class="line">            &#125;</span><br><span class="line">			ENDCG</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312135220029.png" class title="image-20230312135211919">
+
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312135233306.png" class title="image-20230312135233306">
+
+<h1 id="返回颜色"><a href="#返回颜色" class="headerlink" title="返回颜色"></a>返回颜色</h1><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在代码中加入以下列，可以实现颜色的改变</span></span><br><span class="line">_Color(&quot;Color&quot;,Color) = (<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)	<span class="comment">//初值rgba 白色</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    float4 _Color;</span><br><span class="line">	float4 frag(v2f u) : SV_TARGET <span class="comment">//不规定最后返回的类型</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//对纹理进行采样</span></span><br><span class="line">        float4 tex = tex2D(_MainTex,u.uv);<span class="comment">//使用函数对uv坐标进行采样</span></span><br><span class="line">        <span class="keyword">return</span> tex * _Color;	<span class="comment">//这行代码实现了纯色的改变</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312135737723.png" class title="image-20230312135737723">
+
+<h1 id="加入透明效果"><a href="#加入透明效果" class="headerlink" title="加入透明效果"></a>加入透明效果</h1><p>形成透明效果，我们首先要打开混合模式。</p>
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312140024074.png" class title="image-20230312140024074">
+
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312140239938.png" class title="image-20230312140239938">
+
+<h1 id="中间透明，边缘有效果"><a href="#中间透明，边缘有效果" class="headerlink" title="中间透明，边缘有效果"></a>中间透明，边缘有效果</h1><p>需要通过视线与顶点的法线的点乘值去获得观察的角度，然后再判断什么时候要透明，以实现效果。</p>
+<p>于是先引入法线：</p>
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312141022592.png" class title="image-20230312141022592">
+
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312141320979.png" class title="image-20230312141320979">
+
+<p>然后再是摄像机的视线：首先得到摄像机在世界中的坐标，然后得到顶点在世界空间下的坐标（可用UnityCG的一个方法获得值）。之后对于法线和视线进行一个点乘，再输出即可。</p>
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312142752432.png" class title="image-20230312142752432">
+
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312142732634.png" class title="image-20230312142732634">
+
+
+
+<p>继续完善：我们可以将视线的获取放在顶点着色器中，效果会比较好一点。</p>
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312143600208.png" class title="image-20230312143600208">
+
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312143903201.png" class title="image-20230312143903201">
+
+
+
+<h1 id="完善背面剔除的效果"><a href="#完善背面剔除的效果" class="headerlink" title="完善背面剔除的效果"></a>完善背面剔除的效果</h1><p>Unity默认剔除背面，这样子我们在毒圈内往外看就无法看到效果了。</p>
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312144226915.png" class title="image-20230312144226915">
+
+<p>同时我们可以考虑关闭<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/592197953">深写模式ZWrite</a></p>
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312144625736.png" class title="image-20230312144625736">
+
+<img src="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/image-20230312144633936.png" class title="image-20230312144633936">
+
+<p>效果如图，还算不错。</p>
+<h1 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h1><p>到这里，本游戏的毒圈shader就编写完毕，后续可能还会加入更细腻的效果。总shader代码如下：</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Frostsea/POISON_2023&quot;</span><br><span class="line">&#123;</span><br><span class="line">	Properties</span><br><span class="line">	&#123;</span><br><span class="line">		_MainTex(&quot;MainTex&quot;,<span class="number">2</span>D)=&quot;white&quot;&#123;&#125;	<span class="comment">//主要纹理</span></span><br><span class="line">		_Color(&quot;Color&quot;,Color) = (<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)	<span class="comment">//初值rgba 白色</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	SubShader</span><br><span class="line">	&#123;</span><br><span class="line">		Blend SrcAlpha One <span class="comment">//打开混合模式</span></span><br><span class="line">		Cull Off	<span class="comment">//关闭背部剔除模式</span></span><br><span class="line">		ZWrite Off	<span class="comment">//关闭深写模式，可以更好看到内部</span></span><br><span class="line"></span><br><span class="line">		Tags	</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;Queue&quot; = &quot;Transparent&quot;<span class="comment">//渲染队列 通道的调节</span></span><br><span class="line">			&quot;RenderType&quot; = &quot;Transparent&quot; <span class="comment">//渲染类型 的调节</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		Pass	<span class="comment">//算法写在pass通道</span></span><br><span class="line">		&#123;</span><br><span class="line">			CGPROGRAM</span><br><span class="line">			<span class="meta">#include &quot;UnityCG.cginc&quot;	//引用unitycg的头文件，内置方便的函数</span></span><br><span class="line">			<span class="meta">#pragma vertex vert		//顶点函数</span></span><br><span class="line">			<span class="meta">#pragma fragment frag	//片源函数</span></span><br><span class="line"></span><br><span class="line">			struct a2v</span><br><span class="line">			&#123;</span><br><span class="line">				float4 pos : POSITION;	<span class="comment">//模型空间的坐标</span></span><br><span class="line">				float2 uv : TEXCOORD0;	<span class="comment">//uv 坐标存在在纹理上面</span></span><br><span class="line">				float3 normal : NORMAL;	<span class="comment">//法线</span></span><br><span class="line">			&#125;;</span><br><span class="line"></span><br><span class="line">			struct v2f</span><br><span class="line">			&#123;</span><br><span class="line">				float4 pos : SV_POSITION; <span class="comment">//裁剪空间的坐标</span></span><br><span class="line">				float2 uv : TEXCOORD0;	<span class="comment">//纹理</span></span><br><span class="line">				float3 normal : NORMAL;	<span class="comment">//法线</span></span><br><span class="line">				float3 viewDir : TEXCOORD1; <span class="comment">//视线，不确定是什么类型就用TEXCOORD</span></span><br><span class="line">			&#125;;</span><br><span class="line"></span><br><span class="line">			<span class="type">sampler2D</span> _MainTex;	<span class="comment">//声明纹理，才能使用</span></span><br><span class="line">			float4 _Color;</span><br><span class="line"></span><br><span class="line">			v2f vert(a2v i)	<span class="comment">//顶点函数</span></span><br><span class="line">			&#123;</span><br><span class="line">				v2f o;</span><br><span class="line">				<span class="comment">//顶点变换到裁剪空间去</span></span><br><span class="line">				o.pos = UnityObjectToClipPos(i.pos);</span><br><span class="line">				o.uv = i.uv;</span><br><span class="line">				o.normal = UnityObjectToWorldNormal(i.normal);	<span class="comment">//法线从模型空间变换到世界空间来。</span></span><br><span class="line"></span><br><span class="line">				<span class="comment">//先拿到视线 变换到世界坐标来 变换后获得单位向量</span></span><br><span class="line">				o.viewDir= <span class="built_in">normalize</span>(UnityWorldSpaceViewDir(mul(unity_ObjectToWorld, i.pos)));</span><br><span class="line"></span><br><span class="line">				<span class="keyword">return</span> o;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			float4 frag(v2f u) : SV_TARGET <span class="comment">//不规定最后返回的类型</span></span><br><span class="line">			&#123;</span><br><span class="line">				</span><br><span class="line">				<span class="comment">//再拿到法线</span></span><br><span class="line">				u.normal = <span class="built_in">normalize</span>(u.normal);</span><br><span class="line">				<span class="type">float</span> rim =<span class="number">1</span>- <span class="built_in">dot</span>(u.normal, u.viewDir);<span class="comment">//求得点乘值</span></span><br><span class="line"></span><br><span class="line">				<span class="comment">//对纹理进行采样</span></span><br><span class="line">				float4 tex = tex2D(_MainTex,u.uv);<span class="comment">//使用函数对uv坐标进行采样</span></span><br><span class="line">				<span class="comment">//return tex * _Color;	//这行代码实现了纯色的改变</span></span><br><span class="line">				float4 color = _Color;</span><br><span class="line">				color *= rim;</span><br><span class="line">				<span class="keyword">return</span>  color;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			ENDCG</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34593121/article/details/103111299">闲云野鹤：吃鸡（三）之场景制作：制作毒圈</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11P411F7k2">Unity3D材质案例吃鸡毒圈效果</a></p>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80Shader"><span class="toc-number">1.</span> <span class="toc-text">基础Shader</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E9%A2%9C%E8%89%B2"><span class="toc-number">2.</span> <span class="toc-text">返回颜色</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A0%E5%85%A5%E9%80%8F%E6%98%8E%E6%95%88%E6%9E%9C"><span class="toc-number">3.</span> <span class="toc-text">加入透明效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E9%80%8F%E6%98%8E%EF%BC%8C%E8%BE%B9%E7%BC%98%E6%9C%89%E6%95%88%E6%9E%9C"><span class="toc-number">4.</span> <span class="toc-text">中间透明，边缘有效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%8C%E5%96%84%E8%83%8C%E9%9D%A2%E5%89%94%E9%99%A4%E7%9A%84%E6%95%88%E6%9E%9C"><span class="toc-number">5.</span> <span class="toc-text">完善背面剔除的效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">小总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&text=【Unity】用Shader实现毒圈效果"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&title=【Unity】用Shader实现毒圈效果"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&is_video=false&description=【Unity】用Shader实现毒圈效果"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=【Unity】用Shader实现毒圈效果&body=Check out this article: http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&title=【Unity】用Shader实现毒圈效果"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&title=【Unity】用Shader实现毒圈效果"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&title=【Unity】用Shader实现毒圈效果"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&title=【Unity】用Shader实现毒圈效果"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&name=【Unity】用Shader实现毒圈效果&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/&t=【Unity】用Shader实现毒圈效果"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2023
+    Frostsea
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     -->
+
+
+     <!--这一段是不蒜子的访问量统计代码-->
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+<span id="busuanzi_container_site_uv">访客数<span id="busuanzi_value_site_uv"></span>人次</span> -->
+
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

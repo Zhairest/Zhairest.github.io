@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="《SWCS》游戏简介游戏类型：线下多人即时对战休闲小游戏 游戏要素：武器拾取 不同武器的攻击 毒圈机制  主体玩法：游戏刚开始将确定游戏人数以及回合制。玩家将从固定地点生成，拾取地面上随机生成的武器，可以通过武器特殊攻击或者投掷武器来对他人造成伤害。互相攻击的同时，也要注意寻找有利地点，避免毒圈的攻击。 游戏模式：统一固定摄像机视角下的多人对战游戏。   控制方式：每位玩家可以在键盘和手柄中选择自">
+    <meta name="description" content="《SWCS》游戏简介游戏类型：线下多人即时对战休闲小游戏 故事背景：在银河系的角落存在着一个闻名全宇宙的竞技场。每天都会有各种物种在这里决斗，只有最后一个勇士才能存活。竞技场血流成河，因此也被称为宇宙屠宰场。而你现在要做的就是在这次屠宰中活下来，成为最后的勇士。 游戏要素：武器拾取 不同武器的攻击 毒圈机制  主体玩法：游戏刚开始将确定游戏人数以及回合制。玩家将从固定地点生成，拾取地面上随机生成的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unity个人游戏架构解析">
+<meta property="og:title" content="Unity个人游戏《SWCS》架构解析">
 <meta property="og:url" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="旋转公寓的阁楼">
-<meta property="og:description" content="《SWCS》游戏简介游戏类型：线下多人即时对战休闲小游戏 游戏要素：武器拾取 不同武器的攻击 毒圈机制  主体玩法：游戏刚开始将确定游戏人数以及回合制。玩家将从固定地点生成，拾取地面上随机生成的武器，可以通过武器特殊攻击或者投掷武器来对他人造成伤害。互相攻击的同时，也要注意寻找有利地点，避免毒圈的攻击。 游戏模式：统一固定摄像机视角下的多人对战游戏。   控制方式：每位玩家可以在键盘和手柄中选择自">
+<meta property="og:description" content="《SWCS》游戏简介游戏类型：线下多人即时对战休闲小游戏 故事背景：在银河系的角落存在着一个闻名全宇宙的竞技场。每天都会有各种物种在这里决斗，只有最后一个勇士才能存活。竞技场血流成河，因此也被称为宇宙屠宰场。而你现在要做的就是在这次屠宰中活下来，成为最后的勇士。 游戏要素：武器拾取 不同武器的攻击 毒圈机制  主体玩法：游戏刚开始将确定游戏人数以及回合制。玩家将从固定地点生成，拾取地面上随机生成的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/Game6.png">
-<meta property="og:image" content="http://example.com/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311224846000.png">
-<meta property="og:image" content="http://example.com/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311223135053.png">
+<meta property="og:image" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311224846000.png">
+<meta property="og:image" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311223135053.png">
 <meta property="og:image" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311234205041.png">
 <meta property="og:image" content="http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311234147279.png">
 <meta property="article:published_time" content="2023-03-11T11:13:24.000Z">
-<meta property="article:modified_time" content="2023-03-11T16:13:31.700Z">
+<meta property="article:modified_time" content="2023-03-12T06:51:29.433Z">
 <meta property="article:author" content="Frostsea">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
@@ -43,7 +43,7 @@
       
     
     <!-- title -->
-    <title>Unity个人游戏架构解析</title>
+    <title>Unity个人游戏《SWCS》架构解析</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -79,6 +79,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="上一篇" href="/2023/03/12/%E5%9C%A8Unity%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%AF%92%E5%9C%88%E6%95%88%E6%9E%9C/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" aria-label="下一篇" href="/2023/03/11/CPP%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -94,16 +96,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&text=Unity个人游戏架构解析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&is_video=false&description=Unity个人游戏架构解析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity个人游戏架构解析&body=Check out this article: http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&name=Unity个人游戏架构解析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&t=Unity个人游戏架构解析"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&text=Unity个人游戏《SWCS》架构解析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏《SWCS》架构解析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&is_video=false&description=Unity个人游戏《SWCS》架构解析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity个人游戏《SWCS》架构解析&body=Check out this article: http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏《SWCS》架构解析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏《SWCS》架构解析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏《SWCS》架构解析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏《SWCS》架构解析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&name=Unity个人游戏《SWCS》架构解析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&t=Unity个人游戏《SWCS》架构解析"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -120,7 +122,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Unity个人游戏架构解析
+        Unity个人游戏《SWCS》架构解析
     </h1>
 
 
@@ -153,6 +155,7 @@
 
   <div class="content" itemprop="articleBody">
     <h1 id="《SWCS》游戏简介"><a href="#《SWCS》游戏简介" class="headerlink" title="《SWCS》游戏简介"></a>《SWCS》游戏简介</h1><p><strong>游戏类型：</strong>线下多人即时对战休闲小游戏</p>
+<p><strong>故事背景：</strong>在银河系的角落存在着一个闻名全宇宙的竞技场。每天都会有各种物种在这里决斗，只有最后一个勇士才能存活。竞技场血流成河，因此也被称为宇宙屠宰场。而你现在要做的就是在这次屠宰中活下来，成为最后的勇士。</p>
 <p><strong>游戏要素</strong>：武器拾取 不同武器的攻击 毒圈机制 </p>
 <p><strong>主体玩法</strong>：游戏刚开始将确定游戏人数以及回合制。玩家将从固定地点生成，拾取地面上随机生成的武器，可以通过武器特殊攻击或者投掷武器来对他人造成伤害。互相攻击的同时，也要注意寻找有利地点，避免毒圈的攻击。</p>
 <p><strong>游戏模式</strong>：统一固定摄像机视角下的多人对战游戏。</p>
@@ -169,7 +172,10 @@
 <li><strong>工具</strong> ：负责辅助编码，例如日志工具，调试工具。</li>
 </ul>
 <p>本篇暂时只侧重提及游戏逻辑的框架及实现。</p>
-<p><img src="/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311224846000.png" alt="游戏主体场景层级图"><img src="/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311223135053.png" alt="image-20230311223135053"></p>
+<img src="/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311224846000.png" class title="游戏主体场景层级图">
+
+<img src="/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311223135053.png" class title="image-20230311223135053">
+
 <h1 id="游戏主体逻辑代码部分"><a href="#游戏主体逻辑代码部分" class="headerlink" title="游戏主体逻辑代码部分"></a>游戏主体逻辑代码部分</h1><h2 id="GameManager"><a href="#GameManager" class="headerlink" title="GameManager"></a>GameManager</h2><p>GameManager是控制游戏主体逻辑运行的重要工具，实现了游戏的主要状态转换和流程控制。</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">private</span> <span class="built_in">int</span> m_NumRoundsToWin = <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">int</span> m_NumPlayer = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">float</span> m_GameStartDelay = <span class="number">7f</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">float</span> m_StartDelay = <span class="number">3f</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">float</span> m_EndDelay = <span class="number">3f</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">float</span> m_WeaponAppearPerSec=<span class="number">10f</span>;</span><br><span class="line">  <span class="keyword">public</span> Text m_MessageText;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> GameObject[] m_PlayerPrefab;     <span class="comment">//玩家角色预制体（暂时读取顺序是固定的，后续可以加上random或者自己选择，亦或不同角色有不同能力）</span></span><br><span class="line">  <span class="keyword">public</span> CameraController m_CameraControl;    </span><br><span class="line">  Camera _camera;</span><br><span class="line">  <span class="keyword">public</span> GameObject[] m_WeaponPrefab;     <span class="comment">//武器预制体数组</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> PlayerManager[] m_Players;       </span><br><span class="line"><span class="comment">//public WeaponManager[] m_Weapons;</span></span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">int</span> m_WeaponNumber;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="built_in">int</span> m_RoundNumber;      <span class="comment">//当前轮数</span></span><br><span class="line">  <span class="keyword">private</span> WaitForSeconds m_GameStartWait;</span><br><span class="line">  <span class="keyword">private</span> WaitForSeconds m_StartWait;</span><br><span class="line">  <span class="keyword">private</span> WaitForSeconds m_EndWait;</span><br><span class="line">  <span class="keyword">private</span> PlayerManager m_RoundWinner;</span><br><span class="line">  <span class="keyword">private</span> PlayerManager m_GameWinner;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> PoisonRingController poison;</span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">float</span> WeaponAppearRange;</span><br></pre></td></tr></table></figure>
 
@@ -256,7 +262,7 @@
 
 <img src="/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/image-20230311234147279.png" class title="image-20230311234147279">
 
-<p>游戏中的毒圈其实就是以圆柱体为原型去做的，去掉了圆柱体的碰撞体以及刚体。实现毒圈效果的主要工作其实是在于shader的编写。</p>
+<p>​    游戏中的毒圈其实就是以圆柱体为原型去做的，去掉了圆柱体的碰撞体以及刚体。实现毒圈效果的主要工作其实是在于shader的编写。博客中有一篇专门介绍毒圈的编写，可跳转：【Unity】用Shader实现毒圈效果</p>
 
   </div>
 </article>
@@ -286,16 +292,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&text=Unity个人游戏架构解析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&is_video=false&description=Unity个人游戏架构解析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Unity个人游戏架构解析&body=Check out this article: http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏架构解析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&name=Unity个人游戏架构解析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&t=Unity个人游戏架构解析"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&text=Unity个人游戏《SWCS》架构解析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏《SWCS》架构解析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&is_video=false&description=Unity个人游戏《SWCS》架构解析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unity个人游戏《SWCS》架构解析&body=Check out this article: http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏《SWCS》架构解析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏《SWCS》架构解析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏《SWCS》架构解析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&title=Unity个人游戏《SWCS》架构解析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&name=Unity个人游戏《SWCS》架构解析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/11/Unity%E4%B8%AA%E4%BA%BA%E6%B8%B8%E6%88%8F%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90/&t=Unity个人游戏《SWCS》架构解析"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
