@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://example.com/2023/03/10/Unity%E5%9F%BA%E7%A1%80/image-20230310195518316.png">
 <meta property="og:image" content="http://example.com/2023/03/10/Unity%E5%9F%BA%E7%A1%80/image-20230310195822997.png">
 <meta property="article:published_time" content="2023-03-10T09:29:40.000Z">
-<meta property="article:modified_time" content="2023-03-10T13:11:09.092Z">
+<meta property="article:modified_time" content="2023-03-22T09:56:26.707Z">
 <meta property="article:author" content="Frostsea">
 <meta property="article:tag" content="Unity">
 <meta name="twitter:card" content="summary">
@@ -165,7 +165,7 @@
 <li><strong>两者在内存的使用上是相同的，共享堆，不共享栈</strong></li>
 <li><strong>对于协程而言，同一时间只能执行一个协程，而线程则是并发的，可以同时有多个线程在运行</strong></li>
 </ul>
-<img src="/2023/03/10/Unity%E5%9F%BA%E7%A1%80/image-20230310190603993.png" class title="image-20230310190603993">
+<img src="/2023/03/10/Unity%E5%9F%BA%E7%A1%80/image-20230310190603993.png" alt="image-20230310190603993" style="zoom:67%;">
 
 <p>两者最关键，最简单的区别是微观上<strong>线程是并行（对于多核CPU）的</strong>，而<strong>协程是串行</strong>的。</p>
 <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>​    协程，从字面意义上理解就是协助程序的意思，<strong>我们在主任务进行的同时，需要一些分支任务配合工作</strong>来达到最终的效果</p>
@@ -181,7 +181,7 @@
 <p>​    在正式开始代码之前，需要了解StartCoroutine的两种重载方式：</p>
 <ul>
 <li>StartCoroutine（string methodName）：这种是没有参数的情况，直接通过方法名（字符串形式）来开启协程</li>
-<li>StartCoroutine（IEnumerator routine）：通过方法形式调用</li>
+<li>StartCoroutine（IEnumerator routine）：通过方法形式调用 </li>
 <li>StartCoroutine（string methodName，object values):带参数的通过方法名进行调用</li>
 </ul>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过迭代器定义一个方法</span></span><br><span class="line"><span class="function">IEnumerator <span class="title">Demo</span>(<span class="params"><span class="built_in">int</span> i</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//代码块</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">	<span class="comment">//代码块</span></span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在程序种调用协程</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Test</span>(<span class="params"></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//第一种与第二种调用方式,通过方法名与参数调用</span></span><br><span class="line">    StartCoroutine(<span class="string">&quot;Demo&quot;</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//第三种调用方式， 通过调用方法直接调用</span></span><br><span class="line">    StartCoroutine(Demo(<span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -207,7 +207,7 @@
 <li><p>yield return StartCoroutine(“协程方法名”);开启一个协程（嵌套协程)</p>
 </li>
 </ul>
-<img src="/2023/03/10/Unity%E5%9F%BA%E7%A1%80/image-20230310195822997.png" class title="image-20230310195822997">
+<img src="/2023/03/10/Unity%E5%9F%BA%E7%A1%80/image-20230310195822997.png" alt="image-20230310195822997" style="zoom:67%;">
 
 <p>​    可以很清晰的看出，协程虽然是在<code>Update</code>中开启，但是关于<code>yield return null</code>后面的代码会在下一帧运行，并且是在Update执行完之后才开始执行，但是会在<code>LateUpdate</code>之前执行。</p>
 <h2 id="具体用处"><a href="#具体用处" class="headerlink" title="具体用处"></a>具体用处</h2><h3 id="将一个复杂程序分帧执行："><a href="#将一个复杂程序分帧执行：" class="headerlink" title="将一个复杂程序分帧执行："></a>将一个复杂程序分帧执行：</h3><p>​    如果一个复杂的函数对于一帧的性能需求很大，我们就可以通过yield return null将步骤拆除，从而将性能压力分摊开来，最终获取一个流畅的过程，这就是一个简单的应用</p>
